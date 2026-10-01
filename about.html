@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story — Retro Poshak</title>
+  <meta name="description" content="Why Retro Poshak? Founded by Urvashi Naik, we turn Indian memories into contemporary clothing." />
+
+  <!-- Prevent flash of wrong theme (runs before paint) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('retroPoshakTheme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="header-inner container">
+      <a href="index.html" class="logo">RETRO POSHAK</a>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="shop.html?category=oversized-tshirt" class="nav-link">T-Shirts</a></li>
+          <li><a href="shop.html?category=shirt" class="nav-link">Shirts</a></li>
+          <li><a href="about.html" class="nav-link active">Our Story</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <!-- Theme toggle -->
+        <button class="theme-toggle" aria-label="Toggle light and dark theme" title="Toggle theme">
+          <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+
+        <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+
+        <!-- Auth slot: Sign-in icon or user avatar menu -->
+        <span id="authSlot"></span>
+
+        <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          <span class="badge wishlist-count" id="wishlistCount">0</span>
+        </a>
+
+        <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6L5 3H2"/></svg>
+          <span class="badge cart-count" id="cartCount">0</span>
+        </a>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+    <div class="search-box container">
+      <input type="text" id="searchInput" placeholder="Search memories…" autocomplete="off" aria-label="Search products" />
+      <button class="icon-btn" id="searchClose" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="search-results container" id="searchResults"></div>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Since a summer we still remember</span>
+        <h1 class="page-title">Why Retro Poshak?</h1>
+        <p class="page-sub">Because some things deserve to be worn, not just remembered.</p>
+      </div>
+    </section>
+
+    <section class="section editorial">
+      <div class="container editorial-split">
+        <div class="editorial-image reveal">
+          <img
+            src="assets/images/story-street.jpg"
+            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22500%22><rect width=%22700%22 height=%22500%22 fill=%22%23d9cdb8%22/><text x=%22350%22 y=%22240%22 font-family=%22Georgia%22 font-size=%2230%22 fill=%22%238b6f4c%22 text-anchor=%22middle%22>Old Streets</text><text x=%22350%22 y=%22280%22 font-family=%22Georgia%22 font-size=%2218%22 fill=%22%23a0845c%22 text-anchor=%22middle%22>(placeholder)</text></svg>'"
+            alt="Vintage Indian street corner" loading="lazy" />
+        </div>
+        <div class="editorial-text reveal">
+          <h2>The Idea</h2>
+          <p>Memories are the inspiration. Every Retro Poshak piece begins with a small, specific moment — a bicycle bell at 7am, a gola cart in May, a deck of cards on a terrace at dusk.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section editorial alt">
+      <div class="container editorial-split reverse">
+        <div class="editorial-image reveal">
+          <img
+            src="assets/images/design-detail.jpg"
+            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22500%22><rect width=%22700%22 height=%22500%22 fill=%22%23e8e0d5%22/><text x=%22350%22 y=%22240%22 font-family=%22Georgia%22 font-size=%2230%22 fill=%22%238b6f4c%22 text-anchor=%22middle%22>Design Detail</text><text x=%22350%22 y=%22280%22 font-family=%22Georgia%22 font-size=%2218%22 fill=%22%23a0845c%22 text-anchor=%22middle%22>(placeholder)</text></svg>'"
+            alt="Print design detail on fabric" loading="lazy" />
+        </div>
+        <div class="editorial-text reveal">
+          <h2>The Design</h2>
+          <p>Retro references are transformed into modern apparel graphics. We sketch, we distort, we simplify — until a memory becomes a wearable mark. Oversized cuts, heavyweight cotton, DTF prints.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section editorial">
+      <div class="container editorial-split">
+        <div class="editorial-image reveal">
+          <img
+            src="assets/images/feeling.jpg"
+            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22500%22><rect width=%22700%22 height=%22500%22 fill=%22%23d9cdb8%22/><text x=%22350%22 y=%22240%22 font-family=%22Georgia%22 font-size=%2230%22 fill=%22%238b6f4c%22 text-anchor=%22middle%22>The Feeling</text><text x=%22350%22 y=%22280%22 font-family=%22Georgia%22 font-size=%2218%22 fill=%22%23a0845c%22 text-anchor=%22middle%22>(placeholder)</text></svg>'"
+            alt="Person wearing Retro Poshak tee" loading="lazy" />
+        </div>
+        <div class="editorial-text reveal">
+          <h2>The Feeling</h2>
+          <p>Every piece should feel personal, nostalgic and wearable. If someone asks "where is that from?", you should want to tell them the story.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section founder" id="founder">
+      <div class="container founder-split">
+        <div class="founder-image reveal">
+          <img
+            src="assets/images/founder.jpg"
+            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22500%22 height=%22600%22><rect width=%22500%22 height=%22600%22 fill=%22%23e8e0d5%22/><text x=%22250%22 y=%22290%22 font-family=%22Georgia%22 font-size=%2226%22 fill=%22%238b6f4c%22 text-anchor=%22middle%22>Urvashi Naik</text><text x=%22250%22 y=%22330%22 font-family=%22Georgia%22 font-size=%2216%22 fill=%22%23a0845c%22 text-anchor=%22middle%22>Founder portrait (placeholder)</text></svg>'"
+            alt="Urvashi Naik, founder of Retro Poshak" loading="lazy" />
+        </div>
+        <div class="founder-text reveal">
+          <span class="eyebrow">Meet the Founder</span>
+          <h2>Urvashi Naik</h2>
+          <p>Retro Poshak was created to transform personal and cultural memories into contemporary clothing. Urvashi grew up surrounded by the small textures of Indian life — and wanted to bottle them, not on a shelf, but on a sleeve.</p>
+          <p>"We don't just sell clothes. We turn memories into something you can wear."</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3 class="footer-logo">Retro Poshak</h3>
+        <p class="footer-tagline">Wear Your Memories.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html?category=oversized-tshirt">T-Shirts</a></li>
+          <li><a href="shop.html?category=shirt">Shirts</a></li>
+          <li><a href="shop.html">New Arrivals</a></li>
+          <li><a href="shop.html">Collections</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="about.html#founder">Founder</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-newsletter container">
+      <p>Get the next memory in your inbox.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+    <div class="footer-bottom container">
+      <!-- Dynamic copyright year -->
+      <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Scripts: order matters (theme → products → auth → cart → main) -->
+  <script src="js/theme.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

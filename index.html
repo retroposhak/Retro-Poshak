@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Retro Poshak — Pehno Yaaden | Wearable Indian Memories</title>
+    <meta name="description"
+        content="Retro Poshak turns nostalgic Indian memories into premium oversized T-shirts and shirts. Pehno Yaaden. Old memories. New fits." />
+    <meta property="og:title" content="Retro Poshak — Pehno Yaaden" />
+    <meta property="og:description" content="Old memories. New fits. Wearable Indian nostalgia." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/Retro Poshak_ Logo.png" />
+    <link rel="icon" type="image/png" href="assets/images/Retro Poshak_ Logo.png" />
+
+    <!-- Prevent flash of wrong theme — runs before paint -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('retroPoshakTheme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Bebas+Neue&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <!-- Home-specific cinematic styles -->
+    <link rel="stylesheet" href="css/home.css" />
+</head>
+
+<body class="no-js">
+    <script>document.body.classList.remove('no-js');</script>
+
+    <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
+    <div class="announce-bar" aria-label="Site announcements">
+        <div class="announce-track">
+            <span>✦ Free shipping over ₹1999</span>
+            <span class="dot">◆</span>
+            <span>✦ 5% off on prepaid orders</span>
+            <span class="dot">◆</span>
+            <span>✦ COD available across India</span>
+            <span class="dot">◆</span>
+            <span>✦ Easy 7-day returns</span>
+            <span class="dot">◆</span>
+            <span>✦ Free shipping over ₹1999</span>
+            <span class="dot">◆</span>
+            <span>✦ 5% off on prepaid orders</span>
+            <span class="dot">◆</span>
+            <span>✦ COD available across India</span>
+            <span class="dot">◆</span>
+            <span>✦ Easy 7-day returns</span>
+            <span class="dot">◆</span>
+        </div>
+    </div>
+
+    <header class="site-header" id="header">
+        <div class="header-inner container">
+            <!-- Live logo image with SVG fallback -->
+            <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
+                <img src="assets/images/Retro Poshak_ Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
+                    class="logo-img"
+                    onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), { className: 'logo-fallback', innerHTML: 'RETRO<span class=&quot;logo-dot&quot;>.</span>POSHAK' }));" />
+            </a>
+
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="shop.html?filter=new" class="nav-link">New Arrivals</a></li>
+                    <li><a href="shop.html?filter=bestseller" class="nav-link">Bestsellers</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                    <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg>
+                    <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                </button>
+
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                </button>
+
+                <span id="authSlot"></span>
+
+                <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                    </svg>
+                    <span class="badge wishlist-count" id="wishlistCount">0</span>
+                </a>
+
+                <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 6h15l-1.5 9h-12z" />
+                        <circle cx="9" cy="20" r="1" />
+                        <circle cx="18" cy="20" r="1" />
+                        <path d="M6 6L5 3H2" />
+                    </svg>
+                    <span class="badge cart-count" id="cartCount">0</span>
+                </a>
+
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+        <div class="search-box container">
+            <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
+                aria-label="Search products" />
+            <button class="icon-btn" id="searchClose" aria-label="Close search">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="search-results container" id="searchResults"></div>
+    </div>
+
+    <main>
+        <!-- ===== HERO ===== -->
+        <section class="hero">
+            <div class="hero-inner container">
+                <div class="hero-content">
+                    <!-- New collection floating badge (static) -->
+                    <div class="hero-collection-badge">
+                        <span class="badge-pulse"></span>
+                        <span>New Collection · SS25</span>
+                    </div>
+
+                    <span class="hero-eyebrow">
+                        <span class="hero-eyebrow-line"></span>
+                        The First Chapter
+                        <span class="hero-eyebrow-line"></span>
+                    </span>
+
+                    <h1 class="hero-title">
+                        <span class="hero-title-line">PEHNO</span>
+                        <em class="hero-title-em">YAADEN<span class="hero-title-dot">.</span></em>
+                    </h1>
+
+                    <p class="hero-sub">Old memories. New fits.</p>
+                    <p class="hero-hindi">
+                        <span class="hindi-line">कुछ यादें पुरानी होती हैं —</span>
+                        <span class="hindi-line">पर कभी <em>out of style</em> नहीं होतीं।</span>
+                    </p>
+
+                    <div class="hero-cta">
+                        <a href="shop.html" class="btn btn-primary">
+                            <span>Shop the Collection</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                        </a>
+                        <a href="about.html" class="btn btn-outline">Our Story</a>
+                    </div>
+
+                    <!-- Hero meta chips -->
+                    <div class="hero-chips">
+                        <span class="hero-chip"><span class="chip-icon">🧵</span> 240 GSM</span>
+                        <span class="hero-chip"><span class="chip-icon">🌱</span> 100% Cotton</span>
+                        <span class="hero-chip"><span class="chip-icon">🇮🇳</span> Made in India</span>
+                    </div>
+                </div>
+
+                <!-- ===== HERO CAROUSEL ===== -->
+                <div class="hero-image">
+                    <!-- Corner tape — FIXED (no animation) -->
+                    <span class="hero-tape" aria-hidden="true"></span>
+
+                    <!-- Vintage ticket badge — FIXED (no animation) -->
+                    <div class="hero-ticket" aria-hidden="true">
+                        <div class="hero-ticket-inner">
+                            <span class="ticket-top">MEMORY</span>
+                            <span class="ticket-num">No. 001</span>
+                            <span class="ticket-bottom">WEARABLE</span>
+                        </div>
+                    </div>
+
+                    <!-- Stamp — FIXED (no animation) -->
+                    <div class="hero-stamp" aria-hidden="true">
+                        <span>EST.</span>
+                        <strong>SS25</strong>
+                        <span>DELHI</span>
+                    </div>
+
+                    <!-- Carousel -->
+                    <div class="hero-carousel" id="heroCarousel" role="region" aria-roledescription="carousel"
+                        aria-label="Retro Poshak campaign images">
+
+                        <div class="hero-slides" id="heroSlides">
+                            <!-- Slide 1 -->
+                            <div class="hero-slide is-active" role="group" aria-roledescription="slide"
+                                aria-label="Slide 1 of 3">
+                                <img src="assets/images/hero-1.jpg"
+                                    onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23e6d8c3%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>PEHNO YAADEN</text><text x=%22300%22 y=%22440%22 font-family=%22Georgia%22 font-size=%2220%22 fill=%22%236b5748%22 text-anchor=%22middle%22>Campaign 01</text></svg>'"
+                                    alt="Retro Poshak campaign shot 1" loading="eager" />
+                                <span class="hero-slide-caption">The Gully Champion Tee · 240 GSM</span>
+                            </div>
+
+                            <!-- Slide 2 -->
+                            <div class="hero-slide" role="group" aria-roledescription="slide"
+                                aria-label="Slide 2 of 3">
+                                <img src="assets/images/hero-2.jpg"
+                                    onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g2%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23ebe1d0%22/><stop offset=%221%22 stop-color=%22%23d9c8a9%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g2)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>SUNDAY SCENE</text><text x=%22300%22 y=%22440%22 font-family=%22Georgia%22 font-size=%2220%22 fill=%22%236b5748%22 text-anchor=%22middle%22>Campaign 02</text></svg>'"
+                                    alt="Retro Poshak campaign shot 2" loading="lazy" />
+                                <span class="hero-slide-caption">Sunday Scene Shirt · 100% Cotton</span>
+                            </div>
+
+                            <!-- Slide 3 -->
+                            <div class="hero-slide" role="group" aria-roledescription="slide"
+                                aria-label="Slide 3 of 3">
+                                <img src="assets/images/hero-3.jpg"
+                                    onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g3%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23d9cdb8%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g3)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>LAST BENCH</text><text x=%22300%22 y=%22440%22 font-family=%22Georgia%22 font-size=%2220%22 fill=%22%236b5748%22 text-anchor=%22middle%22>Campaign 03</text></svg>'"
+                                    alt="Retro Poshak campaign shot 3" loading="lazy" />
+                                <span class="hero-slide-caption">Last Bench Tee · Oversized Fit</span>
+                            </div>
+                        </div>
+
+                        <!-- Arrows -->
+                        <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6" />
+                            </svg>
+                        </button>
+                        <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 6l6 6-6 6" />
+                            </svg>
+                        </button>
+
+                        <!-- Dots -->
+                        <div class="hero-dots" id="heroDots" role="tablist" aria-label="Choose slide">
+                            <button class="hero-dot is-active" data-slide="0" role="tab" aria-selected="true"
+                                aria-label="Slide 1"></button>
+                            <button class="hero-dot" data-slide="1" role="tab" aria-selected="false"
+                                aria-label="Slide 2"></button>
+                            <button class="hero-dot" data-slide="2" role="tab" aria-selected="false"
+                                aria-label="Slide 3"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-grain" aria-hidden="true"></div>
+        </section>
+
+        <!-- ===== BRAND STATEMENT ===== -->
+        <section class="brand-statement">
+            <div class="container statement-inner">
+                <span class="eyebrow center">Our Philosophy</span>
+                <p class="statement-hindi">
+                    “Kuch yaadein purani hoti hain.<br>
+                    Par kabhi out of style nahi hoti.”
+                </p>
+                <p class="statement-en">
+                    Retro Poshak brings those memories back — one oversized tee at a time.
+                    Every piece begins with a small moment we all remember.
+                </p>
+                <span class="statement-signature">— Urvashi Naik, Founder</span>
+
+                <div class="statement-divider" aria-hidden="true">
+                    <span></span><i>◆</i><span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== NEW ARRIVALS ===== -->
+        <section class="section featured">
+            <div class="container">
+                <span class="eyebrow">Fresh off the press</span>
+                <h2 class="section-title">Stories You Can Wear</h2>
+                <p class="section-sub">New arrivals, straight from the memory book.</p>
+                <div class="product-grid" id="featuredGrid" data-limit="4"></div>
+                <div class="section-cta">
+                    <a href="shop.html" class="btn btn-outline">View All</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SHOP BY STORY ===== -->
+        <section class="shop-by-story">
+            <div class="container">
+                <span class="eyebrow center" style="color: var(--rust);">Shop by Story</span>
+                <h2 class="section-title center">Every Collection is a Memory.</h2>
+                <p class="section-sub center">Choose a feeling. We'll bring the fit.</p>
+                <div class="story-grid" id="storyGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== FEATURED COLLECTION ===== -->
+        <section class="featured-collection">
+            <div class="container">
+                <div class="featured-split reveal">
+                    <div class="featured-image">
+                        <img src="assets/images/featured-collection.jpg"
+                            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22><defs><linearGradient id=%22g2%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23e6d8c3%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22700%22 height=%22700%22 fill=%22url(%23g2)%22/><text x=%22350%22 y=%22330%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>THE FIRST CHAPTER</text><text x=%22350%22 y=%22380%22 font-family=%22Georgia%22 font-size=%2218%22 fill=%22%236b5748%22 text-anchor=%22middle%22>(collection image placeholder)</text></svg>'"
+                            alt="The First Chapter — Retro Poshak editorial" loading="lazy" />
+                    </div>
+                    <div class="featured-info">
+                        <span class="eyebrow">Featured Collection</span>
+                        <h2>The First Chapter</h2>
+                        <p class="featured-hindi">“Har kahani ki ek starting line hoti hai.”</p>
+                        <p>Six oversized pieces. Six memories. One starting line. This is where Retro Poshak begins —
+                            with the moments we all grew up inside.</p>
+                        <div style="margin-top: 30px;">
+                            <a href="shop.html" class="btn btn-primary">Explore Collection</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== MEMORY ARCHIVE ===== -->
+        <section class="section memory-archive">
+            <div class="container">
+                <span class="eyebrow center">Interactive</span>
+                <h2 class="section-title center">The Memory Archive</h2>
+                <p class="section-sub center">Hover over a memory to unlock its story.</p>
+                <div class="memory-grid" id="memoryGrid"></div>
+            </div>
+        </section>
+
+        <!-- ===== LOOKBOOK ===== -->
+        <section class="lookbook">
+            <div class="container">
+                <span class="eyebrow center">The Lookbook</span>
+                <h2 class="section-title center">Worn in the Wild.</h2>
+                <p class="section-sub center">Real streets. Real memories. Real fits.</p>
+                <div class="lookbook-grid">
+                    <div class="lookbook-item">
+                        <img src="assets/images/look-1.jpg" alt="Retro Poshak on the street" loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 01</text></svg>'">
+                        <span class="lookbook-caption">Gully Champion · Mumbai</span>
+                    </div>
+                    <div class="lookbook-item">
+                        <img src="assets/images/look-2.jpg" alt="Retro Poshak editorial shot" loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23ebe1d0%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 02</text></svg>'">
+                        <span class="lookbook-caption">Sunday Scene · Pune</span>
+                    </div>
+                    <div class="lookbook-item">
+                        <img src="assets/images/look-3.jpg" alt="Retro Poshak detail" loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 03</text></svg>'">
+                        <span class="lookbook-caption">Last Bench · Bengaluru</span>
+                    </div>
+                    <div class="lookbook-item">
+                        <img src="assets/images/look-4.jpg" alt="Retro Poshak lifestyle" loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23ebe1d0%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 04</text></svg>'">
+                        <span class="lookbook-caption">Bachpan · Delhi</span>
+                    </div>
+                    <div class="lookbook-item">
+                        <img src="assets/images/look-5.jpg" alt="Retro Poshak close up" loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 05</text></svg>'">
+                        <span class="lookbook-caption">Ground Report · Goa</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== WORN BY COMMUNITY ===== -->
+        <section class="community">
+            <div class="container">
+                <span class="eyebrow center">@retroposhak</span>
+                <h2 class="section-title center">Worn by the Poshak Community.</h2>
+                <p class="section-sub center">Tag us. Become part of the memory.</p>
+                <div class="community-grid">
+                    <div class="community-post"><img src="assets/images/community-1.jpg" alt="Community post"
+                            loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23e6d8c3%22/></svg>'">
+                    </div>
+                    <div class="community-post"><img src="assets/images/community-2.jpg" alt="Community post"
+                            loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23ebe1d0%22/></svg>'">
+                    </div>
+                    <div class="community-post"><img src="assets/images/community-3.jpg" alt="Community post"
+                            loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23e6d8c3%22/></svg>'">
+                    </div>
+                    <div class="community-post"><img src="assets/images/community-4.jpg" alt="Community post"
+                            loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23ebe1d0%22/></svg>'">
+                    </div>
+                    <div class="community-post"><img src="assets/images/community-5.jpg" alt="Community post"
+                            loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23e6d8c3%22/></svg>'">
+                    </div>
+                    <div class="community-post"><img src="assets/images/community-6.jpg" alt="Community post"
+                            loading="lazy"
+                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23ebe1d0%22/></svg>'">
+                    </div>
+                </div>
+                <div class="section-cta">
+                    <a href="#" class="btn btn-outline">Follow @retroposhak</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TRUST STRIP ===== -->
+        <section class="trust-strip">
+            <div class="container trust-inner">
+                <div class="trust-item"><span class="trust-icon">🧵</span><span class="trust-label">240 GSM
+                        Heavyweight</span></div>
+                <div class="trust-item"><span class="trust-icon">🌱</span><span class="trust-label">100% Cotton</span>
+                </div>
+                <div class="trust-item"><span class="trust-icon">🇮🇳</span><span class="trust-label">Made in
+                        India</span></div>
+                <div class="trust-item"><span class="trust-icon">🚚</span><span class="trust-label">Free Shipping
+                        ₹1999+</span></div>
+                <div class="trust-item"><span class="trust-icon">↩️</span><span class="trust-label">Easy 7-Day
+                        Returns</span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo-wrap">
+                    <img src="assets/images/Retro Poshak_ Logo.png" alt="Retro Poshak" class="footer-logo-img"
+                        onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('h3'), { className: 'footer-logo', textContent: 'RETRO POSHAK' }));" />
+                </div>
+                <p class="footer-tagline">Pehno Yaaden.</p>
+                <p class="footer-hindi">Old memories. New fits.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="shop.html">All Products</a></li>
+                    <li><a href="shop.html?filter=new">New Arrivals</a></li>
+                    <li><a href="shop.html?filter=bestseller">Bestsellers</a></li>
+                    <li><a href="shop.html">Collections</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-newsletter container">
+            <p>Get the next memory in your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
+            <a href="#" class="whatsapp">💬 WhatsApp Support</a>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Floating WhatsApp -->
+    <a href="#" class="wa-float" aria-label="Chat on WhatsApp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+                d="M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5zm-8.5 18a9 9 0 0 1-4.6-1.3l-.3-.2-3 .9.9-2.9-.2-.3A9 9 0 1 1 12 21.5zm5.2-6.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.4.2-.6.1a7.4 7.4 0 0 1-3.7-3.3c-.1-.2-.1-.4.1-.6l.6-.7c.1-.2.1-.4 0-.6l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 10.4 10.4 0 0 0 4 3.5 4.6 4.6 0 0 0 2.8.5c.9-.1 1.7-.6 2.1-1.4.2-.4.3-.9.2-1.3 0-.2-.2-.3-.4-.4z" />
+        </svg>
+    </a>
+
+    <script src="js/theme.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Home-specific render -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* Featured products */
+            const featuredGrid = document.getElementById('featuredGrid');
+            if (featuredGrid) {
+                const items = getFeaturedProducts(4);
+                featuredGrid.innerHTML = items.map((p, i) => renderProductCard(p, i)).join('');
+                bindProductCardEvents(featuredGrid);
+            }
+
+            /* Story grid */
+            const storyGrid = document.getElementById('storyGrid');
+            if (storyGrid) {
+                storyGrid.innerHTML = STORY_COLLECTIONS.map(s => `
+          <a href="${s.link}" class="story-card">
+            <span class="story-card-num">${s.number} — ${s.hindi}</span>
+            <h3 class="story-card-title">${s.title}</h3>
+            <p class="story-card-desc">${s.description}</p>
+            <span class="story-card-cta">Explore →</span>
+          </a>
+        `).join('');
+            }
+
+            /* Memory archive */
+            const memoryGrid = document.getElementById('memoryGrid');
+            if (memoryGrid) {
+                memoryGrid.innerHTML = MEMORY_ARCHIVE.map(m => `
+          <a href="${m.link}" class="memory-card" aria-label="${m.title}: ${m.story}">
+            <span class="memory-emoji" aria-hidden="true">${m.icon}</span>
+            <h3>${m.title}</h3>
+            <p class="memory-story">${m.story}</p>
+            <span class="memory-link">See the Story →</span>
+          </a>
+        `).join('');
+            }
+        });
+    </script>
+
+    <!-- Hero Carousel Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById('heroCarousel');
+            const slidesEl = document.getElementById('heroSlides');
+            if (!carousel || !slidesEl) return;
+
+            const slides = Array.from(slidesEl.querySelectorAll('.hero-slide'));
+            const dots = Array.from(document.querySelectorAll('.hero-dot'));
+            const prevBtn = document.getElementById('heroPrev');
+            const nextBtn = document.getElementById('heroNext');
+            let index = 0;
+            let timer = null;
+            let paused = false;
+            const AUTOPLAY_MS = 5500;
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function goTo(i) {
+                index = (i + slides.length) % slides.length;
+                slides.forEach((s, k) => {
+                    const isActive = k === index;
+                    s.classList.toggle('is-active', isActive);
+                    s.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+                });
+                dots.forEach((d, k) => {
+                    d.classList.toggle('is-active', k === index);
+                    d.setAttribute('aria-selected', k === index ? 'true' : 'false');
+                });
+            }
+            function next() { goTo(index + 1); }
+            function prev() { goTo(index - 1); }
+
+            function start() {
+                if (reduceMotion) return;
+                stop();
+                timer = setInterval(() => { if (!paused) next(); }, AUTOPLAY_MS);
+            }
+            function stop() {
+                if (timer) { clearInterval(timer); timer = null; }
+            }
+
+            nextBtn?.addEventListener('click', () => { next(); start(); });
+            prevBtn?.addEventListener('click', () => { prev(); start(); });
+
+            dots.forEach(d => {
+                d.addEventListener('click', () => {
+                    goTo(Number(d.dataset.slide));
+                    start();
+                });
+            });
+
+            carousel.setAttribute('tabindex', '0');
+            carousel.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') { next(); start(); }
+                if (e.key === 'ArrowLeft') { prev(); start(); }
+            });
+
+            carousel.addEventListener('mouseenter', () => paused = true);
+            carousel.addEventListener('mouseleave', () => paused = false);
+            carousel.addEventListener('focusin', () => paused = true);
+            carousel.addEventListener('focusout', () => paused = false);
+
+            let touchX = null;
+            carousel.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+            carousel.addEventListener('touchend', (e) => {
+                if (touchX === null) return;
+                const dx = e.changedTouches[0].clientX - touchX;
+                if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); start(); }
+                touchX = null;
+            }, { passive: true });
+
+            document.addEventListener('visibilitychange', () => {
+                paused = document.hidden;
+            });
+
+            goTo(0);
+            start();
+        });
+    </script>
+</body>
+
+</html>

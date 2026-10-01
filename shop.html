@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — Retro Poshak</title>
+  <meta name="description" content="Shop Retro Poshak oversized T-shirts and shirts — Indian nostalgia reimagined." />
+
+  <!-- Prevent flash of wrong theme (runs before paint) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('retroPoshakTheme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="header-inner container">
+      <a href="index.html" class="logo">RETRO POSHAK</a>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="shop.html" class="nav-link active">Shop</a></li>
+          <li><a href="shop.html?category=oversized-tshirt" class="nav-link">T-Shirts</a></li>
+          <li><a href="shop.html?category=shirt" class="nav-link">Shirts</a></li>
+          <li><a href="about.html" class="nav-link">Our Story</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <!-- Theme toggle -->
+        <button class="theme-toggle" aria-label="Toggle light and dark theme" title="Toggle theme">
+          <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+
+        <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+
+        <!-- Auth slot: Sign-in icon or user avatar menu -->
+        <span id="authSlot"></span>
+
+        <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          <span class="badge wishlist-count" id="wishlistCount">0</span>
+        </a>
+
+        <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6L5 3H2"/></svg>
+          <span class="badge cart-count" id="cartCount">0</span>
+        </a>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+    <div class="search-box container">
+      <input type="text" id="searchInput" placeholder="Search memories…" autocomplete="off" aria-label="Search products" />
+      <button class="icon-btn" id="searchClose" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="search-results container" id="searchResults"></div>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">The Collection</span>
+        <h1 class="page-title">Shop Memories</h1>
+        <p class="page-sub">Every piece tells a story you already know.</p>
+      </div>
+    </section>
+
+    <section class="shop-section">
+      <div class="container shop-layout">
+        <!-- SIDEBAR -->
+        <aside class="shop-sidebar" id="shopSidebar" aria-label="Filters">
+          <div class="filter-head">
+            <h2>Filters</h2>
+            <button class="icon-btn" id="filterClose" aria-label="Close filters">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+
+          <div class="filter-group">
+            <h3>Category</h3>
+            <label><input type="radio" name="category" value="all" checked /> All</label>
+            <label><input type="radio" name="category" value="oversized-tshirt" /> Oversized T-Shirts</label>
+            <label><input type="radio" name="category" value="shirt" /> Shirts</label>
+          </div>
+
+          <div class="filter-group">
+            <h3>Size</h3>
+            <div class="chips" id="sizeChips">
+              <button type="button" class="chip" data-size="S">S</button>
+              <button type="button" class="chip" data-size="M">M</button>
+              <button type="button" class="chip" data-size="L">L</button>
+              <button type="button" class="chip" data-size="XL">XL</button>
+              <button type="button" class="chip" data-size="XXL">XXL</button>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h3>Color</h3>
+            <div class="chips" id="colorChips">
+              <button type="button" class="chip" data-color="Black">Black</button>
+              <button type="button" class="chip" data-color="Cream">Cream</button>
+              <button type="button" class="chip" data-color="Terracotta">Terracotta</button>
+              <button type="button" class="chip" data-color="Mustard">Mustard</button>
+              <button type="button" class="chip" data-color="Washed Green">Washed Green</button>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h3>Price</h3>
+            <input type="range" id="priceRange" min="999" max="2999" value="2999" step="100" />
+            <p class="price-label">Up to ₹<span id="priceValue">2999</span></p>
+          </div>
+
+          <div class="filter-group">
+            <h3>Availability</h3>
+            <label><input type="checkbox" id="inStockOnly" /> In stock only</label>
+          </div>
+
+          <button class="btn btn-outline full" id="clearFilters">Clear Filters</button>
+        </aside>
+
+        <!-- PRODUCTS -->
+        <div class="shop-main">
+          <div class="shop-toolbar">
+            <button class="btn btn-outline filter-open-btn" id="filterOpen">Filters</button>
+            <p class="result-count" id="resultCount">— products</p>
+            <label class="sort-wrap">
+              <span>Sort by</span>
+              <select id="sortSelect" aria-label="Sort products">
+                <option value="featured">Featured</option>
+                <option value="newest">Newest</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="product-grid" id="shopGrid"></div>
+          <p class="no-results" id="noResults" hidden>No memories match your filters.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3 class="footer-logo">Retro Poshak</h3>
+        <p class="footer-tagline">Wear Your Memories.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html?category=oversized-tshirt">T-Shirts</a></li>
+          <li><a href="shop.html?category=shirt">Shirts</a></li>
+          <li><a href="shop.html">New Arrivals</a></li>
+          <li><a href="shop.html">Collections</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="about.html#founder">Founder</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-newsletter container">
+      <p>Get the next memory in your inbox.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+    <div class="footer-bottom container">
+      <!-- Dynamic copyright year -->
+      <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Scripts: order matters -->
+  <script src="js/theme.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Shop page filter / sort / render logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('shopGrid');
+      const noResults = document.getElementById('noResults');
+      const resultCount = document.getElementById('resultCount');
+      const sortSelect = document.getElementById('sortSelect');
+      const priceRange = document.getElementById('priceRange');
+      const priceValue = document.getElementById('priceValue');
+      const inStockOnly = document.getElementById('inStockOnly');
+      const sizeChips = document.getElementById('sizeChips');
+      const colorChips = document.getElementById('colorChips');
+      const clearBtn = document.getElementById('clearFilters');
+      const filterOpen = document.getElementById('filterOpen');
+      const filterClose = document.getElementById('filterClose');
+      const sidebar = document.getElementById('shopSidebar');
+      const categoryRadios = document.querySelectorAll('input[name="category"]');
+
+      /* ---------- State ---------- */
+      const state = {
+        category: 'all',
+        sizes: new Set(),
+        colors: new Set(),
+        maxPrice: 2999,
+        inStockOnly: false,
+        sort: 'featured'
+      };
+
+      /* ---------- Read URL params (e.g. shop.html?category=shirt) ---------- */
+      const params = new URLSearchParams(window.location.search);
+      const urlCategory = params.get('category');
+      if (urlCategory) {
+        state.category = urlCategory;
+        categoryRadios.forEach(r => { r.checked = r.value === urlCategory; });
+      }
+      const urlQ = params.get('q');
+      if (urlQ) {
+        // simple fuzzy: prefilter by name/tags
+        // (handled inside filterProducts via a search match list)
+      }
+
+      /* ---------- Filter + Sort ---------- */
+      function getFiltered() {
+        let list = PRODUCTS.slice();
+
+        if (urlQ) {
+          const q = urlQ.toLowerCase();
+          list = list.filter(p =>
+            p.name.toLowerCase().includes(q) ||
+            p.description.toLowerCase().includes(q) ||
+            p.tags.some(t => t.toLowerCase().includes(q))
+          );
+        }
+
+        if (state.category !== 'all') {
+          list = list.filter(p => p.category === state.category);
+        }
+        if (state.sizes.size) {
+          list = list.filter(p => p.sizes.some(s => state.sizes.has(s)));
+        }
+        if (state.colors.size) {
+          list = list.filter(p => p.colors.some(c => state.colors.has(c)));
+        }
+        list = list.filter(p => p.price <= state.maxPrice);
+        if (state.inStockOnly) list = list.filter(p => p.inStock);
+
+        switch (state.sort) {
+          case 'newest':
+            list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            break;
+          case 'price-asc':
+            list.sort((a, b) => a.price - b.price);
+            break;
+          case 'price-desc':
+            list.sort((a, b) => b.price - a.price);
+            break;
+          default:
+            list.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+        }
+        return list;
+      }
+
+      /* ---------- Render ---------- */
+      function render() {
+        const list = getFiltered();
+        resultCount.textContent = `${list.length} product${list.length === 1 ? '' : 's'}`;
+
+        if (!list.length) {
+          grid.innerHTML = '';
+          noResults.hidden = false;
+          return;
+        }
+        noResults.hidden = true;
+        grid.innerHTML = list.map((p, i) => renderProductCard(p, i)).join('');
+        bindProductCardEvents(grid);
+      }
+
+      /* ---------- Events ---------- */
+      categoryRadios.forEach(r => {
+        r.addEventListener('change', () => {
+          state.category = r.value;
+          render();
+        });
+      });
+
+      sizeChips.addEventListener('click', (e) => {
+        const chip = e.target.closest('.chip');
+        if (!chip) return;
+        const s = chip.dataset.size;
+        chip.classList.toggle('active');
+        state.sizes.has(s) ? state.sizes.delete(s) : state.sizes.add(s);
+        render();
+      });
+
+      colorChips.addEventListener('click', (e) => {
+        const chip = e.target.closest('.chip');
+        if (!chip) return;
+        const c = chip.dataset.color;
+        chip.classList.toggle('active');
+        state.colors.has(c) ? state.colors.delete(c) : state.colors.add(c);
+        render();
+      });
+
+      priceRange.addEventListener('input', () => {
+        state.maxPrice = Number(priceRange.value);
+        priceValue.textContent = state.maxPrice;
+        render();
+      });
+
+      inStockOnly.addEventListener('change', () => {
+        state.inStockOnly = inStockOnly.checked;
+        render();
+      });
+
+      sortSelect.addEventListener('change', () => {
+        state.sort = sortSelect.value;
+        render();
+      });
+
+      clearBtn.addEventListener('click', () => {
+        state.category = 'all';
+        state.sizes.clear();
+        state.colors.clear();
+        state.maxPrice = 2999;
+        state.inStockOnly = false;
+        state.sort = 'featured';
+        categoryRadios.forEach(r => { r.checked = r.value === 'all'; });
+        sizeChips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        colorChips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        priceRange.value = 2999;
+        priceValue.textContent = 2999;
+        inStockOnly.checked = false;
+        sortSelect.value = 'featured';
+        render();
+      });
+
+      /* Mobile filter drawer */
+      filterOpen?.addEventListener('click', () => sidebar.classList.add('drawer-open'));
+      filterClose?.addEventListener('click', () => sidebar.classList.remove('drawer-open'));
+
+      /* Initial paint */
+      render();
+    });
+  </script>
+</body>
+</html>

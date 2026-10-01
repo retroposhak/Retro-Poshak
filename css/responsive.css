@@ -1,0 +1,228 @@
+/* =========================================================
+   RETRO POSHAK — Responsive
+   Breakpoints: 1100, 900, 768, 480, 375, 320
+   Home-page responsive rules live in home.css
+   ========================================================= */
+
+/* =========================================================
+   1100px — Tablet / Small laptop
+   ========================================================= */
+@media (max-width: 1100px) {
+  /* Product detail stacks */
+  .product-detail { grid-template-columns: 1fr; gap: 50px; }
+
+  /* Footer re-flow */
+  .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+}
+
+/* =========================================================
+   900px — Shop sidebar becomes a slide-in drawer
+   ========================================================= */
+@media (max-width: 900px) {
+  .shop-layout { grid-template-columns: 1fr; }
+
+  .shop-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: min(85vw, 340px);
+    height: 100vh;
+    background: var(--cream);
+    padding: 30px 24px 120px;
+    border-right: 1px solid var(--line-strong);
+    z-index: 200;
+    max-height: 100vh;
+    transition: left .45s var(--ease);
+    overflow-y: auto;
+  }
+  .shop-sidebar.drawer-open {
+    left: 0;
+    box-shadow: 10px 0 40px rgba(0, 0, 0, 0.18);
+  }
+
+  .filter-head .icon-btn { display: inline-flex; }
+  .filter-open-btn { display: inline-flex; }
+}
+
+/* =========================================================
+   768px — Mobile
+   ========================================================= */
+@media (max-width: 768px) {
+  :root { --header-h: 68px; }
+
+  .container { padding: 0 20px; }
+
+  /* Reserve room for the sticky mobile cart bar */
+  body.has-mobile-cart main { padding-bottom: 72px; }
+
+  /* ---------- Nav (drawer) ---------- */
+  .main-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: min(85vw, 340px);
+    height: 100vh;
+    background: var(--cream);
+    border-left: 1px solid var(--line-strong);
+    padding: 110px 32px 32px;
+    transition: right .5s var(--ease);
+    z-index: 150;
+    overflow-y: auto;
+  }
+  .main-nav.open {
+    right: 0;
+    box-shadow: -12px 0 50px rgba(0, 0, 0, 0.15);
+  }
+  .main-nav .nav-list {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .nav-link {
+    font-size: 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    display: block;
+    letter-spacing: 0.12em;
+  }
+
+  .hamburger { display: block; }
+  .hide-mobile { display: none !important; }
+
+  /* ---------- Product grid (2 columns) ---------- */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 14px;
+  }
+  .product-info { padding: 12px 2px 0; }
+  .product-name { font-size: 13px; }
+  .product-desc { display: none; }
+  .add-cart-btn {
+    opacity: 1;
+    max-height: 60px;
+    font-size: 9.5px;
+    padding: 11px 8px;
+    letter-spacing: 0.16em;
+  }
+  .quick-view { display: none; }
+
+  /* ---------- Benefits (product page) ---------- */
+  .benefit-icons { grid-template-columns: 1fr 1fr; }
+
+  /* ---------- Cart ---------- */
+  .cart-item { grid-template-columns: 90px 1fr; gap: 14px; }
+  .cart-item img { width: 90px; height: 108px; }
+  .cart-item-actions {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 34px; }
+  .footer-newsletter {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .newsletter-form { max-width: 100%; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  /* ---------- Search ---------- */
+  .search-box input { font-size: 22px; }
+  .search-results { grid-template-columns: 1fr; }
+
+  /* ---------- Mobile cart bar ---------- */
+  .mobile-cart-bar {
+    display: flex;
+    transform: translateY(100%);
+  }
+  .mobile-cart-bar.visible { transform: translateY(0); }
+
+  /* ---------- Touch targets ---------- */
+  .btn,
+  .icon-btn,
+  .size-btn,
+  .chip { min-height: 44px; }
+}
+
+/* =========================================================
+   480px — Small mobile
+   ========================================================= */
+@media (max-width: 480px) {
+  /* Product grid */
+  .product-grid { gap: 20px 12px; }
+  .product-media { aspect-ratio: 3/4; }
+  .badge-tag { font-size: 8.5px; padding: 4px 8px; letter-spacing: 0.14em; }
+
+  /* Gallery */
+  .gallery-thumbs { grid-template-columns: repeat(4, 1fr); }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-col {
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(244, 237, 225, 0.1);
+  }
+
+  /* Buttons */
+  .btn { padding: 13px 22px; font-size: 11px; letter-spacing: 0.14em; }
+}
+
+/* =========================================================
+   375px — Very small
+   ========================================================= */
+@media (max-width: 375px) {
+  .container { padding: 0 16px; }
+}
+
+/* =========================================================
+   320px — Minimum supported
+   ========================================================= */
+@media (max-width: 320px) {
+  .page-title { font-size: 32px; }
+}
+
+/* =========================================================
+   Landscape phones (short height)
+   ========================================================= */
+@media (max-height: 500px) and (orientation: landscape) {
+  .section { padding: 50px 0; }
+}
+
+/* =========================================================
+   Reduced motion
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   Focus visibility (accessibility)
+   ========================================================= */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   Print — keep it simple
+   ========================================================= */
+@media print {
+  .site-header,
+  .site-footer,
+  .announce-bar,
+  .wa-float,
+  .toast,
+  .mobile-cart-bar { display: none !important; }
+  body { background: #fff; color: #000; }
+  a { color: #000; text-decoration: underline; }
+}

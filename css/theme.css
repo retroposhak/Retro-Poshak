@@ -1,0 +1,491 @@
+/* =========================================================
+   RETRO POSHAK — Theme (Dark Mode)
+   Single source of truth for dark overrides on non-home pages.
+   Home-page dark rules live in home.css
+   Toggle target: <html data-theme="dark">
+   ========================================================= */
+
+/* =========================================================
+   1. DARK THEME TOKENS
+   ========================================================= */
+html[data-theme="dark"] {
+  /* Core palette */
+  --cream: #131110;
+  --cream-2: #1b1817;
+  --cream-3: #232020;
+  --paper: #1e1a18;
+  --beige: #2a2522;
+  --charcoal: #f4ede1;
+  --faded-black: #faf5ec;
+  --brown: #f4ede1;
+  --brown-soft: #c6baab;
+  --brown-muted: #8f857a;
+  --brown-deep: #faf5ec;
+
+  /* Accents — warmer to keep gold/rust readable on dark */
+  --rust: #d97a58;
+  --rust-dark: #b5593a;
+  --rust-soft: #e8a184;
+  --mustard: #d4ad55;
+  --washed-blue: #8ba2ae;
+  --faded-green: #99a98a;
+
+  /* Ink that sits on rust/mustard surfaces */
+  --ink-on-rust: #131110;
+
+  /* Lines */
+  --line: rgba(244, 237, 225, 0.14);
+  --line-strong: rgba(244, 237, 225, 0.28);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.50);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.65);
+  --shadow-warm: 0 20px 50px -20px rgba(217, 122, 88, 0.30);
+  --shadow-float: 0 30px 80px -25px rgba(0, 0, 0, 0.70);
+  --shadow-ticket: 0 12px 32px -8px rgba(0, 0, 0, 0.55),
+                   0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-stamp: 0 14px 36px -10px rgba(217, 122, 88, 0.35);
+
+  color-scheme: dark;
+}
+
+/* =========================================================
+   2. BODY
+   ========================================================= */
+html[data-theme="dark"] body {
+  background-image:
+    radial-gradient(rgba(244, 237, 225, 0.025) 1px, transparent 1px),
+    radial-gradient(rgba(244, 237, 225, 0.018) 1px, transparent 1px);
+  background-size: 22px 22px, 13px 13px;
+  background-position: 0 0, 11px 11px;
+}
+
+/* =========================================================
+   3. HEADER
+   ========================================================= */
+html[data-theme="dark"] .site-header {
+  background: rgba(19, 17, 16, 0.85);
+}
+html[data-theme="dark"] .site-header.scrolled {
+  background: rgba(19, 17, 16, 0.97);
+  box-shadow: 0 4px 20px -8px rgba(0, 0, 0, 0.60);
+}
+
+/* Logo fallback (SVG monogram) */
+html[data-theme="dark"] .logo-fallback { color: var(--brown); }
+html[data-theme="dark"] .logo-dot { color: var(--rust); }
+
+/* Nav */
+html[data-theme="dark"] .nav-link { color: var(--brown-soft); }
+html[data-theme="dark"] .nav-link:hover,
+html[data-theme="dark"] .nav-link.active { color: var(--brown); }
+
+/* Header actions */
+html[data-theme="dark"] .header-actions .icon-btn:hover {
+  background: rgba(244, 237, 225, 0.06);
+}
+html[data-theme="dark"] .theme-toggle {
+  background: rgba(19, 17, 16, 0.60);
+  border-color: var(--line-strong);
+  color: var(--brown);
+}
+html[data-theme="dark"] .theme-toggle:hover {
+  background: var(--paper);
+  border-color: var(--rust);
+}
+
+/* =========================================================
+   4. SEARCH OVERLAY
+   ========================================================= */
+html[data-theme="dark"] .search-overlay {
+  background: rgba(19, 17, 16, 0.98);
+}
+html[data-theme="dark"] .search-box {
+  border-bottom-color: var(--line-strong);
+}
+html[data-theme="dark"] .search-box input { color: var(--brown); }
+html[data-theme="dark"] .search-box input::placeholder {
+  color: rgba(244, 237, 225, 0.30);
+}
+html[data-theme="dark"] .search-item:hover {
+  background: rgba(244, 237, 225, 0.05);
+}
+
+/* =========================================================
+   5. ANNOUNCE BAR
+   ========================================================= */
+html[data-theme="dark"] .announce-bar { background: #0a0908; }
+html[data-theme="dark"] .announce-track .dot { color: var(--rust); }
+
+/* =========================================================
+   6. PRODUCT CARDS (shop + product listings)
+   ========================================================= */
+html[data-theme="dark"] .product-media { background: var(--cream-2); }
+html[data-theme="dark"] .product-card:hover .product-media {
+  box-shadow:
+    0 22px 48px -18px rgba(0, 0, 0, 0.70),
+    0 6px 16px rgba(217, 122, 88, 0.10);
+}
+html[data-theme="dark"] .product-name { color: var(--brown); }
+html[data-theme="dark"] .product-desc { color: var(--brown-soft); }
+html[data-theme="dark"] .product-price { color: var(--brown); }
+
+/* Badges */
+html[data-theme="dark"] .badge-tag {
+  background: var(--paper);
+  color: var(--brown);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+html[data-theme="dark"] .badge-tag.new {
+  background: var(--faded-green);
+  color: var(--ink-on-rust);
+}
+html[data-theme="dark"] .badge-tag.best {
+  background: var(--mustard);
+  color: var(--ink-on-rust);
+}
+
+/* Wishlist */
+html[data-theme="dark"] .wishlist-btn {
+  background: rgba(19, 17, 16, 0.85);
+  color: var(--brown);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.40);
+}
+html[data-theme="dark"] .wishlist-btn:hover {
+  background: var(--paper);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.50);
+}
+html[data-theme="dark"] .wishlist-btn.active { color: var(--rust); }
+
+/* Quick view */
+html[data-theme="dark"] .quick-view {
+  background: rgba(19, 17, 16, 0.94);
+  color: var(--brown);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+html[data-theme="dark"] .quick-view:hover {
+  background: var(--paper);
+  color: var(--rust);
+}
+
+/* Add to cart */
+html[data-theme="dark"] .add-cart-btn {
+  color: var(--brown);
+  border-color: var(--brown);
+}
+html[data-theme="dark"] .add-cart-btn:hover {
+  background: var(--brown);
+  color: var(--ink-on-rust);
+}
+
+/* =========================================================
+   7. BUTTONS
+   ========================================================= */
+html[data-theme="dark"] .btn-primary {
+  background: var(--rust);
+  color: var(--ink-on-rust);
+}
+html[data-theme="dark"] .btn-primary:hover { background: var(--mustard); }
+html[data-theme="dark"] .btn-outline {
+  color: var(--brown);
+  border-color: var(--brown);
+}
+html[data-theme="dark"] .btn-outline:hover {
+  background: var(--brown);
+  color: var(--ink-on-rust);
+}
+html[data-theme="dark"] .btn.ghost { color: var(--brown); }
+html[data-theme="dark"] .btn.ghost:hover { color: var(--rust); }
+
+/* =========================================================
+   8. PAGE HERO + INNER PAGES
+   ========================================================= */
+html[data-theme="dark"] .page-hero {
+  background: var(--cream-2);
+  border-bottom-color: var(--line);
+}
+html[data-theme="dark"] .page-title { color: var(--brown); }
+html[data-theme="dark"] .page-sub { color: var(--brown-soft); }
+
+/* Product detail */
+html[data-theme="dark"] .product-detail { color: var(--brown); }
+html[data-theme="dark"] .gallery-main { background: var(--cream-2); }
+html[data-theme="dark"] .gallery-thumbs img { background: var(--cream-2); }
+html[data-theme="dark"] .product-info-detail h1 { color: var(--brown); }
+html[data-theme="dark"] .product-subtitle,
+html[data-theme="dark"] .product-desc-detail { color: var(--brown-soft); }
+html[data-theme="dark"] .product-price-detail { color: var(--brown); }
+html[data-theme="dark"] .product-tax-note { color: var(--brown-muted); }
+html[data-theme="dark"] .benefit-icon {
+  background: var(--paper);
+  border-color: var(--line);
+  color: var(--brown-soft);
+}
+html[data-theme="dark"] .pincode-block {
+  background: var(--paper);
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .pincode-block label { color: var(--brown-soft); }
+html[data-theme="dark"] .pincode-row input {
+  background: var(--cream);
+  color: var(--brown);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .pincode-result { color: var(--brown-soft); }
+html[data-theme="dark"] .size-btn {
+  color: var(--brown);
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .size-btn.active {
+  background: var(--brown);
+  color: var(--ink-on-rust);
+  border-color: var(--brown);
+}
+html[data-theme="dark"] .acc-head { color: var(--brown); }
+html[data-theme="dark"] .acc-body { color: var(--brown-soft); }
+
+/* Shop */
+html[data-theme="dark"] .shop-sidebar { border-right-color: var(--line); }
+html[data-theme="dark"] .filter-head h2,
+html[data-theme="dark"] .filter-group h3 { color: var(--brown-soft); }
+html[data-theme="dark"] .filter-group label { color: var(--brown-soft); }
+html[data-theme="dark"] .filter-group label:hover { color: var(--brown); }
+html[data-theme="dark"] .chip {
+  color: var(--brown-soft);
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .chip:hover {
+  color: var(--brown);
+  border-color: var(--brown);
+}
+html[data-theme="dark"] .chip.active {
+  background: var(--brown);
+  color: var(--ink-on-rust);
+  border-color: var(--brown);
+}
+html[data-theme="dark"] .shop-toolbar { border-bottom-color: var(--line); }
+html[data-theme="dark"] .result-count,
+html[data-theme="dark"] .sort-wrap { color: var(--brown-soft); }
+html[data-theme="dark"] .sort-wrap select {
+  color: var(--brown);
+  border-bottom-color: var(--brown);
+}
+html[data-theme="dark"] .no-results { color: var(--brown-soft); }
+
+/* =========================================================
+   9. CART / CHECKOUT / CONTACT
+   ========================================================= */
+html[data-theme="dark"] .cart-item { border-bottom-color: var(--line); }
+html[data-theme="dark"] .cart-item h4 { color: var(--brown); }
+html[data-theme="dark"] .cart-item .co-meta { color: var(--brown-soft); }
+html[data-theme="dark"] .cart-item .item-price { color: var(--brown); }
+html[data-theme="dark"] .qty-wrap { border-color: var(--line-strong); }
+html[data-theme="dark"] .qty-wrap button { color: var(--brown); }
+html[data-theme="dark"] .qty-wrap button:hover { background: var(--cream-2); }
+html[data-theme="dark"] .remove-btn { color: var(--brown-soft); }
+
+html[data-theme="dark"] .order-summary {
+  background: var(--paper);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .order-summary h2 { color: var(--brown); }
+html[data-theme="dark"] .summary-row { color: var(--brown-soft); }
+html[data-theme="dark"] .summary-row.total-row {
+  color: var(--brown);
+  border-top-color: var(--line-strong);
+}
+html[data-theme="dark"] .coupon-wrap label { color: var(--brown-soft); }
+html[data-theme="dark"] .coupon-row input {
+  background: var(--cream);
+  color: var(--brown);
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .coupon-row input::placeholder {
+  color: rgba(244, 237, 225, 0.35);
+}
+
+/* Checkout */
+html[data-theme="dark"] .checkout-form fieldset {
+  background: var(--paper);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .checkout-form legend { color: var(--brown); }
+html[data-theme="dark"] .checkout-form label { color: var(--brown-soft); }
+html[data-theme="dark"] .checkout-form input[type="text"],
+html[data-theme="dark"] .checkout-form input[type="email"],
+html[data-theme="dark"] .checkout-form input[type="tel"] {
+  background: var(--cream);
+  color: var(--brown);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .checkout-form input:focus { border-color: var(--rust); }
+html[data-theme="dark"] .radio-line { color: var(--brown); }
+html[data-theme="dark"] .payment-note { color: var(--brown-soft); }
+
+/* Contact */
+html[data-theme="dark"] .contact-form label { color: var(--brown-soft); }
+html[data-theme="dark"] .contact-form input,
+html[data-theme="dark"] .contact-form textarea {
+  background: var(--paper);
+  color: var(--brown);
+  border-color: var(--line-strong);
+}
+html[data-theme="dark"] .contact-form input:focus,
+html[data-theme="dark"] .contact-form textarea:focus { border-color: var(--rust); }
+html[data-theme="dark"] .contact-info h2 { color: var(--brown); }
+html[data-theme="dark"] .contact-info ul li { border-bottom-color: var(--line); }
+html[data-theme="dark"] .contact-info ul li strong { color: var(--brown-soft); }
+html[data-theme="dark"] .contact-info ul li span { color: var(--brown); }
+html[data-theme="dark"] .small-note { color: var(--brown-soft); }
+
+/* =========================================================
+   10. AUTH + ACCOUNT
+   ========================================================= */
+html[data-theme="dark"] .auth-card {
+  background: var(--paper);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .auth-card h1 { color: var(--brown); }
+html[data-theme="dark"] .auth-card .auth-sub { color: var(--brown-soft); }
+html[data-theme="dark"] .auth-form label { color: var(--brown-soft); }
+html[data-theme="dark"] .auth-form input {
+  background: var(--cream);
+  color: var(--brown);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .auth-form input:focus {
+  border-color: var(--rust);
+  box-shadow: 0 0 0 3px rgba(217, 122, 88, 0.20);
+}
+html[data-theme="dark"] .auth-form input::placeholder {
+  color: rgba(244, 237, 225, 0.35);
+}
+html[data-theme="dark"] .social-row button {
+  color: var(--brown);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .social-row button:hover {
+  border-color: var(--rust);
+  color: var(--rust);
+}
+html[data-theme="dark"] .auth-alt { color: var(--brown-soft); }
+html[data-theme="dark"] .auth-alt a { color: var(--rust); }
+
+html[data-theme="dark"] .account-side,
+html[data-theme="dark"] .account-content {
+  background: var(--paper);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .account-side h2 { color: var(--brown); }
+html[data-theme="dark"] .account-side p { color: var(--brown-soft); }
+html[data-theme="dark"] .account-nav a,
+html[data-theme="dark"] .account-nav button { color: var(--brown); }
+html[data-theme="dark"] .account-nav a:hover,
+html[data-theme="dark"] .account-nav button:hover {
+  background: rgba(244, 237, 225, 0.06);
+}
+html[data-theme="dark"] .stat {
+  background: var(--cream);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .stat b { color: var(--brown); }
+html[data-theme="dark"] .stat span { color: var(--brown-soft); }
+html[data-theme="dark"] .order-row {
+  border-bottom-color: var(--line);
+  color: var(--brown);
+}
+html[data-theme="dark"] .order-row .ometa { color: var(--brown-soft); }
+
+/* =========================================================
+   11. FOOTER
+   ========================================================= */
+html[data-theme="dark"] .site-footer { background: #0a0908; }
+html[data-theme="dark"] .footer-tagline { color: rgba(244, 237, 225, 0.55); }
+html[data-theme="dark"] .footer-hindi { color: rgba(244, 237, 225, 0.42); }
+html[data-theme="dark"] .footer-col h4 { color: rgba(244, 237, 225, 0.45); }
+html[data-theme="dark"] .footer-col a { color: rgba(244, 237, 225, 0.78); }
+html[data-theme="dark"] .footer-col a:hover { color: var(--rust); }
+html[data-theme="dark"] .footer-newsletter {
+  border-top-color: rgba(244, 237, 225, 0.14);
+}
+html[data-theme="dark"] .newsletter-form input {
+  border-color: rgba(244, 237, 225, 0.24);
+  color: var(--cream);
+}
+html[data-theme="dark"] .newsletter-form input::placeholder {
+  color: rgba(244, 237, 225, 0.45);
+}
+html[data-theme="dark"] .newsletter-form input:focus { border-color: var(--rust); }
+html[data-theme="dark"] .newsletter-form .btn-primary {
+  background: var(--rust);
+  color: var(--ink-on-rust);
+}
+html[data-theme="dark"] .newsletter-form .btn-primary:hover {
+  background: var(--cream);
+  color: var(--ink-on-rust);
+}
+html[data-theme="dark"] .footer-bottom {
+  border-top-color: rgba(244, 237, 225, 0.14);
+}
+html[data-theme="dark"] .footer-bottom p { color: rgba(244, 237, 225, 0.45); }
+html[data-theme="dark"] .footer-bottom .whatsapp { color: rgba(244, 237, 225, 0.65); }
+html[data-theme="dark"] .footer-bottom .whatsapp:hover { color: var(--rust); }
+
+/* =========================================================
+   12. UTILITIES / MISC
+   ========================================================= */
+html[data-theme="dark"] .mobile-cart-bar {
+  background: var(--rust);
+  color: var(--ink-on-rust);
+}
+html[data-theme="dark"] .toast {
+  background: var(--rust);
+  color: var(--ink-on-rust);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.60);
+}
+html[data-theme="dark"] .wa-float {
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.28);
+}
+html[data-theme="dark"] .user-dropdown {
+  background: var(--paper);
+  border-color: var(--line);
+}
+html[data-theme="dark"] .user-dropdown a,
+html[data-theme="dark"] .user-dropdown button { color: var(--brown); }
+html[data-theme="dark"] .user-dropdown a:hover,
+html[data-theme="dark"] .user-dropdown button:hover {
+  background: rgba(244, 237, 225, 0.08);
+}
+html[data-theme="dark"] .user-pill { color: var(--brown); }
+html[data-theme="dark"] .user-pill:hover {
+  background: rgba(244, 237, 225, 0.06);
+}
+html[data-theme="dark"] .avatar { color: var(--ink-on-rust); }
+
+/* Scrollbar */
+html[data-theme="dark"] ::-webkit-scrollbar-track { background: var(--cream-2); }
+html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--brown-muted);
+  border-color: var(--cream-2);
+}
+html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: var(--rust); }
+
+/* =========================================================
+   13. THEME CROSS-FADE (smooth toggle)
+   ========================================================= */
+body,
+.site-header,
+.search-overlay,
+.btn,
+.icon-btn,
+.product-media,
+.order-summary,
+.site-footer,
+.toast {
+  transition:
+    background-color .5s var(--ease),
+    color .5s var(--ease),
+    border-color .5s var(--ease),
+    box-shadow .5s var(--ease);
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart — Retro Poshak</title>
+  <meta name="description" content="Review your Retro Poshak memories before checkout." />
+
+  <!-- Prevent flash of wrong theme (runs before paint) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('retroPoshakTheme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+<body>
+  <header class="site-header" id="header">
+    <div class="header-inner container">
+      <a href="index.html" class="logo">RETRO POSHAK</a>
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="shop.html?category=oversized-tshirt" class="nav-link">T-Shirts</a></li>
+          <li><a href="shop.html?category=shirt" class="nav-link">Shirts</a></li>
+          <li><a href="about.html" class="nav-link">Our Story</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <!-- Theme toggle -->
+        <button class="theme-toggle" aria-label="Toggle light and dark theme" title="Toggle theme">
+          <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        </button>
+
+        <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+
+        <!-- Auth slot: Sign-in icon or user avatar menu -->
+        <span id="authSlot"></span>
+
+        <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          <span class="badge wishlist-count" id="wishlistCount">0</span>
+        </a>
+
+        <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6L5 3H2"/></svg>
+          <span class="badge cart-count" id="cartCount">0</span>
+        </a>
+
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+    <div class="search-box container">
+      <input type="text" id="searchInput" placeholder="Search memories…" autocomplete="off" aria-label="Search products" />
+      <button class="icon-btn" id="searchClose" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="search-results container" id="searchResults"></div>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Almost yours</span>
+        <h1 class="page-title">Your Cart</h1>
+        <p class="page-sub">Memories waiting to be worn.</p>
+      </div>
+    </section>
+
+    <section class="section cart-section">
+      <div class="container cart-layout">
+        <div class="cart-items-wrap">
+          <div id="cartItems" class="cart-items"></div>
+          <div class="cart-empty" id="cartEmpty" hidden>
+            <p>Your cart is empty — let's make a memory.</p>
+            <a href="shop.html" class="btn btn-primary">Explore the Memories</a>
+          </div>
+        </div>
+
+        <aside class="order-summary" aria-label="Order summary">
+          <h2>Order Summary</h2>
+
+          <div class="coupon-wrap">
+            <label for="couponInput">Coupon</label>
+            <div class="coupon-row">
+              <input type="text" id="couponInput" placeholder="MEMORY10" />
+              <button class="btn btn-outline" id="applyCoupon">Apply</button>
+            </div>
+            <p class="coupon-msg" id="couponMsg"></p>
+          </div>
+
+          <div class="summary-row"><span>Subtotal</span><span id="subtotal">₹0</span></div>
+          <div class="summary-row"><span>Shipping</span><span id="shipping">₹0</span></div>
+          <div class="summary-row discount-row" id="discountRow" hidden><span>Discount</span><span id="discount">-₹0</span></div>
+          <div class="summary-row total-row"><span>Total</span><span id="total">₹0</span></div>
+
+          <a href="checkout.html" class="btn btn-primary full" id="checkoutBtn">Proceed to Checkout</a>
+          <a href="shop.html" class="continue-link">Continue shopping →</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3 class="footer-logo">Retro Poshak</h3>
+        <p class="footer-tagline">Wear Your Memories.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="shop.html?category=oversized-tshirt">T-Shirts</a></li>
+          <li><a href="shop.html?category=shirt">Shirts</a></li>
+          <li><a href="shop.html">New Arrivals</a></li>
+          <li><a href="shop.html">Collections</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="about.html">Our Story</a></li>
+          <li><a href="about.html#founder">Founder</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Pinterest</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-newsletter container">
+      <p>Get the next memory in your inbox.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+    <div class="footer-bottom container">
+      <!-- Dynamic copyright year -->
+      <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Scripts: order matters (theme → products → auth → cart → main) -->
+  <script src="js/theme.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- ===== Cart Page Logic ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const itemsWrap = document.getElementById('cartItems');
+      const emptyWrap = document.getElementById('cartEmpty');
+      const couponInput = document.getElementById('couponInput');
+      const applyBtn = document.getElementById('applyCoupon');
+      const couponMsg = document.getElementById('couponMsg');
+      const subtotalEl = document.getElementById('subtotal');
+      const shippingEl = document.getElementById('shipping');
+      const discountRow = document.getElementById('discountRow');
+      const discountEl = document.getElementById('discount');
+      const totalEl = document.getElementById('total');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+
+      const inr = (n) => '₹' + Number(n).toLocaleString('en-IN');
+
+      /* ---------- Render cart items ---------- */
+      function render() {
+        const cart = window.RetroCart.getCart();
+
+        if (!cart.length) {
+          itemsWrap.innerHTML = '';
+          emptyWrap.hidden = false;
+        } else {
+          emptyWrap.hidden = true;
+          itemsWrap.innerHTML = cart.map((item, index) => {
+            const p = getProductById(item.id);
+            if (!p) return '';
+            return `
+              <div class="cart-item" data-index="${index}">
+                <img src="${p.image}" alt="${p.name}"
+                     onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22120%22><rect width=%22100%22 height=%22120%22 fill=%22%23e8e0d5%22/></svg>'">
+                <div class="cart-item-info">
+                  <h4>${p.name}</h4>
+                  <p>Size: ${item.size} · Color: ${item.color}</p>
+                  <p class="item-price">${inr(p.price)} × ${item.qty} = <strong>${inr(p.price * item.qty)}</strong></p>
+                </div>
+                <div class="cart-item-actions">
+                  <div class="qty-wrap">
+                    <button type="button" data-action="dec" data-index="${index}" aria-label="Decrease quantity">−</button>
+                    <span>${item.qty}</span>
+                    <button type="button" data-action="inc" data-index="${index}" aria-label="Increase quantity">+</button>
+                  </div>
+                  <button type="button" class="remove-btn" data-action="remove" data-index="${index}">Remove</button>
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+        renderSummary();
+      }
+
+      /* ---------- Render order summary ---------- */
+      function renderSummary() {
+        subtotalEl.textContent = inr(window.RetroCart.getSubtotal());
+        const ship = window.RetroCart.getShipping();
+        shippingEl.textContent = ship === 0 ? 'Free' : inr(ship);
+
+        const disc = window.RetroCart.getDiscount();
+        if (disc > 0) {
+          discountRow.hidden = false;
+          discountEl.textContent = '-' + inr(disc);
+        } else {
+          discountRow.hidden = true;
+        }
+        totalEl.textContent = inr(window.RetroCart.getTotal());
+
+        // Coupon state
+        const c = window.RetroCart.getCouponData();
+        if (c) {
+          couponMsg.textContent = `Applied: ${c.label}`;
+          couponMsg.className = 'coupon-msg';
+        }
+
+        // Checkout button state
+        const empty = window.RetroCart.getCart().length === 0;
+        checkoutBtn.style.pointerEvents = empty ? 'none' : '';
+        checkoutBtn.style.opacity = empty ? '0.5' : '1';
+      }
+
+      /* ---------- Cart item interactions (event delegation) ---------- */
+      itemsWrap.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        const index = Number(btn.dataset.index);
+
+        if (action === 'inc') window.RetroCart.updateQty(index, +1);
+        if (action === 'dec') window.RetroCart.updateQty(index, -1);
+        if (action === 'remove') {
+          window.RetroCart.removeFromCart(index);
+          window.RetroCart.showToast('Memory removed from cart.');
+        }
+        render();
+      });
+
+      /* ---------- Coupon ---------- */
+      applyBtn.addEventListener('click', () => {
+        const code = couponInput.value;
+        const res = window.RetroCart.applyCoupon(code);
+        couponMsg.textContent = res.msg;
+        couponMsg.className = 'coupon-msg' + (res.ok ? '' : ' error');
+        if (res.ok) {
+          window.RetroCart.showToast('Coupon applied.');
+          couponInput.value = '';
+          renderSummary();
+        }
+      });
+      couponInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); applyBtn.click(); }
+      });
+
+      /* ---------- React to cart updates (from other tabs or header) ---------- */
+      document.addEventListener('cart:updated', render);
+
+      /* ---------- Initial paint ---------- */
+      render();
+    });
+  </script>
+</body>
+</html>
