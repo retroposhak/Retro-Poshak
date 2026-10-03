@@ -1,172 +1,606 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout — Retro Poshak</title>
-  <meta name="description" content="Complete your Retro Poshak order — frontend prototype, connect a real gateway later." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout — Retro Poshak</title>
+    <meta name="description" content="Complete your Retro Poshak order — frontend prototype, connect a real gateway later." />
+
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('retroPoshakTheme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Bebas+Neue&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/checkout.css" />
 </head>
-<body>
-  <header class="site-header" id="header">
-    <div class="header-inner container">
-      <a href="index.html" class="logo">RETRO POSHAK</a>
-      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="shop.html" class="nav-link">Shop</a></li>
-          <li><a href="shop.html?category=oversized-tshirt" class="nav-link">T-Shirts</a></li>
-          <li><a href="shop.html?category=shirt" class="nav-link">Shirts</a></li>
-          <li><a href="about.html" class="nav-link">Our Story</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-        </button>
-        <a href="#" class="icon-btn hide-mobile" aria-label="Account">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/></svg>
-        </a>
-        <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-          <span class="badge wishlist-count" id="wishlistCount">0</span>
-        </a>
-        <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6L5 3H2"/></svg>
-          <span class="badge cart-count" id="cartCount">0</span>
-        </a>
-        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+
+<body class="no-js">
+    <script>document.body.classList.remove('no-js');</script>
+
+    <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
+    <div class="announce-bar" aria-label="Site announcements">
+        <div class="announce-track">
+            <span>✦ Free shipping over ₹1999</span>
+            <span class="dot">◆</span>
+            <span>✦ 5% off on prepaid orders</span>
+            <span class="dot">◆</span>
+            <span>✦ COD available across India</span>
+            <span class="dot">◆</span>
+            <span>✦ Easy 7-day returns</span>
+            <span class="dot">◆</span>
+            <span>✦ Free shipping over ₹1999</span>
+            <span class="dot">◆</span>
+            <span>✦ 5% off on prepaid orders</span>
+            <span class="dot">◆</span>
+            <span>✦ COD available across India</span>
+            <span class="dot">◆</span>
+            <span>✦ Easy 7-day returns</span>
+            <span class="dot">◆</span>
+        </div>
     </div>
-  </header>
 
-  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
-    <div class="search-box container">
-      <input type="text" id="searchInput" placeholder="Search memories…" autocomplete="off" aria-label="Search products" />
-      <button class="icon-btn" id="searchClose" aria-label="Close search">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
+    <header class="site-header" id="header">
+        <div class="header-inner container">
+            <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
+                <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
+                    class="logo-img"
+                    onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), { className: 'logo-fallback', innerHTML: 'RETRO<span class=&quot;logo-dot&quot;>.</span>POSHAK' }));" />
+            </a>
+
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="shop.html?filter=new" class="nav-link">New Arrivals</a></li>
+                    <li><a href="shop.html?filter=bestseller" class="nav-link">Bestsellers</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                    <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg>
+                    <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                </button>
+
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                </button>
+
+                <span id="authSlot"></span>
+
+                <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                    </svg>
+                    <span class="badge wishlist-count" id="wishlistCount">0</span>
+                </a>
+
+                <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 6h15l-1.5 9h-12z" />
+                        <circle cx="9" cy="20" r="1" />
+                        <circle cx="18" cy="20" r="1" />
+                        <path d="M6 6L5 3H2" />
+                    </svg>
+                    <span class="badge cart-count" id="cartCount">0</span>
+                </a>
+
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+        <div class="search-box container">
+            <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
+                aria-label="Search products" />
+            <button class="icon-btn" id="searchClose" aria-label="Close search">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="search-results container" id="searchResults"></div>
     </div>
-    <div class="search-results container" id="searchResults"></div>
-  </div>
 
-  <main>
-    <section class="page-hero">
-      <div class="container">
-        <span class="eyebrow">One last step</span>
-        <h1 class="page-title">Checkout</h1>
-        <p class="page-sub">Frontend prototype — no real payments processed.</p>
-      </div>
-    </section>
+    <main>
+        <!-- ===== HERO ===== -->
+        <section class="checkout-hero">
+            <div class="container checkout-hero-inner">
+                <span class="checkout-hero-eyebrow">
+                    <span class="rule"></span>
+                    One Last Step
+                    <span class="rule"></span>
+                </span>
+                <h1 class="checkout-hero-title">Check<em>out.</em></h1>
+                <p class="checkout-hero-sub">Just a few details and your memories are on their way.</p>
+            </div>
+            <span class="checkout-hero-ornament top-left">✦</span>
+            <span class="checkout-hero-ornament bottom-right">✦</span>
+        </section>
 
-    <section class="section checkout-section">
-      <div class="container checkout-layout">
-        <form class="checkout-form" id="checkoutForm" novalidate>
-          <fieldset>
-            <legend>Customer Details</legend>
-            <label>Full Name<input type="text" name="fullName" required autocomplete="name" /></label>
-            <label>Email<input type="email" name="email" required autocomplete="email" /></label>
-            <label>Phone Number<input type="tel" name="phone" required pattern="[0-9]{10}" placeholder="10-digit number" autocomplete="tel" /></label>
-          </fieldset>
+        <!-- ===== STEP RIBBON ===== -->
+        <section class="checkout-steps" aria-label="Checkout progress">
+            <div class="container checkout-steps-inner">
+                <div class="checkout-step is-active" data-step="1">
+                    <span class="step-num">01</span>
+                    <span class="step-label">Your Details</span>
+                </div>
+                <span class="step-line" aria-hidden="true"></span>
+                <div class="checkout-step" data-step="2">
+                    <span class="step-num">02</span>
+                    <span class="step-label">Shipping</span>
+                </div>
+                <span class="step-line" aria-hidden="true"></span>
+                <div class="checkout-step" data-step="3">
+                    <span class="step-num">03</span>
+                    <span class="step-label">Payment</span>
+                </div>
+            </div>
+        </section>
 
-          <fieldset>
-            <legend>Shipping Address</legend>
-            <label>Address<input type="text" name="address" required autocomplete="street-address" /></label>
-            <label>Apartment / Landmark<input type="text" name="landmark" autocomplete="address-line2" /></label>
-            <label>City<input type="text" name="city" required autocomplete="address-level2" /></label>
-            <label>State<input type="text" name="state" required autocomplete="address-level1" /></label>
-            <label>PIN Code<input type="text" name="pincode" required pattern="[0-9]{6}" autocomplete="postal-code" /></label>
-          </fieldset>
+        <!-- ===== CHECKOUT SECTION ===== -->
+        <section class="checkout-section">
+            <div class="container checkout-layout">
 
-          <fieldset>
-            <legend>Payment</legend>
-            <label class="radio-line"><input type="radio" name="payment" value="upi" checked /> UPI (Google Pay, PhonePe, Paytm)</label>
-            <label class="radio-line"><input type="radio" name="payment" value="card" /> Credit / Debit Card</label>
-            <label class="radio-line"><input type="radio" name="payment" value="cod" /> Cash on Delivery</label>
-            <p class="payment-note">This is a prototype. Real payments will be handled by Razorpay once connected.</p>
-          </fieldset>
+                <!-- FORM -->
+                <form class="checkout-form" id="checkoutForm" novalidate>
 
-          <button type="submit" class="btn btn-primary full" id="placeOrderBtn">Place Order</button>
-          <p class="form-msg" id="checkoutMsg"></p>
-        </form>
+                    <!-- STEP 1 — DETAILS -->
+                    <fieldset class="checkout-fieldset" data-section="details">
+                        <legend>
+                            <span class="checkout-legend-num">01</span>
+                            <span class="checkout-legend-title">Your <em>Details.</em></span>
+                            <span class="checkout-legend-sub">So we know who to write to.</span>
+                        </legend>
 
-        <aside class="order-summary" aria-label="Order summary">
-          <h2>Your Order</h2>
-          <div id="checkoutItems" class="checkout-items"></div>
-          <div class="summary-row"><span>Subtotal</span><span id="coSubtotal">₹0</span></div>
-          <div class="summary-row"><span>Shipping</span><span id="coShipping">₹0</span></div>
-          <div class="summary-row discount-row" id="coDiscountRow" hidden><span>Discount</span><span id="coDiscount">-₹0</span></div>
-          <div class="summary-row total-row"><span>Total</span><span id="coTotal">₹0</span></div>
-        </aside>
-      </div>
-    </section>
-  </main>
+                        <div class="form-row two-col">
+                            <div class="field">
+                                <input type="text" id="fieldFullName" name="fullName" required
+                                    autocomplete="name" placeholder=" " />
+                                <label for="fieldFullName">Full name</label>
+                                <span class="field-border"></span>
+                                <span class="field-error">Please enter your name</span>
+                            </div>
+                            <div class="field">
+                                <input type="email" id="fieldEmail" name="email" required
+                                    autocomplete="email" placeholder=" " />
+                                <label for="fieldEmail">Email address</label>
+                                <span class="field-border"></span>
+                                <span class="field-error">Please enter a valid email</span>
+                            </div>
+                        </div>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <h3 class="footer-logo">Retro Poshak</h3>
-        <p class="footer-tagline">Wear Your Memories.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Shop</h4>
-        <ul>
-          <li><a href="shop.html?category=oversized-tshirt">T-Shirts</a></li>
-          <li><a href="shop.html?category=shirt">Shirts</a></li>
-          <li><a href="shop.html">New Arrivals</a></li>
-          <li><a href="shop.html">Collections</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>About</h4>
-        <ul>
-          <li><a href="about.html">Our Story</a></li>
-          <li><a href="about.html#founder">Founder</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Help</h4>
-        <ul>
-          <li><a href="#">Size Guide</a></li>
-          <li><a href="#">Shipping</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">FAQs</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Follow</h4>
-        <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Pinterest</a></li>
-        </ul>
-      </div>
+                        <div class="field">
+                            <input type="tel" id="fieldPhone" name="phone" required
+                                pattern="[0-9]{10}" autocomplete="tel" placeholder=" " inputmode="numeric"
+                                maxlength="10" />
+                            <label for="fieldPhone">Phone number</label>
+                            <span class="field-border"></span>
+                            <span class="field-error">Enter a 10-digit mobile number</span>
+                        </div>
+                    </fieldset>
+
+                    <!-- STEP 2 — SHIPPING -->
+                    <fieldset class="checkout-fieldset" data-section="shipping">
+                        <legend>
+                            <span class="checkout-legend-num">02</span>
+                            <span class="checkout-legend-title">Where to <em>ship?</em></span>
+                            <span class="checkout-legend-sub">We deliver across India.</span>
+                        </legend>
+
+                        <div class="field">
+                            <input type="text" id="fieldAddress" name="address" required
+                                autocomplete="street-address" placeholder=" " />
+                            <label for="fieldAddress">Address (house no., building, street)</label>
+                            <span class="field-border"></span>
+                            <span class="field-error">Please enter your address</span>
+                        </div>
+
+                        <div class="field">
+                            <input type="text" id="fieldLandmark" name="landmark"
+                                autocomplete="address-line2" placeholder=" " />
+                            <label for="fieldLandmark">Apartment, landmark (optional)</label>
+                            <span class="field-border"></span>
+                        </div>
+
+                        <div class="form-row three-col">
+                            <div class="field">
+                                <input type="text" id="fieldCity" name="city" required
+                                    autocomplete="address-level2" placeholder=" " />
+                                <label for="fieldCity">City</label>
+                                <span class="field-border"></span>
+                                <span class="field-error">Required</span>
+                            </div>
+                            <div class="field">
+                                <input type="text" id="fieldState" name="state" required
+                                    autocomplete="address-level1" placeholder=" " />
+                                <label for="fieldState">State</label>
+                                <span class="field-border"></span>
+                                <span class="field-error">Required</span>
+                            </div>
+                            <div class="field">
+                                <input type="text" id="fieldPincode" name="pincode" required
+                                    pattern="[0-9]{6}" autocomplete="postal-code" placeholder=" "
+                                    inputmode="numeric" maxlength="6" />
+                                <label for="fieldPincode">PIN code</label>
+                                <span class="field-border"></span>
+                                <span class="field-error">6 digits</span>
+                            </div>
+                        </div>
+
+                        <!-- Shipping speed toggle -->
+                        <div class="shipping-speed">
+                            <span class="shipping-speed-label">Delivery speed</span>
+                            <div class="shipping-options">
+                                <label class="shipping-option is-active" data-speed="standard">
+                                    <input type="radio" name="shippingSpeed" value="standard" checked />
+                                    <span class="shipping-radio"></span>
+                                    <span class="shipping-body">
+                                        <strong>Standard</strong>
+                                        <em>4–7 days · Free over ₹1999</em>
+                                    </span>
+                                </label>
+                                <label class="shipping-option" data-speed="express">
+                                    <input type="radio" name="shippingSpeed" value="express" />
+                                    <span class="shipping-radio"></span>
+                                    <span class="shipping-body">
+                                        <strong>Express</strong>
+                                        <em>2–3 days · ₹99</em>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- STEP 3 — PAYMENT -->
+                    <fieldset class="checkout-fieldset" data-section="payment">
+                        <legend>
+                            <span class="checkout-legend-num">03</span>
+                            <span class="checkout-legend-title">How you'll <em>pay.</em></span>
+                            <span class="checkout-legend-sub">Secure &amp; encrypted.</span>
+                        </legend>
+
+                        <div class="payment-options">
+                            <label class="payment-option is-active" data-method="upi">
+                                <input type="radio" name="payment" value="upi" checked />
+                                <span class="payment-radio"></span>
+                                <span class="payment-body">
+                                    <strong>UPI</strong>
+                                    <em>GPay · PhonePe · Paytm · BHIM</em>
+                                </span>
+                                <span class="payment-icon">◐</span>
+                            </label>
+
+                            <label class="payment-option" data-method="card">
+                                <input type="radio" name="payment" value="card" />
+                                <span class="payment-radio"></span>
+                                <span class="payment-body">
+                                    <strong>Credit / Debit Card</strong>
+                                    <em>Visa · Mastercard · RuPay · Amex</em>
+                                </span>
+                                <span class="payment-icon">◈</span>
+                            </label>
+
+                            <label class="payment-option" data-method="cod">
+                                <input type="radio" name="payment" value="cod" />
+                                <span class="payment-radio"></span>
+                                <span class="payment-body">
+                                    <strong>Cash on Delivery</strong>
+                                    <em>Pay when it arrives · ₹49 fee</em>
+                                </span>
+                                <span class="payment-icon">✦</span>
+                            </label>
+                        </div>
+
+                        <p class="payment-note">
+                            <span class="payment-note-icon">⚿</span>
+                            This is a prototype. Real payments will be handled by Razorpay once connected.
+                        </p>
+                    </fieldset>
+
+                    <!-- Submit -->
+                    <div class="checkout-actions">
+                        <button type="submit" class="btn btn-primary full place-order-btn" id="placeOrderBtn">
+                            <span class="place-order-icon" aria-hidden="true">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <rect x="4" y="10" width="16" height="10" rx="2" />
+                                    <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                                </svg>
+                            </span>
+                            <span class="place-order-label">Place Order · <span id="placeOrderTotal">₹0</span></span>
+                        </button>
+                        <p class="checkout-secure">
+                            <span>Encrypted checkout</span>
+                            <span class="dot">·</span>
+                            <span>7-day easy returns</span>
+                            <span class="dot">·</span>
+                            <span>Support on WhatsApp</span>
+                        </p>
+                    </div>
+
+                    <p class="form-msg" id="checkoutMsg" role="alert" aria-live="polite"></p>
+                </form>
+
+                <!-- ORDER SUMMARY -->
+                <aside class="order-summary" id="orderSummary" aria-label="Order summary">
+                    <div class="order-summary-inner">
+
+                        <header class="order-summary-head">
+                            <span class="order-summary-eyebrow">In your order</span>
+                            <h2 class="order-summary-title">
+                                <em id="summaryCount">0</em>
+                                <span id="summaryCountLabel">items</span>
+                            </h2>
+                        </header>
+
+                        <div id="checkoutItems" class="checkout-items" aria-live="polite"></div>
+
+                        <div class="summary-rows">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="coSubtotal">₹0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span id="coShipping">₹0</span>
+                            </div>
+                            <div class="summary-row discount-row" id="coDiscountRow" hidden>
+                                <span>Discount</span>
+                                <span id="coDiscount">-₹0</span>
+                            </div>
+                            <div class="summary-row total-row">
+                                <span>Total</span>
+                                <span id="coTotal">₹0</span>
+                            </div>
+                        </div>
+
+                        <ul class="trust-strip">
+                            <li><span class="trust-dot">✦</span> Free shipping over ₹1999</li>
+                            <li><span class="trust-dot">✦</span> Easy 7-day returns</li>
+                            <li><span class="trust-dot">✦</span> Secure &amp; encrypted</li>
+                        </ul>
+
+                        <a href="cart.html" class="continue-link">
+                            <span aria-hidden="true">←</span>
+                            <span>Back to cart</span>
+                        </a>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== SUCCESS OVERLAY ===== -->
+    <div class="checkout-success" id="checkoutSuccess" hidden role="dialog" aria-labelledby="successTitle">
+        <div class="checkout-success-card">
+            <span class="success-ornament top-left">✦</span>
+            <span class="success-ornament bottom-right">✦</span>
+            <span class="success-icon">✓</span>
+            <h2 class="success-title" id="successTitle">Order <em>placed.</em></h2>
+            <p class="success-sub">Your memory is on its way.</p>
+            <div class="success-meta">
+                <div class="success-meta-row">
+                    <span>Order ID</span>
+                    <strong id="successOrderId">#RP-0000</strong>
+                </div>
+                <div class="success-meta-row">
+                    <span>Total</span>
+                    <strong id="successTotal">₹0</strong>
+                </div>
+                <div class="success-meta-row">
+                    <span>Arrives</span>
+                    <strong id="successEta">—</strong>
+                </div>
+            </div>
+            <div class="success-actions">
+                <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+                <a href="index.html" class="btn btn-outline">Back Home</a>
+            </div>
+        </div>
     </div>
-    <div class="footer-newsletter container">
-      <p>Get the next memory in your inbox.</p>
-      <form class="newsletter-form" id="newsletterForm">
-        <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
-        <button type="submit" class="btn btn-primary">Subscribe</button>
-      </form>
-    </div>
-    <div class="footer-bottom container">
-      <p>&copy; 2025 Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
-    </div>
-  </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo-wrap">
+                    <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak" class="footer-logo-img"
+                        onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('h3'), { className: 'footer-logo', textContent: 'RETRO POSHAK' }));" />
+                </div>
+                <p class="footer-tagline">Pehno Yaaden.</p>
+                <p class="footer-hindi">Old memories. New fits.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="shop.html">All Products</a></li>
+                    <li><a href="shop.html?filter=new">New Arrivals</a></li>
+                    <li><a href="shop.html?filter=bestseller">Bestsellers</a></li>
+                    <li><a href="shop.html">Collections</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow</h4>
+                <ul>
+                    <li><a href="https://www.instagram.com/retro_poshak" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-newsletter container">
+            <p>Get the next memory in your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
+            <a href="#" class="whatsapp">💬 WhatsApp Support</a>
+        </div>
+    </footer>
 
-  <script src="js/products.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/checkout.js"></script>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <a href="#" class="wa-float" aria-label="Chat on WhatsApp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+                d="M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5zm-8.5 18a9 9 0 0 1-4.6-1.3l-.3-.2-3 .9.9-2.9-.2-.3A9 9 0 1 1 12 21.5zm5.2-6.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.4.2-.6.1a7.4 7.4 0 0 1-3.7-3.3c-.1-.2-.1-.4.1-.6l.6-.7c.1-.2.1-.4 0-.6l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 10.4 10.4 0 0 0 4 3.5 4.6 4.6 0 0 0 2.8.5c.9-.1 1.7-.6 2.1-1.4.2-.4.3-.9.2-1.3 0-.2-.2-.3-.4-.4z" />
+        </svg>
+    </a>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/checkout.js"></script>
+
+    <!-- ===== Checkout UI niceties (independent of js/checkout.js) ===== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('checkoutForm');
+            if (!form) return;
+
+            const fields = form.querySelectorAll('input, select');
+            const steps = document.querySelectorAll('.checkout-step');
+            const sections = {
+                details: ['fullName', 'email', 'phone'],
+                shipping: ['address', 'city', 'state', 'pincode'],
+                payment: ['payment']
+            };
+
+            /* ---------- Step highlighting ---------- */
+            function updateSteps() {
+                const detailsDone = sections.details.every(n =>
+                    (form.elements[n]?.value || '').trim().length > 0
+                );
+                const shippingDone = sections.shipping.every(n =>
+                    (form.elements[n]?.value || '').trim().length > 0
+                );
+
+                steps.forEach(s => s.classList.remove('is-active', 'is-done'));
+                if (!detailsDone) steps[0].classList.add('is-active');
+                else if (!shippingDone) {
+                    steps[0].classList.add('is-done');
+                    steps[1].classList.add('is-active');
+                } else {
+                    steps[0].classList.add('is-done');
+                    steps[1].classList.add('is-done');
+                    steps[2].classList.add('is-active');
+                }
+            }
+
+            /* ---------- Payment / shipping toggle cards ---------- */
+            function wireOptionGroup(selector, activeClass = 'is-active') {
+                const options = document.querySelectorAll(selector);
+                options.forEach(opt => {
+                    const input = opt.querySelector('input[type="radio"]');
+                    if (!input) return;
+                    if (input.checked) opt.classList.add(activeClass);
+                    opt.addEventListener('click', () => {
+                        options.forEach(o => o.classList.remove(activeClass));
+                        opt.classList.add(activeClass);
+                        input.checked = true;
+                        updateSteps();
+                    });
+                });
+            }
+            wireOptionGroup('.payment-option');
+            wireOptionGroup('.shipping-option');
+
+            /* ---------- Live validation on blur ---------- */
+            fields.forEach(el => {
+                el.addEventListener('blur', () => {
+                    if (!el.required) return;
+                    const wrap = el.closest('.field');
+                    if (!wrap) return;
+                    const empty = !el.value.trim();
+                    const patternFail = el.pattern &&
+                        el.value.trim() &&
+                        !new RegExp('^(?:' + el.pattern + ')$').test(el.value.trim());
+                    const emailFail = el.type === 'email' &&
+                        el.value.trim() &&
+                        !/^\S+@\S+\.\S+$/.test(el.value.trim());
+                    wrap.classList.toggle('has-error', empty || patternFail || emailFail);
+                });
+                el.addEventListener('input', () => {
+                    const wrap = el.closest('.field');
+                    if (wrap) wrap.classList.remove('has-error');
+                    updateSteps();
+                });
+            });
+
+            /* ---------- Order total on button ---------- */
+            function syncButtonTotal() {
+                const totalEl = document.getElementById('coTotal');
+                const target = document.getElementById('placeOrderTotal');
+                if (totalEl && target) target.textContent = totalEl.textContent.trim();
+            }
+            const coTotalEl = document.getElementById('coTotal');
+            if (coTotalEl) {
+                new MutationObserver(syncButtonTotal)
+                    .observe(coTotalEl, { childList: true, characterData: true, subtree: true });
+                syncButtonTotal();
+            }
+
+            updateSteps();
+        });
+    </script>
 </body>
+
 </html>

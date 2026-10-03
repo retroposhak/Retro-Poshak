@@ -1,0 +1,658 @@
+/* =========================================================
+   RETRO POSHAK — Cinematic Layer
+   Typography, animated backgrounds, scroll reveals,
+   magnetic + tilt interactions, cursor effects.
+
+   Depends on: style.css (base) + theme.css (colors)
+   Load order: style.css → responsive.css → theme.css → cinematic.css → [page].css
+   ========================================================= */
+
+/* =========================================================
+   1. TYPOGRAPHY SCALE — cinematic overrides
+   ========================================================= */
+:root {
+  /* Editorial serif for headlines */
+  --font-editorial: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+
+  /* Type scale — fluid */
+  --text-hero: clamp(60px, 9vw, 128px);
+  --text-display: clamp(40px, 5.5vw, 72px);
+  --text-title: clamp(28px, 3.4vw, 44px);
+  --text-lead: clamp(17px, 1.6vw, 22px);
+
+  /* Tracking tokens */
+  --tracking-tight: -0.04em;
+  --tracking-wide: 0.06em;
+  --tracking-mega: 0.24em;
+}
+
+body {
+  font-feature-settings: "ss01", "cv01", "cv02", "cv11", "kern";
+  text-rendering: optimizeLegibility;
+}
+
+/* Display headings use Playfair with optical sizing */
+.hero-title {
+  font-family: var(--font-serif, 'Playfair Display', Georgia, serif);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144;
+}
+
+.hero-title-em {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Section titles + editorials use Cormorant */
+.section-title,
+.statement-hindi,
+.story-headline,
+.featured-info h2,
+.featured-hindi {
+  font-family: var(--font-editorial);
+  font-weight: 500;
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
+.section-title {
+  font-style: italic;
+  font-weight: 400;
+}
+.statement-hindi {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+.story-card-title {
+  font-family: var(--font-editorial);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Mega-tracked labels */
+.eyebrow,
+.hero-eyebrow,
+.story-card-num,
+.trust-label,
+.footer-col h4,
+.product-name,
+.btn {
+  letter-spacing: var(--tracking-mega);
+  font-variant-ligatures: common-ligatures;
+}
+
+/* Tabular numerals for prices */
+.product-price,
+.product-name {
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================
+   2. ANIMATED PAGE BACKGROUND
+      Aurora + grain, baked into the body's own
+      background-image with background-attachment: fixed.
+
+      This is a real CSS background, never a fixed
+      pseudo-element — so it can never extend the document's
+      scrollable area or fight with overflow: clip on
+      html/body.
+   ========================================================= */
+body {
+  position: relative;
+  background-image:
+    /* Grain */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E"),
+    /* Aurora — left */
+    radial-gradient(900px 500px at 15% 10%, rgba(198, 154, 62, 0.10), transparent 60%),
+    /* Aurora — right */
+    radial-gradient(800px 500px at 85% 90%, rgba(181, 89, 58, 0.08), transparent 60%);
+  background-attachment: fixed, fixed, fixed;
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-size: 300px 300px, auto, auto;
+  background-blend-mode: multiply, normal, normal;
+}
+html[data-theme="dark"] body {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E"),
+    radial-gradient(900px 500px at 15% 10%, rgba(217, 122, 88, 0.14), transparent 60%),
+    radial-gradient(800px 500px at 85% 90%, rgba(212, 173, 85, 0.10), transparent 60%);
+  background-blend-mode: screen, normal, normal;
+}
+
+/* =========================================================
+   3. SCROLL PROGRESS INDICATOR
+   ========================================================= */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  max-height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--rust), var(--mustard));
+  z-index: var(--z-toast, 350);
+  transition: width 0.15s linear;
+  box-shadow: 0 0 12px rgba(181, 89, 58, 0.5);
+  pointer-events: none;
+}
+
+/* =========================================================
+   4. WORD-BY-WORD TEXT REVEAL
+      Use: <span class="reveal-words">…</span>
+      then wrap each word in <span style="--i:N">word</span>
+      Delay uses the --i variable, so it works for any
+      number of children without manual nth-child rules.
+   ========================================================= */
+.reveal-words > span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px) rotateX(-40deg);
+  transform-origin: 50% 100%;
+  will-change: transform, opacity;
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.9s var(--ease);
+}
+.reveal-words.in > span {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--i, 0) * 0.05s);
+}
+
+/* =========================================================
+   5. IMAGE REVEALS
+   ========================================================= */
+
+/* Clip-path reveal — top-down by default */
+.reveal-img {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.2s var(--ease);
+}
+.reveal-img.in { clip-path: inset(0 0 0 0); }
+
+/* Variants */
+.reveal-img.from-bottom { clip-path: inset(100% 0 0 0); }
+.reveal-img.from-left   { clip-path: inset(0 100% 0 0); }
+.reveal-img.from-right  { clip-path: inset(0 0 0 100%); }
+.reveal-img.from-center {
+  clip-path: inset(50% 50% 50% 50%);
+}
+.reveal-img.from-bottom.in,
+.reveal-img.from-left.in,
+.reveal-img.from-right.in,
+.reveal-img.from-center.in {
+  clip-path: inset(0 0 0 0);
+}
+
+/* Curtain reveal — direction modifiers */
+.reveal-curtain {
+  position: relative;
+  overflow: hidden;
+}
+.reveal-curtain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--brown);
+  transform-origin: right center;
+  transition: transform 1.1s var(--ease);
+  z-index: 2;
+  pointer-events: none;
+}
+.reveal-curtain.from-left::after  { transform-origin: left center; }
+.reveal-curtain.from-top::after   { transform-origin: center top; transform: scaleY(1); }
+.reveal-curtain.from-bottom::after { transform-origin: center bottom; transform: scaleY(1); }
+.reveal-curtain.in::after { transform: scale(0, 1); }
+.reveal-curtain.from-top.in::after,
+.reveal-curtain.from-bottom.in::after { transform: scale(1, 0); }
+
+/* =========================================================
+   6. CINEMATIC HERO EXTRAS
+   ========================================================= */
+
+/* Floating gold particles */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.hero-particles span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(198, 154, 62, 0.9), transparent 70%);
+  opacity: 0;
+  animation: particleFloat linear infinite;
+  animation-duration: var(--dur, 16s);
+  animation-delay: var(--delay, 0s);
+}
+html[data-theme="dark"] .hero-particles span {
+  background: radial-gradient(circle, rgba(232, 161, 132, 0.95), transparent 70%);
+}
+@keyframes particleFloat {
+  0%   { opacity: 0; transform: translateY(0) scale(0.6); }
+  15%  { opacity: 0.9; }
+  85%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateY(-140px) scale(1.1); }
+}
+
+/* Hero content stagger via --i variable */
+.hero-content > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroStagger 1s var(--ease) forwards;
+  animation-delay: calc(var(--i, 0) * 0.15s + 0.15s);
+}
+@keyframes heroStagger {
+  to { opacity: 1; transform: none; }
+}
+
+/* Hero carousel entrance */
+.hero-carousel {
+  animation: heroCarouselIn 1.2s var(--ease) 0.3s both;
+}
+@keyframes heroCarouselIn {
+  from {
+    opacity: 0;
+    transform: rotate(-1.2deg) translateY(40px) scale(0.96);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-1.2deg) translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Parallax containers — JS sets --py */
+.hero-image,
+[data-parallax] {
+  will-change: transform;
+  transform: translate3d(0, var(--py, 0), 0);
+}
+
+/* =========================================================
+   7. MAGNETIC BUTTONS
+      JS sets --mx, --my (in px) on pointer move.
+   ========================================================= */
+@media (hover: hover) and (pointer: fine) {
+  .btn.magnetic,
+  .btn-primary.magnetic,
+  .btn-outline.magnetic {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transform: translate3d(var(--mx, 0), var(--my, 0), 0);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+}
+
+/* =========================================================
+   8. CURSOR — dot + ring (desktop only)
+   ========================================================= */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rust);
+  pointer-events: none;
+  z-index: var(--z-cursor, 9997);
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.15s ease-out,
+    width 0.3s ease,
+    height 0.3s ease,
+    background 0.3s ease,
+    opacity 0.3s ease;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--rust);
+  pointer-events: none;
+  z-index: var(--z-cursor, 9996);
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.3s ease,
+    height 0.3s ease,
+    border-color 0.3s ease,
+    background 0.3s ease,
+    opacity 0.3s ease;
+  opacity: 0.55;
+  will-change: transform;
+}
+
+/* States */
+.cursor-dot.is-hover { width: 14px; height: 14px; background: var(--mustard); }
+.cursor-ring.is-hover {
+  width: 60px;
+  height: 60px;
+  opacity: 0.9;
+  background: rgba(181, 89, 58, 0.06);
+}
+.cursor-dot.is-text { width: 4px; height: 22px; border-radius: 2px; }
+.cursor-ring.is-text {
+  width: 6px;
+  height: 32px;
+  border-radius: 2px;
+  border-color: var(--mustard);
+}
+.cursor-dot.is-pressed { transform: translate(-50%, -50%) scale(0.75); }
+.cursor-ring.is-pressed { transform: translate(-50%, -50%) scale(0.9); }
+.cursor-dot.is-hidden,
+.cursor-ring.is-hidden { opacity: 0; }
+
+/* Hide on touch + small screens */
+@media (hover: none), (pointer: coarse), (max-width: 768px) {
+  .cursor-dot,
+  .cursor-ring { display: none !important; }
+}
+
+/* =========================================================
+   9. PRODUCT CARD 3D TILT
+      JS sets --rx, --ry (in deg) on pointer move.
+      --scale — card-wide zoom.
+   ========================================================= */
+@media (hover: hover) and (pointer: fine) {
+  .product-media {
+    position: relative;
+    overflow: hidden;
+    transform:
+      perspective(1000px)
+      rotateX(var(--rx, 0deg))
+      rotateY(var(--ry, 0deg))
+      scale(var(--scale, 1));
+    transform-style: preserve-3d;
+    transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+    will-change: transform;
+  }
+}
+
+/* Product name underline grow */
+.product-name {
+  position: relative;
+  display: inline-block;
+}
+.product-name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  background: var(--rust);
+  transition: width 0.45s var(--ease);
+}
+.product-card:hover .product-name::after { width: 100%; }
+
+/* Price slide-in */
+.product-price {
+  transition: transform 0.5s var(--ease), color 0.3s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover .product-price {
+    transform: translateX(3px);
+    color: var(--rust);
+  }
+}
+
+/* =========================================================
+   10. STORY CARD — ink-bleed hover
+   ========================================================= */
+.story-card {
+  background-image: radial-gradient(
+    circle at 50% 120%,
+    rgba(217, 122, 88, 0),
+    rgba(217, 122, 88, 0)
+  );
+  background-size: 200% 200%;
+  background-position: 50% 120%;
+  transition:
+    transform 0.6s var(--ease),
+    box-shadow 0.6s var(--ease),
+    border-color 0.4s var(--ease),
+    background-image 0.9s var(--ease),
+    background-position 0.9s var(--ease);
+}
+.story-card:hover {
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    rgba(217, 122, 88, 0.22),
+    rgba(217, 122, 88, 0)
+  );
+  background-position: 50% 0%;
+}
+
+/* Story card title underline */
+.story-card-title {
+  position: relative;
+  display: inline-block;
+}
+.story-card-title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--rust-soft, #e8a184);
+  transition: width 0.5s var(--ease);
+}
+.story-card:hover .story-card-title::after { width: 60%; }
+
+/* =========================================================
+   11. SECTION HEADING DECORATIVE MOTION
+   ========================================================= */
+.section-title.center::after,
+.section-title:not(.center)::after {
+  background-image: linear-gradient(
+    90deg,
+    var(--rust) 0%,
+    var(--mustard) 50%,
+    var(--rust) 100%
+  );
+  background-size: 200% 100%;
+  animation: titleLine 4s ease-in-out infinite;
+}
+@keyframes titleLine {
+  0%, 100% { background-position: 0% 0; }
+  50%      { background-position: 100% 0; }
+}
+
+/* Eyebrow rule pulse */
+.eyebrow::before {
+  animation: eyebrowDot 2.4s ease-in-out infinite;
+}
+@keyframes eyebrowDot {
+  0%, 100% { transform: translateY(-2px) scaleX(1); opacity: 1; }
+  50%      { transform: translateY(-2px) scaleX(0.6); opacity: 0.6; }
+}
+
+/* =========================================================
+   12. MEMORY ARCHIVE CARDS — floating subtle
+   ========================================================= */
+.memory-card {
+  transition:
+    transform 0.6s var(--ease),
+    box-shadow 0.6s var(--ease),
+    border-color 0.4s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .memory-card:hover {
+    transform: rotate(0deg) translateY(-10px) scale(1.02);
+  }
+}
+
+/* =========================================================
+   13. LOOKBOOK CINEMATIC TILES
+   ========================================================= */
+.lookbook-item {
+  position: relative;
+  overflow: hidden;
+}
+.lookbook-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.55));
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+  z-index: 2;
+  pointer-events: none;
+}
+.lookbook-item:hover::before { opacity: 1; }
+.lookbook-item .lookbook-caption {
+  transform: translateY(6px);
+  transition: transform 0.5s var(--ease), opacity 0.4s var(--ease);
+}
+.lookbook-item:hover .lookbook-caption {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   14. TRUST STRIP — icon-only motion
+   ========================================================= */
+.trust-item {
+  transition: transform 0.5s var(--ease), color 0.5s var(--ease);
+}
+.trust-icon {
+  display: inline-block;
+  transition: transform 0.6s var(--ease);
+}
+@media (hover: hover) and (pointer: fine) {
+  .trust-item:hover .trust-icon {
+    transform: scale(1.15) rotate(-6deg);
+  }
+}
+
+/* =========================================================
+   15. NEWSLETTER INPUT FOCUS GLOW
+   ========================================================= */
+.newsletter-form input:focus {
+  box-shadow: 0 0 0 3px rgba(181, 89, 58, 0.2);
+}
+
+/* =========================================================
+   16. SMOOTH SCROLL
+   ========================================================= */
+html { scroll-behavior: smooth; }
+
+/* =========================================================
+   17. SCROLL-BLEED SAFETY NET
+      Ensures fixed/absolutely-positioned decorations can
+      never grow the scrollable area or paint a floating
+      artifact outside the viewport.
+      `overflow: clip` does NOT create a scroll container.
+   ========================================================= */
+html,
+body { overflow-x: clip; }
+
+main {
+  position: relative;
+  overflow: clip;
+}
+
+.trust-strip,
+.site-footer {
+  overflow: clip;
+  position: relative;
+}
+
+/* =========================================================
+   18. REDUCED MOTION — disable cinematic effects
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .hero-particles span,
+  .hero-content > *,
+  .hero-carousel,
+  .section-title::after,
+  .eyebrow::before { animation: none !important; }
+
+  .reveal-words > span {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .reveal-img,
+  .reveal-curtain { clip-path: none !important; }
+  .reveal-curtain::after { display: none !important; }
+
+  .cursor-dot,
+  .cursor-ring { display: none !important; }
+
+  /* Kill transform-based hover effects */
+  .btn.magnetic,
+  .product-media,
+  .hero-image,
+  [data-parallax] {
+    transform: none !important;
+  }
+
+  html { scroll-behavior: auto; }
+}
+
+/* =========================================================
+   19. TOUCH DEVICES — disable heavy hover effects
+   ========================================================= */
+@media (hover: none), (pointer: coarse) {
+  .hero-particles { display: none; }
+  .btn.magnetic,
+  .product-media { transform: none !important; }
+}
+
+/* =========================================================
+   20. MOBILE ADJUSTMENTS
+   ========================================================= */
+@media (max-width: 768px) {
+  body { background-size: 300px 300px, auto, auto; }
+
+  .hero-particles { display: none; }
+
+  .reveal-words > span { transition-duration: 0.5s; }
+
+  /* Disable parallax on mobile for perf */
+  .hero-image,
+  [data-parallax] { transform: none !important; }
+}
+
+/* =========================================================
+   21. PRINT — hide cinematic chrome
+   ========================================================= */
+@media print {
+  .scroll-progress,
+  .cursor-dot,
+  .cursor-ring,
+  .hero-particles { display: none !important; }
+
+  body {
+    background-image: none !important;
+    background: #ffffff !important;
+  }
+
+  .reveal-words > span,
+  .reveal-img,
+  .reveal-curtain {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+  .reveal-curtain::after { display: none !important; }
+}

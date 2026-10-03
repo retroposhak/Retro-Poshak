@@ -10,8 +10,8 @@
     <meta property="og:title" content="Retro Poshak — Pehno Yaaden" />
     <meta property="og:description" content="Old memories. New fits. Wearable Indian nostalgia." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/images/Retro Poshak_ Logo.png" />
-    <link rel="icon" type="image/png" href="assets/images/Retro Poshak_ Logo.png" />
+    <meta property="og:image" content="assets/images/Retro_Poshak_Logo.png" />
+    <link rel="icon" type="image/png" href="assets/images/Retro_Poshak_Logo.png" />
 
     <!-- Prevent flash of wrong theme — runs before paint -->
     <script>
@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/cinematic.css"/>
     <!-- Home-specific cinematic styles -->
     <link rel="stylesheet" href="css/home.css" />
 </head>
@@ -65,7 +66,7 @@
         <div class="header-inner container">
             <!-- Live logo image with SVG fallback -->
             <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
-                <img src="assets/images/Retro Poshak_ Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
+                <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
                     class="logo-img"
                     onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), { className: 'logo-fallback', innerHTML: 'RETRO<span class=&quot;logo-dot&quot;>.</span>POSHAK' }));" />
             </a>
@@ -143,128 +144,135 @@
     </div>
 
     <main>
-        <!-- ===== HERO ===== -->
+        <!-- ===== HERO — Single panel, 30% text · 70% image ===== -->
         <section class="hero">
-            <div class="hero-inner container">
-                <div class="hero-content">
-                    <!-- New collection floating badge (static) -->
-                    <div class="hero-collection-badge">
-                        <span class="badge-pulse"></span>
-                        <span>New Collection · SS25</span>
-                    </div>
+            <div class="hero-shell container">
+                <div class="hero-panel">
+                    <div class="hero-promo">
+                        <div class="hero-promo-slides" id="heroSlides">
 
-                    <span class="hero-eyebrow">
-                        <span class="hero-eyebrow-line"></span>
-                        The First Chapter
-                        <span class="hero-eyebrow-line"></span>
-                    </span>
-
-                    <h1 class="hero-title">
-                        <span class="hero-title-line">PEHNO</span>
-                        <em class="hero-title-em">YAADEN<span class="hero-title-dot">.</span></em>
-                    </h1>
-
-                    <p class="hero-sub">Old memories. New fits.</p>
-                    <p class="hero-hindi">
-                        <span class="hindi-line">कुछ यादें पुरानी होती हैं —</span>
-                        <span class="hindi-line">पर कभी <em>out of style</em> नहीं होतीं।</span>
-                    </p>
-
-                    <div class="hero-cta">
-                        <a href="shop.html" class="btn btn-primary">
-                            <span>Shop the Collection</span>
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                        </a>
-                        <a href="about.html" class="btn btn-outline">Our Story</a>
-                    </div>
-
-                    <!-- Hero meta chips -->
-                    <div class="hero-chips">
-                        <span class="hero-chip"><span class="chip-icon">🧵</span> 240 GSM</span>
-                        <span class="hero-chip"><span class="chip-icon">🌱</span> 100% Cotton</span>
-                        <span class="hero-chip"><span class="chip-icon">🇮🇳</span> Made in India</span>
-                    </div>
-                </div>
-
-                <!-- ===== HERO CAROUSEL ===== -->
-                <div class="hero-image">
-                    <!-- Corner tape — FIXED (no animation) -->
-                    <span class="hero-tape" aria-hidden="true"></span>
-
-                    <!-- Vintage ticket badge — FIXED (no animation) -->
-                    <div class="hero-ticket" aria-hidden="true">
-                        <div class="hero-ticket-inner">
-                            <span class="ticket-top">MEMORY</span>
-                            <span class="ticket-num">No. 001</span>
-                            <span class="ticket-bottom">WEARABLE</span>
-                        </div>
-                    </div>
-
-                    <!-- Stamp — FIXED (no animation) -->
-                    <div class="hero-stamp" aria-hidden="true">
-                        <span>EST.</span>
-                        <strong>SS25</strong>
-                        <span>DELHI</span>
-                    </div>
-
-                    <!-- Carousel -->
-                    <div class="hero-carousel" id="heroCarousel" role="region" aria-roledescription="carousel"
-                        aria-label="Retro Poshak campaign images">
-
-                        <div class="hero-slides" id="heroSlides">
-                            <!-- Slide 1 -->
-                            <div class="hero-slide is-active" role="group" aria-roledescription="slide"
-                                aria-label="Slide 1 of 3">
-                                <img src="assets/images/hero-1.jpg"
-                                    onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23e6d8c3%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>PEHNO YAADEN</text><text x=%22300%22 y=%22440%22 font-family=%22Georgia%22 font-size=%2220%22 fill=%22%236b5748%22 text-anchor=%22middle%22>Campaign 01</text></svg>'"
-                                    alt="Retro Poshak campaign shot 1" loading="eager" />
-                                <span class="hero-slide-caption">The Gully Champion Tee · 240 GSM</span>
+                            <!-- Slide 1 — Barf Ka Gola -->
+                            <div class="hero-promo-slide is-active" role="group" aria-roledescription="slide"
+                                aria-label="Slide 1 of 4">
+                                <div class="hero-promo-copy">
+                                    <span class="hero-promo-eyebrow">Pehno. Yaaden. Wear them.</span>
+                                    <h2 class="hero-promo-title">
+                                        Barf Ka Gola
+                                        <span class="hero-promo-title-em">Cool summers, sweeter memories.</span>
+                                    </h2>
+                                    <p class="hero-promo-name">Chapter 01</p>
+                                    <p class="hero-promo-tag">240 GSM · Oversized Fit</p>
+                                </div>
+                                <div class="hero-promo-media">
+                                    <img src="assets/images/products/Barf Ka Gola/BarfKaGola_Hero.png"
+                                        alt="Barf Ka Gola campaign" loading="eager"
+                                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23f4ede1%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>BARF KA GOLA</text></svg>'">
+                                    <a href="product.html?id=5" class="hero-promo-shop">Shop →</a>
+                                </div>
                             </div>
 
-                            <!-- Slide 2 -->
-                            <div class="hero-slide" role="group" aria-roledescription="slide"
-                                aria-label="Slide 2 of 3">
-                                <img src="assets/images/hero-2.jpg"
-                                    onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g2%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23ebe1d0%22/><stop offset=%221%22 stop-color=%22%23d9c8a9%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g2)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>SUNDAY SCENE</text><text x=%22300%22 y=%22440%22 font-family=%22Georgia%22 font-size=%2220%22 fill=%22%236b5748%22 text-anchor=%22middle%22>Campaign 02</text></svg>'"
-                                    alt="Retro Poshak campaign shot 2" loading="lazy" />
-                                <span class="hero-slide-caption">Sunday Scene Shirt · 100% Cotton</span>
+                            <!-- Slide 2 — Chai ki Tapri -->
+                            <div class="hero-promo-slide" role="group" aria-roledescription="slide"
+                                aria-label="Slide 2 of 4">
+                                <div class="hero-promo-copy">
+                                    <span class="hero-promo-eyebrow">Pehno. Yaaden. Wear them.</span>
+                                    <h2 class="hero-promo-title">
+                                        Chai ki Tapri
+                                        <span class="hero-promo-title-em">Slow mornings, warmer stories.</span>
+                                    </h2>
+                                    <p class="hero-promo-name">Chapter 02</p>
+                                    <p class="hero-promo-tag">100% Cotton · Relaxed Fit</p>
+                                </div>
+                                <div class="hero-promo-media">
+                                    <img src="assets/images/products/Chai ki Tapri/ChaiKiTapri_Hero.png"
+                                        alt="Chai ki Tapri campaign" loading="lazy"
+                                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g2%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23ebe1d0%22/><stop offset=%221%22 stop-color=%22%23d9c8a9%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g2)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>CHAI KI TAPRI</text></svg>'">
+                                    <a href="product.html?id=7" class="hero-promo-shop">Shop →</a>
+                                </div>
                             </div>
 
-                            <!-- Slide 3 -->
-                            <div class="hero-slide" role="group" aria-roledescription="slide"
-                                aria-label="Slide 3 of 3">
-                                <img src="assets/images/hero-3.jpg"
-                                    onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g3%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23d9cdb8%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g3)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>LAST BENCH</text><text x=%22300%22 y=%22440%22 font-family=%22Georgia%22 font-size=%2220%22 fill=%22%236b5748%22 text-anchor=%22middle%22>Campaign 03</text></svg>'"
-                                    alt="Retro Poshak campaign shot 3" loading="lazy" />
-                                <span class="hero-slide-caption">Last Bench Tee · Oversized Fit</span>
+                            <!-- Slide 3 — Cycle ka Safar -->
+                            <div class="hero-promo-slide" role="group" aria-roledescription="slide"
+                                aria-label="Slide 3 of 4">
+                                <div class="hero-promo-copy">
+                                    <span class="hero-promo-eyebrow">Pehno. Yaaden. Wear them.</span>
+                                    <h2 class="hero-promo-title">
+                                        Cycle ka Safar
+                                        <span class="hero-promo-title-em">Ride back home, feel the wind.</span>
+                                    </h2>
+                                    <p class="hero-promo-name">Chapter 03</p>
+                                    <p class="hero-promo-tag">240 GSM · Oversized Fit</p>
+                                </div>
+                                <div class="hero-promo-media">
+                                    <img src="assets/images/products/Cycle ka Safar/CycleKaSafar_Hero.jpeg"
+                                        alt="Cycle ka Safar campaign" loading="lazy"
+                                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g3%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23d9cdb8%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g3)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>CYCLE KA SAFAR</text></svg>'">
+                                    <a href="product.html?id=1" class="hero-promo-shop">Shop →</a>
+                                </div>
+                            </div>
+
+                            <!-- Slide 4 — Khelo Cards -->
+                            <div class="hero-promo-slide" role="group" aria-roledescription="slide"
+                                aria-label="Slide 4 of 4">
+                                <div class="hero-promo-copy">
+                                    <span class="hero-promo-eyebrow">Pehno. Yaaden. Wear them.</span>
+                                    <h2 class="hero-promo-title">
+                                        Khelo Cards
+                                        <span class="hero-promo-title-em">Terrace nights, endless games.</span>
+                                    </h2>
+                                    <p class="hero-promo-name">Chapter 04</p>
+                                    <p class="hero-promo-tag">240 GSM · Oversized Fit</p>
+                                </div>
+                                <div class="hero-promo-media">
+                                    <img src="assets/images/products/Khelo Cards/KheloCards_Hero.jpeg"
+                                        alt="Khelo Cards campaign" loading="lazy"
+                                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g4%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23ebe1d0%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g4)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>KHELO CARDS</text></svg>'">
+                                    <a href="product.html?id=6" class="hero-promo-shop">Shop →</a>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Arrows -->
-                        <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M15 18l-6-6 6-6" />
+                        <!-- Carousel controls (bottom-left) -->
+                        <div class="hero-promo-controls">
+                            <button class="hero-promo-arrow" id="heroPrev" aria-label="Previous slide">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6" />
+                                </svg>
+                            </button>
+                            <button class="hero-promo-arrow" id="heroNext" aria-label="Next slide">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M9 6l6 6-6 6" />
+                                </svg>
+                            </button>
+
+                            <div class="hero-promo-dots" id="heroDots" role="tablist" aria-label="Choose slide">
+                                <button class="hero-promo-dot is-active" data-slide="0" role="tab"
+                                    aria-selected="true" aria-label="Slide 1"></button>
+                                <button class="hero-promo-dot" data-slide="1" role="tab" aria-selected="false"
+                                    aria-label="Slide 2"></button>
+                                <button class="hero-promo-dot" data-slide="2" role="tab" aria-selected="false"
+                                    aria-label="Slide 3"></button>
+                                <button class="hero-promo-dot" data-slide="3" role="tab" aria-selected="false"
+                                    aria-label="Slide 4"></button>
+                            </div>
+                        </div>
+
+                        <!-- Pause/play (top-right) -->
+                        <button class="hero-promo-pause" id="heroPause" aria-label="Pause carousel">
+                            <svg class="pp-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="6" y="5" width="4" height="14" rx="1" />
+                                <rect x="14" y="5" width="4" height="14" rx="1" />
+                            </svg>
+                            <svg class="pp-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
+                                style="display:none;">
+                                <path d="M8 5v14l11-7z" />
                             </svg>
                         </button>
-                        <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M9 6l6 6-6 6" />
-                            </svg>
-                        </button>
-
-                        <!-- Dots -->
-                        <div class="hero-dots" id="heroDots" role="tablist" aria-label="Choose slide">
-                            <button class="hero-dot is-active" data-slide="0" role="tab" aria-selected="true"
-                                aria-label="Slide 1"></button>
-                            <button class="hero-dot" data-slide="1" role="tab" aria-selected="false"
-                                aria-label="Slide 2"></button>
-                            <button class="hero-dot" data-slide="2" role="tab" aria-selected="false"
-                                aria-label="Slide 3"></button>
-                        </div>
                     </div>
                 </div>
             </div>
-            <div class="hero-grain" aria-hidden="true"></div>
         </section>
 
         <!-- ===== BRAND STATEMENT ===== -->
@@ -310,23 +318,29 @@
             </div>
         </section>
 
-        <!-- ===== FEATURED COLLECTION ===== -->
+       <!-- ===== FEATURED COLLECTION ===== -->
         <section class="featured-collection">
             <div class="container">
                 <div class="featured-split reveal">
                     <div class="featured-image">
-                        <img src="assets/images/featured-collection.jpg"
-                            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22><defs><linearGradient id=%22g2%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23e6d8c3%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22700%22 height=%22700%22 fill=%22url(%23g2)%22/><text x=%22350%22 y=%22330%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>THE FIRST CHAPTER</text><text x=%22350%22 y=%22380%22 font-family=%22Georgia%22 font-size=%2218%22 fill=%22%236b5748%22 text-anchor=%22middle%22>(collection image placeholder)</text></svg>'"
-                            alt="The First Chapter — Retro Poshak editorial" loading="lazy" />
+                        <img src="assets/images/gully-champion.jpg"
+                            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22><defs><linearGradient id=%22g2%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23e6d8c3%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22700%22 height=%22700%22 fill=%22url(%23g2)%22/><text x=%22350%22 y=%22330%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>CYCLE KA SAFAR</text><text x=%22350%22 y=%22380%22 font-family=%22Georgia%22 font-size=%2218%22 fill=%22%236b5748%22 text-anchor=%22middle%22>(product image placeholder)</text></svg>'"
+                            alt="Cycle ka Safar — Retro Poshak oversized tee" loading="lazy" />
                     </div>
                     <div class="featured-info">
-                        <span class="eyebrow">Featured Collection</span>
-                        <h2>The First Chapter</h2>
+                        <span class="eyebrow">Featured Drop</span>
+                        <h2>Cycle ka Safar</h2>
                         <p class="featured-hindi">“Har kahani ki ek starting line hoti hai.”</p>
-                        <p>Six oversized pieces. Six memories. One starting line. This is where Retro Poshak begins —
+                        <p>Four oversized pieces. Four memories. One starting line. This is where Retro Poshak begins —
                             with the moments we all grew up inside.</p>
+                        <p class="featured-price">
+                            <strong>₹1,299</strong>
+                            <span class="strike">₹1,699</span>
+                            <span class="save">Save ₹400</span>
+                        </p>
                         <div style="margin-top: 30px;">
-                            <a href="shop.html" class="btn btn-primary">Explore Collection</a>
+                            <a href="product.html?id=1" class="btn btn-primary">Shop Cycle ka Safar</a>
+                            <a href="shop.html" class="btn btn-ghost" style="margin-left: 12px;">View All 4 Pieces</a>
                         </div>
                     </div>
                 </div>
@@ -351,29 +365,29 @@
                 <p class="section-sub center">Real streets. Real memories. Real fits.</p>
                 <div class="lookbook-grid">
                     <div class="lookbook-item">
-                        <img src="assets/images/look-1.jpg" alt="Retro Poshak on the street" loading="lazy"
+                        <img src="assets/images/look-1.jpg" alt="Barf Ka Gola oversized tee on the street" loading="lazy"
                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 01</text></svg>'">
-                        <span class="lookbook-caption">Gully Champion · Mumbai</span>
+                        <span class="lookbook-caption">Barf Ka Gola · Old Delhi</span>
                     </div>
                     <div class="lookbook-item">
-                        <img src="assets/images/look-2.jpg" alt="Retro Poshak editorial shot" loading="lazy"
+                        <img src="assets/images/look-2.jpg" alt="Chai ki Tapri oversized tee editorial shot" loading="lazy"
                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23ebe1d0%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 02</text></svg>'">
-                        <span class="lookbook-caption">Sunday Scene · Pune</span>
+                        <span class="lookbook-caption">Chai ki Tapri · Mumbai</span>
                     </div>
                     <div class="lookbook-item">
-                        <img src="assets/images/look-3.jpg" alt="Retro Poshak detail" loading="lazy"
+                        <img src="assets/images/look-3.jpg" alt="Cycle ka Safar oversized tee detail" loading="lazy"
                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 03</text></svg>'">
-                        <span class="lookbook-caption">Last Bench · Bengaluru</span>
+                        <span class="lookbook-caption">Cycle ka Safar · Pune</span>
                     </div>
                     <div class="lookbook-item">
-                        <img src="assets/images/look-4.jpg" alt="Retro Poshak lifestyle" loading="lazy"
+                        <img src="assets/images/look-4.jpg" alt="Khelo Cards oversized tee lifestyle" loading="lazy"
                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23ebe1d0%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 04</text></svg>'">
-                        <span class="lookbook-caption">Bachpan · Delhi</span>
+                        <span class="lookbook-caption">Khelo Cards · Studio</span>
                     </div>
                     <div class="lookbook-item">
-                        <img src="assets/images/look-5.jpg" alt="Retro Poshak close up" loading="lazy"
+                        <img src="assets/images/look-5.jpg" alt="Khelo Cards oversized tee on the terrace" loading="lazy"
                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 05</text></svg>'">
-                        <span class="lookbook-caption">Ground Report · Goa</span>
+                        <span class="lookbook-caption">Khelo Cards · Terrace</span>
                     </div>
                 </div>
             </div>
@@ -438,7 +452,7 @@
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="footer-logo-wrap">
-                    <img src="assets/images/Retro Poshak_ Logo.png" alt="Retro Poshak" class="footer-logo-img"
+                    <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak" class="footer-logo-img"
                         onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('h3'), { className: 'footer-logo', textContent: 'RETRO POSHAK' }));" />
                 </div>
                 <p class="footer-tagline">Pehno Yaaden.</p>
@@ -475,7 +489,7 @@
             <div class="footer-col">
                 <h4>Follow</h4>
                 <ul>
-                    <li><a href="#">Instagram</a></li>
+                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==">Instagram</a></li>
                     <li><a href="#">Facebook</a></li>
                     <li><a href="#">Pinterest</a></li>
                     <li><a href="#">YouTube</a></li>
@@ -530,7 +544,7 @@
             <span class="story-card-num">${s.number} — ${s.hindi}</span>
             <h3 class="story-card-title">${s.title}</h3>
             <p class="story-card-desc">${s.description}</p>
-            <span class="story-card-cta">Explore →</span>
+            <span class="story-card-cta">Explore</span>
           </a>
         `).join('');
             }
@@ -553,14 +567,18 @@
     <!-- Hero Carousel Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const carousel = document.getElementById('heroCarousel');
+            const shell = document.querySelector('.hero-promo');
             const slidesEl = document.getElementById('heroSlides');
-            if (!carousel || !slidesEl) return;
+            if (!shell || !slidesEl) return;
 
-            const slides = Array.from(slidesEl.querySelectorAll('.hero-slide'));
-            const dots = Array.from(document.querySelectorAll('.hero-dot'));
+            const slides = Array.from(slidesEl.querySelectorAll('.hero-promo-slide'));
+            const dots = Array.from(document.querySelectorAll('.hero-promo-dot'));
             const prevBtn = document.getElementById('heroPrev');
             const nextBtn = document.getElementById('heroNext');
+            const pauseBtn = document.getElementById('heroPause');
+            const pauseIcon = pauseBtn?.querySelector('.pp-pause');
+            const playIcon = pauseBtn?.querySelector('.pp-play');
+
             let index = 0;
             let timer = null;
             let paused = false;
@@ -583,46 +601,51 @@
             function prev() { goTo(index - 1); }
 
             function start() {
-                if (reduceMotion) return;
+                if (reduceMotion || paused) return;
                 stop();
                 timer = setInterval(() => { if (!paused) next(); }, AUTOPLAY_MS);
             }
             function stop() {
                 if (timer) { clearInterval(timer); timer = null; }
             }
+            function setPaused(state) {
+                paused = state;
+                if (paused) {
+                    stop();
+                    if (pauseIcon) pauseIcon.style.display = 'none';
+                    if (playIcon) playIcon.style.display = '';
+                    pauseBtn?.setAttribute('aria-label', 'Play carousel');
+                } else {
+                    if (pauseIcon) pauseIcon.style.display = '';
+                    if (playIcon) playIcon.style.display = 'none';
+                    pauseBtn?.setAttribute('aria-label', 'Pause carousel');
+                    start();
+                }
+            }
 
-            nextBtn?.addEventListener('click', () => { next(); start(); });
-            prevBtn?.addEventListener('click', () => { prev(); start(); });
+            nextBtn?.addEventListener('click', () => { next(); if (!paused) start(); });
+            prevBtn?.addEventListener('click', () => { prev(); if (!paused) start(); });
+            pauseBtn?.addEventListener('click', () => setPaused(!paused));
 
             dots.forEach(d => {
                 d.addEventListener('click', () => {
                     goTo(Number(d.dataset.slide));
-                    start();
+                    if (!paused) start();
                 });
             });
 
-            carousel.setAttribute('tabindex', '0');
-            carousel.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowRight') { next(); start(); }
-                if (e.key === 'ArrowLeft') { prev(); start(); }
-            });
-
-            carousel.addEventListener('mouseenter', () => paused = true);
-            carousel.addEventListener('mouseleave', () => paused = false);
-            carousel.addEventListener('focusin', () => paused = true);
-            carousel.addEventListener('focusout', () => paused = false);
-
             let touchX = null;
-            carousel.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
-            carousel.addEventListener('touchend', (e) => {
+            shell.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+            shell.addEventListener('touchend', (e) => {
                 if (touchX === null) return;
                 const dx = e.changedTouches[0].clientX - touchX;
-                if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); start(); }
+                if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); if (!paused) start(); }
                 touchX = null;
             }, { passive: true });
 
             document.addEventListener('visibilitychange', () => {
-                paused = document.hidden;
+                if (document.hidden) stop();
+                else if (!paused) start();
             });
 
             goTo(0);
