@@ -1,229 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Account — Retro Poshak</title>
-  <meta name="description" content="Your Retro Poshak account — profile, orders, wishlist." />
-  <script>
-    (function () {
-      try {
-        var t = localStorage.getItem('retroPoshakTheme');
-        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {}
-    })();
-  </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/theme.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Account — Retro Poshak</title>
+    <meta name="description" content="Your Retro Poshak account — profile, orders, wishlist." />
+
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('retroPoshakTheme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { }
+        })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Bebas+Neue&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <!-- Account-page editorial styles -->
+    <link rel="stylesheet" href="css/account.css" />
 </head>
-<body>
-  <header class="site-header" id="header">
-    <div class="header-inner container">
-      <a href="index.html" class="logo">RETRO POSHAK</a>
-      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="shop.html" class="nav-link">Shop</a></li>
-          <li><a href="shop.html?category=oversized-tshirt" class="nav-link">T-Shirts</a></li>
-          <li><a href="shop.html?category=shirt" class="nav-link">Shirts</a></li>
-          <li><a href="about.html" class="nav-link">Our Story</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <button class="theme-toggle" aria-label="Toggle theme">
-          <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-          <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        </button>
-        <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-        </button>
-        <span id="authSlot"></span>
-        <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-          <span class="badge wishlist-count" id="wishlistCount">0</span>
-        </a>
-        <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6L5 3H2"/></svg>
-          <span class="badge cart-count" id="cartCount">0</span>
-        </a>
-        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+
+<body class="no-js">
+    <script>document.body.classList.remove('no-js');</script>
+
+    <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
+    <div class="announce-bar" aria-label="Site announcements">
+        <div class="announce-track">
+            <span>✦ Free shipping over ₹1999</span>
+            <span class="dot">◆</span>
+            <span>✦ 5% off on prepaid orders</span>
+            <span class="dot">◆</span>
+            <span>✦ COD available across India</span>
+            <span class="dot">◆</span>
+            <span>✦ Easy 7-day returns</span>
+            <span class="dot">◆</span>
+            <span>✦ Free shipping over ₹1999</span>
+            <span class="dot">◆</span>
+            <span>✦ 5% off on prepaid orders</span>
+            <span class="dot">◆</span>
+            <span>✦ COD available across India</span>
+            <span class="dot">◆</span>
+            <span>✦ Easy 7-day returns</span>
+            <span class="dot">◆</span>
+        </div>
     </div>
-  </header>
 
-  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
-    <div class="search-box container">
-      <input type="text" id="searchInput" placeholder="Search memories…" autocomplete="off" aria-label="Search products" />
-      <button class="icon-btn" id="searchClose" aria-label="Close search">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
-    </div>
-    <div class="search-results container" id="searchResults"></div>
-  </div>
+    <header class="site-header" id="header">
+        <div class="header-inner container">
+            <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
+                <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
+                    class="logo-img"
+                    onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), { className: 'logo-fallback', innerHTML: 'RETRO<span class=&quot;logo-dot&quot;>.</span>POSHAK' }));" />
+            </a>
 
-  <main>
-    <section class="page-hero">
-      <div class="container">
-        <span class="eyebrow">Your space</span>
-        <h1 class="page-title">My Account</h1>
-        <p class="page-sub">Memories collected, orders tracked, stories saved.</p>
-      </div>
-    </section>
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="shop.html?filter=new" class="nav-link">New Arrivals</a></li>
+                    <li><a href="shop.html?filter=bestseller" class="nav-link">Bestsellers</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
 
-    <section class="section" style="padding-top:30px;">
-      <div class="container" id="accountRoot">
-        <!-- Rendered by script -->
-      </div>
-    </section>
-  </main>
+            <div class="header-actions">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                    <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg>
+                    <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                </button>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <h3 class="footer-logo">Retro Poshak</h3>
-        <p class="footer-tagline">Wear Your Memories.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Shop</h4>
-        <ul>
-          <li><a href="shop.html?category=oversized-tshirt">T-Shirts</a></li>
-          <li><a href="shop.html?category=shirt">Shirts</a></li>
-          <li><a href="shop.html">New Arrivals</a></li>
-          <li><a href="shop.html">Collections</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>About</h4>
-        <ul>
-          <li><a href="about.html">Our Story</a></li>
-          <li><a href="about.html#founder">Founder</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Help</h4>
-        <ul>
-          <li><a href="#">Size Guide</a></li>
-          <li><a href="#">Shipping</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">FAQs</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Follow</h4>
-        <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Pinterest</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-newsletter container">
-      <p>Get the next memory in your inbox.</p>
-      <form class="newsletter-form" id="newsletterForm">
-        <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
-        <button type="submit" class="btn btn-primary">Subscribe</button>
-      </form>
-    </div>
-    <div class="footer-bottom container">
-      <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
-    </div>
-  </footer>
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                </button>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+                <span id="authSlot"></span>
 
-  <script src="js/theme.js"></script>
-  <script src="js/products.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', renderAccount);
-    document.addEventListener('auth:changed', renderAccount);
-    document.addEventListener('cart:updated', renderAccount);
+                <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                    </svg>
+                    <span class="badge wishlist-count" id="wishlistCount">0</span>
+                </a>
 
-    function renderAccount() {
-      const root = document.getElementById('accountRoot');
-      if (!root) return;
-      const user = window.RetroAuth?.currentUser();
+                <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 6h15l-1.5 9h-12z" />
+                        <circle cx="9" cy="20" r="1" />
+                        <circle cx="18" cy="20" r="1" />
+                        <path d="M6 6L5 3H2" />
+                    </svg>
+                    <span class="badge cart-count" id="cartCount">0</span>
+                </a>
 
-      if (!user) {
-        root.innerHTML = `
-          <div class="auth-card" style="margin:0 auto;">
-            <h1>Please sign in</h1>
-            <p class="auth-sub">You need an account to view this page.</p>
-            <a href="login.html" class="btn btn-primary full">Sign In</a>
-            <p class="auth-alt">New? <a href="signup.html">Create an account</a></p>
-          </div>
-        `;
-        return;
-      }
-
-      const orders = window.RetroAuth.getOrders();
-      const wishCount = window.RetroCart.getWishlistCount();
-      const cartCount = window.RetroCart.getCartCount();
-      const initials = user.name.split(' ').map(s => s[0]).slice(0, 2).join('').toUpperCase();
-
-      root.innerHTML = `
-        <div class="account-layout">
-          <aside class="account-side">
-            <div class="avatar avatar-lg">${initials}</div>
-            <h2>${user.name}</h2>
-            <p>${user.email}</p>
-            <div class="account-nav">
-              <a href="account.html">Overview</a>
-              <a href="cart.html">My Cart (${cartCount})</a>
-              <a href="shop.html">Continue Shopping</a>
-              <button type="button" id="logoutBtn2">Sign Out</button>
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
-          </aside>
+        </div>
+    </header>
 
-          <div class="account-content">
-            <h2>Hello, ${user.name.split(' ')[0]}</h2>
-            <p class="muted">Here's a look at your memories.</p>
+    <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+        <div class="search-box container">
+            <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
+                aria-label="Search products" />
+            <button class="icon-btn" id="searchClose" aria-label="Close search">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="search-results container" id="searchResults"></div>
+    </div>
 
-            <div class="account-stats">
-              <div class="stat"><b>${orders.length}</b><span>Orders</span></div>
-              <div class="stat"><b>${wishCount}</b><span>Wishlist</span></div>
-              <div class="stat"><b>${cartCount}</b><span>In Cart</span></div>
+    <main>
+        <!-- ===== HERO ===== -->
+        <section class="account-hero">
+            <div class="container account-hero-inner">
+                <span class="account-hero-eyebrow">
+                    <span class="rule"></span>
+                    Your Space
+                    <span class="rule"></span>
+                </span>
+                <h1 class="account-hero-title">My <em>Account.</em></h1>
+                <p class="account-hero-sub">Memories collected. Orders tracked. Stories saved.</p>
             </div>
+            <span class="account-hero-ornament top-left">✦</span>
+            <span class="account-hero-ornament bottom-right">✦</span>
+        </section>
 
-            <div class="order-history">
-              <h3 style="font-family:'Inter',sans-serif;font-size:15px;margin-bottom:12px;">Order History</h3>
-              ${orders.length === 0
-                ? `<p class="muted">No orders yet — your first memory is waiting.</p>`
-                : orders.map(o => `
-                  <div class="order-row">
-                    <div>
-                      <div class="oid">#${o.id}</div>
-                      <div class="ometa">${new Date(o.at).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' })} · ${o.items.length} item(s)</div>
+        <!-- ===== ACCOUNT CONTENT (rendered by script) ===== -->
+        <section class="account-section">
+            <div class="container" id="accountRoot" aria-live="polite">
+                <!-- Rendered by script -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo-wrap">
+                    <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak" class="footer-logo-img"
+                        onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('h3'), { className: 'footer-logo', textContent: 'RETRO POSHAK' }));" />
+                </div>
+                <p class="footer-tagline">Pehno Yaaden.</p>
+                <p class="footer-hindi">Old memories. New fits.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="shop.html">All Products</a></li>
+                    <li><a href="shop.html?filter=new">New Arrivals</a></li>
+                    <li><a href="shop.html?filter=bestseller">Bestsellers</a></li>
+                    <li><a href="shop.html">Collections</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow</h4>
+                <ul>
+                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-newsletter container">
+            <p>Get the next memory in your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
+            <a href="#" class="whatsapp">💬 WhatsApp Support</a>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <a href="#" class="wa-float" aria-label="Chat on WhatsApp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+                d="M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5zm-8.5 18a9 9 0 0 1-4.6-1.3l-.3-.2-3 .9.9-2.9-.2-.3A9 9 0 1 1 12 21.5zm5.2-6.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.4.2-.6.1a7.4 7.4 0 0 1-3.7-3.3c-.1-.2-.1-.4.1-.6l.6-.7c.1-.2.1-.4 0-.6l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 10.4 10.4 0 0 0 4 3.5 4.6 4.6 0 0 0 2.8.5c.9-.1 1.7-.6 2.1-1.4.2-.4.3-.9.2-1.3 0-.2-.2-.3-.4-.4z" />
+        </svg>
+    </a>
+
+    <script src="js/theme.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Account page render -->
+    <script>
+        document.addEventListener('DOMContentLoaded', renderAccount);
+        document.addEventListener('auth:changed', renderAccount);
+        document.addEventListener('cart:updated', renderAccount);
+
+        function renderAccount() {
+            const root = document.getElementById('accountRoot');
+            if (!root) return;
+
+            const user = window.RetroAuth?.currentUser();
+
+            /* ---------- SIGNED OUT STATE ---------- */
+            if (!user) {
+                root.innerHTML = `
+                  <div class="account-gate">
+                    <span class="account-gate-ornament">✦</span>
+                    <span class="account-gate-eyebrow">Private Space</span>
+                    <h2 class="account-gate-title">Sign in to <em>your memories.</em></h2>
+                    <p class="account-gate-sub">
+                      Your wishlist, orders, and saved stories live here — but only after you sign in.
+                    </p>
+                    <div class="account-gate-actions">
+                      <a href="login.html" class="btn btn-primary">Sign In</a>
+                      <a href="signup.html" class="btn btn-outline">Create Account</a>
                     </div>
-                    <div style="text-align:right;">
-                      <div style="font-weight:600;">₹${o.total.toLocaleString('en-IN')}</div>
-                      <div class="ometa">${o.payment.toUpperCase()}</div>
+                    <p class="account-gate-alt">New here? Your first memory is waiting.</p>
+                  </div>
+                `;
+                return;
+            }
+
+            /* ---------- SIGNED IN STATE ---------- */
+            const orders      = window.RetroAuth.getOrders?.() || [];
+            const wishCount   = window.RetroCart?.getWishlistCount?.() || 0;
+            const cartCount   = window.RetroCart?.getCartCount?.() || 0;
+            const initials    = user.name.split(' ').map(s => s[0]).slice(0, 2).join('').toUpperCase();
+            const firstName   = user.name.split(' ')[0];
+
+            const orderHistoryHTML = orders.length === 0
+                ? `
+                    <div class="order-empty">
+                      <span class="order-empty-icon">◌</span>
+                      <h4>No orders yet</h4>
+                      <p>Your first memory is waiting to be worn.</p>
+                      <a href="shop.html" class="btn btn-primary">Explore the Collection</a>
+                    </div>
+                  `
+                : orders.map((o, i) => {
+                    const date = new Date(o.at).toLocaleDateString('en-IN',
+                      { day: 'numeric', month: 'short', year: 'numeric' });
+                    const itemLabel = `${o.items.length} item${o.items.length === 1 ? '' : 's'}`;
+                    const status = o.status || 'processing';
+                    return `
+                      <article class="order-row">
+                        <span class="order-index">${String(i + 1).padStart(2, '0')}</span>
+                        <div class="order-info">
+                          <div class="order-id">#${o.id}</div>
+                          <div class="order-meta">${date} · ${itemLabel}</div>
+                        </div>
+                        <div class="order-status status-${status}">${status}</div>
+                        <div class="order-total">
+                          <span class="order-total-num">₹${o.total.toLocaleString('en-IN')}</span>
+                          <span class="order-total-pay">${(o.payment || 'prepaid').toUpperCase()}</span>
+                        </div>
+                        <a href="order.html?id=${encodeURIComponent(o.id)}"
+                           class="order-view" aria-label="View order #${o.id}">
+                          View →
+                        </a>
+                      </article>
+                    `;
+                }).join('');
+
+            root.innerHTML = `
+              <div class="account-layout">
+
+                <!-- SIDEBAR -->
+                <aside class="account-side">
+                  <div class="account-side-inner">
+
+                    <div class="account-avatar">
+                      <div class="account-avatar-ring">
+                        <span class="account-avatar-initials">${initials}</span>
+                      </div>
+                      <span class="account-avatar-dot" aria-hidden="true"></span>
+                    </div>
+
+                    <h2 class="account-name">${user.name}</h2>
+                    <p class="account-email">${user.email}</p>
+
+                    <nav class="account-nav" aria-label="Account navigation">
+                      <a href="account.html" class="account-nav-link is-active">
+                        <span class="account-nav-icon">◐</span>
+                        <span>Overview</span>
+                      </a>
+                      <a href="cart.html" class="account-nav-link">
+                        <span class="account-nav-icon">✦</span>
+                        <span>My Cart</span>
+                        ${cartCount > 0 ? `<span class="account-nav-badge">${cartCount}</span>` : ''}
+                      </a>
+                      <a href="#" class="account-nav-link">
+                        <span class="account-nav-icon">◈</span>
+                        <span>Wishlist</span>
+                        ${wishCount > 0 ? `<span class="account-nav-badge">${wishCount}</span>` : ''}
+                      </a>
+                      <a href="shop.html" class="account-nav-link">
+                        <span class="account-nav-icon">↗</span>
+                        <span>Continue Shopping</span>
+                      </a>
+                      <button type="button" class="account-nav-link account-nav-logout" id="logoutBtn2">
+                        <span class="account-nav-icon">←</span>
+                        <span>Sign Out</span>
+                      </button>
+                    </nav>
+
+                    <p class="account-side-foot">Member since 2025</p>
+                  </div>
+                </aside>
+
+                <!-- CONTENT -->
+                <div class="account-content">
+
+                  <header class="account-welcome">
+                    <span class="account-welcome-eyebrow">Welcome back</span>
+                    <h2 class="account-welcome-title">Hello, <em>${firstName}.</em></h2>
+                    <p class="account-welcome-sub">Here's a look at your memories.</p>
+                  </header>
+
+                  <!-- STATS -->
+                  <div class="account-stats">
+                    <div class="stat-card">
+                      <span class="stat-icon">✎</span>
+                      <div class="stat-num">${orders.length}</div>
+                      <div class="stat-label">Orders</div>
+                    </div>
+                    <div class="stat-card">
+                      <span class="stat-icon">◈</span>
+                      <div class="stat-num">${wishCount}</div>
+                      <div class="stat-label">Wishlist</div>
+                    </div>
+                    <div class="stat-card">
+                      <span class="stat-icon">✦</span>
+                      <div class="stat-num">${cartCount}</div>
+                      <div class="stat-label">In Cart</div>
                     </div>
                   </div>
-                `).join('')
-              }
-            </div>
-          </div>
-        </div>
-      `;
 
-      document.getElementById('logoutBtn2')?.addEventListener('click', () => {
-        window.RetroAuth.logout();
-        window.RetroCart?.showToast('Signed out. See you soon.');
-        setTimeout(() => window.location.href = 'index.html', 500);
-      });
-    }
-  </script>
+                  <!-- ORDER HISTORY -->
+                  <section class="account-orders">
+                    <header class="account-orders-head">
+                      <h3>Order History</h3>
+                      <span class="account-orders-count">${orders.length} order${orders.length === 1 ? '' : 's'}</span>
+                    </header>
+                    <div class="account-orders-list">
+                      ${orderHistoryHTML}
+                    </div>
+                  </section>
+
+                </div>
+              </div>
+            `;
+
+            /* Logout handler */
+            document.getElementById('logoutBtn2')?.addEventListener('click', () => {
+                window.RetroAuth.logout();
+                window.RetroCart?.showToast?.('Signed out. See you soon.');
+                setTimeout(() => window.location.href = 'index.html', 500);
+            });
+
+            /* Animated counters */
+            root.querySelectorAll('.stat-num').forEach(el => {
+                const target = Number(el.textContent) || 0;
+                if (target === 0) return;
+                const duration = 700;
+                const start = performance.now();
+                el.textContent = '0';
+                const tick = (now) => {
+                    const p = Math.min(1, (now - start) / duration);
+                    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+                    if (p < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            });
+        }
+    </script>
 </body>
+
 </html>

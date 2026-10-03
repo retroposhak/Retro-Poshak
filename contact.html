@@ -1,179 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — Retro Poshak</title>
-  <meta name="description" content="Get in touch with Retro Poshak — customer support, business enquiries and more." />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — Retro Poshak</title>
+    <meta name="description"
+        content="Get in touch with Retro Poshak — customer support, business enquiries and more." />
 
-  <!-- Prevent flash of wrong theme (runs before paint) -->
-  <script>
-    (function () {
-      try {
-        var t = localStorage.getItem('retroPoshakTheme');
-        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', t);
-      } catch (e) {}
-    })();
-  </script>
+    <!-- Prevent flash of wrong theme (runs before paint) -->
+    <script>
+        (function () {
+            try {
+                var t = localStorage.getItem('retroPoshakTheme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', t);
+            } catch (e) { }
+        })();
+    </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/responsive.css" />
-  <link rel="stylesheet" href="css/theme.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Bebas+Neue&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <!-- Contact-page editorial styles -->
+    <link rel="stylesheet" href="css/contact.css" />
 </head>
-<body>
-  <header class="site-header" id="header">
-    <div class="header-inner container">
-      <a href="index.html" class="logo">RETRO POSHAK</a>
-      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-        <ul class="nav-list">
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="shop.html" class="nav-link">Shop</a></li>
-          <li><a href="shop.html?category=oversized-tshirt" class="nav-link">T-Shirts</a></li>
-          <li><a href="shop.html?category=shirt" class="nav-link">Shirts</a></li>
-          <li><a href="about.html" class="nav-link">Our Story</a></li>
-          <li><a href="contact.html" class="nav-link active">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <!-- Theme toggle -->
-        <button class="theme-toggle" aria-label="Toggle light and dark theme" title="Toggle theme">
-          <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-          <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-        </button>
 
-        <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
-        </button>
+<body class="no-js">
+    <script>document.body.classList.remove('no-js');</script>
 
-        <!-- Auth slot: Sign-in icon or user avatar menu -->
-        <span id="authSlot"></span>
-
-        <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-          <span class="badge wishlist-count" id="wishlistCount">0</span>
-        </a>
-
-        <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M6 6L5 3H2"/></svg>
-          <span class="badge cart-count" id="cartCount">0</span>
-        </a>
-
-        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+    <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
+    <div class="announce-bar" aria-label="Site announcements">
+        <div class="announce-track">
+            <span>✦ Free shipping over ₹1999</span>
+            <span class="dot">◆</span>
+            <span>✦ 5% off on prepaid orders</span>
+            <span class="dot">◆</span>
+            <span>✦ COD available across India</span>
+            <span class="dot">◆</span>
+            <span>✦ Easy 7-day returns</span>
+            <span class="dot">◆</span>
+            <span>✦ Free shipping over ₹1999</span>
+            <span class="dot">◆</span>
+            <span>✦ 5% off on prepaid orders</span>
+            <span class="dot">◆</span>
+            <span>✦ COD available across India</span>
+            <span class="dot">◆</span>
+            <span>✦ Easy 7-day returns</span>
+            <span class="dot">◆</span>
+        </div>
     </div>
-  </header>
 
-  <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
-    <div class="search-box container">
-      <input type="text" id="searchInput" placeholder="Search memories…" autocomplete="off" aria-label="Search products" />
-      <button class="icon-btn" id="searchClose" aria-label="Close search">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-      </button>
+    <header class="site-header" id="header">
+        <div class="header-inner container">
+            <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
+                <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
+                    class="logo-img"
+                    onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), { className: 'logo-fallback', innerHTML: 'RETRO<span class=&quot;logo-dot&quot;>.</span>POSHAK' }));" />
+            </a>
+
+            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="shop.html" class="nav-link">Shop</a></li>
+                    <li><a href="shop.html?filter=new" class="nav-link">New Arrivals</a></li>
+                    <li><a href="shop.html?filter=bestseller" class="nav-link">Bestsellers</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                    <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="12" cy="12" r="4" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                    </svg>
+                    <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                    </svg>
+                </button>
+
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="7" />
+                        <path d="M21 21l-4.35-4.35" />
+                    </svg>
+                </button>
+
+                <span id="authSlot"></span>
+
+                <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                    </svg>
+                    <span class="badge wishlist-count" id="wishlistCount">0</span>
+                </a>
+
+                <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 6h15l-1.5 9h-12z" />
+                        <circle cx="9" cy="20" r="1" />
+                        <circle cx="18" cy="20" r="1" />
+                        <path d="M6 6L5 3H2" />
+                    </svg>
+                    <span class="badge cart-count" id="cartCount">0</span>
+                </a>
+
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
+        <div class="search-box container">
+            <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
+                aria-label="Search products" />
+            <button class="icon-btn" id="searchClose" aria-label="Close search">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="search-results container" id="searchResults"></div>
     </div>
-    <div class="search-results container" id="searchResults"></div>
-  </div>
 
-  <main>
-    <section class="page-hero">
-      <div class="container">
-        <span class="eyebrow">Say hello</span>
-        <h1 class="page-title">Get in Touch</h1>
-        <p class="page-sub">We'd love to hear your memory.</p>
-      </div>
-    </section>
+    <main>
+        <!-- ===== HERO ===== -->
+        <section class="contact-hero">
+            <div class="container contact-hero-inner">
+                <span class="contact-hero-eyebrow">
+                    <span class="rule"></span>
+                    Say Hello
+                    <span class="rule"></span>
+                </span>
+                <h1 class="contact-hero-title">Get in <em>Touch.</em></h1>
+                <p class="contact-hero-sub">
+                    We'd love to hear your memory — or help you find a new one.
+                </p>
+            </div>
+            <span class="contact-hero-ornament top-left">✦</span>
+            <span class="contact-hero-ornament bottom-right">✦</span>
+        </section>
 
-    <section class="section contact-section">
-      <div class="container contact-layout">
-        <form class="contact-form" id="contactForm">
-          <label>Name<input type="text" name="name" required autocomplete="name" /></label>
-          <label>Email<input type="email" name="email" required autocomplete="email" /></label>
-          <label>Phone<input type="tel" name="phone" autocomplete="tel" /></label>
-          <label>Message<textarea name="message" rows="5" required></textarea></label>
-          <button type="submit" class="btn btn-primary full">Send Message</button>
-          <p class="form-msg" id="contactMsg"></p>
-        </form>
+        <!-- ===== RESPONSE STRIP ===== -->
+        <section class="response-strip" aria-label="Response times">
+            <div class="container response-strip-inner">
+                <div class="response-item">
+                    <span class="response-icon">✎</span>
+                    <div>
+                        <strong>General enquiries</strong>
+                        <span>Reply within 24 hours</span>
+                    </div>
+                </div>
+                <span class="response-divider" aria-hidden="true"></span>
+                <div class="response-item">
+                    <span class="response-icon">↻</span>
+                    <div>
+                        <strong>Order support</strong>
+                        <span>Reply within 12 hours</span>
+                    </div>
+                </div>
+                <span class="response-divider" aria-hidden="true"></span>
+                <div class="response-item">
+                    <span class="response-icon">◈</span>
+                    <div>
+                        <strong>Partnerships</strong>
+                        <span>Reply within 2 days</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <aside class="contact-info">
-          <h2>Other ways to reach us</h2>
-          <ul>
-            <li><strong>Instagram</strong><span>@retroposhak</span></li>
-            <li><strong>Email</strong><span>hello@retroposhak.in</span></li>
-            <li><strong>Customer Support</strong><span>support@retroposhak.in</span></li>
-            <li><strong>Business Enquiries</strong><span>partners@retroposhak.in</span></li>
-          </ul>
-          <p class="small-note">Placeholder details — replace with real ones before launch.</p>
-        </aside>
-      </div>
-    </section>
-  </main>
+        <!-- ===== MAIN CONTACT SECTION ===== -->
+        <section class="contact-section">
+            <div class="container contact-layout">
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <h3 class="footer-logo">Retro Poshak</h3>
-        <p class="footer-tagline">Wear Your Memories.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Shop</h4>
-        <ul>
-          <li><a href="shop.html?category=oversized-tshirt">T-Shirts</a></li>
-          <li><a href="shop.html?category=shirt">Shirts</a></li>
-          <li><a href="shop.html">New Arrivals</a></li>
-          <li><a href="shop.html">Collections</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>About</h4>
-        <ul>
-          <li><a href="about.html">Our Story</a></li>
-          <li><a href="about.html#founder">Founder</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Help</h4>
-        <ul>
-          <li><a href="#">Size Guide</a></li>
-          <li><a href="#">Shipping</a></li>
-          <li><a href="#">Returns</a></li>
-          <li><a href="#">FAQs</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Follow</h4>
-        <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Pinterest</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-newsletter container">
-      <p>Get the next memory in your inbox.</p>
-      <form class="newsletter-form" id="newsletterForm">
-        <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
-        <button type="submit" class="btn btn-primary">Subscribe</button>
-      </form>
-    </div>
-    <div class="footer-bottom container">
-      <!-- Dynamic copyright year -->
-      <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
-    </div>
-  </footer>
+                <!-- FORM -->
+                <div class="contact-form-wrap">
+                    <header class="contact-form-head">
+                        <span class="contact-form-eyebrow">Send a message</span>
+                        <h2 class="contact-form-title">Tell us your <em>story.</em></h2>
+                        <p class="contact-form-sub">
+                            Whether it's an order query, a custom request, or just a memory you want
+                            to share — write to us.
+                        </p>
+                    </header>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <div class="form-row two-col">
+                            <div class="field">
+                                <input type="text" id="fieldName" name="name" required autocomplete="name"
+                                    placeholder=" " />
+                                <label for="fieldName">Your name</label>
+                                <span class="field-border"></span>
+                            </div>
+                            <div class="field">
+                                <input type="email" id="fieldEmail" name="email" required autocomplete="email"
+                                    placeholder=" " />
+                                <label for="fieldEmail">Email address</label>
+                                <span class="field-border"></span>
+                            </div>
+                        </div>
 
-  <!-- Scripts: order matters (theme → products → auth → cart → main) -->
-  <script src="js/theme.js"></script>
-  <script src="js/products.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/main.js"></script>
+                        <div class="form-row two-col">
+                            <div class="field">
+                                <input type="tel" id="fieldPhone" name="phone" autocomplete="tel"
+                                    placeholder=" " />
+                                <label for="fieldPhone">Phone (optional)</label>
+                                <span class="field-border"></span>
+                            </div>
+                            <div class="field field-select">
+                                <select id="fieldSubject" name="subject" required>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="order">Order / Delivery</option>
+                                    <option value="return">Return / Exchange</option>
+                                    <option value="product">Product question</option>
+                                    <option value="wholesale">Wholesale enquiry</option>
+                                    <option value="press">Press / Collaboration</option>
+                                    <option value="other">Something else</option>
+                                </select>
+                                <label for="fieldSubject">Subject</label>
+                                <span class="field-border"></span>
+                            </div>
+                        </div>
+
+                        <div class="field field-textarea">
+                            <textarea id="fieldMessage" name="message" rows="6" required
+                                maxlength="800" placeholder=" "></textarea>
+                            <label for="fieldMessage">Your message</label>
+                            <span class="field-border"></span>
+                            <span class="field-count"><span id="msgCount">0</span> / 800</span>
+                        </div>
+
+                        <div class="contact-form-actions">
+                            <button type="submit" class="btn btn-primary contact-submit" id="contactSubmit">
+                                <span class="contact-submit-label">Send Message</span>
+                                <svg class="contact-submit-icon" width="14" height="14" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                    <path d="M5 12h14M13 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                            <p class="form-msg" id="contactMsg" role="status" aria-live="polite"></p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- INFO PANEL -->
+                <aside class="contact-info">
+                    <header class="contact-info-head">
+                        <span class="contact-info-eyebrow">Or reach us directly</span>
+                        <h2 class="contact-info-title">Other <em>ways.</em></h2>
+                    </header>
+
+                    <div class="contact-cards">
+                        <a href="https://instagram.com/retroposhak" class="contact-card" target="_blank" rel="noopener">
+                            <span class="contact-card-icon">◐</span>
+                            <div class="contact-card-body">
+                                <strong>Instagram</strong>
+                                <span>@retroposhak</span>
+                                <em>DMs open · fastest replies</em>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <a href="mailto:hello@retroposhak.in" class="contact-card">
+                            <span class="contact-card-icon">✎</span>
+                            <div class="contact-card-body">
+                                <strong>General Email</strong>
+                                <span>hello@retroposhak.in</span>
+                                <em>For any query</em>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <a href="mailto:support@retroposhak.in" class="contact-card">
+                            <span class="contact-card-icon">✦</span>
+                            <div class="contact-card-body">
+                                <strong>Order Support</strong>
+                                <span>support@retroposhak.in</span>
+                                <em>Include your order #</em>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <a href="mailto:partners@retroposhak.in" class="contact-card">
+                            <span class="contact-card-icon">◈</span>
+                            <div class="contact-card-body">
+                                <strong>Business Enquiries</strong>
+                                <span>partners@retroposhak.in</span>
+                                <em>Collabs, wholesale, press</em>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+
+                        <a href="#" class="contact-card whatsapp-card">
+                            <span class="contact-card-icon">☎</span>
+                            <div class="contact-card-body">
+                                <strong>WhatsApp Support</strong>
+                                <span>Mon–Sat · 10am–7pm IST</span>
+                                <em>Quickest for order tracking</em>
+                            </div>
+                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
+                        </a>
+                    </div>
+
+                    <div class="contact-studio">
+                        <span class="contact-studio-eyebrow">Visit us</span>
+                        <h3>Studio & Pickup Point</h3>
+                        <p>Retro Poshak Studio<br>Mumbai, Maharashtra<br>India</p>
+                        <p class="contact-studio-note">By appointment only · Drop us a line first.</p>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- ===== FAQ TEASER ===== -->
+        <section class="faq-teaser">
+            <div class="container">
+                <header class="faq-teaser-head">
+                    <span class="eyebrow center">Quick Answers</span>
+                    <h2 class="section-title center">Before You Write.</h2>
+                    <p class="section-sub center">A few things people ask us most.</p>
+                </header>
+
+                <div class="faq-grid">
+                    <article class="faq-card">
+                        <span class="faq-num">01</span>
+                        <h3>How long does shipping take?</h3>
+                        <p>2–3 days to dispatch, then 3–7 days across India. Tracking by email.</p>
+                    </article>
+                    <article class="faq-card">
+                        <span class="faq-num">02</span>
+                        <h3>Can I exchange for a different size?</h3>
+                        <p>Yes — free within 7 days, unworn with tags. Just email us your order #.</p>
+                    </article>
+                    <article class="faq-card">
+                        <span class="faq-num">03</span>
+                        <h3>Do you do custom / bulk orders?</h3>
+                        <p>We do! Minimum 20 pieces. Write to partners@retroposhak.in with details.</p>
+                    </article>
+                    <article class="faq-card">
+                        <span class="faq-num">04</span>
+                        <h3>Are the prints long-lasting?</h3>
+                        <p>Yes — high-quality DTF prints designed to survive 50+ washes with care.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo-wrap">
+                    <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak" class="footer-logo-img"
+                        onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('h3'), { className: 'footer-logo', textContent: 'RETRO POSHAK' }));" />
+                </div>
+                <p class="footer-tagline">Pehno Yaaden.</p>
+                <p class="footer-hindi">Old memories. New fits.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="shop.html">All Products</a></li>
+                    <li><a href="shop.html?filter=new">New Arrivals</a></li>
+                    <li><a href="shop.html?filter=bestseller">Bestsellers</a></li>
+                    <li><a href="shop.html">Collections</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow</h4>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Pinterest</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-newsletter container">
+            <p>Get the next memory in your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
+            <a href="#" class="whatsapp">💬 WhatsApp Support</a>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <a href="#" class="wa-float" aria-label="Chat on WhatsApp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+                d="M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5zm-8.5 18a9 9 0 0 1-4.6-1.3l-.3-.2-3 .9.9-2.9-.2-.3A9 9 0 1 1 12 21.5zm5.2-6.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.4.2-.6.1a7.4 7.4 0 0 1-3.7-3.3c-.1-.2-.1-.4.1-.6l.6-.7c.1-.2.1-.4 0-.6l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 10.4 10.4 0 0 0 4 3.5 4.6 4.6 0 0 0 2.8.5c.9-.1 1.7-.6 2.1-1.4.2-.4.3-.9.2-1.3 0-.2-.2-.3-.4-.4z" />
+        </svg>
+    </a>
+
+    <script src="js/theme.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- Contact form interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contactForm');
+            const msg = document.getElementById('contactMsg');
+            const msgField = document.getElementById('fieldMessage');
+            const msgCount = document.getElementById('msgCount');
+            const submitBtn = document.getElementById('contactSubmit');
+            if (!form) return;
+
+            /* Character counter */
+            msgField?.addEventListener('input', () => {
+                if (msgCount) msgCount.textContent = msgField.value.length;
+            });
+
+            /* Validation helper */
+            const setFieldError = (field, hasError) => {
+                const wrap = field.closest('.field');
+                if (!wrap) return;
+                wrap.classList.toggle('has-error', hasError);
+            };
+
+            /* Clear error on input */
+            form.querySelectorAll('input, select, textarea').forEach(el => {
+                el.addEventListener('input', () => setFieldError(el, false));
+                el.addEventListener('change', () => setFieldError(el, false));
+            });
+
+            /* Submit */
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                msg.textContent = '';
+
+                let valid = true;
+                ['fieldName', 'fieldEmail', 'fieldSubject', 'fieldMessage'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    const empty = !el.value.trim();
+                    const badEmail = id === 'fieldEmail' &&
+                        el.value.trim() && !/^\S+@\S+\.\S+$/.test(el.value.trim());
+                    if (empty || badEmail) {
+                        setFieldError(el, true);
+                        valid = false;
+                    }
+                });
+
+                if (!valid) {
+                    msg.textContent = 'Please fill in the highlighted fields.';
+                    msg.className = 'form-msg error';
+                    return;
+                }
+
+                /* Simulate send */
+                submitBtn.disabled = true;
+                submitBtn.classList.add('is-sending');
+                const label = submitBtn.querySelector('.contact-submit-label');
+                if (label) label.textContent = 'Sending…';
+
+                setTimeout(() => {
+                    submitBtn.classList.remove('is-sending');
+                    submitBtn.classList.add('is-sent');
+                    if (label) label.textContent = 'Sent ✓';
+                    msg.textContent = 'Thank you — your message is on its way. We\'ll reply within 24 hours.';
+                    msg.className = 'form-msg success';
+
+                    setTimeout(() => {
+                        form.reset();
+                        if (msgCount) msgCount.textContent = '0';
+                        submitBtn.disabled = false;
+                        submitBtn.classList.remove('is-sent');
+                        if (label) label.textContent = 'Send Message';
+                    }, 2600);
+                }, 1200);
+            });
+        });
+    </script>
 </body>
+
 </html>

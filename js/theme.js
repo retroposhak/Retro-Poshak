@@ -40,13 +40,49 @@
     });
   }
 
-  /* ---------- Cursor glow (desktop only) ---------- */
+   /* ---------- Cursor glow (desktop only) ---------- */
   if (window.matchMedia('(hover: hover)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     const glow = document.createElement('div');
     glow.className = 'cursor-glow';
+
+    // CRITICAL: set fixed-position styling BEFORE appending to body.
+    // Otherwise the element lives as a static, full-width block and
+    // contributes hundreds of pixels to body.scrollHeight (phantom scroll).
+    Object.assign(glow.style, {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      right: 'auto',
+      bottom: 'auto',
+      width: '340px',
+      height: '340px',
+      margin: '0',
+      padding: '0',
+      border: '0',
+      pointerEvents: 'none',
+      zIndex: '9997',
+      opacity: '0',
+      transition: 'opacity .35s ease',
+      willChange: 'transform',
+      contain: 'strict'
+    });
+
     document.body.appendChild(glow);
+
     let tx = 0, ty = 0, cx = 0, cy = 0;
-    document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+    let activated = false;
+
+    document.addEventListener('mousemove', (e) => {
+      tx = e.clientX;
+      ty = e.clientY;
+      if (!activated) {
+        activated = true;
+        cx = tx;
+        cy = ty;
+        glow.style.opacity = '1';
+      }
+    });
+
     (function loop() {
       cx += (tx - cx) * 0.12;
       cy += (ty - cy) * 0.12;
@@ -54,7 +90,7 @@
       requestAnimationFrame(loop);
     })();
   }
-
+  
   /* ---------- Magnetic buttons ---------- */
   if (window.matchMedia('(hover: hover)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.addEventListener('mousemove', (e) => {
