@@ -13,6 +13,10 @@
     <meta property="og:image" content="assets/images/Retro_Poshak_Logo.png" />
     <link rel="icon" type="image/png" href="assets/images/Retro_Poshak_Logo.png" />
 
+    <!-- Theme color for browser chrome -->
+    <meta name="theme-color" content="#f4ede1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0d0c" media="(prefers-color-scheme: dark)" />
+
     <!-- Prevent flash of wrong theme — runs before paint -->
     <script>
         (function () {
@@ -20,6 +24,7 @@
                 var t = localStorage.getItem('retroPoshakTheme');
                 if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', t);
+                document.documentElement.style.colorScheme = t;
             } catch (e) { }
         })();
     </script>
@@ -32,9 +37,70 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/theme.css" />
-    <link rel="stylesheet" href="css/cinematic.css"/>
-    <!-- Home-specific cinematic styles -->
+    <link rel="stylesheet" href="css/cinematic.css" />
     <link rel="stylesheet" href="css/home.css" />
+
+    <!-- ===== CRITICAL THEME SAFETY NET =====
+         Guarantees hero + section text responds to the theme toggle
+         even if any other stylesheet drifts. Scoped tightly so it
+         can't accidentally affect other pages. -->
+    <style id="theme-safety-net">
+        /* Light defaults (also covered in home.css, but kept here
+           as a hard fallback) */
+        .hero-promo-title,
+        .hero-promo-title em {
+            color: var(--brown, #3a2d22);
+        }
+
+        .hero-promo-name,
+        .hero-promo-tag {
+            color: var(--brown-soft, #6b5748);
+        }
+
+        .hero-promo-eyebrow {
+            color: var(--rust, #8f4228);
+        }
+
+        /* Dark overrides — forced */
+        html[data-theme="dark"] .hero-promo-title,
+        html[data-theme="dark"] .hero-promo-title em {
+            color: var(--brown, #f4ede1) !important;
+        }
+
+        html[data-theme="dark"] .hero-promo-name {
+            color: var(--brown, #f4ede1) !important;
+        }
+
+        html[data-theme="dark"] .hero-promo-tag {
+            color: var(--brown-soft, rgba(244, 237, 225, 0.72)) !important;
+        }
+
+        html[data-theme="dark"] .hero-promo-eyebrow {
+            color: var(--rust-soft, #e8a184) !important;
+        }
+
+        /* Fix text-fill-color: transparent overriding in dark mode */
+        html[data-theme="dark"] .hero-promo-title em,
+        html[data-theme="dark"] .hero-promo-title .hero-promo-title-em {
+            -webkit-text-fill-color: transparent !important;
+            color: transparent !important;
+            background: linear-gradient(135deg, #f0b69a 0%, #d97a58 50%, #b5593a 100%) !important;
+            background-size: 200% 200% !important;
+            -webkit-background-clip: text !important;
+            background-clip: text !important;
+        }
+
+        /* If the gradient fails, ensure the em element is at least
+           visible via a fallback color */
+        @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+
+            html[data-theme="dark"] .hero-promo-title em,
+            html[data-theme="dark"] .hero-promo-title .hero-promo-title-em {
+                color: var(--rust-soft, #e8a184) !important;
+                -webkit-text-fill-color: currentColor !important;
+            }
+        }
+    </style>
 </head>
 
 <body class="no-js">
@@ -64,7 +130,6 @@
 
     <header class="site-header" id="header">
         <div class="header-inner container">
-            <!-- Live logo image with SVG fallback -->
             <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
                 <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
                     class="logo-img"
@@ -248,8 +313,8 @@
                             </button>
 
                             <div class="hero-promo-dots" id="heroDots" role="tablist" aria-label="Choose slide">
-                                <button class="hero-promo-dot is-active" data-slide="0" role="tab"
-                                    aria-selected="true" aria-label="Slide 1"></button>
+                                <button class="hero-promo-dot is-active" data-slide="0" role="tab" aria-selected="true"
+                                    aria-label="Slide 1"></button>
                                 <button class="hero-promo-dot" data-slide="1" role="tab" aria-selected="false"
                                     aria-label="Slide 2"></button>
                                 <button class="hero-promo-dot" data-slide="2" role="tab" aria-selected="false"
@@ -280,8 +345,8 @@
             <div class="container statement-inner">
                 <span class="eyebrow center">Our Philosophy</span>
                 <p class="statement-hindi">
-                    “Kuch yaadein purani hoti hain.<br>
-                    Par kabhi out of style nahi hoti.”
+                    "Kuch yaadein purani hoti hain.<br>
+                    Par kabhi out of style nahi hoti."
                 </p>
                 <p class="statement-en">
                     Retro Poshak brings those memories back — one oversized tee at a time.
@@ -318,7 +383,7 @@
             </div>
         </section>
 
-       <!-- ===== FEATURED COLLECTION ===== -->
+        <!-- ===== FEATURED COLLECTION ===== -->
         <section class="featured-collection">
             <div class="container">
                 <div class="featured-split reveal">
@@ -330,7 +395,7 @@
                     <div class="featured-info">
                         <span class="eyebrow">Featured Drop</span>
                         <h2>Cycle ka Safar</h2>
-                        <p class="featured-hindi">“Har kahani ki ek starting line hoti hai.”</p>
+                        <p class="featured-hindi">"Har kahani ki ek starting line hoti hai."</p>
                         <p>Four oversized pieces. Four memories. One starting line. This is where Retro Poshak begins —
                             with the moments we all grew up inside.</p>
                         <p class="featured-price">
@@ -340,7 +405,7 @@
                         </p>
                         <div style="margin-top: 30px;">
                             <a href="product.html?id=1" class="btn btn-primary">Shop Cycle ka Safar</a>
-                            <a href="shop.html" class="btn btn-ghost" style="margin-left: 12px;">View All 4 Pieces</a>
+                            <a href="shop.html" class="btn btn-ghost" style="margin-left: 12px;">View All Pieces</a>
                         </div>
                     </div>
                 </div>
@@ -365,12 +430,14 @@
                 <p class="section-sub center">Real streets. Real memories. Real fits.</p>
                 <div class="lookbook-grid">
                     <div class="lookbook-item">
-                        <img src="assets/images/look-1.jpg" alt="Barf Ka Gola oversized tee on the street" loading="lazy"
+                        <img src="assets/images/look-1.jpg" alt="Barf Ka Gola oversized tee on the street"
+                            loading="lazy"
                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 01</text></svg>'">
                         <span class="lookbook-caption">Barf Ka Gola · Old Delhi</span>
                     </div>
                     <div class="lookbook-item">
-                        <img src="assets/images/look-2.jpg" alt="Chai ki Tapri oversized tee editorial shot" loading="lazy"
+                        <img src="assets/images/look-2.jpg" alt="Chai ki Tapri oversized tee editorial shot"
+                            loading="lazy"
                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23ebe1d0%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 02</text></svg>'">
                         <span class="lookbook-caption">Chai ki Tapri · Mumbai</span>
                     </div>
@@ -385,7 +452,8 @@
                         <span class="lookbook-caption">Khelo Cards · Studio</span>
                     </div>
                     <div class="lookbook-item">
-                        <img src="assets/images/look-5.jpg" alt="Khelo Cards oversized tee on the terrace" loading="lazy"
+                        <img src="assets/images/look-5.jpg" alt="Khelo Cards oversized tee on the terrace"
+                            loading="lazy"
                             onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 05</text></svg>'">
                         <span class="lookbook-caption">Khelo Cards · Terrace</span>
                     </div>
@@ -449,6 +517,11 @@
     </main>
 
     <footer class="site-footer">
+        <!-- Decorative top ornament -->
+        <div class="footer-ornament" aria-hidden="true">
+            <span></span><i>◆</i><span></span>
+        </div>
+
         <div class="container footer-grid">
             <div class="footer-brand">
                 <div class="footer-logo-wrap">
@@ -457,7 +530,46 @@
                 </div>
                 <p class="footer-tagline">Pehno Yaaden.</p>
                 <p class="footer-hindi">Old memories. New fits.</p>
+
+                <!-- Founder signature -->
+                <p class="footer-signature">— Founded by Urvashi Naik</p>
+
+                <!-- Social row -->
+                <ul class="footer-social" aria-label="Social links">
+                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==" target="_blank"
+                            rel="noopener" aria-label="Instagram">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" />
+                                <circle cx="12" cy="12" r="4" />
+                                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
+                            </svg>
+                        </a></li>
+                    <li><a href="#" aria-label="Facebook">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a></li>
+                    <li><a href="#" aria-label="Pinterest">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path
+                                    d="M9 20c1-3 2-6 2-6s-.5-1-.5-2c0-1.5 1-2.5 2-2.5s1.5 1 1.5 2c0 1.5-1 3.5-1 3.5s.5 1 1.5 1c2 0 3-2 3-4 0-2.5-2-4.5-5-4.5s-5 2-5 4.5c0 1 .5 2 1 2.5" />
+                            </svg>
+                        </a></li>
+                    <li><a href="#" aria-label="YouTube">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path
+                                    d="M22 8.5a3 3 0 0 0-2-2C18.5 6 12 6 12 6s-6.5 0-8 .5a3 3 0 0 0-2 2C1.5 10 1.5 12 1.5 12s0 2 .5 3.5a3 3 0 0 0 2 2C5.5 18 12 18 12 18s6.5 0 8-.5a3 3 0 0 0 2-2c.5-1.5.5-3.5.5-3.5s0-2-.5-3.5z" />
+                                <path d="M10 15l5-3-5-3z" fill="currentColor" />
+                            </svg>
+                        </a></li>
+                </ul>
             </div>
+
             <div class="footer-col">
                 <h4>Shop</h4>
                 <ul>
@@ -489,13 +601,15 @@
             <div class="footer-col">
                 <h4>Follow</h4>
                 <ul>
-                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==">Instagram</a></li>
+                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==" target="_blank"
+                            rel="noopener">Instagram</a></li>
                     <li><a href="#">Facebook</a></li>
                     <li><a href="#">Pinterest</a></li>
                     <li><a href="#">YouTube</a></li>
                 </ul>
             </div>
         </div>
+
         <div class="footer-newsletter container">
             <p>Get the next memory in your inbox.</p>
             <form class="newsletter-form" id="newsletterForm">
@@ -503,15 +617,22 @@
                 <button type="submit" class="btn btn-primary">Subscribe</button>
             </form>
         </div>
+
         <div class="footer-bottom container">
-            <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
-            <a href="#" class="whatsapp">💬 WhatsApp Support</a>
+            <p>
+                &copy; <span data-year>2025</span> Retro Poshak. All memories reserved.
+            </p>
+            <a href="#" class="whatsapp">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5z" />
+                </svg>
+                WhatsApp Support
+            </a>
         </div>
     </footer>
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <!-- Floating WhatsApp -->
     <a href="#" class="wa-float" aria-label="Chat on WhatsApp">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path
@@ -528,19 +649,21 @@
     <!-- Home-specific render -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            /* Featured products */
+            /* Featured products — pass stagger index via --i */
             const featuredGrid = document.getElementById('featuredGrid');
             if (featuredGrid) {
                 const items = getFeaturedProducts(4);
-                featuredGrid.innerHTML = items.map((p, i) => renderProductCard(p, i)).join('');
+                featuredGrid.innerHTML = items
+                    .map((p, i) => renderProductCard(p, i))
+                    .join('');
                 bindProductCardEvents(featuredGrid);
             }
 
-            /* Story grid */
+            /* Story grid — with --i stagger */
             const storyGrid = document.getElementById('storyGrid');
             if (storyGrid) {
-                storyGrid.innerHTML = STORY_COLLECTIONS.map(s => `
-          <a href="${s.link}" class="story-card">
+                storyGrid.innerHTML = STORY_COLLECTIONS.map((s, i) => `
+          <a href="${s.link}" class="story-card" style="--i:${i}">
             <span class="story-card-num">${s.number} — ${s.hindi}</span>
             <h3 class="story-card-title">${s.title}</h3>
             <p class="story-card-desc">${s.description}</p>
@@ -560,6 +683,25 @@
             <span class="memory-link">See the Story →</span>
           </a>
         `).join('');
+            }
+
+            /* Hero particles — populate with JS for theming */
+            const particles = document.querySelector('.hero-particles');
+            if (particles && !particles.dataset.ready) {
+                const isMobile = window.matchMedia('(max-width: 768px)').matches;
+                if (!isMobile) {
+                    const frag = document.createDocumentFragment();
+                    for (let i = 0; i < 12; i++) {
+                        const p = document.createElement('span');
+                        p.style.left = (8 + i * 7.5) + '%';
+                        p.style.bottom = (10 + (i * 13) % 60) + '%';
+                        p.style.setProperty('--dur', (14 + (i % 5) * 2) + 's');
+                        p.style.setProperty('--delay', ((i % 6) * 0.6) + 's');
+                        frag.appendChild(p);
+                    }
+                    particles.appendChild(frag);
+                    particles.dataset.ready = 'true';
+                }
             }
         });
     </script>

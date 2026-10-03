@@ -1,7 +1,7 @@
 /* =========================================================
-   RETRO POSHAK — Product Page (Editorial Edition v2)
+   RETRO POSHAK — Product Page (Editorial Edition v3)
    Load ONLY on product.html
-   Depends on: style.css, responsive.css, theme.css
+   Depends on: style.css, responsive.css, theme.css, cinematic.css
 
    NOTE: header + logo styles are in style.css.
    This file owns the product detail layout, gallery, options,
@@ -47,6 +47,12 @@
     0 30px 60px -30px rgba(58, 45, 34, 0.35);
   cursor: zoom-in;
 }
+@supports not (aspect-ratio: 4 / 5) {
+  .product-gallery .gallery-main {
+    height: 0;
+    padding-bottom: 125%;
+  }
+}
 html[data-theme="dark"] .product-gallery .gallery-main {
   background: linear-gradient(135deg, #2a2522 0%, #1e1a18 100%);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 30px 60px -30px rgba(0, 0, 0, 0.85);
@@ -87,6 +93,10 @@ html[data-theme="dark"] .product-gallery .gallery-main {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
+html[data-theme="dark"] .product-gallery .gallery-main::after {
+  background: rgba(36, 29, 24, 0.92);
+  color: var(--cream);
+}
 @media (hover: hover) and (pointer: fine) {
   .product-gallery .gallery-main:hover::after {
     opacity: 1;
@@ -123,6 +133,14 @@ html[data-theme="dark"] .product-gallery .gallery-main {
 .product-gallery .gallery-badge.badge-sale {
   background: var(--rust);
   color: var(--ink-on-rust, #ffffff);
+}
+html[data-theme="dark"] .product-gallery .gallery-badge.badge-new {
+  background: var(--sage, #99a98a);
+  color: #131110;
+}
+html[data-theme="dark"] .product-gallery .gallery-badge.badge-sale {
+  background: var(--rust, #d97a58);
+  color: #131110;
 }
 
 /* Thumbnail strip */
@@ -229,9 +247,28 @@ html[data-theme="dark"] .product-gallery .gallery-main {
   font-style: italic;
   background: linear-gradient(135deg, #d97a58 0%, #8f4228 100%);
   -webkit-background-clip: text;
-  background-clip: text;
+          background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: transparent;
+          color: transparent;
+}
+html[data-theme="dark"] .product-title em {
+  background: linear-gradient(135deg, #f0b69a 0%, #d97a58 50%, #b5593a 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .product-title em {
+    -webkit-text-fill-color: currentColor;
+            color: var(--rust);
+    background: none;
+  }
+  html[data-theme="dark"] .product-title em {
+    -webkit-text-fill-color: currentColor;
+            color: var(--rust-soft, #e8a184);
+    background: none;
+  }
 }
 
 /* Subtitle */
@@ -378,7 +415,7 @@ html[data-theme="dark"] .product-gallery .gallery-main {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  border: 1px solid rgba(58, 45, 34, 0.18);
+  border: 1px solid var(--line-strong);
   background: var(--swatch, #ccc);
   cursor: pointer;
   padding: 0;
@@ -524,7 +561,7 @@ html[data-theme="dark"] .qty-stepper {
   transition: background .25s var(--ease), color .25s var(--ease);
 }
 .qty-stepper button:hover:not(:disabled) {
-  background: rgba(143, 66, 40, 0.08);
+  background: var(--rust-tint, rgba(143, 66, 40, 0.08));
   color: var(--rust);
 }
 .qty-stepper button:disabled {
@@ -1064,6 +1101,10 @@ html[data-theme="dark"] .product-cta-bar {
   border-color: var(--rust);
   color: var(--ink-on-rust, #fff);
 }
+.product-cta-bar .pcb-btn:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+}
 
 /* =========================================================
    14. RESPONSIVE
@@ -1161,6 +1202,9 @@ html[data-theme="dark"] .product-cta-bar {
     -webkit-text-fill-color: currentColor !important;
     color: var(--rust) !important;
   }
+  html[data-theme="dark"] .product-title em {
+    color: var(--rust-soft, #e8a184) !important;
+  }
 }
 
 /* =========================================================
@@ -1177,10 +1221,19 @@ html[data-theme="dark"] .product-cta-bar {
   .gallery-badge,
   .product-cta .btn-outline,
   .option-help,
-  .qty-row {
+  .qty-row,
+  .stock-row,
+  .color-swatches,
+  .size-chips,
+  .product-story-label {
     display: none !important;
   }
   .product-layout { grid-template-columns: 1fr; gap: 24px; }
   .product-gallery { position: static; }
   .product-page { padding: 20px 0; }
+  .product-details-strip {
+    background: #fafafa;
+    border-color: #ddd;
+  }
+  .detail-block { padding: 20px 16px; }
 }

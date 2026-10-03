@@ -1,7 +1,10 @@
 /* =========================================================
-   RETRO POSHAK — Home Page (Cinematic Editorial)
+   RETRO POSHAK — Home Page (Cinematic Editorial v3)
    Load ONLY on index.html
-   Depends on: style.css, responsive.css, theme.css
+   Depends on: style.css, responsive.css, theme.css, cinematic.css
+
+   NOTE: header, logo, footer-logo, and their responsive sizes
+   live in style.css. This file owns homepage sections only.
    ========================================================= */
 
 /* =========================================================
@@ -24,46 +27,7 @@
 }
 
 /* =========================================================
-   1. LOGO — theme-aware, fluid
-   ========================================================= */
-.logo-img {
-  height: 80px;
-  width: auto;
-  display: block;
-  filter: drop-shadow(0 2px 6px rgba(58, 45, 34, 0.12));
-  mix-blend-mode: multiply;
-  transition: transform var(--duration-base, .4s) var(--ease), height var(--duration-base, .4s) var(--ease);
-  animation: logoFloat 6s ease-in-out infinite;
-}
-@supports not (mix-blend-mode: multiply) {
-  .logo-img {
-    -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 70%, transparent 100%);
-            mask-image: radial-gradient(circle at 50% 50%, #000 70%, transparent 100%);
-  }
-}
-html[data-theme="dark"] .logo-img {
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.6)) brightness(1.05) contrast(1.02);
-}
-.site-header.scrolled .logo-img { height: 68px; }
-.logo-live:hover .logo-img { transform: scale(1.04); }
-
-@keyframes logoFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-2px); }
-}
-
-.footer-logo-img {
-  height: 80px;
-  width: auto;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
-  transition: transform var(--duration-base, .4s) var(--ease);
-}
-.footer-logo-wrap:hover .footer-logo-img { transform: scale(1.04); }
-
-/* =========================================================
-   2. HERO — Cinematic single panel
+   1. HERO — Cinematic single panel
    ========================================================= */
 .hero {
   position: relative;
@@ -125,7 +89,7 @@ html[data-theme="dark"] .hero-grain {
   overflow: hidden;
   min-height: 640px;
   isolation: isolate;
-  color: #3a2d22;
+  color: var(--brown);
   background: linear-gradient(180deg, #faf3e4 0%, #f1e6d1 100%);
   border: 1px solid rgba(58, 45, 34, 0.10);
   box-shadow:
@@ -211,6 +175,7 @@ html[data-theme="dark"] .hero-panel::after {
   opacity: 0;
   animation: heroParticleFloat linear infinite;
 }
+/* Fallback timing if JS doesn't generate particles */
 .hero-particles span:nth-child(1)  { left: 8%;  bottom: 10%; animation-duration: 14s; animation-delay: 0s; }
 .hero-particles span:nth-child(2)  { left: 16%; bottom: 30%; animation-duration: 18s; animation-delay: 2s; }
 .hero-particles span:nth-child(3)  { left: 24%; bottom: 55%; animation-duration: 16s; animation-delay: 1s; }
@@ -284,7 +249,7 @@ html[data-theme="dark"] .hero-particles span {
 }
 .hero-promo-slide.is-active .hero-promo-copy::before { transform: scaleX(1); }
 html[data-theme="dark"] .hero-promo-copy::before {
-  background: linear-gradient(90deg, var(--rust-soft), transparent);
+  background: linear-gradient(90deg, var(--rust-soft, #e8a184), transparent);
 }
 
 /* Staggered copy reveal */
@@ -301,6 +266,9 @@ html[data-theme="dark"] .hero-promo-copy::before {
 .hero-promo-slide.is-active .hero-promo-name    { opacity: 1; transform: none; transition-delay: .46s; }
 .hero-promo-slide.is-active .hero-promo-tag     { opacity: 1; transform: none; transition-delay: .60s; }
 
+/* ✦ Theme-safe text colors — inherits from hero-panel, but
+   we override explicitly with tokens so the theme toggle
+   always flips correctly, even under third-party CSS drift. */
 .hero-promo-eyebrow {
   display: block;
   font-family: var(--font-sans);
@@ -311,7 +279,9 @@ html[data-theme="dark"] .hero-promo-copy::before {
   margin-bottom: 20px;
   color: #8a5a3a;
 }
-html[data-theme="dark"] .hero-promo-eyebrow { color: var(--rust-soft); }
+html[data-theme="dark"] .hero-promo-eyebrow {
+  color: var(--rust-soft, #e8a184);
+}
 
 .hero-promo-title {
   font-family: var(--font-serif);
@@ -320,13 +290,14 @@ html[data-theme="dark"] .hero-promo-eyebrow { color: var(--rust-soft); }
   letter-spacing: -0.035em;
   font-weight: 600;
   margin: 0 0 26px;
-  color: #3a2d22;
+  color: var(--brown, #3a2d22);
   text-shadow: 0 2px 20px rgba(58, 45, 34, 0.06);
 }
 html[data-theme="dark"] .hero-promo-title {
-  color: var(--cream);
+  color: var(--cream, #f4ede1);
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
 }
+
 .hero-promo-title-em {
   display: block;
   font-style: italic;
@@ -334,13 +305,28 @@ html[data-theme="dark"] .hero-promo-title {
   margin-top: 8px;
   background: linear-gradient(135deg, #d97a58 0%, #8f4228 100%);
   background-size: 200% 200%;
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
   animation: titleGradient 6s ease-in-out infinite;
 }
 html[data-theme="dark"] .hero-promo-title-em {
   background: linear-gradient(135deg, #f0b69a 0%, #d97a58 50%, #b5593a 100%);
   background-size: 200% 200%;
+}
+/* Fallback for browsers without background-clip: text */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-promo-title-em {
+    -webkit-text-fill-color: currentColor;
+            color: var(--rust, #8f4228);
+    background: none;
+  }
+  html[data-theme="dark"] .hero-promo-title-em {
+    -webkit-text-fill-color: currentColor;
+            color: var(--rust-soft, #e8a184);
+    background: none;
+  }
 }
 @keyframes titleGradient {
   0%, 100% { background-position: 0% 50%; }
@@ -353,9 +339,11 @@ html[data-theme="dark"] .hero-promo-title-em {
   font-weight: 700;
   letter-spacing: -0.01em;
   margin: 0 0 8px;
-  color: #3a2d22;
+  color: var(--brown, #3a2d22);
 }
-html[data-theme="dark"] .hero-promo-name { color: var(--cream); }
+html[data-theme="dark"] .hero-promo-name {
+  color: var(--cream, #f4ede1);
+}
 
 .hero-promo-tag {
   font-family: var(--font-sans);
@@ -364,9 +352,11 @@ html[data-theme="dark"] .hero-promo-name { color: var(--cream); }
   letter-spacing: 0.22em;
   text-transform: uppercase;
   margin: 0;
-  color: #6b5748;
+  color: var(--brown-soft, #6b5748);
 }
-html[data-theme="dark"] .hero-promo-tag { color: rgba(244, 237, 225, 0.62); }
+html[data-theme="dark"] .hero-promo-tag {
+  color: rgba(244, 237, 225, 0.72);
+}
 
 /* Image column */
 .hero-promo-media {
@@ -479,7 +469,7 @@ html[data-theme="dark"] .hero-promo-shop {
 .hero-promo-shop:hover::before { transform: translateX(120%); }
 .hero-promo-shop:hover {
   background: var(--rust);
-  color: var(--ink-on-rust);
+  color: var(--ink-on-rust, #fff);
   transform: translateX(4px);
   box-shadow: 0 12px 28px -8px rgba(143, 66, 40, 0.55);
 }
@@ -518,7 +508,7 @@ html[data-theme="dark"] .hero-promo-arrow {
 }
 .hero-promo-arrow:hover {
   background: var(--rust);
-  color: var(--ink-on-rust);
+  color: var(--ink-on-rust, #fff);
   border-color: transparent;
   transform: translateY(-3px) scale(1.05);
   box-shadow: 0 14px 28px -10px rgba(143, 66, 40, 0.65);
@@ -592,19 +582,18 @@ html[data-theme="dark"] .hero-promo-pause {
 }
 .hero-promo-pause:hover {
   background: var(--rust);
-  color: var(--ink-on-rust);
+  color: var(--ink-on-rust, #fff);
   border-color: transparent;
   transform: scale(1.08) rotate(8deg);
   box-shadow: 0 12px 26px -8px rgba(143, 66, 40, 0.6);
 }
 
 /* =========================================================
-   3. STATS BAND (new)
+   2. STATS BAND
    ========================================================= */
 .stats-band {
   padding: 78px 0;
-  background:
-    linear-gradient(180deg, var(--cream-3), var(--cream-2));
+  background: linear-gradient(180deg, var(--cream-3), var(--cream-2));
   border-bottom: 1px solid var(--line);
 }
 html[data-theme="dark"] .stats-band {
@@ -647,13 +636,9 @@ html[data-theme="dark"] .stats-band {
   text-transform: uppercase;
   color: var(--brown-muted);
 }
-@media (max-width: 768px) {
-  .stat-block + .stat-block::before { display: none; }
-  .stats-band { padding: 56px 0; }
-}
 
 /* =========================================================
-   4. BRAND STATEMENT
+   3. BRAND STATEMENT
    ========================================================= */
 .brand-statement {
   padding: 110px 0;
@@ -681,8 +666,10 @@ html[data-theme="dark"] .brand-statement {
 .statement-hindi em {
   font-style: italic;
   background: linear-gradient(135deg, #d97a58 0%, #8f4228 100%);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
 }
 .statement-en {
   font-size: 16.5px;
@@ -720,7 +707,7 @@ html[data-theme="dark"] .brand-statement {
 }
 
 /* =========================================================
-   5. EDITORIAL BAND (new — quote marquee)
+   4. EDITORIAL BAND — quote marquee
    ========================================================= */
 .editorial-band {
   padding: 34px 0;
@@ -786,7 +773,7 @@ html[data-theme="dark"] .editorial-band::after {
 }
 
 /* =========================================================
-   6. FEATURED PRODUCTS — "Stories You Can Wear"
+   5. FEATURED PRODUCTS — "Stories You Can Wear"
    ========================================================= */
 .featured {
   position: relative;
@@ -891,10 +878,8 @@ html[data-theme="dark"] .featured::before {
   will-change: transform;
 }
 .featured .product-card:hover { transform: translateY(-6px); }
-.featured .product-card:nth-child(1) { animation-delay: .05s; }
-.featured .product-card:nth-child(2) { animation-delay: .15s; }
-.featured .product-card:nth-child(3) { animation-delay: .25s; }
-.featured .product-card:nth-child(4) { animation-delay: .35s; }
+/* Stagger via --i (works with any count) */
+.featured .product-card { animation-delay: calc(var(--i, 0) * 0.10s + 0.05s); }
 
 /* Media */
 .featured .product-media {
@@ -1033,7 +1018,7 @@ html[data-theme="dark"] .featured .product-card:hover .product-media {
 }
 html[data-theme="dark"] .featured .add-cart-btn:hover {
   background: var(--brown);
-  color: var(--ink-on-rust);
+  color: var(--cream);
 }
 
 /* Section CTA */
@@ -1077,7 +1062,7 @@ html[data-theme="dark"] .featured .add-cart-btn:hover {
 }
 
 /* =========================================================
-   7. SHOP BY STORY — dark cinematic canvas
+   6. SHOP BY STORY — dark cinematic canvas
    ========================================================= */
 .shop-by-story {
   position: relative;
@@ -1209,13 +1194,8 @@ html[data-theme="dark"] .shop-by-story {
   opacity: 0;
   transform: translateY(24px);
   animation: storyCardIn .9s var(--ease) forwards;
+  animation-delay: calc(var(--i, 0) * 0.07s + 0.05s);
 }
-.story-card:nth-child(1) { animation-delay: .05s; }
-.story-card:nth-child(2) { animation-delay: .12s; }
-.story-card:nth-child(3) { animation-delay: .19s; }
-.story-card:nth-child(4) { animation-delay: .26s; }
-.story-card:nth-child(5) { animation-delay: .33s; }
-.story-card:nth-child(6) { animation-delay: .40s; }
 @keyframes storyCardIn {
   to { opacity: 1; transform: none; }
 }
@@ -1338,7 +1318,7 @@ html[data-theme="dark"] .shop-by-story {
 .story-card:hover .story-card-cta::after { transform: translateX(4px); }
 
 /* =========================================================
-   8. FEATURED COLLECTION
+   7. FEATURED COLLECTION
    ========================================================= */
 .featured-collection {
   padding: 110px 0;
@@ -1403,7 +1383,7 @@ html[data-theme="dark"] .featured-split {
 .featured-info p { color: var(--brown-soft); font-size: 15px; }
 
 /* =========================================================
-   9. MEMORY ARCHIVE — scrapbook cards
+   8. MEMORY ARCHIVE — scrapbook cards
    ========================================================= */
 .memory-archive { background: var(--cream-2); padding: 110px 0; }
 .memory-grid {
@@ -1428,9 +1408,13 @@ html[data-theme="dark"] .memory-card {
   background: linear-gradient(180deg, var(--paper), rgba(30, 26, 24, 0.9));
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 20px 40px -30px rgba(0, 0, 0, 0.8);
 }
-.memory-card:nth-child(3n+1) { transform: rotate(-1deg); }
-.memory-card:nth-child(3n+2) { transform: rotate(0.8deg); }
-.memory-card:nth-child(3n+3) { transform: rotate(-0.5deg); }
+/* 6 distinct rotations, cycling */
+.memory-card:nth-child(6n+1) { transform: rotate(-1deg); }
+.memory-card:nth-child(6n+2) { transform: rotate(0.8deg); }
+.memory-card:nth-child(6n+3) { transform: rotate(-0.5deg); }
+.memory-card:nth-child(6n+4) { transform: rotate(1.2deg); }
+.memory-card:nth-child(6n+5) { transform: rotate(-0.9deg); }
+.memory-card:nth-child(6n+6) { transform: rotate(0.5deg); }
 .memory-card:hover {
   transform: rotate(0deg) translateY(-6px);
   border-color: var(--rust);
@@ -1494,7 +1478,7 @@ html[data-theme="dark"] .memory-card {
 .memory-card:hover .memory-link { opacity: 1; }
 
 /* =========================================================
-   10. LOOKBOOK
+   9. LOOKBOOK
    ========================================================= */
 .lookbook { padding: 110px 0; background: var(--cream-2); }
 .lookbook-grid {
@@ -1544,7 +1528,7 @@ html[data-theme="dark"] .memory-card {
 .lookbook-item:hover .lookbook-caption { opacity: 1; }
 
 /* =========================================================
-   11. COMMUNITY
+   10. COMMUNITY
    ========================================================= */
 .community { padding: 100px 0; }
 .community-grid {
@@ -1588,8 +1572,14 @@ html[data-theme="dark"] .memory-card {
 }
 .community-post:hover::after { opacity: 1; transform: none; }
 
+/* Bento spans on wide screens */
+@media (min-width: 1100px) {
+  .community-grid > *:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .community-grid > *:nth-child(6) { grid-column: span 2; grid-row: span 2; }
+}
+
 /* =========================================================
-   12. TRUST STRIP
+   11. TRUST STRIP
    ========================================================= */
 .trust-strip {
   padding: 46px 0;
@@ -1614,7 +1604,9 @@ html[data-theme="dark"] .memory-card {
 .trust-icon {
   font-size: 32px;
   filter: drop-shadow(0 3px 8px rgba(58, 45, 34, 0.12));
+  transition: transform .5s var(--ease);
 }
+.trust-item:hover .trust-icon { transform: scale(1.12) rotate(-6deg); }
 .trust-label {
   font-family: var(--font-sans);
   font-size: 10.5px;
@@ -1625,7 +1617,7 @@ html[data-theme="dark"] .memory-card {
 }
 
 /* =========================================================
-   13. CINEMA BLOCK (new — optional video strip)
+   12. CINEMA BLOCK — optional video strip
    ========================================================= */
 .cinema {
   padding: 110px 0;
@@ -1652,8 +1644,7 @@ html[data-theme="dark"] .memory-card {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(80% 80% at 50% 50%, transparent 40%, rgba(30, 22, 16, 0.28));
+  background: radial-gradient(80% 80% at 50% 50%, transparent 40%, rgba(30, 22, 16, 0.28));
 }
 .cinema-play {
   position: absolute;
@@ -1685,7 +1676,7 @@ html[data-theme="dark"] .memory-card {
 }
 .cinema-play:hover {
   background: var(--rust);
-  color: var(--ink-on-rust);
+  color: var(--ink-on-rust, #fff);
   transform: translateY(-2px);
 }
 html[data-theme="dark"] .cinema-frame {
@@ -1697,7 +1688,7 @@ html[data-theme="dark"] .cinema-play {
 }
 
 /* =========================================================
-   14. REDUCED MOTION
+   13. REDUCED MOTION
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
   .hero-panel,
@@ -1708,7 +1699,8 @@ html[data-theme="dark"] .cinema-play {
   .featured .badge-tag,
   .shop-by-story::before,
   .shop-by-story .section-title.center::after,
-  .editorial-track {
+  .editorial-track,
+  .statement-divider i {
     animation: none !important;
   }
   .hero-promo-slide,
@@ -1739,7 +1731,7 @@ html[data-theme="dark"] .cinema-play {
 }
 
 /* =========================================================
-   15. RESPONSIVE
+   14. RESPONSIVE
    ========================================================= */
 @media (max-width: 1100px) {
   .hero-panel { min-height: 660px; border-radius: 24px; }
@@ -1759,10 +1751,6 @@ html[data-theme="dark"] .cinema-play {
   .shop-by-story { padding: 110px 0; }
   .shop-by-story .section-title.center { font-size: clamp(34px, 4.8vw, 52px); }
   .story-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
-
-  .logo-img { height: 72px; }
-  .site-header.scrolled .logo-img { height: 62px; }
-  .footer-logo-img { height: 72px; }
 }
 
 @media (max-width: 900px) {
@@ -1780,10 +1768,6 @@ html[data-theme="dark"] .cinema-play {
   .shop-by-story { padding: 100px 0; }
   .story-card { padding: 40px 24px 34px; }
   .story-card-title { font-size: 25px; }
-
-  .logo-img { height: 68px; }
-  .site-header.scrolled .logo-img { height: 60px; }
-  .footer-logo-img { height: 68px; }
 }
 
 @media (max-width: 768px) {
@@ -1852,10 +1836,6 @@ html[data-theme="dark"] .cinema-play {
   .lookbook { padding: 70px 0; }
   .community { padding: 60px 0; }
   .cinema { padding: 70px 0; }
-
-  .logo-img { height: 60px; }
-  .site-header.scrolled .logo-img { height: 54px; }
-  .footer-logo-img { height: 60px; }
 }
 
 @media (max-width: 480px) {
@@ -1898,19 +1878,34 @@ html[data-theme="dark"] .cinema-play {
   .lookbook-item:nth-child(4),
   .lookbook-item:nth-child(5) { grid-column: span 1; grid-row: span 1; }
 
-  .logo-img { height: 52px; }
-  .site-header.scrolled .logo-img { height: 46px; }
-  .footer-logo-img { height: 54px; }
+  .community-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 }
 
-@media (max-width: 375px) {
-  .logo-img { height: 46px; }
-  .site-header.scrolled .logo-img { height: 42px; }
-  .footer-logo-img { height: 48px; }
-}
+/* =========================================================
+   15. PRINT
+   ========================================================= */
+@media print {
+  .site-header,
+  .announce-bar,
+  .site-footer,
+  .wa-float,
+  .toast,
+  .hero-particles,
+  .hero-promo-controls,
+  .hero-promo-pause,
+  .hero-promo-shop,
+  .editorial-band,
+  .cinema,
+  .community { display: none !important; }
 
-@media (max-width: 320px) {
-  .logo-img { height: 42px; }
-  .site-header.scrolled .logo-img { height: 38px; }
-  .footer-logo-img { height: 44px; }
+  .hero-panel { animation: none; box-shadow: none; border: 0; }
+  .hero-panel::before,
+  .hero-panel::after { display: none; }
+
+  .product-card,
+  .story-card,
+  .memory-card,
+  .lookbook-item { break-inside: avoid; }
+
+  .featured .add-cart-btn { display: none; }
 }

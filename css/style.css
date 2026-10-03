@@ -1,7 +1,9 @@
 /* =========================================================
-   RETRO POSHAK — Main Stylesheet (Editorial Edition v2.0)
+   RETRO POSHAK — Main Stylesheet (Editorial Edition v2.1)
    Colors are defined in theme.css. This file owns structure,
    components, motion, and responsive behavior.
+
+   Load order: style.css → responsive.css → theme.css → cinematic.css → [page].css
    ========================================================= */
 
 /* =========================================================
@@ -233,12 +235,24 @@ summary::-webkit-details-marker { display: none; }
   margin: 0 0 12px;
 }
 .section-title.center { text-align: center; }
+
+/* ✦ FIXED — Section title em gradient is now theme-aware */
 .section-title em {
   font-style: italic;
   background: linear-gradient(135deg, #d97a58 0%, #8f4228 100%);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
 }
+html[data-theme="dark"] .section-title em {
+  background: linear-gradient(135deg, #f0b69a 0%, #d97a58 50%, #b5593a 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+
 .section-sub {
   font-family: var(--font-serif);
   font-style: italic;
@@ -300,7 +314,6 @@ summary::-webkit-details-marker { display: none; }
 }
 .eyebrow.no-rule::before { display: none; }
 
-/* Editorial drop-cap style — apply to .lead */
 .lead {
   font-family: var(--font-serif);
   font-size: clamp(18px, 2.4vw, 22px);
@@ -310,7 +323,6 @@ summary::-webkit-details-marker { display: none; }
   max-width: 60ch;
 }
 
-/* Kicker line — for "Chapter 01 · The Idea" style labels */
 .kicker {
   display: inline-flex;
   align-items: center;
@@ -328,7 +340,6 @@ summary::-webkit-details-marker { display: none; }
   background: linear-gradient(90deg, transparent, currentColor);
 }
 
-/* Divider */
 .rule {
   display: block;
   height: 1px;
@@ -397,6 +408,17 @@ summary::-webkit-details-marker { display: none; }
   transform: translateY(-1px);
 }
 
+/* ✦ FIXED — Dark-mode override for outline hover
+   so it doesn't produce white-on-dark text */
+html[data-theme="dark"] .btn-outline {
+  color: var(--brown);
+  border-color: var(--brown);
+}
+html[data-theme="dark"] .btn-outline:hover {
+  background: var(--brown);
+  color: var(--cream);
+}
+
 /* Ghost */
 .btn.ghost {
   background: transparent;
@@ -440,7 +462,7 @@ summary::-webkit-details-marker { display: none; }
 .icon-btn.sm { width: 34px; height: 34px; }
 .icon-btn.lg { width: 48px; height: 48px; }
 
-/* Badge (count pill on icons) */
+/* Badge */
 .badge {
   position: absolute;
   top: 6px; right: 6px;
@@ -459,9 +481,7 @@ summary::-webkit-details-marker { display: none; }
   border: 1.5px solid var(--cream);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
-html[data-theme="dark"] .badge { border-color: var(--cream); }
 
-/* Link button */
 .link-btn {
   display: inline-block;
   background: none;
@@ -516,6 +536,8 @@ html[data-theme="dark"] .site-header.scrolled { background: rgba(15, 13, 12, 0.9
   padding: 4px 0;
   position: relative;
   transition: transform var(--duration-base) var(--ease);
+  /* ✦ FIXED — isolate so mix-blend-mode doesn't leak into siblings */
+  isolation: isolate;
 }
 .logo-live:hover { transform: scale(1.02); }
 
@@ -540,7 +562,8 @@ html[data-theme="dark"] .site-header.scrolled { background: rgba(15, 13, 12, 0.9
   50%      { opacity: 0.4; }
 }
 
-/* ✦ NEW — Logo image: canonical sizing (single source of truth) */
+/* ✦ Logo image — canonical sizing (SINGLE SOURCE OF TRUTH)
+   Every other stylesheet should NOT redefine this. */
 .logo-img {
   height: 80px;
   width: auto;
@@ -574,7 +597,7 @@ html[data-theme="dark"] .logo-img {
   50%      { transform: translateY(-2px); }
 }
 
-/* ✦ NEW — Footer logo image: canonical sizing */
+/* ✦ Footer logo image — canonical sizing */
 .footer-logo-img {
   height: 80px;
   width: auto;
@@ -683,7 +706,7 @@ html[data-theme="dark"] .theme-toggle .moon { opacity: 0; transform: translateY(
 .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 /* =========================================================
-   7. MOBILE DRAWER (nav opened via hamburger)
+   7. MOBILE DRAWER
    ========================================================= */
 @media (max-width: 900px) {
   .main-nav {
@@ -698,7 +721,10 @@ html[data-theme="dark"] .theme-toggle .moon { opacity: 0; transform: translateY(
     z-index: var(--z-drawer);
     overflow-y: auto;
   }
-  .main-nav.open { transform: translateX(0); box-shadow: 20px 0 60px rgba(0, 0, 0, 0.18); }
+  .main-nav.open {
+    transform: translateX(0);
+    box-shadow: 20px 0 60px rgba(0, 0, 0, 0.18);
+  }
   .main-nav .nav-list {
     flex-direction: column;
     gap: 8px;
@@ -711,12 +737,12 @@ html[data-theme="dark"] .theme-toggle .moon { opacity: 0; transform: translateY(
   }
   .hamburger { display: block; }
 
-  /* Backdrop */
   .nav-backdrop {
     position: fixed;
     inset: 0;
     background: rgba(30, 22, 16, 0.5);
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--duration-base) var(--ease);
@@ -861,7 +887,6 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
   gap: 44px 28px;
   align-items: start;
 }
-/* When only 1–3 items, cap columns so they don't stretch */
 .product-grid.is-sparse {
   grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
   justify-content: center;
@@ -912,7 +937,6 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
 .product-card:hover .img-primary { transform: scale(1.06); }
 .product-card:hover .img-secondary { opacity: 1; transform: scale(1.06); }
 
-/* Gradient veil on hover */
 .product-media::after {
   content: '';
   position: absolute;
@@ -949,9 +973,32 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
   transition: transform var(--duration-base) var(--ease);
 }
 .product-card:hover .badge-tag { transform: translateY(-1px); }
-.badge-tag.new  { background: var(--sage, #7a8b5c); color: var(--ink-on-sage, #fff); }
-.badge-tag.best { background: var(--mustard); color: var(--ink-on-mustard, #2a1e14); }
-.badge-tag.sale { background: var(--rust); color: var(--ink-on-rust, #fff); }
+
+/* ✦ FIXED — theme-aware badge colors */
+.badge-tag.new {
+  background: var(--sage, #7a8b5c);
+  color: #ffffff;
+}
+.badge-tag.best {
+  background: var(--mustard);
+  color: #2a1e14;
+}
+.badge-tag.sale {
+  background: var(--rust);
+  color: #ffffff;
+}
+html[data-theme="dark"] .badge-tag.new {
+  background: var(--sage, #99a98a);
+  color: #131110;
+}
+html[data-theme="dark"] .badge-tag.best {
+  background: var(--mustard, #d4ad55);
+  color: #2a1e14;
+}
+html[data-theme="dark"] .badge-tag.sale {
+  background: var(--rust, #d97a58);
+  color: #131110;
+}
 
 /* Wishlist */
 .wishlist-btn {
@@ -968,6 +1015,7 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
   z-index: 4;
   box-shadow: 0 2px 8px rgba(58, 45, 34, 0.10);
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   transition:
     background-color var(--duration-fast) var(--ease),
     color var(--duration-fast) var(--ease),
@@ -986,6 +1034,20 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
 }
 .wishlist-btn.active svg { fill: currentColor; }
 .wishlist-btn.pop { animation: heartPop .5s var(--ease); }
+
+html[data-theme="dark"] .wishlist-btn {
+  background: rgba(30, 26, 24, 0.85);
+  color: var(--cream);
+}
+html[data-theme="dark"] .wishlist-btn:hover {
+  background: var(--paper);
+  color: var(--rust);
+}
+html[data-theme="dark"] .wishlist-btn.active {
+  background: var(--rust);
+  color: #131110;
+}
+
 @keyframes heartPop {
   0% { transform: scale(1); }
   45% { transform: scale(1.35); }
@@ -1021,6 +1083,14 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
   transform: translateY(0);
 }
 .quick-view:hover {
+  background: var(--brown);
+  color: var(--cream);
+}
+html[data-theme="dark"] .quick-view {
+  background: rgba(36, 29, 24, 0.95);
+  color: var(--cream);
+}
+html[data-theme="dark"] .quick-view:hover {
   background: var(--brown);
   color: var(--cream);
 }
@@ -1133,6 +1203,20 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
   color: var(--brown);
 }
 
+/* ✦ FIXED — Dark-mode disabled button uses correct colors */
+html[data-theme="dark"] .add-cart-btn {
+  color: var(--brown);
+  border-color: var(--brown);
+}
+html[data-theme="dark"] .add-cart-btn:hover {
+  background: var(--brown);
+  color: var(--cream);
+}
+html[data-theme="dark"] .add-cart-btn:disabled:hover {
+  background: transparent;
+  color: var(--brown);
+}
+
 /* Sold out veil */
 .product-card.is-sold-out .product-media::before {
   content: 'SOLD OUT';
@@ -1146,12 +1230,16 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.34em;
-  color: #fff;
+  color: #ffffff;
   background: rgba(30, 22, 16, 0.55);
   backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+html[data-theme="dark"] .product-card.is-sold-out .product-media::before {
+  background: rgba(0, 0, 0, 0.65);
 }
 
-/* Numbered index (editorial flourish) */
+/* Numbered index */
 .product-index {
   position: absolute;
   bottom: 12px; left: 14px;
@@ -1187,6 +1275,12 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
     radial-gradient(800px 500px at 85% 90%, rgba(181, 89, 58, 0.08), transparent 65%),
     linear-gradient(180deg, var(--cream-2), var(--cream-3));
 }
+html[data-theme="dark"] .page-hero {
+  background:
+    radial-gradient(900px 500px at 15% 10%, rgba(217, 122, 88, 0.14), transparent 65%),
+    radial-gradient(800px 500px at 85% 90%, rgba(212, 173, 85, 0.10), transparent 65%),
+    linear-gradient(180deg, var(--cream-2), var(--cream-3));
+}
 .page-hero::before {
   content: '';
   position: absolute;
@@ -1209,12 +1303,24 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
   letter-spacing: -0.03em;
   color: var(--brown);
 }
+
+/* ✦ FIXED — theme-aware gradient em */
 .page-title em {
   font-style: italic;
   background: linear-gradient(135deg, #d97a58 0%, #8f4228 100%);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
 }
+html[data-theme="dark"] .page-title em {
+  background: linear-gradient(135deg, #f0b69a 0%, #d97a58 50%, #b5593a 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
+
 .page-sub {
   font-family: var(--font-serif);
   font-style: italic;
@@ -1225,7 +1331,7 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
 }
 
 /* =========================================================
-   12. PRODUCT DETAIL (fallback structure — mostly in product.css)
+   12. PRODUCT DETAIL
    ========================================================= */
 .product-detail {
   display: grid;
@@ -1270,7 +1376,7 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
 }
 
 /* =========================================================
-   13. SHOP LAYOUT (structural — cosmetics in shop.css)
+   13. SHOP LAYOUT
    ========================================================= */
 .shop-layout {
   display: grid;
@@ -1298,7 +1404,7 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
 }
 
 /* =========================================================
-   14. ORDER SUMMARY (structural — cosmetics in cart.css / checkout.css)
+   14. ORDER SUMMARY
    ========================================================= */
 .order-summary {
   background: var(--paper);
@@ -1311,7 +1417,7 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
 }
 
 /* =========================================================
-   15. CART ITEM (structural — cosmetics in cart.css)
+   15. CART ITEM
    ========================================================= */
 .cart-item {
   display: grid;
@@ -1327,7 +1433,6 @@ html[data-theme="dark"] .search-overlay { background: rgba(15, 13, 12, 0.98); }
   border-radius: var(--radius-xs);
 }
 
-/* Quantity stepper */
 .qty-wrap {
   display: inline-flex;
   align-items: center;
@@ -1491,6 +1596,195 @@ html[data-theme="dark"] .site-footer { background: #080706; }
 .footer-bottom .whatsapp:hover { color: var(--rust-soft, var(--rust)); }
 
 /* =========================================================
+   16b. FOOTER — EDITORIAL EDITION (creative + aesthetic)
+   Extends the existing .site-footer block.
+   ========================================================= */
+
+/* ---------- Decorative top ornament ---------- */
+.footer-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 0 40px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.footer-ornament span {
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(90deg, transparent, rgba(217, 122, 88, 0.55), transparent);
+}
+.footer-ornament i {
+  color: var(--rust, #d97a58);
+  font-style: normal;
+  font-size: 10px;
+  animation: footerDotBlink 3s ease-in-out infinite;
+}
+@keyframes footerDotBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.3; }
+}
+
+/* ---------- Founder signature ---------- */
+.footer-signature {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(244, 237, 225, 0.42);
+  letter-spacing: 0.04em;
+  margin: 14px 0 18px;
+}
+
+/* ---------- Social icon row ---------- */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  list-style: none;
+  padding: 0;
+}
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(244, 237, 225, 0.18);
+  color: rgba(244, 237, 225, 0.72);
+  background: rgba(244, 237, 225, 0.03);
+  transition:
+    background-color .35s var(--ease),
+    border-color .35s var(--ease),
+    color .35s var(--ease),
+    transform .35s var(--ease),
+    box-shadow .35s var(--ease);
+}
+.footer-social a:hover {
+  background: var(--rust);
+  border-color: var(--rust);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px -10px rgba(217, 122, 88, 0.55);
+}
+.footer-social a:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+/* ---------- Footer links — animated underline ---------- */
+.footer-col ul li {
+  position: relative;
+}
+.footer-col a {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 2px;
+}
+.footer-col a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 1px; width: 0;
+  background: linear-gradient(90deg, var(--rust), var(--mustard));
+  transition: width .45s var(--ease);
+}
+.footer-col a:hover::after { width: 100%; }
+
+/* ---------- Footer heading — accent rule ---------- */
+.footer-col h4 {
+  position: relative;
+  padding-bottom: 12px;
+}
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 28px; height: 1px;
+  background: linear-gradient(90deg, var(--rust), transparent);
+  opacity: 0.65;
+}
+
+/* ---------- Newsletter form — polish ---------- */
+.newsletter-form input {
+  transition:
+    border-color .35s var(--ease),
+    background-color .35s var(--ease),
+    box-shadow .35s var(--ease);
+}
+.newsletter-form input:focus {
+  border-color: var(--rust);
+  box-shadow: 0 0 0 4px rgba(217, 122, 88, 0.14);
+  outline: none;
+}
+.newsletter-form .btn-primary {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.newsletter-form .btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.25), transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .9s var(--ease);
+  z-index: 0;
+}
+.newsletter-form .btn-primary:hover::before { transform: translateX(120%); }
+.newsletter-form .btn-primary > * { position: relative; z-index: 1; }
+
+/* ---------- Footer bottom — WhatsApp pill ---------- */
+.footer-bottom .whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid rgba(244, 237, 225, 0.18);
+  border-radius: var(--radius-pill);
+  background: rgba(244, 237, 225, 0.03);
+  transition:
+    background-color .35s var(--ease),
+    border-color .35s var(--ease),
+    color .35s var(--ease),
+    transform .35s var(--ease);
+}
+.footer-bottom .whatsapp:hover {
+  background: rgba(37, 211, 102, 0.14);
+  border-color: rgba(37, 211, 102, 0.55);
+  color: #6ee7a8;
+  transform: translateY(-1px);
+}
+
+/* ---------- Footer responsive polish ---------- */
+@media (max-width: 900px) {
+  .footer-ornament { padding-bottom: 30px; }
+  .footer-ornament span { width: 50px; }
+  .footer-social { justify-content: flex-start; }
+}
+@media (max-width: 768px) {
+  .footer-signature { font-size: 12.5px; }
+}
+@media (max-width: 480px) {
+  .footer-ornament { padding-bottom: 22px; }
+  .footer-social { flex-wrap: wrap; }
+  .footer-bottom .whatsapp { width: 100%; justify-content: center; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .footer-ornament i,
+  .footer-social a,
+  .footer-col a::after,
+  .newsletter-form .btn-primary::before,
+  .footer-bottom .whatsapp {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
    17. TOAST
    ========================================================= */
 .toast {
@@ -1528,7 +1822,7 @@ html[data-theme="dark"] .site-footer { background: #080706; }
 }
 
 /* =========================================================
-   18. REVEAL (scroll animation)
+   18. REVEAL
    ========================================================= */
 .reveal {
   opacity: 0;
@@ -1570,7 +1864,7 @@ html[data-theme="dark"] .site-footer { background: #080706; }
 }
 
 /* =========================================================
-   20. CURSOR GLOW (desktop only)
+   20. CURSOR GLOW
    ========================================================= */
 .cursor-glow {
   position: fixed !important;
@@ -1610,7 +1904,7 @@ html[data-theme="dark"] .cursor-glow {
 }
 
 /* =========================================================
-   21. SCROLLBAR (themed)
+   21. SCROLLBAR
    ========================================================= */
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--cream-2); }
@@ -1626,10 +1920,9 @@ html[data-theme="dark"] .cursor-glow {
 }
 
 /* =========================================================
-   22. RESPONSIVE — large breakpoints
+   22. RESPONSIVE — logo sizing across breakpoints
    ========================================================= */
 
-/* ✦ NEW — Logo sizing at 1100px */
 @media (max-width: 1100px) {
   .logo-img { height: 72px; max-height: 72px; }
   .site-header.scrolled .logo-img { height: 62px; max-height: 62px; }
@@ -1639,7 +1932,6 @@ html[data-theme="dark"] .cursor-glow {
   .footer-grid { gap: 40px; }
 }
 
-/* ✦ NEW — Logo sizing at 900px */
 @media (max-width: 900px) {
   .logo-img { height: 68px; max-height: 68px; }
   .site-header.scrolled .logo-img { height: 60px; max-height: 60px; }
@@ -1669,7 +1961,6 @@ html[data-theme="dark"] .cursor-glow {
   .footer-brand { grid-column: 1 / -1; margin-bottom: 12px; }
 }
 
-/* ✦ NEW — Logo sizing at 768px */
 @media (max-width: 768px) {
   .logo-img { height: 60px; max-height: 60px; }
   .site-header.scrolled .logo-img { height: 54px; max-height: 54px; }
@@ -1704,7 +1995,6 @@ html[data-theme="dark"] .cursor-glow {
   .cart-item img { width: 90px; height: 108px; }
 }
 
-/* ✦ NEW — Logo sizing at 480px */
 @media (max-width: 480px) {
   .logo-img { height: 52px; max-height: 52px; }
   .site-header.scrolled .logo-img { height: 46px; max-height: 46px; }
@@ -1738,14 +2028,12 @@ html[data-theme="dark"] .cursor-glow {
   }
 }
 
-/* ✦ NEW — Logo sizing at 375px */
 @media (max-width: 375px) {
   .logo-img { height: 46px; max-height: 46px; }
   .site-header.scrolled .logo-img { height: 42px; max-height: 42px; }
   .footer-logo-img { height: 48px; max-height: 48px; }
 }
 
-/* ✦ NEW — Logo sizing at 320px */
 @media (max-width: 320px) {
   .logo-img { height: 42px; max-height: 42px; }
   .site-header.scrolled .logo-img { height: 38px; max-height: 38px; }
@@ -1770,7 +2058,11 @@ html[data-theme="dark"] .cursor-glow {
   .skip-link,
   .hamburger,
   .theme-toggle,
-  .newsletter-form { display: none !important; }
+  .newsletter-form,
+  .scroll-progress,
+  .hero-particles,
+  .cursor-dot,
+  .cursor-ring { display: none !important; }
 
   .product-card,
   .cart-item,

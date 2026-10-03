@@ -8,6 +8,10 @@
     <meta name="description"
         content="Retro Poshak wearable story — oversized T-shirt or shirt, made with heavyweight cotton." />
 
+    <!-- Theme color for browser chrome -->
+    <meta name="theme-color" content="#f4ede1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0d0c" media="(prefers-color-scheme: dark)" />
+
     <!-- Prevent flash of wrong theme (runs before paint) -->
     <script>
         (function () {
@@ -15,6 +19,7 @@
                 var t = localStorage.getItem('retroPoshakTheme');
                 if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', t);
+                document.documentElement.style.colorScheme = t;
             } catch (e) { }
         })();
     </script>
@@ -34,6 +39,9 @@
 
 <body class="no-js">
     <script>document.body.classList.remove('no-js');</script>
+
+    <!-- Skip link -->
+    <a href="#mainContent" class="skip-link">Skip to content</a>
 
     <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
     <div class="announce-bar" aria-label="Site announcements">
@@ -77,7 +85,7 @@
             </nav>
 
             <div class="header-actions">
-                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme" type="button">
                     <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2">
                         <circle cx="12" cy="12" r="4" />
@@ -90,7 +98,7 @@
                     </svg>
                 </button>
 
-                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search" type="button">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="7" />
                         <path d="M21 21l-4.35-4.35" />
@@ -117,18 +125,20 @@
                     <span class="badge cart-count" id="cartCount">0</span>
                 </a>
 
-                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" type="button">
                     <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </header>
 
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
     <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
         <div class="search-box container">
             <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
                 aria-label="Search products" />
-            <button class="icon-btn" id="searchClose" aria-label="Close search">
+            <button class="icon-btn" id="searchClose" aria-label="Close search" type="button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -137,77 +147,91 @@
         <div class="search-results container" id="searchResults"></div>
     </div>
 
-    <main>
+    <main id="mainContent">
+        <!-- Screen-reader page title -->
+        <h1 class="sr-only" id="productTitleSR">Product page</h1>
+
         <!-- ===== PRODUCT DETAIL ===== -->
         <section class="product-page" id="productPage">
-            <div class="container product-container" id="productContainer">
+            <div class="container product-container" id="productContainer" aria-live="polite">
                 <!-- Injected by product.js -->
+                <noscript>
+                    <p style="text-align:center;padding:40px 20px;font-family:var(--font-serif);font-style:italic;">
+                        Please enable JavaScript to view product details.
+                    </p>
+                </noscript>
             </div>
         </section>
 
         <!-- ===== STORY / FABRIC STRIP ===== -->
-        <section class="product-details-strip" id="productDetailsStrip" hidden>
+        <section class="product-details-strip" id="productDetailsStrip" hidden aria-label="Product details">
             <div class="container details-strip-inner">
                 <article class="detail-block">
                     <span class="detail-num">01</span>
                     <h3>Fabric</h3>
-                    <p id="detailFabric">100% Cotton Terry</p>
+                    <p id="detailFabric" data-detail="fabric">100% Cotton Terry</p>
                 </article>
                 <article class="detail-block">
                     <span class="detail-num">02</span>
                     <h3>Weight</h3>
-                    <p id="detailGsm">240 GSM</p>
+                    <p id="detailGsm" data-detail="gsm">240 GSM</p>
                 </article>
                 <article class="detail-block">
                     <span class="detail-num">03</span>
                     <h3>Fit</h3>
-                    <p id="detailFit">Oversized / Drop Shoulder</p>
+                    <p id="detailFit" data-detail="fit">Oversized / Drop Shoulder</p>
                 </article>
                 <article class="detail-block">
                     <span class="detail-num">04</span>
                     <h3>Care</h3>
-                    <p>Cold wash. Inside out. Line dry.</p>
+                    <p data-detail="care">Cold wash. Inside out. Line dry.</p>
                 </article>
             </div>
         </section>
 
         <!-- ===== REVIEWS ===== -->
-        <section class="reviews-section">
+        <section class="reviews-section" aria-labelledby="reviewsTitle">
             <div class="container">
                 <span class="eyebrow center">From the Community</span>
-                <h2 class="section-title center">What They're Saying.</h2>
+                <h2 class="section-title center" id="reviewsTitle">What They're Saying.</h2>
                 <p class="section-sub center">Real memories, real fits.</p>
                 <div class="reviews-grid">
-                    <div class="review-card">
+                    <article class="review-card">
                         <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
                         <p class="review-text">"Loved the oversized fit. The fabric feels really premium — exactly like
                             the description."</p>
-                        <div class="review-meta"><span>— Aarav M.</span><span class="review-verified">✓ Verified</span>
+                        <div class="review-meta">
+                            <span>— Aarav M.</span>
+                            <span class="review-verified">✓ Verified</span>
                         </div>
-                    </div>
-                    <div class="review-card">
+                    </article>
+                    <article class="review-card">
                         <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
                         <p class="review-text">"The story behind the print makes it feel personal. Wore it to a reunion
                             and everyone asked where it was from."</p>
-                        <div class="review-meta"><span>— Nisha K.</span><span class="review-verified">✓ Verified</span>
+                        <div class="review-meta">
+                            <span>— Nisha K.</span>
+                            <span class="review-verified">✓ Verified</span>
                         </div>
-                    </div>
-                    <div class="review-card">
+                    </article>
+                    <article class="review-card">
                         <div class="review-stars" aria-label="4 out of 5 stars">★★★★☆</div>
                         <p class="review-text">"Super comfortable and the print quality is excellent. Took one size up
                             for the perfect oversized look."</p>
-                        <div class="review-meta"><span>— Rohan T.</span><span class="review-verified">✓ Verified</span>
+                        <div class="review-meta">
+                            <span>— Rohan T.</span>
+                            <span class="review-verified">✓ Verified</span>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
 
         <!-- ===== RELATED ===== -->
-        <section class="section related-section">
+        <section class="section related-section" aria-labelledby="relatedTitle">
             <div class="container">
                 <span class="eyebrow">You may also remember</span>
-                <h2 class="section-title">More Stories.</h2>
+                <h2 class="section-title" id="relatedTitle">More Stories.</h2>
                 <div class="product-grid" id="relatedGrid"></div>
             </div>
         </section>

@@ -7,6 +7,10 @@
     <title>Create Account — Retro Poshak</title>
     <meta name="description" content="Create your Retro Poshak account to save memories, wishlist and orders." />
 
+    <!-- Theme color for browser chrome -->
+    <meta name="theme-color" content="#f4ede1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0d0c" media="(prefers-color-scheme: dark)" />
+
     <!-- Prevent flash of wrong theme (runs before paint) -->
     <script>
         (function () {
@@ -14,6 +18,7 @@
                 var t = localStorage.getItem('retroPoshakTheme');
                 if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', t);
+                document.documentElement.style.colorScheme = t;
             } catch (e) { }
         })();
     </script>
@@ -26,12 +31,16 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/cinematic.css" />
     <!-- Auth page styles -->
     <link rel="stylesheet" href="css/auth.css" />
 </head>
 
 <body class="no-js">
     <script>document.body.classList.remove('no-js');</script>
+
+    <!-- Skip link -->
+    <a href="#mainContent" class="skip-link">Skip to content</a>
 
     <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
     <div class="announce-bar" aria-label="Site announcements">
@@ -57,7 +66,6 @@
 
     <header class="site-header" id="header">
         <div class="header-inner container">
-            <!-- Live logo image with SVG fallback -->
             <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
                 <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
                     class="logo-img"
@@ -76,7 +84,7 @@
             </nav>
 
             <div class="header-actions">
-                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme" type="button">
                     <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2">
                         <circle cx="12" cy="12" r="4" />
@@ -89,7 +97,7 @@
                     </svg>
                 </button>
 
-                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search" type="button">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="7" />
                         <path d="M21 21l-4.35-4.35" />
@@ -116,18 +124,20 @@
                     <span class="badge cart-count" id="cartCount">0</span>
                 </a>
 
-                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" type="button">
                     <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </header>
 
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
     <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
         <div class="search-box container">
             <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
                 aria-label="Search products" />
-            <button class="icon-btn" id="searchClose" aria-label="Close search">
+            <button class="icon-btn" id="searchClose" aria-label="Close search" type="button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -136,7 +146,7 @@
         <div class="search-results container" id="searchResults"></div>
     </div>
 
-    <main>
+    <main id="mainContent">
         <!-- ===== AUTH SECTION ===== -->
         <section class="auth-section">
             <div class="auth-card">
@@ -145,34 +155,46 @@
                 <p class="auth-sub">Save your wishlist, track orders, and collect memories.</p>
 
                 <form class="auth-form" id="signupForm" novalidate>
-                    <label>Full Name
-                        <input type="text" name="name" required autocomplete="name" placeholder="Your name" />
+                    <label for="signupName">Full Name
+                        <input type="text" id="signupName" name="name" required autocomplete="name"
+                            placeholder="Your name" aria-required="true" autofocus />
                     </label>
-                    <label>Email
-                        <input type="email" name="email" required autocomplete="email" placeholder="you@email.com" />
+
+                    <label for="signupEmail">Email
+                        <input type="email" id="signupEmail" name="email" required autocomplete="email"
+                            placeholder="you@email.com" aria-required="true" />
                     </label>
-                    <label>Password
+
+                    <label for="signupPassword">Password
                         <span class="password-wrap">
-                            <input type="password" name="password" required autocomplete="new-password"
-                                id="signupPassword" minlength="6" placeholder="At least 6 characters" />
+                            <input type="password" id="signupPassword" name="password" required
+                                autocomplete="new-password" minlength="6"
+                                placeholder="At least 6 characters" aria-required="true" />
                             <button type="button" class="toggle-pw" data-target="signupPassword"
-                                aria-label="Show password">
+                                aria-label="Show password" aria-pressed="false">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
+                                    stroke-width="2" aria-hidden="true">
                                     <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
                                     <circle cx="12" cy="12" r="3" />
                                 </svg>
                             </button>
                         </span>
+                        <span class="pw-strength" id="pwStrength" aria-hidden="true">
+                            <span class="pw-bar"></span>
+                            <span class="pw-bar"></span>
+                            <span class="pw-bar"></span>
+                        </span>
                     </label>
-                    <label>Confirm Password
+
+                    <label for="signupConfirm">Confirm Password
                         <span class="password-wrap">
-                            <input type="password" name="confirm" required autocomplete="new-password"
-                                id="signupConfirm" placeholder="Repeat your password" />
+                            <input type="password" id="signupConfirm" name="confirm" required
+                                autocomplete="new-password" placeholder="Repeat your password"
+                                aria-required="true" />
                             <button type="button" class="toggle-pw" data-target="signupConfirm"
-                                aria-label="Show password">
+                                aria-label="Show password" aria-pressed="false">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
+                                    stroke-width="2" aria-hidden="true">
                                     <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
                                     <circle cx="12" cy="12" r="3" />
                                 </svg>
@@ -180,8 +202,13 @@
                         </span>
                     </label>
 
+                    <label class="auth-check">
+                        <input type="checkbox" id="signupTerms" name="terms" required aria-required="true" />
+                        <span>I agree to the <a href="#" class="auth-link">Terms</a> and <a href="#" class="auth-link">Privacy Policy</a></span>
+                    </label>
+
                     <button type="submit" class="btn btn-primary full">Create Account</button>
-                    <p class="auth-msg" id="signupMsg"></p>
+                    <p class="auth-msg" id="signupMsg" role="status" aria-live="polite"></p>
                 </form>
 
                 <p class="auth-alt">Already have an account? <a href="login.html">Sign in</a></p>
@@ -214,7 +241,7 @@
                     <li><a href="contact.html">Contact Us</a></li>
                     <li><a href="#">FAQs</a></li>
                     <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Returns &amp; Exchanges</a></li>
                     <li><a href="#">Size Guide</a></li>
                 </ul>
             </div>
@@ -224,13 +251,13 @@
                     <li><a href="about.html">Our Story</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Follow</h4>
                 <ul>
-                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==">Instagram</a></li>
+                    <li><a href="https://www.instagram.com/retro_poshak" target="_blank" rel="noopener">Instagram</a></li>
                     <li><a href="#">Facebook</a></li>
                     <li><a href="#">Pinterest</a></li>
                     <li><a href="#">YouTube</a></li>
@@ -270,33 +297,63 @@
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('signupForm');
             const msg = document.getElementById('signupMsg');
+            const pwField = document.getElementById('signupPassword');
+            const pwStrength = document.getElementById('pwStrength');
+            if (!form) return;
 
+            /* Helper: mark field error */
+            const setError = (el, on) => {
+                const label = el.closest('label');
+                if (label) label.classList.toggle('has-error', on);
+                el.setAttribute('aria-invalid', on ? 'true' : 'false');
+            };
+
+            /* Clear error on input */
+            form.querySelectorAll('input').forEach(el => {
+                el.addEventListener('input', () => setError(el, false));
+            });
+
+            /* Password strength meter */
+            pwField?.addEventListener('input', () => {
+                const v = pwField.value;
+                let score = 0;
+                if (v.length >= 6) score++;
+                if (v.length >= 10) score++;
+                if (/[A-Z]/.test(v) && /[a-z]/.test(v)) score++;
+                if (/\d/.test(v)) score++;
+                if (/[^A-Za-z0-9]/.test(v)) score++;
+
+                const level = Math.min(3, Math.ceil(score / 2));
+                if (pwStrength) {
+                    pwStrength.dataset.level = level;
+                }
+            });
+
+            /* Submit */
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const { name, email, password, confirm } = form;
+                msg.textContent = '';
 
-                if (!name.value.trim() || !email.value.trim() || !password.value) {
-                    msg.textContent = 'Please fill in all fields.';
+                const name = form.name.value.trim();
+                const email = form.email.value.trim();
+                const password = form.password.value;
+                const confirm = form.confirm.value;
+                const terms = form.terms.checked;
+
+                let valid = true;
+                if (!name) { setError(form.name, true); valid = false; }
+                if (!email) { setError(form.email, true); valid = false; }
+                if (!password || password.length < 6) { setError(form.password, true); valid = false; }
+                if (password !== confirm) { setError(form.confirm, true); valid = false; }
+                if (!terms) { setError(form.terms, true); valid = false; }
+
+                if (!valid) {
+                    msg.textContent = 'Please fix the highlighted fields.';
                     msg.className = 'auth-msg error';
                     return;
                 }
-                if (password.value.length < 6) {
-                    msg.textContent = 'Password must be at least 6 characters.';
-                    msg.className = 'auth-msg error';
-                    return;
-                }
-                if (password.value !== confirm.value) {
-                    msg.textContent = 'Passwords do not match.';
-                    msg.className = 'auth-msg error';
-                    return;
-                }
 
-                const res = window.RetroAuth.signup({
-                    name: name.value.trim(),
-                    email: email.value.trim(),
-                    password: password.value
-                });
-
+                const res = window.RetroAuth.signup({ name, email, password });
                 msg.textContent = res.msg;
                 msg.className = 'auth-msg ' + (res.ok ? 'success' : 'error');
 
@@ -315,6 +372,7 @@
                     input.type = isPw ? 'text' : 'password';
                     btn.classList.toggle('is-visible', isPw);
                     btn.setAttribute('aria-label', isPw ? 'Hide password' : 'Show password');
+                    btn.setAttribute('aria-pressed', isPw ? 'true' : 'false');
                 });
             });
         });

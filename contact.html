@@ -8,6 +8,10 @@
     <meta name="description"
         content="Get in touch with Retro Poshak — customer support, business enquiries and more." />
 
+    <!-- Theme color for browser chrome -->
+    <meta name="theme-color" content="#f4ede1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0d0c" media="(prefers-color-scheme: dark)" />
+
     <!-- Prevent flash of wrong theme (runs before paint) -->
     <script>
         (function () {
@@ -15,6 +19,7 @@
                 var t = localStorage.getItem('retroPoshakTheme');
                 if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', t);
+                document.documentElement.style.colorScheme = t;
             } catch (e) { }
         })();
     </script>
@@ -27,12 +32,16 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/cinematic.css" />
     <!-- Contact-page editorial styles -->
     <link rel="stylesheet" href="css/contact.css" />
 </head>
 
 <body class="no-js">
     <script>document.body.classList.remove('no-js');</script>
+
+    <!-- Skip link -->
+    <a href="#mainContent" class="skip-link">Skip to content</a>
 
     <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
     <div class="announce-bar" aria-label="Site announcements">
@@ -76,7 +85,7 @@
             </nav>
 
             <div class="header-actions">
-                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme" type="button">
                     <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2">
                         <circle cx="12" cy="12" r="4" />
@@ -89,7 +98,7 @@
                     </svg>
                 </button>
 
-                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search" type="button">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="7" />
                         <path d="M21 21l-4.35-4.35" />
@@ -116,18 +125,20 @@
                     <span class="badge cart-count" id="cartCount">0</span>
                 </a>
 
-                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" type="button">
                     <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </header>
 
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
     <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
         <div class="search-box container">
             <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
                 aria-label="Search products" />
-            <button class="icon-btn" id="searchClose" aria-label="Close search">
+            <button class="icon-btn" id="searchClose" aria-label="Close search" type="button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -136,29 +147,29 @@
         <div class="search-results container" id="searchResults"></div>
     </div>
 
-    <main>
+    <main id="mainContent">
         <!-- ===== HERO ===== -->
         <section class="contact-hero">
             <div class="container contact-hero-inner">
                 <span class="contact-hero-eyebrow">
-                    <span class="rule"></span>
+                    <span class="rule" aria-hidden="true"></span>
                     Say Hello
-                    <span class="rule"></span>
+                    <span class="rule" aria-hidden="true"></span>
                 </span>
                 <h1 class="contact-hero-title">Get in <em>Touch.</em></h1>
                 <p class="contact-hero-sub">
                     We'd love to hear your memory — or help you find a new one.
                 </p>
             </div>
-            <span class="contact-hero-ornament top-left">✦</span>
-            <span class="contact-hero-ornament bottom-right">✦</span>
+            <span class="contact-hero-ornament top-left" aria-hidden="true">✦</span>
+            <span class="contact-hero-ornament bottom-right" aria-hidden="true">✦</span>
         </section>
 
         <!-- ===== RESPONSE STRIP ===== -->
         <section class="response-strip" aria-label="Response times">
             <div class="container response-strip-inner">
                 <div class="response-item">
-                    <span class="response-icon">✎</span>
+                    <span class="response-icon" aria-hidden="true">✎</span>
                     <div>
                         <strong>General enquiries</strong>
                         <span>Reply within 24 hours</span>
@@ -166,7 +177,7 @@
                 </div>
                 <span class="response-divider" aria-hidden="true"></span>
                 <div class="response-item">
-                    <span class="response-icon">↻</span>
+                    <span class="response-icon" aria-hidden="true">↻</span>
                     <div>
                         <strong>Order support</strong>
                         <span>Reply within 12 hours</span>
@@ -174,7 +185,7 @@
                 </div>
                 <span class="response-divider" aria-hidden="true"></span>
                 <div class="response-item">
-                    <span class="response-icon">◈</span>
+                    <span class="response-icon" aria-hidden="true">◈</span>
                     <div>
                         <strong>Partnerships</strong>
                         <span>Reply within 2 days</span>
@@ -184,14 +195,14 @@
         </section>
 
         <!-- ===== MAIN CONTACT SECTION ===== -->
-        <section class="contact-section">
+        <section class="contact-section" aria-labelledby="contactFormTitle">
             <div class="container contact-layout">
 
                 <!-- FORM -->
                 <div class="contact-form-wrap">
                     <header class="contact-form-head">
                         <span class="contact-form-eyebrow">Send a message</span>
-                        <h2 class="contact-form-title">Tell us your <em>story.</em></h2>
+                        <h2 class="contact-form-title" id="contactFormTitle">Tell us your <em>story.</em></h2>
                         <p class="contact-form-sub">
                             Whether it's an order query, a custom request, or just a memory you want
                             to share — write to us.
@@ -202,15 +213,15 @@
                         <div class="form-row two-col">
                             <div class="field">
                                 <input type="text" id="fieldName" name="name" required autocomplete="name"
-                                    placeholder=" " />
+                                    placeholder=" " aria-required="true" />
                                 <label for="fieldName">Your name</label>
-                                <span class="field-border"></span>
+                                <span class="field-border" aria-hidden="true"></span>
                             </div>
                             <div class="field">
                                 <input type="email" id="fieldEmail" name="email" required autocomplete="email"
-                                    placeholder=" " />
+                                    placeholder=" " aria-required="true" />
                                 <label for="fieldEmail">Email address</label>
-                                <span class="field-border"></span>
+                                <span class="field-border" aria-hidden="true"></span>
                             </div>
                         </div>
 
@@ -219,10 +230,10 @@
                                 <input type="tel" id="fieldPhone" name="phone" autocomplete="tel"
                                     placeholder=" " />
                                 <label for="fieldPhone">Phone (optional)</label>
-                                <span class="field-border"></span>
+                                <span class="field-border" aria-hidden="true"></span>
                             </div>
                             <div class="field field-select">
-                                <select id="fieldSubject" name="subject" required>
+                                <select id="fieldSubject" name="subject" required aria-required="true">
                                     <option value="" disabled selected hidden></option>
                                     <option value="order">Order / Delivery</option>
                                     <option value="return">Return / Exchange</option>
@@ -232,16 +243,16 @@
                                     <option value="other">Something else</option>
                                 </select>
                                 <label for="fieldSubject">Subject</label>
-                                <span class="field-border"></span>
+                                <span class="field-border" aria-hidden="true"></span>
                             </div>
                         </div>
 
                         <div class="field field-textarea">
                             <textarea id="fieldMessage" name="message" rows="6" required
-                                maxlength="800" placeholder=" "></textarea>
+                                maxlength="800" placeholder=" " aria-required="true"></textarea>
                             <label for="fieldMessage">Your message</label>
-                            <span class="field-border"></span>
-                            <span class="field-count"><span id="msgCount">0</span> / 800</span>
+                            <span class="field-border" aria-hidden="true"></span>
+                            <span class="field-count" aria-hidden="true"><span id="msgCount">0</span> / 800</span>
                         </div>
 
                         <div class="contact-form-actions">
@@ -258,15 +269,15 @@
                 </div>
 
                 <!-- INFO PANEL -->
-                <aside class="contact-info">
+                <aside class="contact-info" aria-labelledby="contactInfoTitle">
                     <header class="contact-info-head">
                         <span class="contact-info-eyebrow">Or reach us directly</span>
-                        <h2 class="contact-info-title">Other <em>ways.</em></h2>
+                        <h2 class="contact-info-title" id="contactInfoTitle">Other <em>ways.</em></h2>
                     </header>
 
                     <div class="contact-cards">
                         <a href="https://instagram.com/retroposhak" class="contact-card" target="_blank" rel="noopener">
-                            <span class="contact-card-icon">◐</span>
+                            <span class="contact-card-icon" aria-hidden="true">◐</span>
                             <div class="contact-card-body">
                                 <strong>Instagram</strong>
                                 <span>@retroposhak</span>
@@ -276,7 +287,7 @@
                         </a>
 
                         <a href="mailto:hello@retroposhak.in" class="contact-card">
-                            <span class="contact-card-icon">✎</span>
+                            <span class="contact-card-icon" aria-hidden="true">✎</span>
                             <div class="contact-card-body">
                                 <strong>General Email</strong>
                                 <span>hello@retroposhak.in</span>
@@ -286,7 +297,7 @@
                         </a>
 
                         <a href="mailto:support@retroposhak.in" class="contact-card">
-                            <span class="contact-card-icon">✦</span>
+                            <span class="contact-card-icon" aria-hidden="true">✦</span>
                             <div class="contact-card-body">
                                 <strong>Order Support</strong>
                                 <span>support@retroposhak.in</span>
@@ -296,7 +307,7 @@
                         </a>
 
                         <a href="mailto:partners@retroposhak.in" class="contact-card">
-                            <span class="contact-card-icon">◈</span>
+                            <span class="contact-card-icon" aria-hidden="true">◈</span>
                             <div class="contact-card-body">
                                 <strong>Business Enquiries</strong>
                                 <span>partners@retroposhak.in</span>
@@ -305,8 +316,8 @@
                             <span class="contact-card-arrow" aria-hidden="true">↗</span>
                         </a>
 
-                        <a href="#" class="contact-card whatsapp-card">
-                            <span class="contact-card-icon">☎</span>
+                        <a href="https://wa.me/919999999999" class="contact-card whatsapp-card" target="_blank" rel="noopener">
+                            <span class="contact-card-icon" aria-hidden="true">☎</span>
                             <div class="contact-card-body">
                                 <strong>WhatsApp Support</strong>
                                 <span>Mon–Sat · 10am–7pm IST</span>
@@ -318,7 +329,7 @@
 
                     <div class="contact-studio">
                         <span class="contact-studio-eyebrow">Visit us</span>
-                        <h3>Studio & Pickup Point</h3>
+                        <h3>Studio &amp; Pickup Point</h3>
                         <p>Retro Poshak Studio<br>Mumbai, Maharashtra<br>India</p>
                         <p class="contact-studio-note">By appointment only · Drop us a line first.</p>
                     </div>
@@ -328,32 +339,32 @@
         </section>
 
         <!-- ===== FAQ TEASER ===== -->
-        <section class="faq-teaser">
+        <section class="faq-teaser" aria-labelledby="faqTitle">
             <div class="container">
                 <header class="faq-teaser-head">
                     <span class="eyebrow center">Quick Answers</span>
-                    <h2 class="section-title center">Before You Write.</h2>
+                    <h2 class="section-title center" id="faqTitle">Before You Write.</h2>
                     <p class="section-sub center">A few things people ask us most.</p>
                 </header>
 
                 <div class="faq-grid">
                     <article class="faq-card">
-                        <span class="faq-num">01</span>
+                        <span class="faq-num" aria-hidden="true">01</span>
                         <h3>How long does shipping take?</h3>
                         <p>2–3 days to dispatch, then 3–7 days across India. Tracking by email.</p>
                     </article>
                     <article class="faq-card">
-                        <span class="faq-num">02</span>
+                        <span class="faq-num" aria-hidden="true">02</span>
                         <h3>Can I exchange for a different size?</h3>
                         <p>Yes — free within 7 days, unworn with tags. Just email us your order #.</p>
                     </article>
                     <article class="faq-card">
-                        <span class="faq-num">03</span>
+                        <span class="faq-num" aria-hidden="true">03</span>
                         <h3>Do you do custom / bulk orders?</h3>
                         <p>We do! Minimum 20 pieces. Write to partners@retroposhak.in with details.</p>
                     </article>
                     <article class="faq-card">
-                        <span class="faq-num">04</span>
+                        <span class="faq-num" aria-hidden="true">04</span>
                         <h3>Are the prints long-lasting?</h3>
                         <p>Yes — high-quality DTF prints designed to survive 50+ washes with care.</p>
                     </article>
@@ -387,7 +398,7 @@
                     <li><a href="contact.html">Contact Us</a></li>
                     <li><a href="#">FAQs</a></li>
                     <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Returns &amp; Exchanges</a></li>
                     <li><a href="#">Size Guide</a></li>
                 </ul>
             </div>
@@ -397,13 +408,13 @@
                     <li><a href="about.html">Our Story</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Follow</h4>
                 <ul>
-                    <li><a href="#">Instagram</a></li>
+                    <li><a href="https://www.instagram.com/retro_poshak" target="_blank" rel="noopener">Instagram</a></li>
                     <li><a href="#">Facebook</a></li>
                     <li><a href="#">Pinterest</a></li>
                     <li><a href="#">YouTube</a></li>
@@ -432,6 +443,7 @@
         </svg>
     </a>
 
+    <!-- Scripts -->
     <script src="js/theme.js"></script>
     <script src="js/products.js"></script>
     <script src="js/auth.js"></script>
@@ -458,6 +470,7 @@
                 const wrap = field.closest('.field');
                 if (!wrap) return;
                 wrap.classList.toggle('has-error', hasError);
+                field.setAttribute('aria-invalid', hasError ? 'true' : 'false');
             };
 
             /* Clear error on input */

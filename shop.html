@@ -8,6 +8,10 @@
     <meta name="description"
         content="Shop Retro Poshak oversized T-shirts and shirts — Indian nostalgia reimagined. Pehno Yaaden." />
 
+    <!-- Theme color for browser chrome -->
+    <meta name="theme-color" content="#f4ede1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0d0c" media="(prefers-color-scheme: dark)" />
+
     <!-- Prevent flash of wrong theme — runs before paint -->
     <script>
         (function () {
@@ -15,6 +19,7 @@
                 var t = localStorage.getItem('retroPoshakTheme');
                 if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', t);
+                document.documentElement.style.colorScheme = t;
             } catch (e) { }
         })();
     </script>
@@ -27,12 +32,16 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/theme.css" />
-    <!-- Shop-specific cinematic styles -->
+    <link rel="stylesheet" href="css/cinematic.css" />
+    <!-- Shop-specific editorial styles -->
     <link rel="stylesheet" href="css/shop.css" />
 </head>
 
 <body class="no-js">
     <script>document.body.classList.remove('no-js');</script>
+
+    <!-- Skip link -->
+    <a href="#mainContent" class="skip-link">Skip to content</a>
 
     <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
     <div class="announce-bar" aria-label="Site announcements">
@@ -58,7 +67,6 @@
 
     <header class="site-header" id="header">
         <div class="header-inner container">
-            <!-- Live logo image with SVG fallback -->
             <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
                 <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
                     class="logo-img"
@@ -124,6 +132,8 @@
         </div>
     </header>
 
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
     <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
         <div class="search-box container">
             <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
@@ -137,11 +147,11 @@
         <div class="search-results container" id="searchResults"></div>
     </div>
 
-    <main>
+    <main id="mainContent">
         <!-- ===== PAGE HERO ===== -->
         <section class="page-hero">
             <div class="container">
-                <span class="eyebrow">The Collection</span>
+                <span class="eyebrow center">The Collection</span>
                 <h1 class="page-title">Shop <em>Memories.</em></h1>
                 <p class="page-sub">Every piece tells a story you already know.</p>
             </div>
@@ -154,7 +164,7 @@
                 <aside class="shop-sidebar" id="shopSidebar" aria-label="Filters">
                     <div class="filter-head">
                         <h2>Filters</h2>
-                        <button class="icon-btn" id="filterClose" aria-label="Close filters">
+                        <button class="icon-btn" id="filterClose" aria-label="Close filters" type="button">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
                                 <path d="M18 6L6 18M6 6l12 12" />
@@ -162,14 +172,14 @@
                         </button>
                     </div>
 
-                    <div class="filter-group">
+                    <div class="filter-group" data-group="category">
                         <h3>Category</h3>
                         <label><input type="radio" name="category" value="all" checked /> All</label>
                         <label><input type="radio" name="category" value="oversized-tshirt" /> Oversized T-Shirts</label>
                         <label><input type="radio" name="category" value="shirt" /> Shirts</label>
                     </div>
 
-                    <div class="filter-group">
+                    <div class="filter-group" data-group="story">
                         <h3>Story</h3>
                         <div class="chips" id="storyChips">
                             <button type="button" class="chip" data-story="school-days">School Days</button>
@@ -181,7 +191,7 @@
                         </div>
                     </div>
 
-                    <div class="filter-group">
+                    <div class="filter-group" data-group="size">
                         <h3>Size</h3>
                         <div class="chips" id="sizeChips">
                             <button type="button" class="chip" data-size="S">S</button>
@@ -192,7 +202,7 @@
                         </div>
                     </div>
 
-                    <div class="filter-group">
+                    <div class="filter-group" data-group="color">
                         <h3>Color</h3>
                         <div class="chips" id="colorChips">
                             <button type="button" class="chip" data-color="Beige">Beige</button>
@@ -202,25 +212,27 @@
                         </div>
                     </div>
 
-                    <div class="filter-group">
+                    <div class="filter-group" data-group="price">
                         <h3>Price</h3>
                         <input type="range" id="priceRange" min="999" max="2999" value="2999" step="100" />
                         <p class="price-label">Up to ₹<span id="priceValue">2999</span></p>
                     </div>
 
-                    <div class="filter-group">
+                    <div class="filter-group" data-group="availability">
                         <h3>Availability</h3>
                         <label><input type="checkbox" id="inStockOnly" /> In stock only</label>
                     </div>
 
-                    <button class="btn btn-outline full" id="clearFilters">Clear Filters</button>
+                    <button class="btn btn-outline full" id="clearFilters" type="button">Clear Filters</button>
                 </aside>
 
                 <!-- PRODUCTS -->
                 <div class="shop-main">
                     <div class="shop-toolbar">
-                        <button class="btn btn-outline filter-open-btn" id="filterOpen">Filters</button>
-                        <p class="result-count" id="resultCount">— products</p>
+                        <button class="btn btn-outline filter-open-btn" id="filterOpen" type="button">
+                            Filters
+                        </button>
+                        <p class="result-count" id="resultCount">— pieces</p>
                         <label class="sort-wrap">
                             <span>Sort by</span>
                             <select id="sortSelect" aria-label="Sort products">
@@ -283,7 +295,7 @@
             <div class="footer-col">
                 <h4>Follow</h4>
                 <ul>
-                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==">Instagram</a></li>
+                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==" target="_blank" rel="noopener">Instagram</a></li>
                     <li><a href="#">Facebook</a></li>
                     <li><a href="#">Pinterest</a></li>
                     <li><a href="#">YouTube</a></li>
@@ -305,7 +317,6 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <!-- Floating WhatsApp -->
     <a href="#" class="wa-float" aria-label="Chat on WhatsApp">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path
@@ -313,7 +324,6 @@
         </svg>
     </a>
 
-    <!-- Scripts: order matters -->
     <script src="js/theme.js"></script>
     <script src="js/products.js"></script>
     <script src="js/auth.js"></script>
@@ -341,6 +351,17 @@
             const sidebar = document.getElementById('shopSidebar');
             const categoryRadios = document.querySelectorAll('input[name="category"]');
 
+            if (!grid) return;
+
+            /* ---------- Backdrop (create if not in DOM) ---------- */
+            let backdrop = document.querySelector('.drawer-backdrop');
+            if (!backdrop) {
+                backdrop = document.createElement('div');
+                backdrop.className = 'drawer-backdrop';
+                backdrop.setAttribute('aria-hidden', 'true');
+                document.body.appendChild(backdrop);
+            }
+
             /* ---------- State ---------- */
             const state = {
                 category: 'all',
@@ -356,7 +377,7 @@
             const params = new URLSearchParams(window.location.search);
             const urlCategory = params.get('category');
             const urlCollection = params.get('collection');
-            const urlFilter = params.get('filter');   // 'new' | 'bestseller'
+            const urlFilter = params.get('filter');
             const urlQ = params.get('q');
 
             if (urlCategory) {
@@ -441,40 +462,35 @@
                 return list;
             }
 
-            /* ---------- Card markup ---------- */
-            function renderProductCard(p, i) {
+            /* ---------- Card markup (uses shared renderer if available) ---------- */
+            function cardHTML(p, i) {
+                // Prefer the shared renderer from products.js
+                if (typeof renderProductCard === 'function') {
+                    return renderProductCard(p, i);
+                }
+
+                // Fallback: inline renderer (matches products.js output)
                 const soldOut = isSoldOut(p);
                 const save = getSave(p);
                 const index = String(i + 1).padStart(2, '0');
 
-                // Badge
                 let badgeHTML = '';
-                if (p.badge === 'bestseller') {
-                    badgeHTML = `<span class="product-badge">Bestseller</span>`;
-                } else if (p.badge === 'new') {
-                    badgeHTML = `<span class="product-badge badge-new">New</span>`;
-                } else if (save > 0) {
-                    badgeHTML = `<span class="product-badge badge-sale">Sale</span>`;
-                }
+                if (p.badge === 'bestseller') badgeHTML = `<span class="product-badge">Bestseller</span>`;
+                else if (p.badge === 'new')  badgeHTML = `<span class="product-badge badge-new">New</span>`;
+                else if (save > 0)            badgeHTML = `<span class="product-badge badge-sale">Sale</span>`;
 
-                // Second image
                 const secondImg = p.image2
-                    ? `<img src="${p.image2}" alt="" aria-hidden="true" loading="lazy">`
-                    : '';
+                    ? `<img src="${p.image2}" alt="" aria-hidden="true" loading="lazy">` : '';
 
-                // Swatches from colorHex
                 const swatches = p.colors.map(c => {
                     const hex = (p.colorHex && p.colorHex[c]) || '#ccc';
                     return `<span class="swatch" style="background:${hex}" title="${c}"></span>`;
                 }).join('');
 
-                // Price row
                 const compareHTML = p.compareAt && p.compareAt > p.price
-                    ? `<span class="product-compare">${formatPrice(p.compareAt)}</span>`
-                    : '';
+                    ? `<span class="product-compare">${formatPrice(p.compareAt)}</span>` : '';
                 const saveHTML = save > 0
-                    ? `<span class="product-save">Save ${formatPrice(save)}</span>`
-                    : '';
+                    ? `<span class="product-save">Save ${formatPrice(save)}</span>` : '';
 
                 return `
                 <article class="product-card${soldOut ? ' is-sold-out' : ''}" data-id="${p.id}">
@@ -514,75 +530,49 @@
                 </article>`;
             }
 
-            /* ---------- Render ---------- */
-            function render() {
-                const list = getFiltered();
-                resultCount.textContent = `${list.length} ${list.length === 1 ? 'piece' : 'pieces'}`;
-
-                if (!list.length) {
-                    grid.innerHTML = '';
-                    noResults.hidden = false;
+            /* ---------- Bind card events (uses shared if available) ---------- */
+            function bindCards() {
+                if (typeof bindProductCardEvents === 'function') {
+                    bindProductCardEvents(grid);
                     return;
                 }
-                noResults.hidden = true;
-                grid.innerHTML = list.map((p, i) => renderProductCard(p, i)).join('');
-                bindProductCardEvents();
-            }
 
-            /* ---------- Wishlist (simple localStorage) ---------- */
-            const WISHLIST_KEY = 'retroPoshakWishlist';
-            const readWishlist = () => {
-                try { return JSON.parse(localStorage.getItem(WISHLIST_KEY) || '[]'); }
-                catch { return []; }
-            };
-            const writeWishlist = (arr) => {
-                try { localStorage.setItem(WISHLIST_KEY, JSON.stringify(arr)); } catch { }
-            };
-
-            function bindProductCardEvents() {
+                // Fallback (matches products.js behavior)
+                const WISHLIST_KEY = 'retroPoshakWishlist';
+                const readWishlist = () => {
+                    try { return JSON.parse(localStorage.getItem(WISHLIST_KEY) || '[]'); } catch { return []; }
+                };
+                const writeWishlist = (arr) => {
+                    try { localStorage.setItem(WISHLIST_KEY, JSON.stringify(arr)); } catch { }
+                };
                 const wishlist = new Set(readWishlist());
 
-                // Mark already-wishlisted
                 grid.querySelectorAll('.wishlist-btn').forEach(btn => {
                     const id = Number(btn.dataset.id);
                     if (wishlist.has(id)) btn.classList.add('is-active');
-                });
-
-                // Wishlist click
-                grid.querySelectorAll('.wishlist-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
-                        const id = Number(btn.dataset.id);
                         const list = new Set(readWishlist());
-                        if (list.has(id)) {
-                            list.delete(id);
-                            btn.classList.remove('is-active');
-                        } else {
-                            list.add(id);
-                            btn.classList.add('is-active');
-                        }
+                        if (list.has(id)) { list.delete(id); btn.classList.remove('is-active'); }
+                        else              { list.add(id);    btn.classList.add('is-active'); }
                         writeWishlist([...list]);
                         const count = document.getElementById('wishlistCount');
                         if (count) count.textContent = list.size;
                     });
                 });
 
-                // Add to Memories
                 grid.querySelectorAll('.add-cart-btn').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const id = Number(btn.dataset.id);
                         const product = getProductById(id);
                         if (!product) return;
-
-                        // Delegate to Cart module if present
                         if (window.Cart && typeof window.Cart.add === 'function') {
-                            try {
-                                window.Cart.add(id, product.colors[0], product.sizes[2], 1);
-                            } catch (err) {
-                                console.warn('Cart.add failed:', err);
-                            }
+                            try { window.Cart.add(id, product.colors[0], product.sizes[2], 1); }
+                            catch (err) { console.warn('Cart.add failed:', err); }
+                        } else if (window.RetroCart && typeof window.RetroCart.addToCart === 'function') {
+                            try { window.RetroCart.addToCart(id, product.sizes[2], product.colors[0], 1); }
+                            catch (err) { console.warn('RetroCart.addToCart failed:', err); }
                         } else {
-                            // Fallback: toast
                             const toast = document.getElementById('toast');
                             if (toast) {
                                 toast.textContent = `${product.name} added to your memories.`;
@@ -594,6 +584,25 @@
                 });
             }
 
+            /* ---------- Render ---------- */
+            function render() {
+                const list = getFiltered();
+                resultCount.textContent = `${list.length} ${list.length === 1 ? 'piece' : 'pieces'}`;
+
+                if (!list.length) {
+                    grid.innerHTML = '';
+                    noResults.hidden = false;
+                    return;
+                }
+                noResults.hidden = true;
+
+                // Add sparse class for 1–3 items so grid centers nicely
+                grid.classList.toggle('is-sparse', list.length <= 4 && list.length >= 2);
+
+                grid.innerHTML = list.map((p, i) => cardHTML(p, i)).join('');
+                bindCards();
+            }
+
             /* ---------- Filter events ---------- */
             categoryRadios.forEach(r => {
                 r.addEventListener('change', () => {
@@ -602,7 +611,7 @@
                 });
             });
 
-            sizeChips.addEventListener('click', (e) => {
+            sizeChips?.addEventListener('click', (e) => {
                 const chip = e.target.closest('.chip');
                 if (!chip) return;
                 const s = chip.dataset.size;
@@ -611,7 +620,7 @@
                 render();
             });
 
-            colorChips.addEventListener('click', (e) => {
+            colorChips?.addEventListener('click', (e) => {
                 const chip = e.target.closest('.chip');
                 if (!chip) return;
                 const c = chip.dataset.color;
@@ -629,18 +638,18 @@
                 render();
             });
 
-            priceRange.addEventListener('input', () => {
+            priceRange?.addEventListener('input', () => {
                 state.maxPrice = Number(priceRange.value);
                 priceValue.textContent = state.maxPrice;
                 render();
             });
 
-            inStockOnly.addEventListener('change', () => {
+            inStockOnly?.addEventListener('change', () => {
                 state.inStockOnly = inStockOnly.checked;
                 render();
             });
 
-            sortSelect.addEventListener('change', () => {
+            sortSelect?.addEventListener('change', () => {
                 state.sort = sortSelect.value;
                 render();
             });
@@ -655,30 +664,68 @@
                 state.sort = 'featured';
 
                 categoryRadios.forEach(r => { r.checked = r.value === 'all'; });
-                sizeChips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-                colorChips.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                sizeChips?.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                colorChips?.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
                 storyChips?.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
-                priceRange.value = 2999;
-                priceValue.textContent = 2999;
-                inStockOnly.checked = false;
-                sortSelect.value = 'featured';
+                if (priceRange) priceRange.value = 2999;
+                if (priceValue) priceValue.textContent = 2999;
+                if (inStockOnly) inStockOnly.checked = false;
+                if (sortSelect) sortSelect.value = 'featured';
 
-                // Also clear URL params for a fresh start
                 if (urlCollection || urlFilter || urlQ) {
-                    const clean = window.location.pathname;
-                    window.history.replaceState({}, '', clean);
+                    window.history.replaceState({}, '', window.location.pathname);
                 }
                 render();
             }
 
-            clearBtn.addEventListener('click', resetFilters);
+            clearBtn?.addEventListener('click', resetFilters);
             noResultsClear?.addEventListener('click', resetFilters);
 
-            /* Mobile filter drawer */
-            filterOpen?.addEventListener('click', () => sidebar.classList.add('drawer-open'));
-            filterClose?.addEventListener('click', () => sidebar.classList.remove('drawer-open'));
+            /* ---------- Mobile filter drawer ---------- */
+            function openDrawer() {
+                sidebar?.classList.add('drawer-open');
+                backdrop?.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+                // Move focus to the first interactive element in drawer
+                setTimeout(() => {
+                    const first = sidebar?.querySelector('button, input, [tabindex]');
+                    first?.focus?.();
+                }, 250);
+            }
+            function closeDrawer() {
+                sidebar?.classList.remove('drawer-open');
+                backdrop?.classList.remove('is-open');
+                document.body.style.overflow = '';
+                filterOpen?.focus?.();
+            }
 
-            /* Initial paint */
+            filterOpen?.addEventListener('click', openDrawer);
+            filterClose?.addEventListener('click', closeDrawer);
+            backdrop?.addEventListener('click', closeDrawer);
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && sidebar?.classList.contains('drawer-open')) {
+                    closeDrawer();
+                }
+            });
+
+            /* ---------- Active filter indicator dots ---------- */
+            function markActiveGroups() {
+                document.querySelectorAll('.filter-group').forEach(g => {
+                    const hasChip = !!g.querySelector('.chip.active');
+                    const hasCheck = !!g.querySelector('input:checked:not([value="all"])');
+                    g.classList.toggle('has-active', hasChip || hasCheck);
+                });
+            }
+
+            // Wrap render so active-group markers update every time
+            const _render = render;
+            render = function () {
+                _render();
+                markActiveGroups();
+            };
+
+            /* ---------- Initial paint ---------- */
             render();
         });
     </script>

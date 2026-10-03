@@ -8,6 +8,10 @@
     <meta name="description"
         content="Why Retro Poshak? Founded by Urvashi Naik, we turn Indian memories into contemporary clothing." />
 
+    <!-- Theme color for browser chrome -->
+    <meta name="theme-color" content="#f4ede1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0d0c" media="(prefers-color-scheme: dark)" />
+
     <!-- Prevent flash of wrong theme (runs before paint) -->
     <script>
         (function () {
@@ -15,6 +19,7 @@
                 var t = localStorage.getItem('retroPoshakTheme');
                 if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 document.documentElement.setAttribute('data-theme', t);
+                document.documentElement.style.colorScheme = t;
             } catch (e) { }
         })();
     </script>
@@ -27,12 +32,16 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/cinematic.css" />
     <!-- About-page editorial styles -->
     <link rel="stylesheet" href="css/about.css" />
 </head>
 
 <body class="no-js">
     <script>document.body.classList.remove('no-js');</script>
+
+    <!-- Skip link -->
+    <a href="#mainContent" class="skip-link">Skip to content</a>
 
     <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
     <div class="announce-bar" aria-label="Site announcements">
@@ -76,7 +85,7 @@
             </nav>
 
             <div class="header-actions">
-                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme" type="button">
                     <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2">
                         <circle cx="12" cy="12" r="4" />
@@ -89,7 +98,7 @@
                     </svg>
                 </button>
 
-                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
+                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search" type="button">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="7" />
                         <path d="M21 21l-4.35-4.35" />
@@ -116,18 +125,20 @@
                     <span class="badge cart-count" id="cartCount">0</span>
                 </a>
 
-                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" type="button">
                     <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </header>
 
+    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+
     <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
         <div class="search-box container">
             <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
                 aria-label="Search products" />
-            <button class="icon-btn" id="searchClose" aria-label="Close search">
+            <button class="icon-btn" id="searchClose" aria-label="Close search" type="button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -136,14 +147,14 @@
         <div class="search-results container" id="searchResults"></div>
     </div>
 
-    <main>
+    <main id="mainContent">
         <!-- ===== HERO ===== -->
         <section class="about-hero">
             <div class="container about-hero-inner">
                 <span class="about-hero-eyebrow">
-                    <span class="rule"></span>
+                    <span class="rule" aria-hidden="true"></span>
                     Our Story · Est. 2025
-                    <span class="rule"></span>
+                    <span class="rule" aria-hidden="true"></span>
                 </span>
                 <h1 class="about-hero-title">
                     Why <em>Retro&nbsp;Poshak?</em>
@@ -151,7 +162,7 @@
                 <p class="about-hero-sub">
                     Because some things deserve to be worn, not just remembered.
                 </p>
-                <a href="#chapter-01" class="about-hero-scroll" aria-label="Read our story">
+                <a href="#chapter-01" class="about-hero-scroll" aria-label="Scroll to read our story">
                     <span>Read the story</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" aria-hidden="true">
@@ -159,12 +170,12 @@
                     </svg>
                 </a>
             </div>
-            <span class="about-hero-ornament top-left">✦</span>
-            <span class="about-hero-ornament bottom-right">✦</span>
+            <span class="about-hero-ornament top-left" aria-hidden="true">✦</span>
+            <span class="about-hero-ornament bottom-right" aria-hidden="true">✦</span>
         </section>
 
         <!-- ===== CHAPTER RIBBON ===== -->
-        <section class="chapter-ribbon" aria-label="Story chapters">
+        <nav class="chapter-ribbon" aria-label="Story chapters">
             <div class="container chapter-ribbon-inner">
                 <a href="#chapter-01" class="chapter-link">
                     <span class="chapter-num">01</span>
@@ -181,10 +192,10 @@
                     <span class="chapter-label">The Feeling</span>
                 </a>
             </div>
-        </section>
+        </nav>
 
         <!-- ===== CHAPTER 01 — THE IDEA ===== -->
-        <section class="chapter" id="chapter-01">
+        <section class="chapter" id="chapter-01" aria-labelledby="chapterTitle01">
             <div class="container chapter-inner">
                 <div class="chapter-image reveal">
                     <div class="chapter-image-frame">
@@ -196,7 +207,7 @@
                 </div>
                 <div class="chapter-text reveal">
                     <span class="chapter-kicker">Chapter 01</span>
-                    <h2 class="chapter-title">The <em>Idea.</em></h2>
+                    <h2 class="chapter-title" id="chapterTitle01">The <em>Idea.</em></h2>
                     <p>Memories are the inspiration. Every Retro Poshak piece begins with a small, specific
                         moment — a bicycle bell at 7am, a gola cart in May, a deck of cards on a terrace at dusk.</p>
                     <p class="chapter-quote">"Not every memory needs a photograph. Some just need a print."</p>
@@ -205,7 +216,7 @@
         </section>
 
         <!-- ===== CHAPTER 02 — THE DESIGN (reversed) ===== -->
-        <section class="chapter alt" id="chapter-02">
+        <section class="chapter alt" id="chapter-02" aria-labelledby="chapterTitle02">
             <div class="container chapter-inner reverse">
                 <div class="chapter-image reveal">
                     <div class="chapter-image-frame">
@@ -217,7 +228,7 @@
                 </div>
                 <div class="chapter-text reveal">
                     <span class="chapter-kicker">Chapter 02</span>
-                    <h2 class="chapter-title">The <em>Design.</em></h2>
+                    <h2 class="chapter-title" id="chapterTitle02">The <em>Design.</em></h2>
                     <p>Retro references are transformed into modern apparel graphics. We sketch, we distort, we
                         simplify — until a memory becomes a wearable mark. Oversized cuts, heavyweight cotton,
                         DTF prints.</p>
@@ -231,7 +242,7 @@
         </section>
 
         <!-- ===== CHAPTER 03 — THE FEELING ===== -->
-        <section class="chapter" id="chapter-03">
+        <section class="chapter" id="chapter-03" aria-labelledby="chapterTitle03">
             <div class="container chapter-inner">
                 <div class="chapter-image reveal">
                     <div class="chapter-image-frame">
@@ -243,7 +254,7 @@
                 </div>
                 <div class="chapter-text reveal">
                     <span class="chapter-kicker">Chapter 03</span>
-                    <h2 class="chapter-title">The <em>Feeling.</em></h2>
+                    <h2 class="chapter-title" id="chapterTitle03">The <em>Feeling.</em></h2>
                     <p>Every piece should feel personal, nostalgic and wearable. If someone asks "where is that
                         from?", you should want to tell them the story.</p>
                     <p class="chapter-quote">"Pehno Yaaden — wear your memories."</p>
@@ -252,35 +263,35 @@
         </section>
 
         <!-- ===== BELIEFS ===== -->
-        <section class="beliefs">
+        <section class="beliefs" aria-labelledby="beliefsTitle">
             <div class="container">
                 <header class="beliefs-head">
                     <span class="eyebrow center">What We Stand For</span>
-                    <h2 class="section-title center">Small Things, Kept.</h2>
+                    <h2 class="section-title center" id="beliefsTitle">Small Things, Kept.</h2>
                     <p class="section-sub center">Four beliefs we design by.</p>
                 </header>
                 <div class="beliefs-grid">
                     <article class="belief-card reveal">
-                        <span class="belief-num">01</span>
-                        <span class="belief-icon">✎</span>
+                        <span class="belief-num" aria-hidden="true">01</span>
+                        <span class="belief-icon" aria-hidden="true">✎</span>
                         <h3>Story first</h3>
                         <p>Every print starts with a real moment — never a mood board.</p>
                     </article>
                     <article class="belief-card reveal">
-                        <span class="belief-num">02</span>
-                        <span class="belief-icon">◈</span>
+                        <span class="belief-num" aria-hidden="true">02</span>
+                        <span class="belief-icon" aria-hidden="true">◈</span>
                         <h3>Fabric that lasts</h3>
                         <p>240 GSM cotton terry, built for daily wear and years of memory.</p>
                     </article>
                     <article class="belief-card reveal">
-                        <span class="belief-num">03</span>
-                        <span class="belief-icon">◐</span>
+                        <span class="belief-num" aria-hidden="true">03</span>
+                        <span class="belief-icon" aria-hidden="true">◐</span>
                         <h3>Fit over fast</h3>
                         <p>Oversized, drop-shoulder cuts designed for comfort, not trends.</p>
                     </article>
                     <article class="belief-card reveal">
-                        <span class="belief-num">04</span>
-                        <span class="belief-icon">❤</span>
+                        <span class="belief-num" aria-hidden="true">04</span>
+                        <span class="belief-icon" aria-hidden="true">❤</span>
                         <h3>Made with care</h3>
                         <p>Small-batch drops. Slow fashion rhythms. Every order hand-packed.</p>
                     </article>
@@ -289,7 +300,7 @@
         </section>
 
         <!-- ===== PULL QUOTE ===== -->
-        <section class="pull-quote">
+        <section class="pull-quote" aria-label="Brand quote">
             <div class="container">
                 <blockquote class="pull-quote-inner reveal">
                     <span class="pull-quote-mark" aria-hidden="true">"</span>
@@ -301,27 +312,27 @@
         </section>
 
         <!-- ===== TIMELINE ===== -->
-        <section class="timeline">
+        <section class="timeline" aria-labelledby="timelineTitle">
             <div class="container">
                 <header class="timeline-head">
                     <span class="eyebrow center">Milestones</span>
-                    <h2 class="section-title center">A Short Walk.</h2>
+                    <h2 class="section-title center" id="timelineTitle">A Short Walk.</h2>
                 </header>
                 <div class="timeline-track">
                     <div class="timeline-item reveal">
-                        <span class="timeline-dot"></span>
-                        <span class="timeline-year">2024</span>
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <time class="timeline-year" datetime="2024">2024</time>
                         <h4>The first sketch</h4>
                         <p>A notebook, a memory, and a stubborn idea that wouldn't leave.</p>
                     </div>
                     <div class="timeline-item reveal">
-                        <span class="timeline-dot"></span>
-                        <span class="timeline-year">2025</span>
+                        <span class="timeline-dot" aria-hidden="true"></span>
+                        <time class="timeline-year" datetime="2025">2025</time>
                         <h4>First drop</h4>
                         <p>Four designs. Four stories. Thirty pieces each, hand-packed.</p>
                     </div>
                     <div class="timeline-item reveal">
-                        <span class="timeline-dot"></span>
+                        <span class="timeline-dot" aria-hidden="true"></span>
                         <span class="timeline-year">Now</span>
                         <h4>Worn in the wild</h4>
                         <p>Your stories are being lived in — schools, terraces, tapris, everywhere.</p>
@@ -331,7 +342,7 @@
         </section>
 
         <!-- ===== FOUNDER ===== -->
-        <section class="founder" id="founder">
+        <section class="founder" id="founder" aria-labelledby="founderTitle">
             <div class="container founder-inner">
                 <div class="founder-image reveal">
                     <div class="founder-image-frame">
@@ -343,8 +354,8 @@
                 </div>
                 <div class="founder-text reveal">
                     <span class="eyebrow">Meet the Founder</span>
-                    <h2 class="founder-name">Urvashi Naik</h2>
-                    <p class="founder-role">Founder & Creative Director</p>
+                    <h2 class="founder-name" id="founderTitle">Urvashi Naik</h2>
+                    <p class="founder-role">Founder &amp; Creative Director</p>
                     <p>Retro Poshak was created to transform personal and cultural memories into contemporary
                         clothing. Urvashi grew up surrounded by the small textures of Indian life — and wanted
                         to bottle them, not on a shelf, but on a sleeve.</p>
@@ -394,7 +405,7 @@
                     <li><a href="contact.html">Contact Us</a></li>
                     <li><a href="#">FAQs</a></li>
                     <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Returns &amp; Exchanges</a></li>
                     <li><a href="#">Size Guide</a></li>
                 </ul>
             </div>
@@ -404,13 +415,14 @@
                     <li><a href="about.html">Our Story</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Terms &amp; Conditions</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Follow</h4>
                 <ul>
-                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==">Instagram</a></li>
+                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==" target="_blank"
+                            rel="noopener">Instagram</a></li>
                     <li><a href="#">Facebook</a></li>
                     <li><a href="#">Pinterest</a></li>
                     <li><a href="#">YouTube</a></li>
@@ -446,6 +458,30 @@
     <script src="js/auth.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
+
+    <!-- Reveal on scroll for .reveal elements -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            if (!reveals.length) return;
+
+            if (!('IntersectionObserver' in window)) {
+                reveals.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            reveals.forEach(el => io.observe(el));
+        });
+    </script>
 </body>
 
 </html>
