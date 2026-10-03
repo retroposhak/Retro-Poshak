@@ -1,11 +1,11 @@
 /* =========================================================
-   RETRO POSHAK — Shop Page (Editorial Edition v2)
+   RETRO POSHAK — Shop Page (Editorial Edition v3)
    Load ONLY on shop.html
-   Depends on: style.css, responsive.css, theme.css
+   Depends on: style.css, responsive.css, theme.css, cinematic.css
 
-   NOTE: header, logo, and page-hero base styles are defined
-   in style.css. This file extends them with shop-specific
-   editorial overrides only.
+   NOTE: header, logo, page-hero base, and footer styles are
+   defined in style.css. This file extends them with shop-
+   specific editorial overrides only.
    ========================================================= */
 
 /* =========================================================
@@ -23,6 +23,14 @@
   background-size: 200% 200%;
   animation: shopTitleGradient 6s ease-in-out infinite;
 }
+html[data-theme="dark"] .page-hero .page-title em {
+  background: linear-gradient(135deg, #f0b69a 0%, #d97a58 50%, #b5593a 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+}
 @keyframes shopTitleGradient {
   0%, 100% { background-position: 0% 50%; }
   50%      { background-position: 100% 50%; }
@@ -38,12 +46,21 @@
   letter-spacing: 0.40em;
   margin: 0 0 24px;
 }
+.page-hero .eyebrow.center {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
 .page-hero .eyebrow::before,
 .page-hero .eyebrow::after {
   width: 44px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--rust), transparent);
   opacity: 0.8;
+}
+.page-hero .eyebrow.center::before,
+.page-hero .eyebrow.center::after {
+  width: 44px;
 }
 
 /* =========================================================
@@ -153,6 +170,11 @@ html[data-theme="dark"] .shop-sidebar::-webkit-scrollbar-thumb {
   border-radius: 50%;
   background: var(--rust);
   margin-left: 4px;
+  animation: activeDotPulse 2.4s ease-in-out infinite;
+}
+@keyframes activeDotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.5; transform: scale(0.85); }
 }
 
 /* Labels */
@@ -489,7 +511,8 @@ html[data-theme="dark"] .shop-main .product-card:hover .product-media {
 .shop-main .product-card:hover .product-media::after { opacity: 1; }
 
 /* ---------- BADGE ---------- */
-.shop-main .product-badge {
+.shop-main .product-badge,
+.shop-main .badge-tag {
   position: absolute;
   top: 12px;
   left: 12px;
@@ -507,16 +530,29 @@ html[data-theme="dark"] .shop-main .product-card:hover .product-media {
   transform: translateY(0);
   transition: transform .4s var(--ease);
 }
-.shop-main .product-card:hover .product-badge {
+.shop-main .product-card:hover .product-badge,
+.shop-main .product-card:hover .badge-tag {
   transform: translateY(-2px) rotate(-1.5deg);
 }
-.shop-main .product-badge.badge-new {
+.shop-main .product-badge.badge-new,
+.shop-main .badge-tag.new {
   background: var(--sage, #7a8b5c);
   color: var(--ink-on-sage, #ffffff);
 }
-.shop-main .product-badge.badge-sale {
+.shop-main .product-badge.badge-sale,
+.shop-main .badge-tag.sale {
   background: var(--rust);
   color: var(--ink-on-rust, #ffffff);
+}
+html[data-theme="dark"] .shop-main .product-badge.badge-new,
+html[data-theme="dark"] .shop-main .badge-tag.new {
+  background: var(--sage, #99a98a);
+  color: #131110;
+}
+html[data-theme="dark"] .shop-main .product-badge.badge-sale,
+html[data-theme="dark"] .shop-main .badge-tag.sale {
+  background: var(--rust, #d97a58);
+  color: #131110;
 }
 
 /* ---------- WISHLIST ---------- */
@@ -564,7 +600,7 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn {
 html[data-theme="dark"] .shop-main .product-card .wishlist-btn:hover,
 html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
   background: var(--rust);
-  color: var(--ink-on-rust);
+  color: #131110;
 }
 
 /* ---------- INFO BLOCK ---------- */
@@ -668,7 +704,6 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
   transition: transform .25s var(--ease);
 }
 .shop-main .product-card:hover .product-swatches .swatch { transform: scale(1.1); }
-/* Stagger swatch pop */
 .shop-main .product-card:hover .product-swatches .swatch:nth-child(1) { transition-delay: 0s; }
 .shop-main .product-card:hover .product-swatches .swatch:nth-child(2) { transition-delay: .04s; }
 .shop-main .product-card:hover .product-swatches .swatch:nth-child(3) { transition-delay: .08s; }
@@ -738,6 +773,9 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
   background: rgba(30, 22, 16, 0.55);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
+}
+html[data-theme="dark"] .shop-main .product-card.is-sold-out .product-media::before {
+  background: rgba(0, 0, 0, 0.65);
 }
 
 /* ---------- PRODUCT INDEX ---------- */
@@ -819,28 +857,28 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
 }
 
 /* =========================================================
-   9. MOBILE FILTER DRAWER
+   9. MOBILE FILTER DRAWER — backdrop always defined
    ========================================================= */
+.drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 14, 10, 0.45);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: calc(var(--z-drawer, 200) - 1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s var(--ease);
+}
+.drawer-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 @media (max-width: 900px) {
   .shop-layout {
     grid-template-columns: 1fr;
     gap: 0;
-  }
-
-  .drawer-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(20, 14, 10, 0.45);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    z-index: calc(var(--z-drawer, 200) - 1);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .4s var(--ease);
-  }
-  .drawer-backdrop.is-open {
-    opacity: 1;
-    pointer-events: auto;
   }
 
   .shop-sidebar {
@@ -850,7 +888,7 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
     width: min(85vw, 340px);
     height: 100vh;
     max-height: 100vh;
-    padding: 28px 22px 120px;
+    padding: 28px 22px calc(120px + env(safe-area-inset-bottom, 0px));
     border-radius: 0;
     border-right: 1px solid var(--line-strong);
     border-top: 0;
@@ -876,6 +914,11 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
     letter-spacing: 0.20em;
   }
   .shop-toolbar { padding: 18px 0 20px; }
+
+  /* Prevent background scroll while drawer is open */
+  body:has(.shop-sidebar.drawer-open) {
+    overflow: hidden;
+  }
 }
 
 /* =========================================================
@@ -1001,7 +1044,8 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
   .shop-main .add-cart-btn::before,
   .chip,
   .filter-group label,
-  .sort-wrap select {
+  .sort-wrap select,
+  .filter-group.has-active h3::after {
     transition: none !important;
     transform: none !important;
     animation: none !important;
@@ -1021,7 +1065,9 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
   .wa-float,
   .toast,
   .drawer-backdrop,
+  .nav-backdrop,
   .product-badge,
+  .badge-tag,
   .wishlist-btn,
   .product-index,
   .add-cart-btn {
@@ -1036,6 +1082,7 @@ html[data-theme="dark"] .shop-main .product-card .wishlist-btn.is-active {
     opacity: 1 !important;
     animation: none !important;
     break-inside: avoid;
+    page-break-inside: avoid;
   }
   .shop-main .product-media { box-shadow: none; }
 }
