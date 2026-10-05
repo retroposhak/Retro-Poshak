@@ -1,0 +1,676 @@
+/* ============================================
+   OUR STORY PAGE — MATCHING REFERENCE
+   ============================================ */
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.story-hero {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    min-height: 88vh;
+    background-color: #f5f0e8;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ============================================
+   LEFT: CONTENT
+   ============================================ */
+.story-hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+    z-index: 2;
+    animation: storyFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes storyFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.story-eyebrow {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #b33a3a;
+    font-weight: 600;
+    margin-bottom: 24px;
+    font-family: var(--font-body);
+    animation: eyebrowFade 0.8s 0.2s ease backwards;
+}
+
+@keyframes eyebrowFade {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.story-heading {
+    font-family: var(--font-serif);
+    font-size: 4.2rem;
+    font-weight: 500;
+    line-height: 1.02;
+    color: #1a1a1a;
+    margin: 0 0 12px 0;
+    letter-spacing: -1.5px;
+    animation: headingFade 1s 0.3s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes headingFade {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.story-script {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.8rem;
+    font-weight: 500;
+    color: #b33a3a;
+    margin: 0 0 40px 0;
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    padding-bottom: 8px;
+    animation: scriptFade 1s 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes scriptFade {
+    from { opacity: 0; transform: translateY(15px) rotate(-2deg); }
+    to { opacity: 1; transform: translateY(0) rotate(0); }
+}
+
+/* Wavy underline for script text */
+.story-script::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 8px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'><path d='M0,4 Q12.5,0 25,4 T50,4 T75,4 T100,4' stroke='%23b33a3a' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.9;
+    animation: underlineDraw 1.2s 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    transform-origin: left;
+}
+
+@keyframes underlineDraw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+.story-body {
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.story-body p {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: #3d3d3d;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.1px;
+    animation: bodyFade 1s 0.6s ease backwards;
+}
+
+.story-body p:nth-child(2) {
+    animation-delay: 0.75s;
+}
+
+@keyframes bodyFade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   RIGHT: IMAGE
+   ============================================ */
+.story-hero-image {
+    position: relative;
+    overflow: hidden;
+    background-color: #0d0d0d;
+}
+
+.story-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: saturate(0.92) contrast(1.05) brightness(0.98);
+    transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: imgZoom 20s ease-out infinite alternate;
+}
+
+@keyframes imgZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.06); }
+}
+
+.story-hero-image:hover img {
+    filter: saturate(1.05) contrast(1.08) brightness(1);
+}
+
+/* Soft warm vignette on the image */
+.story-hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(245, 240, 232, 0.15) 0%, transparent 8%),
+        radial-gradient(circle at 70% 50%, transparent 40%, rgba(0, 0, 0, 0.25) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ============================================
+   CURSIVE NOTE (top-right of image)
+   ============================================ */
+.story-note {
+    position: absolute;
+    top: 45px;
+    right: 45px;
+    z-index: 3;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.7rem;
+    line-height: 1.2;
+    color: #f5f0e8;
+    text-align: right;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    animation: noteSlideIn 1s 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes noteSlideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.story-note em {
+    font-style: italic;
+    color: #c9a96e;
+    display: block;
+    margin-top: 4px;
+    font-size: 1.6rem;
+}
+
+/* ============================================
+   VALUES ROW + INDIA POSTAL STAMP
+   ============================================ */
+.story-values {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    background-color: #f5f0e8;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 60px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 0;
+    align-items: center;
+}
+
+/* Vertical dividers between items */
+.value-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px 24px;
+    position: relative;
+    opacity: 0;
+    animation: valueSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.value-item:nth-child(1) { animation-delay: 0.1s; }
+.value-item:nth-child(2) { animation-delay: 0.2s; }
+.value-item:nth-child(3) { animation-delay: 0.3s; }
+.value-item:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes valueSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Thin vertical dividers */
+.value-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0, 0, 0, 0.12) 30%,
+        rgba(0, 0, 0, 0.12) 70%,
+        transparent 100%
+    );
+}
+
+.value-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    color: #1a1a1a;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s ease;
+}
+
+.value-item:hover .value-icon {
+    transform: translateY(-5px) scale(1.08);
+    color: #b33a3a;
+}
+
+.value-icon svg {
+    width: 40px;
+    height: 40px;
+    stroke-width: 1.4;
+}
+
+.value-title {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin: 0 0 4px 0;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.value-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 1.5px;
+    background: #b33a3a;
+    border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.value-item:hover .value-title::after {
+    width: 45px;
+}
+
+.value-desc {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #5a5a5a;
+    margin: 12px 0 0 0;
+    max-width: 200px;
+}
+
+/* ============================================
+   INDIA POSTAL STAMP (in values row)
+   ============================================ */
+.story-postal-stamp {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b33a3a;
+    transform: rotate(-8deg);
+    margin-left: 20px;
+    opacity: 0;
+    animation: stampAppear 1s 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+               stampFloat 7s 2s ease-in-out infinite;
+}
+
+@keyframes stampAppear {
+    from { opacity: 0; transform: rotate(-8deg) scale(0.6); }
+    to { opacity: 1; transform: rotate(-8deg) scale(1); }
+}
+
+@keyframes stampFloat {
+    0%, 100% { transform: rotate(-8deg) translateY(0); }
+    50% { transform: rotate(-6deg) translateY(-4px); }
+}
+
+.story-postal-stamp::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(179, 58, 58, 0.6);
+    box-shadow:
+        inset 0 0 0 5px rgba(179, 58, 58, 0.08),
+        inset 0 0 0 7px rgba(179, 58, 58, 0.3);
+}
+
+/* Dashed inner ring */
+.story-postal-stamp::after {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 1px dashed rgba(179, 58, 58, 0.45);
+}
+
+.stamp-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
+    gap: 2px;
+    position: relative;
+    z-index: 1;
+    color: #b33a3a;
+}
+
+.stamp-top,
+.stamp-bottom {
+    font-family: var(--font-body);
+    font-size: 0.55rem;
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #b33a3a;
+}
+
+.stamp-icon {
+    color: #b33a3a;
+    margin: 3px 0;
+    opacity: 0.85;
+}
+
+/* ============================================
+   RESPONSIVE — ULTRAWIDE (1800px+)
+   ============================================ */
+@media (min-width: 1800px) {
+    .story-hero-content { padding: 100px 80px 100px 120px; }
+    .story-heading { font-size: 5rem; }
+    .story-script { font-size: 3.4rem; }
+    .story-body p { font-size: 1.05rem; }
+    .story-body { max-width: 560px; }
+    .story-values { max-width: 1600px; }
+    .story-postal-stamp { width: 130px; height: 130px; }
+    .story-note { font-size: 2rem; }
+}
+
+/* ============================================
+   RESPONSIVE — LARGE DESKTOP (1400–1799px)
+   ============================================ */
+@media (min-width: 1400px) and (max-width: 1799px) {
+    .story-heading { font-size: 4.5rem; }
+    .story-script { font-size: 3rem; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL DESKTOP / TABLET LANDSCAPE (1024–1199px)
+   ============================================ */
+@media (max-width: 1199px) {
+    .story-hero { grid-template-columns: 1fr 1.05fr; }
+    .story-hero-content { padding: 60px 50px 60px 60px; }
+    .story-heading { font-size: 3.4rem; }
+    .story-script { font-size: 2.3rem; }
+    .story-body p { font-size: 0.9rem; }
+    .story-note { font-size: 1.4rem; top: 30px; right: 30px; }
+    .story-note em { font-size: 1.3rem; }
+    .story-postal-stamp { width: 95px; height: 95px; margin-left: 16px; }
+    .stamp-top, .stamp-bottom { font-size: 0.5rem; letter-spacing: 2.2px; }
+    .stamp-icon { width: 32px; height: 32px; }
+    .story-values { padding: 50px 30px; }
+    .value-item { padding: 10px 18px; }
+    .value-icon svg { width: 34px; height: 34px; }
+    .value-title { font-size: 0.75rem; }
+    .value-desc { font-size: 0.82rem; }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET LANDSCAPE (900–1023px)
+   ============================================ */
+@media (max-width: 1023px) {
+    .story-hero { min-height: 80vh; }
+    .story-hero-content { padding: 50px 40px; }
+    .story-heading { font-size: 2.8rem; }
+    .story-script { font-size: 2rem; margin-bottom: 30px; }
+    .story-eyebrow { font-size: 0.68rem; letter-spacing: 3px; margin-bottom: 18px; }
+    .story-body { max-width: 100%; }
+    .story-body p { font-size: 0.85rem; line-height: 1.75; }
+    .story-note { font-size: 1.2rem; top: 24px; right: 24px; }
+    .story-note em { font-size: 1.15rem; }
+
+    .story-values {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px 0;
+        padding: 50px 30px;
+    }
+
+    /* Hide the postal stamp on tablet as the grid has 2 cols */
+    .story-postal-stamp { display: none; }
+
+    .value-item:nth-child(2)::after { display: none; }
+    .value-item:nth-child(4)::after { display: none; }
+    .value-item:nth-child(1),
+    .value-item:nth-child(3) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding-bottom: 40px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET PORTRAIT (768–899px)
+   ============================================ */
+@media (max-width: 899px) {
+    .story-hero { grid-template-columns: 1fr 1fr; }
+    .story-hero-content { padding: 40px 30px; }
+    .story-heading { font-size: 2.4rem; }
+    .story-script { font-size: 1.8rem; }
+    .story-body p { font-size: 0.82rem; }
+
+    .story-values {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px 0;
+        padding: 40px 20px;
+    }
+    .value-icon svg { width: 32px; height: 32px; }
+    .value-title { font-size: 0.72rem; letter-spacing: 1.8px; }
+    .value-desc { font-size: 0.78rem; }
+}
+
+/* ============================================
+   RESPONSIVE — LARGE PHONE (600–767px)
+   — STACKED
+   ============================================ */
+@media (max-width: 767px) {
+    .story-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .story-hero-content {
+        padding: 50px 24px 40px;
+        text-align: left;
+    }
+
+    .story-eyebrow { font-size: 0.65rem; letter-spacing: 3px; margin-bottom: 16px; }
+    .story-heading { font-size: 2.5rem; margin-bottom: 8px; letter-spacing: -0.8px; }
+    .story-script { font-size: 2rem; margin-bottom: 26px; }
+    .story-body { max-width: 100%; gap: 16px; }
+    .story-body p { font-size: 0.88rem; line-height: 1.75; }
+
+    .story-hero-image { min-height: 55vh; }
+
+    .story-note {
+        font-size: 1.3rem;
+        top: 20px;
+        right: 20px;
+        max-width: 60%;
+    }
+    .story-note em { font-size: 1.2rem; }
+
+    .story-values {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 0;
+        padding: 40px 20px;
+    }
+
+    .value-item { padding: 8px 12px; }
+    .value-item::after { display: none; }
+    .value-item:not(:nth-child(2n)):not(:last-child)::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 20%;
+        height: 60%;
+        width: 1px;
+        background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.12) 30%, rgba(0,0,0,0.12) 70%, transparent);
+    }
+
+    .value-icon { width: 48px; height: 48px; margin-bottom: 14px; }
+    .value-icon svg { width: 30px; height: 30px; }
+    .value-title { font-size: 0.7rem; letter-spacing: 1.5px; }
+    .value-desc { font-size: 0.75rem; margin-top: 10px; }
+}
+
+/* ============================================
+   RESPONSIVE — STANDARD PHONE (480–599px)
+   ============================================ */
+@media (max-width: 599px) {
+    .story-hero-content { padding: 40px 20px 32px; }
+    .story-heading { font-size: 2.1rem; }
+    .story-script { font-size: 1.7rem; margin-bottom: 22px; }
+    .story-body p { font-size: 0.82rem; }
+    .story-hero-image { min-height: 48vh; }
+    .story-note { font-size: 1.1rem; }
+    .story-note em { font-size: 1.05rem; }
+
+    .story-values { padding: 32px 16px; gap: 28px 0; }
+    .value-icon svg { width: 26px; height: 26px; }
+    .value-title { font-size: 0.65rem; }
+    .value-desc { font-size: 0.7rem; line-height: 1.45; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL PHONE (360–479px)
+   ============================================ */
+@media (max-width: 479px) {
+    .story-hero-content { padding: 32px 16px 26px; }
+    .story-eyebrow { font-size: 0.58rem; letter-spacing: 2.5px; margin-bottom: 12px; }
+    .story-heading { font-size: 1.75rem; margin-bottom: 6px; }
+    .story-script { font-size: 1.5rem; margin-bottom: 20px; padding-bottom: 6px; }
+    .story-body { gap: 14px; }
+    .story-body p { font-size: 0.78rem; line-height: 1.7; }
+
+    .story-hero-image { min-height: 42vh; }
+    .story-note { font-size: 1rem; top: 14px; right: 14px; }
+    .story-note em { font-size: 0.95rem; }
+
+    .story-values { padding: 28px 12px; gap: 24px 0; }
+    .value-item { padding: 6px 6px; }
+    .value-icon { width: 40px; height: 40px; margin-bottom: 10px; }
+    .value-icon svg { width: 24px; height: 24px; }
+    .value-title { font-size: 0.6rem; letter-spacing: 1.2px; }
+    .value-title::after { width: 20px; }
+    .value-desc { font-size: 0.65rem; margin-top: 8px; }
+}
+
+/* ============================================
+   RESPONSIVE — TINY PHONE (up to 359px)
+   ============================================ */
+@media (max-width: 359px) {
+    .story-hero-content { padding: 26px 12px 22px; }
+    .story-heading { font-size: 1.5rem; }
+    .story-script { font-size: 1.3rem; }
+    .story-body p { font-size: 0.72rem; }
+
+    .story-hero-image { min-height: 38vh; }
+    .story-note { font-size: 0.9rem; }
+    .story-note em { font-size: 0.85rem; }
+
+    .story-values { gap: 22px 0; }
+    .value-icon svg { width: 20px; height: 20px; }
+    .value-title { font-size: 0.55rem; letter-spacing: 1px; }
+    .value-desc { font-size: 0.6rem; }
+}
+
+/* ============================================
+   LANDSCAPE PHONE (short viewport)
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .story-hero {
+        grid-template-columns: 1fr 1fr;
+        min-height: auto;
+    }
+
+    .story-hero-content {
+        padding: 24px 24px;
+        text-align: left;
+    }
+
+    .story-heading { font-size: 1.8rem; margin-bottom: 4px; }
+    .story-script { font-size: 1.4rem; margin-bottom: 16px; }
+    .story-body p { font-size: 0.72rem; line-height: 1.6; }
+    .story-body { gap: 10px; }
+
+    .story-hero-image { min-height: auto; height: 100%; }
+    .story-note { font-size: 0.95rem; top: 12px; right: 12px; }
+    .story-note em { font-size: 0.9rem; }
+}
+
+/* ============================================
+   TOUCH DEVICES
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+    .story-hero-image:hover img { transform: none; filter: saturate(0.92) contrast(1.05) brightness(0.98); }
+    .value-item:hover .value-icon { transform: none; color: #1a1a1a; }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .story-hero-content,
+    .story-note,
+    .story-postal-stamp,
+    .value-item,
+    .story-hero-image img,
+    .story-hero-image:hover img,
+    .value-item:hover .value-icon,
+    .story-eyebrow,
+    .story-heading,
+    .story-script,
+    .story-script::after,
+    .story-body p {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* ============================================
+   HIGH DPI DISPLAYS
+   ============================================ */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .story-postal-stamp::before {
+        border-width: 1px;
+    }
+}
