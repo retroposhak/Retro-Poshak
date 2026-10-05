@@ -1,0 +1,684 @@
+/* ============================================
+   FOOTER — MATCHING REFERENCE
+   ============================================ */
+
+.footer {
+    background-color: #1a1a1a;
+    color: #f5f0e8;
+    padding: 0;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ============================================
+   TOP STRIP: Newsletter + Polaroids
+   ============================================ */
+.footer-top {
+    background-color: #f5f0e8;
+    color: #1a1a1a;
+    padding: 40px 60px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+.footer-top-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Newsletter left column */
+.newsletter {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.newsletter-title {
+    font-family: 'Dancing Script', 'Bebas Neue', cursive;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 0.95;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.newsletter-desc {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: #5a5a5a;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 400;
+}
+
+/* Newsletter right column */
+.newsletter-actions {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0;
+    max-width: 420px;
+    width: 100%;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: transparent;
+    color: #1a1a1a;
+    font-size: 0.85rem;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.newsletter-form input::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.newsletter-form input:focus {
+    border-color: #b33a3a;
+}
+
+.newsletter-form button {
+    padding: 14px 30px;
+    background: #1a1a1a;
+    color: #f5f0e8;
+    border: none;
+    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.newsletter-form button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transition: left 0.6s ease;
+}
+
+.newsletter-form button:hover::before {
+    left: 100%;
+}
+
+.newsletter-form button:hover {
+    background: #b33a3a;
+}
+
+/* Polaroid strip */
+.newsletter-polaroids {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.polaroid {
+    background: #fdfbf7;
+    padding: 6px 6px 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.polaroid-1 {
+    transform: rotate(-6deg);
+}
+
+.polaroid-2 {
+    transform: rotate(5deg);
+}
+
+.polaroid:hover {
+    transform: rotate(0) scale(1.05);
+    z-index: 2;
+}
+
+.polaroid-img {
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%) contrast(1.05);
+}
+
+.polaroid-caption {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Dancing Script', cursive;
+    font-size: 0.7rem;
+    color: #b33a3a;
+    white-space: nowrap;
+}
+
+.polaroid-note {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    line-height: 1.1;
+    margin-left: 8px;
+    transform: rotate(-4deg);
+}
+
+/* ============================================
+   MAIN FOOTER
+   ============================================ */
+.footer-main {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr 1.4fr 1.6fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 60px 40px;
+    align-items: flex-start;
+}
+
+/* Brand column */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-logo-link {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.footer-logo-link:hover {
+    transform: scale(1.03);
+}
+
+.footer-logo {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
+}
+
+.footer-logo-link:hover .footer-logo {
+    filter: brightness(0) invert(1) sepia(1) hue-rotate(-20deg) saturate(3);
+}
+
+.footer-tagline {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    margin: 0;
+}
+
+/* ============================================
+   SOCIAL ICON — Instagram SVG
+   ============================================ */
+.footer-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+}
+
+.social-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f5f0e8;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 110%, rgba(255, 220, 128, 0.35), transparent 70%),
+                radial-gradient(circle at 70% 110%, rgba(255, 90, 120, 0.35), transparent 70%),
+                radial-gradient(circle at 50% 110%, rgba(120, 90, 255, 0.35), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.social-icon svg {
+    position: relative;
+    z-index: 1;
+    width: 18px;
+    height: 18px;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-icon:hover {
+    background: #1a1a1a;
+    border-color: transparent;
+    transform: translateY(-4px) rotate(-6deg);
+    box-shadow: 0 10px 24px rgba(179, 58, 58, 0.35);
+}
+
+.social-icon:hover::before {
+    opacity: 1;
+}
+
+.social-icon:hover svg {
+    transform: scale(1.15);
+}
+
+/* ============================================
+   LINK COLUMNS (Shop, Help, Company)
+   ============================================ */
+.footer-links h4,
+.footer-contact h4,
+.footer-payments h4 {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: 0 0 20px 0;
+    color: #f5f0e8;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-links h4::after,
+.footer-contact h4::after,
+.footer-payments h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: #b33a3a;
+    border-radius: 2px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-block;
+    position: relative;
+}
+
+.footer-links ul li a::before {
+    content: '';
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 1px;
+    background: #b33a3a;
+    transition: width 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: #f5f0e8;
+    padding-left: 10px;
+}
+
+.footer-links ul li a:hover::before {
+    width: 8px;
+}
+
+/* ============================================
+   CONTACT COLUMN — Unicode Icons + Email Visible
+   ============================================ */
+.footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: #ddd;
+    line-height: 1.4;
+    min-width: 0;
+    width: 100%;
+}
+
+/* Unicode icon (☎ ✉ ◷) */
+.contact-list li .contact-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    font-size: 1rem;
+    line-height: 1;
+    color: #b33a3a;
+    margin-top: 1px;
+    font-family: var(--font-body);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* SVG fallback (in case you use SVGs later) */
+.contact-list li svg {
+    color: #b33a3a;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+}
+
+.contact-list li:hover .contact-icon {
+    color: #f5f0e8;
+    transform: scale(1.15);
+}
+
+/* Text and links */
+.contact-list li a,
+.contact-list li span:not(.contact-icon) {
+    color: #ddd;
+    transition: color 0.3s ease;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    flex: 1 1 auto;
+    min-width: 0;
+    display: block;
+    line-height: 1.5;
+}
+
+.contact-list li a:hover {
+    color: #b33a3a;
+}
+
+.contact-note-small {
+    font-size: 0.72rem;
+    color: #7a7a7a;
+    font-style: italic;
+    margin: 14px 0 0 0;
+    padding-left: 26px;
+}
+
+/* ============================================
+   PAYMENT LOGOS
+   ============================================ */
+.payment-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.payment-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    background: #ffffff;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: var(--font-body);
+    border: 1px solid transparent;
+}
+
+.payment-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.12);
+    border-color: #b33a3a;
+}
+
+/* ============================================
+   BOTTOM: Copyright
+   ============================================ */
+.footer-bottom {
+    text-align: center;
+    padding: 24px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 0.75rem;
+    color: #666;
+    font-family: var(--font-body);
+    letter-spacing: 0.3px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE — ULTRAWIDE (1800px+)
+   ============================================ */
+@media (min-width: 1800px) {
+    .footer-top { padding: 50px 80px; }
+    .footer-main { max-width: 1600px; padding: 70px 80px 50px; gap: 50px; }
+    .newsletter-title { font-size: 2.8rem; }
+    .footer-logo { height: 62px; }
+}
+
+/* ============================================
+   RESPONSIVE — DESKTOP (1200–1399px)
+   ============================================ */
+@media (max-width: 1399px) {
+    .footer-top { padding: 36px 40px; }
+    .footer-main { padding: 50px 40px 30px; gap: 30px; }
+    .newsletter-form { max-width: 340px; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL DESKTOP / TABLET (1024–1199px)
+   ============================================ */
+@media (max-width: 1199px) {
+    .footer-top-inner { grid-template-columns: 1fr; gap: 30px; }
+    .newsletter-actions { grid-template-columns: 1fr; gap: 24px; }
+
+    .footer-main {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px 30px;
+        padding: 50px 40px 30px;
+    }
+
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-payments { grid-column: 1 / -1; }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET PORTRAIT (768–1023px)
+   ============================================ */
+@media (max-width: 1023px) {
+    .footer-top { padding: 32px 30px; }
+    .newsletter-title { font-size: 2rem; }
+    .newsletter-desc { font-size: 0.78rem; }
+
+    .newsletter-form input { padding: 12px 16px; font-size: 0.8rem; }
+    .newsletter-form button { padding: 12px 24px; font-size: 0.7rem; }
+
+    .footer-main {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px 24px;
+        padding: 40px 30px 26px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE — LARGE PHONE (600–767px)
+   ============================================ */
+@media (max-width: 767px) {
+    .footer-top { padding: 28px 20px; }
+
+    .footer-top-inner { gap: 24px; }
+    .newsletter { text-align: center; align-items: center; }
+    .newsletter-title { font-size: 1.7rem; text-align: center; }
+    .newsletter-desc { text-align: center; font-size: 0.75rem; }
+
+    .newsletter-actions { text-align: center; }
+    .newsletter-form {
+        flex-direction: column;
+        gap: 10px;
+        max-width: 100%;
+    }
+
+    .newsletter-form input,
+    .newsletter-form button {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .newsletter-polaroids { justify-content: center; }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 36px 20px 20px;
+        text-align: left;
+    }
+
+    .footer-brand { align-items: flex-start; }
+    .footer-socials { justify-content: flex-start; }
+
+    .footer-logo { height: 46px; }
+
+    .footer-bottom { padding: 20px; }
+}
+
+/* ============================================
+   RESPONSIVE — STANDARD PHONE (480–599px)
+   ============================================ */
+@media (max-width: 599px) {
+    .footer-top { padding: 24px 16px; }
+    .newsletter-title { font-size: 1.55rem; }
+    .newsletter-desc { font-size: 0.72rem; }
+    .footer-main { padding: 32px 16px 20px; gap: 28px; }
+    .footer-links h4,
+    .footer-contact h4,
+    .footer-payments h4 { font-size: 0.78rem; margin-bottom: 16px; }
+    .footer-links ul li a { font-size: 0.8rem; }
+    .contact-list li { font-size: 0.8rem; }
+    .payment-badge { font-size: 0.6rem; padding: 5px 8px; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL PHONE (360–479px)
+   ============================================ */
+@media (max-width: 479px) {
+    .footer-top { padding: 22px 14px; }
+    .newsletter-title { font-size: 1.4rem; }
+    .newsletter-desc { font-size: 0.68rem; }
+
+    .polaroid-img { width: 50px; height: 50px; }
+    .polaroid-caption { font-size: 0.62rem; }
+    .polaroid-note { font-size: 0.95rem; }
+
+    .footer-main { padding: 28px 14px 18px; gap: 24px; }
+    .footer-logo { height: 40px; }
+    .footer-tagline { font-size: 0.8rem; }
+    .social-icon { width: 32px; height: 32px; }
+    .social-icon svg { width: 16px; height: 16px; }
+
+    .footer-links h4,
+    .footer-contact h4,
+    .footer-payments h4 { font-size: 0.72rem; margin-bottom: 14px; }
+    .footer-links h4::after,
+    .footer-contact h4::after,
+    .footer-payments h4::after { width: 20px; }
+
+    .footer-links ul li a { font-size: 0.76rem; }
+    .contact-list li { font-size: 0.75rem; gap: 8px; }
+    .contact-list li .contact-icon { width: 14px; height: 14px; font-size: 0.9rem; }
+    .contact-list li svg { width: 12px; height: 12px; }
+    .contact-note-small { font-size: 0.65rem; padding-left: 22px; }
+
+    .payment-badge { font-size: 0.55rem; padding: 4px 7px; }
+}
+
+/* ============================================
+   RESPONSIVE — TINY PHONE (up to 359px)
+   ============================================ */
+@media (max-width: 359px) {
+    .footer-top { padding: 18px 12px; }
+    .newsletter-title { font-size: 1.25rem; }
+    .footer-main { padding: 24px 12px 16px; gap: 22px; }
+    .footer-logo { height: 36px; }
+    .footer-bottom { padding: 16px 12px; font-size: 0.68rem; }
+}
+
+/* ============================================
+   TOUCH DEVICES
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+    .social-icon:hover {
+        transform: none;
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .social-icon:hover::before {
+        opacity: 0;
+    }
+
+    .footer-links ul li a:hover {
+        padding-left: 0;
+        color: #a0a0a0;
+    }
+
+    .footer-links ul li a:hover::before { width: 0; }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .social-icon,
+    .polaroid,
+    .newsletter-form button,
+    .footer-logo-link,
+    .payment-badge,
+    .contact-list li .contact-icon {
+        transition: none !important;
+        animation: none !important;
+    }
+}

@@ -1,0 +1,412 @@
+/* ============================================
+   REVIEWS + COMMUNITY SECTION
+   ============================================ */
+
+.reviews-section {
+    padding: 70px 60px;
+    max-width: 1500px;
+    margin: 0 auto;
+    background-color: #f5f0e8;
+    position: relative;
+}
+
+/* ============================================
+   TOP PART: Rating + Reviews Grid
+   ============================================ */
+.reviews-top {
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+    gap: 40px;
+    align-items: flex-start;
+    margin-bottom: 60px;
+}
+
+/* ---- Rating summary (left) ---- */
+.rating-summary {
+    padding-top: 12px;
+}
+
+.rating-summary h3 {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+}
+
+.rating-score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.rating-score .stars {
+    font-size: 1.05rem;
+    color: #d4a44a;
+    letter-spacing: 2px;
+    line-height: 1;
+}
+
+.rating-score .score {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+}
+
+.rating-summary p {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    color: #7a7a7a;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+/* ---- Reviews grid (right) ---- */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.review-card {
+    position: relative;
+    background: transparent;
+    padding: 0 12px 0 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.review-card .review-stars {
+    font-size: 0.85rem;
+    color: #d4a44a;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    line-height: 1;
+}
+
+.quote-mark {
+    position: absolute;
+    top: 0;
+    right: 12px;
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 0.7;
+    opacity: 0.8;
+}
+
+.review-card p {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: #4a4a4a;
+    line-height: 1.6;
+    margin: 0 0 16px 0;
+    font-style: normal;
+}
+
+.reviewer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: 0.3px;
+    text-transform: none;
+}
+
+/* Avatar dot before reviewer name */
+.reviewer::before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e8dcc8, #c9a96e);
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   BOTTOM PART: Community Carousel
+   ============================================ */
+.community-section {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 40px;
+    align-items: center;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.community-heading {
+    padding-right: 20px;
+}
+
+.community-eyebrow {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.community-heading p {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: #7a7a7a;
+    margin: 0;
+    letter-spacing: 0.3px;
+}
+
+.community-heading p strong {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+/* ---- Carousel ---- */
+.community-carousel-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.community-carousel {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 4px;
+}
+
+.community-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.community-item {
+    flex: 0 0 auto;
+    width: 140px;
+    height: 140px;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #ece3d1;
+    cursor: pointer;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.community-item:hover {
+    transform: scale(1.04);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+
+.community-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: saturate(0.95);
+    transition: filter 0.4s ease;
+}
+
+.community-item:hover img {
+    filter: saturate(1.05);
+}
+
+/* ---- Next arrow (Unicode) ---- */
+.community-arrow {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #f5f0e8;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;
+    font-family: var(--font-body);
+    font-size: 1.6rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    padding: 0 0 4px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.community-arrow:hover {
+    background: #1a1a1a;
+    color: #f5f0e8;
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade gradient on right edge (behind arrow) */
+.community-carousel-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, #f5f0e8 80%);
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* ============================================
+   RESPONSIVE — ULTRAWIDE (1800px+)
+   ============================================ */
+@media (min-width: 1800px) {
+    .reviews-section { max-width: 1600px; padding: 90px 80px; }
+    .community-item { width: 160px; height: 160px; }
+    .reviews-grid { gap: 30px; }
+}
+
+/* ============================================
+   RESPONSIVE — DESKTOP (1200–1399px)
+   ============================================ */
+@media (max-width: 1399px) {
+    .reviews-section { padding: 60px 40px; }
+    .reviews-top { gap: 32px; }
+    .community-item { width: 130px; height: 130px; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL DESKTOP / TABLET (1024–1199px)
+   ============================================ */
+@media (max-width: 1199px) {
+    .reviews-top {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 50px;
+    }
+    .rating-summary { text-align: center; }
+    .rating-score { justify-content: center; }
+
+    .reviews-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .community-section {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        align-items: flex-start;
+    }
+    .community-heading { padding-right: 0; }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET PORTRAIT (768–1023px)
+   ============================================ */
+@media (max-width: 1023px) {
+    .reviews-section { padding: 50px 30px; }
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    .community-item { width: 120px; height: 120px; }
+    .community-arrow { width: 36px; height: 36px; font-size: 1.4rem; }
+}
+
+/* ============================================
+   RESPONSIVE — LARGE PHONE (600–767px)
+   ============================================ */
+@media (max-width: 767px) {
+    .reviews-section { padding: 40px 20px; }
+
+    .rating-summary h3 { font-size: 0.68rem; letter-spacing: 2px; }
+    .rating-score .stars { font-size: 0.95rem; }
+    .rating-score .score { font-size: 0.88rem; }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .review-card {
+        padding: 0 10px 0 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        padding-bottom: 20px;
+    }
+    .review-card:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .quote-mark { font-size: 2rem; right: 10px; }
+    .review-card p { font-size: 0.8rem; }
+
+    .community-item { width: 110px; height: 110px; }
+    .community-arrow { width: 32px; height: 32px; font-size: 1.3rem; right: 4px; }
+    .community-carousel-wrap::after { width: 50px; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL PHONE (480–599px)
+   ============================================ */
+@media (max-width: 599px) {
+    .reviews-section { padding: 34px 16px; }
+    .community-eyebrow { font-size: 0.65rem; letter-spacing: 1.5px; }
+    .community-heading p { font-size: 0.72rem; }
+    .community-item { width: 100px; height: 100px; }
+    .community-carousel { gap: 10px; }
+    .community-arrow { width: 30px; height: 30px; font-size: 1.2rem; }
+}
+
+/* ============================================
+   RESPONSIVE — TINY PHONE (up to 359px)
+   ============================================ */
+@media (max-width: 359px) {
+    .reviews-section { padding: 28px 12px; }
+    .rating-summary h3 { font-size: 0.62rem; }
+    .community-item { width: 90px; height: 90px; }
+    .community-arrow { display: none; }
+    .community-carousel-wrap::after { display: none; }
+}
+
+/* ============================================
+   TOUCH DEVICES
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+    .community-item:hover { transform: none; box-shadow: none; }
+    .community-item:hover img { filter: saturate(0.95); }
+    .community-arrow:hover {
+        background: #f5f0e8;
+        color: #1a1a1a;
+        transform: translateY(-50%) scale(1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .community-item,
+    .community-item img,
+    .community-arrow {
+        transition: none !important;
+        animation: none !important;
+    }
+    .community-carousel {
+        scroll-behavior: auto;
+    }
+}

@@ -2,798 +2,269 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Retro Poshak — Pehno Yaaden | Wearable Indian Memories</title>
-    <meta name="description"
-        content="Retro Poshak turns nostalgic Indian memories into premium oversized T-shirts and shirts. Pehno Yaaden. Old memories. New fits." />
-    <meta property="og:title" content="Retro Poshak — Pehno Yaaden" />
-    <meta property="og:description" content="Old memories. New fits. Wearable Indian nostalgia." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/images/Retro_Poshak_Logo.png" />
-    <link rel="icon" type="image/png" href="assets/images/Retro_Poshak_Logo.png" />
-
-    <!-- Theme color for browser chrome -->
-    <meta name="theme-color" content="#f4ede1" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0f0d0c" media="(prefers-color-scheme: dark)" />
-
-    <!-- Prevent flash of wrong theme — runs before paint -->
-    <script>
-        (function () {
-            try {
-                var t = localStorage.getItem('retroPoshakTheme');
-                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', t);
-                document.documentElement.style.colorScheme = t;
-            } catch (e) { }
-        })();
-    </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Bebas+Neue&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
-    <link rel="stylesheet" href="css/theme.css" />
-    <link rel="stylesheet" href="css/cinematic.css" />
-    <link rel="stylesheet" href="css/home.css" />
-
-    <!-- ===== CRITICAL THEME SAFETY NET =====
-         Guarantees hero + section text responds to the theme toggle
-         even if any other stylesheet drifts. Scoped tightly so it
-         can't accidentally affect other pages. -->
-    <style id="theme-safety-net">
-        /* Light defaults (also covered in home.css, but kept here
-           as a hard fallback) */
-        .hero-promo-title,
-        .hero-promo-title em {
-            color: var(--brown, #3a2d22);
-        }
-
-        .hero-promo-name,
-        .hero-promo-tag {
-            color: var(--brown-soft, #6b5748);
-        }
-
-        .hero-promo-eyebrow {
-            color: var(--rust, #8f4228);
-        }
-
-        /* Dark overrides — forced */
-        html[data-theme="dark"] .hero-promo-title,
-        html[data-theme="dark"] .hero-promo-title em {
-            color: var(--brown, #f4ede1) !important;
-        }
-
-        html[data-theme="dark"] .hero-promo-name {
-            color: var(--brown, #f4ede1) !important;
-        }
-
-        html[data-theme="dark"] .hero-promo-tag {
-            color: var(--brown-soft, rgba(244, 237, 225, 0.72)) !important;
-        }
-
-        html[data-theme="dark"] .hero-promo-eyebrow {
-            color: var(--rust-soft, #e8a184) !important;
-        }
-
-        /* Fix text-fill-color: transparent overriding in dark mode */
-        html[data-theme="dark"] .hero-promo-title em,
-        html[data-theme="dark"] .hero-promo-title .hero-promo-title-em {
-            -webkit-text-fill-color: transparent !important;
-            color: transparent !important;
-            background: linear-gradient(135deg, #f0b69a 0%, #d97a58 50%, #b5593a 100%) !important;
-            background-size: 200% 200% !important;
-            -webkit-background-clip: text !important;
-            background-clip: text !important;
-        }
-
-        /* If the gradient fails, ensure the em element is at least
-           visible via a fallback color */
-        @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-
-            html[data-theme="dark"] .hero-promo-title em,
-            html[data-theme="dark"] .hero-promo-title .hero-promo-title-em {
-                color: var(--rust-soft, #e8a184) !important;
-                -webkit-text-fill-color: currentColor !important;
-            }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Poshak - Pehno Yaaden</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/collections.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/lookbook.css">
+    <link rel="stylesheet" href="css/reviews.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="no-js">
-    <script>document.body.classList.remove('no-js');</script>
+<body>
 
-    <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
-    <div class="announce-bar" aria-label="Site announcements">
-        <div class="announce-track">
-            <span>✦ Free shipping over ₹1999</span>
-            <span class="dot">◆</span>
-            <span>✦ 5% off on prepaid orders</span>
-            <span class="dot">◆</span>
-            <span>✦ COD available across India</span>
-            <span class="dot">◆</span>
-            <span>✦ Easy 7-day returns</span>
-            <span class="dot">◆</span>
-            <span>✦ Free shipping over ₹1999</span>
-            <span class="dot">◆</span>
-            <span>✦ 5% off on prepaid orders</span>
-            <span class="dot">◆</span>
-            <span>✦ COD available across India</span>
-            <span class="dot">◆</span>
-            <span>✦ Easy 7-day returns</span>
-            <span class="dot">◆</span>
-        </div>
+    <!-- NAVBAR -->
+    <div id="navbar-placeholder"></div>
+
+    <!-- HERO -->
+    <div id="hero-placeholder"></div>
+
+    <!-- FEATURES BAR (inlined) -->
+    <div id="features-placeholder">
+        <section class="features-bar">
+            <div class="features-track">
+                <div class="feature-item">
+                    <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+                    <div class="feature-text"><h4>240 GSM</h4><p>Heavyweight Fabric</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.5 3-3 5-3 7a3 3 0 0 0 6 0c0-2-1.5-4-3-7z"></path><path d="M12 9v13"></path><path d="M8 14l4 3 4-3"></path></svg></div>
+                    <div class="feature-text"><h4>100% Cotton</h4><p>Terry</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg></div>
+                    <div class="feature-text"><h4>Oversized Fit</h4><p>Drop Shoulder</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg></div>
+                    <div class="feature-text"><h4>Premium Print</h4><p>Long Lasting</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
+                    <div class="feature-text"><h4>Free Shipping</h4><p>On orders above ₹1499</p></div>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></div>
+                    <div class="feature-text"><h4>COD Available</h4><p>Across India</p></div>
+                </div>
+                <!-- Duplicated set for seamless marquee -->
+                <div class="feature-item" aria-hidden="true"><div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div><div class="feature-text"><h4>240 GSM</h4><p>Heavyweight Fabric</p></div></div>
+                <div class="feature-item" aria-hidden="true"><div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c-1.5 3-3 5-3 7a3 3 0 0 0 6 0c0-2-1.5-4-3-7z"></path><path d="M12 9v13"></path><path d="M8 14l4 3 4-3"></path></svg></div><div class="feature-text"><h4>100% Cotton</h4><p>Terry</p></div></div>
+                <div class="feature-item" aria-hidden="true"><div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg></div><div class="feature-text"><h4>Oversized Fit</h4><p>Drop Shoulder</p></div></div>
+                <div class="feature-item" aria-hidden="true"><div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg></div><div class="feature-text"><h4>Premium Print</h4><p>Long Lasting</p></div></div>
+                <div class="feature-item" aria-hidden="true"><div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div><div class="feature-text"><h4>Free Shipping</h4><p>On orders above ₹1499</p></div></div>
+                <div class="feature-item" aria-hidden="true"><div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg></div><div class="feature-text"><h4>COD Available</h4><p>Across India</p></div></div>
+            </div>
+        </section>
     </div>
 
-    <header class="site-header" id="header">
-        <div class="header-inner container">
-            <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
-                <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
-                    class="logo-img"
-                    onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), { className: 'logo-fallback', innerHTML: 'RETRO<span class=&quot;logo-dot&quot;>.</span>POSHAK' }));" />
-            </a>
+    <!-- PRODUCTS -->
+    <div id="products-placeholder"></div>
 
-            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link active">Home</a></li>
-                    <li><a href="shop.html" class="nav-link">Shop</a></li>
-                    <li><a href="shop.html?filter=new" class="nav-link">New Arrivals</a></li>
-                    <li><a href="shop.html?filter=bestseller" class="nav-link">Bestsellers</a></li>
-                    <li><a href="about.html" class="nav-link">Our Story</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="header-actions">
-                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme">
-                    <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <circle cx="12" cy="12" r="4" />
-                        <path
-                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-                    </svg>
-                    <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
-                    </svg>
-                </button>
-
-                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="7" />
-                        <path d="M21 21l-4.35-4.35" />
-                    </svg>
-                </button>
-
-                <span id="authSlot"></span>
-
-                <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path
-                            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
-                    </svg>
-                    <span class="badge wishlist-count" id="wishlistCount">0</span>
+    <!-- COLLECTIONS — Shop by Story (inlined) -->
+    <div id="collections-placeholder" style="width: 100%; display: block;">
+        <section class="collections-section">
+            <div class="collections-header">
+                <div class="collections-header-left">
+                    <h2>Shop by Story</h2>
+                    <p>Different stories. Same feeling.</p>
+                </div>
+                <a href="shop.html" class="collections-view-all">
+                    <span>EXPLORE ALL STORIES</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </a>
-
-                <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 6h15l-1.5 9h-12z" />
-                        <circle cx="9" cy="20" r="1" />
-                        <circle cx="18" cy="20" r="1" />
-                        <path d="M6 6L5 3H2" />
-                    </svg>
-                    <span class="badge cart-count" id="cartCount">0</span>
-                </a>
-
-                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-                    <span></span><span></span><span></span>
-                </button>
             </div>
-        </div>
-    </header>
 
-    <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
-        <div class="search-box container">
-            <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
-                aria-label="Search products" />
-            <button class="icon-btn" id="searchClose" aria-label="Close search">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-        <div class="search-results container" id="searchResults"></div>
+            <div class="collection-scroll">
+                <div class="collection-grid">
+
+                    <!-- 1. Gola Wale Ki Gali -->
+                    <a href="shop.html?category=gola-wale-ki-gali" class="collection-card">
+                        <div class="collection-image-wrap">
+                            <img src="assets/images/shopbystory/golawalekigali.jpeg" alt="Gola Wale Ki Gali" loading="lazy">
+                            <button class="collection-wishlist" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                        <h3>Gola Wale Ki Gali <span class="arrow">→</span></h3>
+                    </a>
+
+                    <!-- 2. School Ka Vo Safar -->
+                    <a href="shop.html?category=school-ka-vo-safar" class="collection-card">
+                        <div class="collection-image-wrap">
+                            <img src="assets/images/shopbystory/schoolkavosafar.jpeg" alt="School Ka Vo Safar" loading="lazy">
+                            <button class="collection-wishlist" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                        <h3>School Ka Vo Safar <span class="arrow">→</span></h3>
+                    </a>
+
+                    <!-- 3. Doston Ki Baithak -->
+                    <a href="shop.html?category=doston-ki-baithak" class="collection-card">
+                        <div class="collection-image-wrap">
+                            <img src="assets/images/shopbystory/dostonkibaithak.jpeg" alt="Doston Ki Baithak" loading="lazy">
+                            <button class="collection-wishlist" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                        <h3>Doston Ki Baithak <span class="arrow">→</span></h3>
+                    </a>
+
+                    <!-- 4. Ek Chai, Hazaar Kisse -->
+                    <a href="shop.html?category=ek-chai-hazaar-kisse" class="collection-card">
+                        <div class="collection-image-wrap">
+                            <img src="assets/images/shopbystory/ekchaihazaarkisse.jpeg" alt="Ek Chai, Hazaar Kisse">
+                            <button class="collection-wishlist" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                        <h3>Ek Chai, Hazaar Kisse <span class="arrow">→</span></h3>
+                    </a>
+
+                    <!-- 5. Woh Lambi Calls -->
+                    <a href="shop.html?category=woh-lambi-calls" class="collection-card">
+                        <div class="collection-image-wrap">
+                            <img src="assets/images/shopbystory/wohlambicalls.jpeg" alt="Woh Lambi Calls" loading="lazy">
+                            <button class="collection-wishlist" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                        <h3>Woh Lambi Calls <span class="arrow">→</span></h3>
+                    </a>
+
+                    <!-- 6. Gali Cricket -->
+                    <a href="shop.html?category=gali-cricket" class="collection-card">
+                        <div class="collection-image-wrap">
+                            <img src="assets/images/shopbystory/galicricket.jpeg" alt="Gali Cricket" loading="lazy">
+                            <button class="collection-wishlist" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                        <h3>Gali Cricket <span class="arrow">→</span></h3>
+                    </a>
+
+                    <!-- 7. Ready, Set, Bachpan! -->
+                    <a href="shop.html?category=ready-set-bachpan" class="collection-card">
+                        <div class="collection-image-wrap">
+                            <img src="assets/images/shopbystory/readysetbachpan.jpeg" alt="Ready, Set, Bachpan!">
+                            <button class="collection-wishlist" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                        <h3>Ready, Set, Bachpan! <span class="arrow">→</span></h3>
+                    </a>
+
+                    <!-- 8. Woh Gaane, Woh Din -->
+                    <a href="shop.html?category=woh-gaane-woh-din" class="collection-card">
+                        <div class="collection-image-wrap">
+                            <img src="assets/images/shopbystory/wohgaanewohdin.jpeg" alt="Woh Gaane, Woh Din">
+                            <button class="collection-wishlist" aria-label="Add to wishlist" onclick="event.preventDefault(); event.stopPropagation(); this.classList.toggle('active');">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                            </button>
+                        </div>
+                        <h3>Woh Gaane, Woh Din <span class="arrow">→</span></h3>
+                    </a>
+
+                </div>
+            </div>
+        </section>
     </div>
 
-    <main>
-        <!-- ===== HERO — Single panel, 30% text · 70% image ===== -->
-        <section class="hero">
-            <div class="hero-shell container">
-                <div class="hero-panel">
-                    <div class="hero-promo">
-                        <div class="hero-promo-slides" id="heroSlides">
+    <!-- ABOUT -->
+    <div id="about-placeholder"></div>
 
-                            <!-- Slide 1 — Barf Ka Gola -->
-                            <div class="hero-promo-slide is-active" role="group" aria-roledescription="slide"
-                                aria-label="Slide 1 of 4">
-                                <div class="hero-promo-copy">
-                                    <span class="hero-promo-eyebrow">Pehno. Yaaden. Wear them.</span>
-                                    <h2 class="hero-promo-title">
-                                        Barf Ka Gola
-                                        <span class="hero-promo-title-em">Cool summers, sweeter memories.</span>
-                                    </h2>
-                                    <p class="hero-promo-name">Chapter 01</p>
-                                    <p class="hero-promo-tag">240 GSM · Oversized Fit</p>
-                                </div>
-                                <div class="hero-promo-media">
-                                    <img src="assets/images/products/Barf Ka Gola/BarfKaGola_Hero.png"
-                                        alt="Barf Ka Gola campaign" loading="eager"
-                                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23f4ede1%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>BARF KA GOLA</text></svg>'">
-                                    <a href="product.html?id=5" class="hero-promo-shop">Shop →</a>
-                                </div>
-                            </div>
+    <!-- LOOKBOOK (inlined) -->
+    <div id="lookbook-placeholder" style="width: 100%; display: block;">
+        <section class="lookbook-section">
+            <!-- LEFT: Header column -->
+            <div class="lookbook-header">
+                <span class="lookbook-eyebrow">LOOKBOOK</span>
+                <h2 class="lookbook-heading">Same memories.<br>Different styles.</h2>
 
-                            <!-- Slide 2 — Chai ki Tapri -->
-                            <div class="hero-promo-slide" role="group" aria-roledescription="slide"
-                                aria-label="Slide 2 of 4">
-                                <div class="hero-promo-copy">
-                                    <span class="hero-promo-eyebrow">Pehno. Yaaden. Wear them.</span>
-                                    <h2 class="hero-promo-title">
-                                        Chai ki Tapri
-                                        <span class="hero-promo-title-em">Slow mornings, warmer stories.</span>
-                                    </h2>
-                                    <p class="hero-promo-name">Chapter 02</p>
-                                    <p class="hero-promo-tag">100% Cotton · Relaxed Fit</p>
-                                </div>
-                                <div class="hero-promo-media">
-                                    <img src="assets/images/products/Chai ki Tapri/ChaiKiTapri_Hero.png"
-                                        alt="Chai ki Tapri campaign" loading="lazy"
-                                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g2%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23ebe1d0%22/><stop offset=%221%22 stop-color=%22%23d9c8a9%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g2)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>CHAI KI TAPRI</text></svg>'">
-                                    <a href="product.html?id=7" class="hero-promo-shop">Shop →</a>
-                                </div>
-                            </div>
+                <!-- Navigation arrows -->
+                <div class="lookbook-nav">
+                    <button class="lookbook-arrow" aria-label="Previous" id="lookbookPrev">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </button>
+                    <button class="lookbook-arrow" aria-label="Next" id="lookbookNext">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
-                            <!-- Slide 3 — Cycle ka Safar -->
-                            <div class="hero-promo-slide" role="group" aria-roledescription="slide"
-                                aria-label="Slide 3 of 4">
-                                <div class="hero-promo-copy">
-                                    <span class="hero-promo-eyebrow">Pehno. Yaaden. Wear them.</span>
-                                    <h2 class="hero-promo-title">
-                                        Cycle ka Safar
-                                        <span class="hero-promo-title-em">Ride back home, feel the wind.</span>
-                                    </h2>
-                                    <p class="hero-promo-name">Chapter 03</p>
-                                    <p class="hero-promo-tag">240 GSM · Oversized Fit</p>
-                                </div>
-                                <div class="hero-promo-media">
-                                    <img src="assets/images/products/Cycle ka Safar/CycleKaSafar_Hero.jpeg"
-                                        alt="Cycle ka Safar campaign" loading="lazy"
-                                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g3%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23d9cdb8%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g3)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>CYCLE KA SAFAR</text></svg>'">
-                                    <a href="product.html?id=1" class="hero-promo-shop">Shop →</a>
-                                </div>
-                            </div>
+            <!-- RIGHT: Image grid -->
+            <div class="lookbook-grid" id="lookbookGrid">
+                <!-- Image 1 — Chai ki Tapri -->
+                <div class="lookbook-item">
+                    <img src="assets/images/products/Chai ki Tapri/Website _Shop/2.png" alt="Chai ki Tapri lookbook">
+                    <button class="lookbook-wishlist" aria-label="Add to wishlist" onclick="this.classList.toggle('active'); event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
 
-                            <!-- Slide 4 — Khelo Cards -->
-                            <div class="hero-promo-slide" role="group" aria-roledescription="slide"
-                                aria-label="Slide 4 of 4">
-                                <div class="hero-promo-copy">
-                                    <span class="hero-promo-eyebrow">Pehno. Yaaden. Wear them.</span>
-                                    <h2 class="hero-promo-title">
-                                        Khelo Cards
-                                        <span class="hero-promo-title-em">Terrace nights, endless games.</span>
-                                    </h2>
-                                    <p class="hero-promo-name">Chapter 04</p>
-                                    <p class="hero-promo-tag">240 GSM · Oversized Fit</p>
-                                </div>
-                                <div class="hero-promo-media">
-                                    <img src="assets/images/products/Khelo Cards/KheloCards_Hero.jpeg"
-                                        alt="Khelo Cards campaign" loading="lazy"
-                                        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22750%22><defs><linearGradient id=%22g4%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23ebe1d0%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22600%22 height=%22750%22 fill=%22url(%23g4)%22/><text x=%22300%22 y=%22380%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>KHELO CARDS</text></svg>'">
-                                    <a href="product.html?id=6" class="hero-promo-shop">Shop →</a>
-                                </div>
-                            </div>
-                        </div>
+                <!-- Image 2 — Barf Ka Gola -->
+                <div class="lookbook-item">
+                    <img src="assets/images/products/Barf Ka Gola/Website _Shop/3.0.png" alt="Barf Ka Gola lookbook">
+                    <button class="lookbook-wishlist" aria-label="Add to wishlist" onclick="this.classList.toggle('active'); event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
 
-                        <!-- Carousel controls (bottom-left) -->
-                        <div class="hero-promo-controls">
-                            <button class="hero-promo-arrow" id="heroPrev" aria-label="Previous slide">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M15 18l-6-6 6-6" />
-                                </svg>
-                            </button>
-                            <button class="hero-promo-arrow" id="heroNext" aria-label="Next slide">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M9 6l6 6-6 6" />
-                                </svg>
-                            </button>
+                <!-- Image 3 — Khelo Cards -->
+                <div class="lookbook-item">
+                    <img src="assets/images/products/Khelo Cards/Website _shop/3.png" alt="Khelo Cards lookbook">
+                    <button class="lookbook-wishlist" aria-label="Add to wishlist" onclick="this.classList.toggle('active'); event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
+                </div>
 
-                            <div class="hero-promo-dots" id="heroDots" role="tablist" aria-label="Choose slide">
-                                <button class="hero-promo-dot is-active" data-slide="0" role="tab" aria-selected="true"
-                                    aria-label="Slide 1"></button>
-                                <button class="hero-promo-dot" data-slide="1" role="tab" aria-selected="false"
-                                    aria-label="Slide 2"></button>
-                                <button class="hero-promo-dot" data-slide="2" role="tab" aria-selected="false"
-                                    aria-label="Slide 3"></button>
-                                <button class="hero-promo-dot" data-slide="3" role="tab" aria-selected="false"
-                                    aria-label="Slide 4"></button>
-                            </div>
-                        </div>
-
-                        <!-- Pause/play (top-right) -->
-                        <button class="hero-promo-pause" id="heroPause" aria-label="Pause carousel">
-                            <svg class="pp-pause" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                                <rect x="6" y="5" width="4" height="14" rx="1" />
-                                <rect x="14" y="5" width="4" height="14" rx="1" />
-                            </svg>
-                            <svg class="pp-play" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"
-                                style="display:none;">
-                                <path d="M8 5v14l11-7z" />
-                            </svg>
-                        </button>
-                    </div>
+                <!-- Image 4 — Cycle ka Safar -->
+                <div class="lookbook-item">
+                    <img src="assets/images/products/Cycle ka Safar/Website_Shop/3.0.png" alt="Cycle ka Safar lookbook">
+                    <button class="lookbook-wishlist" aria-label="Add to wishlist" onclick="this.classList.toggle('active'); event.stopPropagation();">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </section>
+    </div>
 
-        <!-- ===== BRAND STATEMENT ===== -->
-        <section class="brand-statement">
-            <div class="container statement-inner">
-                <span class="eyebrow center">Our Philosophy</span>
-                <p class="statement-hindi">
-                    "Kuch yaadein purani hoti hain.<br>
-                    Par kabhi out of style nahi hoti."
-                </p>
-                <p class="statement-en">
-                    Retro Poshak brings those memories back — one oversized tee at a time.
-                    Every piece begins with a small moment we all remember.
-                </p>
-                <span class="statement-signature">— Urvashi Naik, Founder</span>
+    <!-- REVIEWS -->
+    <div id="reviews-placeholder"></div>
 
-                <div class="statement-divider" aria-hidden="true">
-                    <span></span><i>◆</i><span></span>
-                </div>
-            </div>
-        </section>
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
 
-        <!-- ===== NEW ARRIVALS ===== -->
-        <section class="section featured">
-            <div class="container">
-                <span class="eyebrow">Fresh off the press</span>
-                <h2 class="section-title">Stories You Can Wear</h2>
-                <p class="section-sub">New arrivals, straight from the memory book.</p>
-                <div class="product-grid" id="featuredGrid" data-limit="4"></div>
-                <div class="section-cta">
-                    <a href="shop.html" class="btn btn-outline">View All</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== SHOP BY STORY ===== -->
-        <section class="shop-by-story">
-            <div class="container">
-                <span class="eyebrow center" style="color: var(--rust);">Shop by Story</span>
-                <h2 class="section-title center">Every Collection is a Memory.</h2>
-                <p class="section-sub center">Choose a feeling. We'll bring the fit.</p>
-                <div class="story-grid" id="storyGrid"></div>
-            </div>
-        </section>
-
-        <!-- ===== FEATURED COLLECTION ===== -->
-        <section class="featured-collection">
-            <div class="container">
-                <div class="featured-split reveal">
-                    <div class="featured-image">
-                        <img src="assets/images/gully-champion.jpg"
-                            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22700%22 height=%22700%22><defs><linearGradient id=%22g2%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%221%22><stop offset=%220%22 stop-color=%22%23e6d8c3%22/><stop offset=%221%22 stop-color=%22%23c9b18a%22/></linearGradient></defs><rect width=%22700%22 height=%22700%22 fill=%22url(%23g2)%22/><text x=%22350%22 y=%22330%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2242%22 fill=%22%238f4228%22 text-anchor=%22middle%22>CYCLE KA SAFAR</text><text x=%22350%22 y=%22380%22 font-family=%22Georgia%22 font-size=%2218%22 fill=%22%236b5748%22 text-anchor=%22middle%22>(product image placeholder)</text></svg>'"
-                            alt="Cycle ka Safar — Retro Poshak oversized tee" loading="lazy" />
-                    </div>
-                    <div class="featured-info">
-                        <span class="eyebrow">Featured Drop</span>
-                        <h2>Cycle ka Safar</h2>
-                        <p class="featured-hindi">"Har kahani ki ek starting line hoti hai."</p>
-                        <p>Four oversized pieces. Four memories. One starting line. This is where Retro Poshak begins —
-                            with the moments we all grew up inside.</p>
-                        <p class="featured-price">
-                            <strong>₹1,299</strong>
-                            <span class="strike">₹1,699</span>
-                            <span class="save">Save ₹400</span>
-                        </p>
-                        <div style="margin-top: 30px;">
-                            <a href="product.html?id=1" class="btn btn-primary">Shop Cycle ka Safar</a>
-                            <a href="shop.html" class="btn btn-ghost" style="margin-left: 12px;">View All Pieces</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== MEMORY ARCHIVE ===== -->
-        <section class="section memory-archive">
-            <div class="container">
-                <span class="eyebrow center">Interactive</span>
-                <h2 class="section-title center">The Memory Archive</h2>
-                <p class="section-sub center">Hover over a memory to unlock its story.</p>
-                <div class="memory-grid" id="memoryGrid"></div>
-            </div>
-        </section>
-
-        <!-- ===== LOOKBOOK ===== -->
-        <section class="lookbook">
-            <div class="container">
-                <span class="eyebrow center">The Lookbook</span>
-                <h2 class="section-title center">Worn in the Wild.</h2>
-                <p class="section-sub center">Real streets. Real memories. Real fits.</p>
-                <div class="lookbook-grid">
-                    <div class="lookbook-item">
-                        <img src="assets/images/look-1.jpg" alt="Barf Ka Gola oversized tee on the street"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 01</text></svg>'">
-                        <span class="lookbook-caption">Barf Ka Gola · Old Delhi</span>
-                    </div>
-                    <div class="lookbook-item">
-                        <img src="assets/images/look-2.jpg" alt="Chai ki Tapri oversized tee editorial shot"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23ebe1d0%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 02</text></svg>'">
-                        <span class="lookbook-caption">Chai ki Tapri · Mumbai</span>
-                    </div>
-                    <div class="lookbook-item">
-                        <img src="assets/images/look-3.jpg" alt="Cycle ka Safar oversized tee detail" loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 03</text></svg>'">
-                        <span class="lookbook-caption">Cycle ka Safar · Pune</span>
-                    </div>
-                    <div class="lookbook-item">
-                        <img src="assets/images/look-4.jpg" alt="Khelo Cards oversized tee lifestyle" loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23ebe1d0%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 04</text></svg>'">
-                        <span class="lookbook-caption">Khelo Cards · Studio</span>
-                    </div>
-                    <div class="lookbook-item">
-                        <img src="assets/images/look-5.jpg" alt="Khelo Cards oversized tee on the terrace"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22600%22><rect width=%22600%22 height=%22600%22 fill=%22%23e6d8c3%22/><text x=%22300%22 y=%22305%22 font-family=%22Georgia%22 font-style=%22italic%22 font-size=%2224%22 fill=%22%238f4228%22 text-anchor=%22middle%22>Look 05</text></svg>'">
-                        <span class="lookbook-caption">Khelo Cards · Terrace</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== WORN BY COMMUNITY ===== -->
-        <section class="community">
-            <div class="container">
-                <span class="eyebrow center">@retroposhak</span>
-                <h2 class="section-title center">Worn by the Poshak Community.</h2>
-                <p class="section-sub center">Tag us. Become part of the memory.</p>
-                <div class="community-grid">
-                    <div class="community-post"><img src="assets/images/community-1.jpg" alt="Community post"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23e6d8c3%22/></svg>'">
-                    </div>
-                    <div class="community-post"><img src="assets/images/community-2.jpg" alt="Community post"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23ebe1d0%22/></svg>'">
-                    </div>
-                    <div class="community-post"><img src="assets/images/community-3.jpg" alt="Community post"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23e6d8c3%22/></svg>'">
-                    </div>
-                    <div class="community-post"><img src="assets/images/community-4.jpg" alt="Community post"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23ebe1d0%22/></svg>'">
-                    </div>
-                    <div class="community-post"><img src="assets/images/community-5.jpg" alt="Community post"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23e6d8c3%22/></svg>'">
-                    </div>
-                    <div class="community-post"><img src="assets/images/community-6.jpg" alt="Community post"
-                            loading="lazy"
-                            onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22300%22><rect width=%22300%22 height=%22300%22 fill=%22%23ebe1d0%22/></svg>'">
-                    </div>
-                </div>
-                <div class="section-cta">
-                    <a href="#" class="btn btn-outline">Follow @retroposhak</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== TRUST STRIP ===== -->
-        <section class="trust-strip">
-            <div class="container trust-inner">
-                <div class="trust-item"><span class="trust-icon">🧵</span><span class="trust-label">240 GSM
-                        Heavyweight</span></div>
-                <div class="trust-item"><span class="trust-icon">🌱</span><span class="trust-label">100% Cotton</span>
-                </div>
-                <div class="trust-item"><span class="trust-icon">🇮🇳</span><span class="trust-label">Made in
-                        India</span></div>
-                <div class="trust-item"><span class="trust-icon">🚚</span><span class="trust-label">Free Shipping
-                        ₹1999+</span></div>
-                <div class="trust-item"><span class="trust-icon">↩️</span><span class="trust-label">Easy 7-Day
-                        Returns</span></div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <!-- Decorative top ornament -->
-        <div class="footer-ornament" aria-hidden="true">
-            <span></span><i>◆</i><span></span>
-        </div>
-
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <div class="footer-logo-wrap">
-                    <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak" class="footer-logo-img"
-                        onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('h3'), { className: 'footer-logo', textContent: 'RETRO POSHAK' }));" />
-                </div>
-                <p class="footer-tagline">Pehno Yaaden.</p>
-                <p class="footer-hindi">Old memories. New fits.</p>
-
-                <!-- Founder signature -->
-                <p class="footer-signature">— Founded by Urvashi Naik</p>
-
-                <!-- Social row -->
-                <ul class="footer-social" aria-label="Social links">
-                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==" target="_blank"
-                            rel="noopener" aria-label="Instagram">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <rect x="2" y="2" width="20" height="20" rx="5" />
-                                <circle cx="12" cy="12" r="4" />
-                                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" />
-                            </svg>
-                        </a></li>
-                    <li><a href="#" aria-label="Facebook">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                            </svg>
-                        </a></li>
-                    <li><a href="#" aria-label="Pinterest">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <circle cx="12" cy="12" r="10" />
-                                <path
-                                    d="M9 20c1-3 2-6 2-6s-.5-1-.5-2c0-1.5 1-2.5 2-2.5s1.5 1 1.5 2c0 1.5-1 3.5-1 3.5s.5 1 1.5 1c2 0 3-2 3-4 0-2.5-2-4.5-5-4.5s-5 2-5 4.5c0 1 .5 2 1 2.5" />
-                            </svg>
-                        </a></li>
-                    <li><a href="#" aria-label="YouTube">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <path
-                                    d="M22 8.5a3 3 0 0 0-2-2C18.5 6 12 6 12 6s-6.5 0-8 .5a3 3 0 0 0-2 2C1.5 10 1.5 12 1.5 12s0 2 .5 3.5a3 3 0 0 0 2 2C5.5 18 12 18 12 18s6.5 0 8-.5a3 3 0 0 0 2-2c.5-1.5.5-3.5.5-3.5s0-2-.5-3.5z" />
-                                <path d="M10 15l5-3-5-3z" fill="currentColor" />
-                            </svg>
-                        </a></li>
-                </ul>
-            </div>
-
-            <div class="footer-col">
-                <h4>Shop</h4>
-                <ul>
-                    <li><a href="shop.html">All Products</a></li>
-                    <li><a href="shop.html?filter=new">New Arrivals</a></li>
-                    <li><a href="shop.html?filter=bestseller">Bestsellers</a></li>
-                    <li><a href="shop.html">Collections</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Help</h4>
-                <ul>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Returns & Exchanges</a></li>
-                    <li><a href="#">Size Guide</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="about.html">Our Story</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Follow</h4>
-                <ul>
-                    <li><a href="https://www.instagram.com/retro_poshak?stkn=MWM0Z2RwNzdzMTVzdg==" target="_blank"
-                            rel="noopener">Instagram</a></li>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Pinterest</a></li>
-                    <li><a href="#">YouTube</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-newsletter container">
-            <p>Get the next memory in your inbox.</p>
-            <form class="newsletter-form" id="newsletterForm">
-                <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
-                <button type="submit" class="btn btn-primary">Subscribe</button>
-            </form>
-        </div>
-
-        <div class="footer-bottom container">
-            <p>
-                &copy; <span data-year>2025</span> Retro Poshak. All memories reserved.
-            </p>
-            <a href="#" class="whatsapp">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5z" />
-                </svg>
-                WhatsApp Support
-            </a>
-        </div>
-    </footer>
-
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-    <a href="#" class="wa-float" aria-label="Chat on WhatsApp">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-                d="M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5zm-8.5 18a9 9 0 0 1-4.6-1.3l-.3-.2-3 .9.9-2.9-.2-.3A9 9 0 1 1 12 21.5zm5.2-6.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.4.2-.6.1a7.4 7.4 0 0 1-3.7-3.3c-.1-.2-.1-.4.1-.6l.6-.7c.1-.2.1-.4 0-.6l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 10.4 10.4 0 0 0 4 3.5 4.6 4.6 0 0 0 2.8.5c.9-.1 1.7-.6 2.1-1.4.2-.4.3-.9.2-1.3 0-.2-.2-.3-.4-.4z" />
-        </svg>
-    </a>
-
-    <script src="js/theme.js"></script>
-    <script src="js/products.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/cart.js"></script>
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/render.js"></script>
     <script src="js/main.js"></script>
-
-    <!-- Home-specific render -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            /* Featured products — pass stagger index via --i */
-            const featuredGrid = document.getElementById('featuredGrid');
-            if (featuredGrid) {
-                const items = getFeaturedProducts(4);
-                featuredGrid.innerHTML = items
-                    .map((p, i) => renderProductCard(p, i))
-                    .join('');
-                bindProductCardEvents(featuredGrid);
-            }
-
-            /* Story grid — with --i stagger */
-            const storyGrid = document.getElementById('storyGrid');
-            if (storyGrid) {
-                storyGrid.innerHTML = STORY_COLLECTIONS.map((s, i) => `
-          <a href="${s.link}" class="story-card" style="--i:${i}">
-            <span class="story-card-num">${s.number} — ${s.hindi}</span>
-            <h3 class="story-card-title">${s.title}</h3>
-            <p class="story-card-desc">${s.description}</p>
-            <span class="story-card-cta">Explore</span>
-          </a>
-        `).join('');
-            }
-
-            /* Memory archive */
-            const memoryGrid = document.getElementById('memoryGrid');
-            if (memoryGrid) {
-                memoryGrid.innerHTML = MEMORY_ARCHIVE.map(m => `
-          <a href="${m.link}" class="memory-card" aria-label="${m.title}: ${m.story}">
-            <span class="memory-emoji" aria-hidden="true">${m.icon}</span>
-            <h3>${m.title}</h3>
-            <p class="memory-story">${m.story}</p>
-            <span class="memory-link">See the Story →</span>
-          </a>
-        `).join('');
-            }
-
-            /* Hero particles — populate with JS for theming */
-            const particles = document.querySelector('.hero-particles');
-            if (particles && !particles.dataset.ready) {
-                const isMobile = window.matchMedia('(max-width: 768px)').matches;
-                if (!isMobile) {
-                    const frag = document.createDocumentFragment();
-                    for (let i = 0; i < 12; i++) {
-                        const p = document.createElement('span');
-                        p.style.left = (8 + i * 7.5) + '%';
-                        p.style.bottom = (10 + (i * 13) % 60) + '%';
-                        p.style.setProperty('--dur', (14 + (i % 5) * 2) + 's');
-                        p.style.setProperty('--delay', ((i % 6) * 0.6) + 's');
-                        frag.appendChild(p);
-                    }
-                    particles.appendChild(frag);
-                    particles.dataset.ready = 'true';
-                }
-            }
-        });
-    </script>
-
-    <!-- Hero Carousel Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const shell = document.querySelector('.hero-promo');
-            const slidesEl = document.getElementById('heroSlides');
-            if (!shell || !slidesEl) return;
-
-            const slides = Array.from(slidesEl.querySelectorAll('.hero-promo-slide'));
-            const dots = Array.from(document.querySelectorAll('.hero-promo-dot'));
-            const prevBtn = document.getElementById('heroPrev');
-            const nextBtn = document.getElementById('heroNext');
-            const pauseBtn = document.getElementById('heroPause');
-            const pauseIcon = pauseBtn?.querySelector('.pp-pause');
-            const playIcon = pauseBtn?.querySelector('.pp-play');
-
-            let index = 0;
-            let timer = null;
-            let paused = false;
-            const AUTOPLAY_MS = 5500;
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            function goTo(i) {
-                index = (i + slides.length) % slides.length;
-                slides.forEach((s, k) => {
-                    const isActive = k === index;
-                    s.classList.toggle('is-active', isActive);
-                    s.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-                });
-                dots.forEach((d, k) => {
-                    d.classList.toggle('is-active', k === index);
-                    d.setAttribute('aria-selected', k === index ? 'true' : 'false');
-                });
-            }
-            function next() { goTo(index + 1); }
-            function prev() { goTo(index - 1); }
-
-            function start() {
-                if (reduceMotion || paused) return;
-                stop();
-                timer = setInterval(() => { if (!paused) next(); }, AUTOPLAY_MS);
-            }
-            function stop() {
-                if (timer) { clearInterval(timer); timer = null; }
-            }
-            function setPaused(state) {
-                paused = state;
-                if (paused) {
-                    stop();
-                    if (pauseIcon) pauseIcon.style.display = 'none';
-                    if (playIcon) playIcon.style.display = '';
-                    pauseBtn?.setAttribute('aria-label', 'Play carousel');
-                } else {
-                    if (pauseIcon) pauseIcon.style.display = '';
-                    if (playIcon) playIcon.style.display = 'none';
-                    pauseBtn?.setAttribute('aria-label', 'Pause carousel');
-                    start();
-                }
-            }
-
-            nextBtn?.addEventListener('click', () => { next(); if (!paused) start(); });
-            prevBtn?.addEventListener('click', () => { prev(); if (!paused) start(); });
-            pauseBtn?.addEventListener('click', () => setPaused(!paused));
-
-            dots.forEach(d => {
-                d.addEventListener('click', () => {
-                    goTo(Number(d.dataset.slide));
-                    if (!paused) start();
-                });
-            });
-
-            let touchX = null;
-            shell.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
-            shell.addEventListener('touchend', (e) => {
-                if (touchX === null) return;
-                const dx = e.changedTouches[0].clientX - touchX;
-                if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); if (!paused) start(); }
-                touchX = null;
-            }, { passive: true });
-
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) stop();
-                else if (!paused) start();
-            });
-
-            goTo(0);
-            start();
-        });
-    </script>
 </body>
 
 </html>

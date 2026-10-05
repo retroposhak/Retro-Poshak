@@ -2,531 +2,313 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact — Retro Poshak</title>
-    <meta name="description"
-        content="Get in touch with Retro Poshak — customer support, business enquiries and more." />
-
-    <!-- Theme color for browser chrome -->
-    <meta name="theme-color" content="#f4ede1" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0f0d0c" media="(prefers-color-scheme: dark)" />
-
-    <!-- Prevent flash of wrong theme (runs before paint) -->
-    <script>
-        (function () {
-            try {
-                var t = localStorage.getItem('retroPoshakTheme');
-                if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', t);
-                document.documentElement.style.colorScheme = t;
-            } catch (e) { }
-        })();
-    </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Bebas+Neue&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/responsive.css" />
-    <link rel="stylesheet" href="css/theme.css" />
-    <link rel="stylesheet" href="css/cinematic.css" />
-    <!-- Contact-page editorial styles -->
-    <link rel="stylesheet" href="css/contact.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us — Retro Poshak</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Dancing+Script:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="no-js">
-    <script>document.body.classList.remove('no-js');</script>
+<body>
 
-    <!-- Skip link -->
-    <a href="#mainContent" class="skip-link">Skip to content</a>
+    <!-- NAVBAR -->
+    <div id="navbar-placeholder"></div>
 
-    <!-- ===== ANNOUNCEMENT MARQUEE ===== -->
-    <div class="announce-bar" aria-label="Site announcements">
-        <div class="announce-track">
-            <span>✦ Free shipping over ₹1999</span>
-            <span class="dot">◆</span>
-            <span>✦ 5% off on prepaid orders</span>
-            <span class="dot">◆</span>
-            <span>✦ COD available across India</span>
-            <span class="dot">◆</span>
-            <span>✦ Easy 7-day returns</span>
-            <span class="dot">◆</span>
-            <span>✦ Free shipping over ₹1999</span>
-            <span class="dot">◆</span>
-            <span>✦ 5% off on prepaid orders</span>
-            <span class="dot">◆</span>
-            <span>✦ COD available across India</span>
-            <span class="dot">◆</span>
-            <span>✦ Easy 7-day returns</span>
-            <span class="dot">◆</span>
-        </div>
-    </div>
+    <!-- ============================================ -->
+    <!-- CONTACT HERO SECTION                          -->
+    <!-- ============================================ -->
+    <section class="contact-hero">
 
-    <header class="site-header" id="header">
-        <div class="header-inner container">
-            <a href="index.html" class="logo-live" aria-label="Retro Poshak home">
-                <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak — Desi Roots. Modern Streets."
-                    class="logo-img"
-                    onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('span'), { className: 'logo-fallback', innerHTML: 'RETRO<span class=&quot;logo-dot&quot;>.</span>POSHAK' }));" />
-            </a>
+        <!-- LEFT COLUMN: Contact Info -->
+        <div class="contact-hero-content">
+            <span class="contact-eyebrow">LET'S TALK</span>
 
-            <nav class="main-nav" id="mainNav" aria-label="Main navigation">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="shop.html" class="nav-link">Shop</a></li>
-                    <li><a href="shop.html?filter=new" class="nav-link">New Arrivals</a></li>
-                    <li><a href="shop.html?filter=bestseller" class="nav-link">Bestsellers</a></li>
-                    <li><a href="about.html" class="nav-link">Our Story</a></li>
-                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
-                </ul>
-            </nav>
+            <h1 class="contact-heading">Contact Us<span class="heading-dot">.</span></h1>
 
-            <div class="header-actions">
-                <button class="theme-toggle" aria-label="Toggle theme" title="Toggle theme" type="button">
-                    <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <circle cx="12" cy="12" r="4" />
-                        <path
-                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-                    </svg>
-                    <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2">
-                        <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
-                    </svg>
-                </button>
+            <p class="contact-script">We're just a message away.</p>
 
-                <button class="icon-btn search-toggle" id="searchToggle" aria-label="Open search" type="button">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="7" />
-                        <path d="M21 21l-4.35-4.35" />
-                    </svg>
-                </button>
+            <p class="contact-description">
+                Have a question, suggestion or just
+                want to share your childhood memories
+                with us? We'd love to hear from you.
+            </p>
 
-                <span id="authSlot"></span>
-
-                <a href="#" class="icon-btn hide-mobile" aria-label="Wishlist">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path
-                            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
-                    </svg>
-                    <span class="badge wishlist-count" id="wishlistCount">0</span>
+            <div class="contact-info-list">
+                <!-- Email -->
+                <a href="mailto:retroposhak2026@gmail.com" class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                            <path d="m22 7-10 5L2 7"></path>
+                        </svg>
+                    </div>
+                    <div class="contact-info-text">
+                        <h4>Email Us</h4>
+                        <span class="contact-info-link">retroposhak2026@gmail.com</span>
+                        <p>We usually respond within 24 hours.</p>
+                    </div>
                 </a>
 
-                <a href="cart.html" class="icon-btn cart-icon" aria-label="Cart">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 6h15l-1.5 9h-12z" />
-                        <circle cx="9" cy="20" r="1" />
-                        <circle cx="18" cy="20" r="1" />
-                        <path d="M6 6L5 3H2" />
-                    </svg>
-                    <span class="badge cart-count" id="cartCount">0</span>
+                <!-- Phone -->
+                <a href="tel:+919220722844" class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <div class="contact-info-text">
+                        <h4>Call Us</h4>
+                        <span class="contact-info-link">+91 92207 22844</span>
+                        <p>Mon – Sat, 10 AM to 7 PM</p>
+                    </div>
                 </a>
 
-                <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" type="button">
-                    <span></span><span></span><span></span>
-                </button>
+                <!-- Location -->
+                <div class="contact-info-item">
+                    <div class="contact-info-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                    <div class="contact-info-text">
+                        <h4>Our Location</h4>
+                        <span class="contact-info-link">Noida, Delhi NCR, India</span>
+                        <p>Visit us by appointment.</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
 
-    <div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
-
-    <div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search">
-        <div class="search-box container">
-            <input type="text" id="searchInput" placeholder="Search a memory…" autocomplete="off"
-                aria-label="Search products" />
-            <button class="icon-btn" id="searchClose" aria-label="Close search" type="button">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12" />
+        <!-- CENTER COLUMN: Form -->
+        <div class="contact-form-wrapper">
+            <!-- Postal stamp decoration (top-right of form) -->
+            <div class="contact-postal-stamp">
+                <span class="stamp-top">INDIA</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="stamp-icon">
+                    <path d="M12 3 L14 7 L18 7 L15 10 L16.5 14 L12 12 L7.5 14 L9 10 L6 7 L10 7 Z"/>
+                    <path d="M9 14 L9 20 L12 18 L15 20 L15 14"/>
                 </svg>
-            </button>
-        </div>
-        <div class="search-results container" id="searchResults"></div>
-    </div>
-
-    <main id="mainContent">
-        <!-- ===== HERO ===== -->
-        <section class="contact-hero">
-            <div class="container contact-hero-inner">
-                <span class="contact-hero-eyebrow">
-                    <span class="rule" aria-hidden="true"></span>
-                    Say Hello
-                    <span class="rule" aria-hidden="true"></span>
-                </span>
-                <h1 class="contact-hero-title">Get in <em>Touch.</em></h1>
-                <p class="contact-hero-sub">
-                    We'd love to hear your memory — or help you find a new one.
-                </p>
+                <span class="stamp-bottom">INDIA</span>
             </div>
-            <span class="contact-hero-ornament top-left" aria-hidden="true">✦</span>
-            <span class="contact-hero-ornament bottom-right" aria-hidden="true">✦</span>
-        </section>
 
-        <!-- ===== RESPONSE STRIP ===== -->
-        <section class="response-strip" aria-label="Response times">
-            <div class="container response-strip-inner">
-                <div class="response-item">
-                    <span class="response-icon" aria-hidden="true">✎</span>
-                    <div>
-                        <strong>General enquiries</strong>
-                        <span>Reply within 24 hours</span>
+            <div class="contact-form-header">
+                <h2 class="contact-form-title">Send us a Message</h2>
+                <div class="contact-form-underline"></div>
+            </div>
+
+            <form class="contact-form" id="contactForm" novalidate>
+                <div class="form-group">
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Your Name *" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" id="email" name="email" class="form-input" placeholder="Your Email *" required>
+                </div>
+
+                <div class="form-group">
+                    <div class="select-wrap">
+                        <select id="subject" name="subject" class="form-input form-select" required>
+                            <option value="" disabled selected>Subject *</option>
+                            <option value="general">General Enquiry</option>
+                            <option value="order">Order Support</option>
+                            <option value="return">Returns & Exchange</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="collab">Collaboration</option>
+                        </select>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="select-arrow">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
                     </div>
                 </div>
-                <span class="response-divider" aria-hidden="true"></span>
-                <div class="response-item">
-                    <span class="response-icon" aria-hidden="true">↻</span>
-                    <div>
-                        <strong>Order support</strong>
-                        <span>Reply within 12 hours</span>
-                    </div>
-                </div>
-                <span class="response-divider" aria-hidden="true"></span>
-                <div class="response-item">
-                    <span class="response-icon" aria-hidden="true">◈</span>
-                    <div>
-                        <strong>Partnerships</strong>
-                        <span>Reply within 2 days</span>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- ===== MAIN CONTACT SECTION ===== -->
-        <section class="contact-section" aria-labelledby="contactFormTitle">
-            <div class="container contact-layout">
-
-                <!-- FORM -->
-                <div class="contact-form-wrap">
-                    <header class="contact-form-head">
-                        <span class="contact-form-eyebrow">Send a message</span>
-                        <h2 class="contact-form-title" id="contactFormTitle">Tell us your <em>story.</em></h2>
-                        <p class="contact-form-sub">
-                            Whether it's an order query, a custom request, or just a memory you want
-                            to share — write to us.
-                        </p>
-                    </header>
-
-                    <form class="contact-form" id="contactForm" novalidate>
-                        <div class="form-row two-col">
-                            <div class="field">
-                                <input type="text" id="fieldName" name="name" required autocomplete="name"
-                                    placeholder=" " aria-required="true" />
-                                <label for="fieldName">Your name</label>
-                                <span class="field-border" aria-hidden="true"></span>
-                            </div>
-                            <div class="field">
-                                <input type="email" id="fieldEmail" name="email" required autocomplete="email"
-                                    placeholder=" " aria-required="true" />
-                                <label for="fieldEmail">Email address</label>
-                                <span class="field-border" aria-hidden="true"></span>
-                            </div>
-                        </div>
-
-                        <div class="form-row two-col">
-                            <div class="field">
-                                <input type="tel" id="fieldPhone" name="phone" autocomplete="tel"
-                                    placeholder=" " />
-                                <label for="fieldPhone">Phone (optional)</label>
-                                <span class="field-border" aria-hidden="true"></span>
-                            </div>
-                            <div class="field field-select">
-                                <select id="fieldSubject" name="subject" required aria-required="true">
-                                    <option value="" disabled selected hidden></option>
-                                    <option value="order">Order / Delivery</option>
-                                    <option value="return">Return / Exchange</option>
-                                    <option value="product">Product question</option>
-                                    <option value="wholesale">Wholesale enquiry</option>
-                                    <option value="press">Press / Collaboration</option>
-                                    <option value="other">Something else</option>
-                                </select>
-                                <label for="fieldSubject">Subject</label>
-                                <span class="field-border" aria-hidden="true"></span>
-                            </div>
-                        </div>
-
-                        <div class="field field-textarea">
-                            <textarea id="fieldMessage" name="message" rows="6" required
-                                maxlength="800" placeholder=" " aria-required="true"></textarea>
-                            <label for="fieldMessage">Your message</label>
-                            <span class="field-border" aria-hidden="true"></span>
-                            <span class="field-count" aria-hidden="true"><span id="msgCount">0</span> / 800</span>
-                        </div>
-
-                        <div class="contact-form-actions">
-                            <button type="submit" class="btn btn-primary contact-submit" id="contactSubmit">
-                                <span class="contact-submit-label">Send Message</span>
-                                <svg class="contact-submit-icon" width="14" height="14" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                    <path d="M5 12h14M13 5l7 7-7 7" />
-                                </svg>
-                            </button>
-                            <p class="form-msg" id="contactMsg" role="status" aria-live="polite"></p>
-                        </div>
-                    </form>
+                <div class="form-group">
+                    <textarea id="message" name="message" class="form-input form-textarea" placeholder="Your Message *" required></textarea>
                 </div>
 
-                <!-- INFO PANEL -->
-                <aside class="contact-info" aria-labelledby="contactInfoTitle">
-                    <header class="contact-info-head">
-                        <span class="contact-info-eyebrow">Or reach us directly</span>
-                        <h2 class="contact-info-title" id="contactInfoTitle">Other <em>ways.</em></h2>
-                    </header>
+                <button type="submit" class="contact-submit">
+                    <span>Send Message</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
 
-                    <div class="contact-cards">
-                        <a href="https://instagram.com/retroposhak" class="contact-card" target="_blank" rel="noopener">
-                            <span class="contact-card-icon" aria-hidden="true">◐</span>
-                            <div class="contact-card-body">
-                                <strong>Instagram</strong>
-                                <span>@retroposhak</span>
-                                <em>DMs open · fastest replies</em>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
-                        </a>
-
-                        <a href="mailto:hello@retroposhak.in" class="contact-card">
-                            <span class="contact-card-icon" aria-hidden="true">✎</span>
-                            <div class="contact-card-body">
-                                <strong>General Email</strong>
-                                <span>hello@retroposhak.in</span>
-                                <em>For any query</em>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
-                        </a>
-
-                        <a href="mailto:support@retroposhak.in" class="contact-card">
-                            <span class="contact-card-icon" aria-hidden="true">✦</span>
-                            <div class="contact-card-body">
-                                <strong>Order Support</strong>
-                                <span>support@retroposhak.in</span>
-                                <em>Include your order #</em>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
-                        </a>
-
-                        <a href="mailto:partners@retroposhak.in" class="contact-card">
-                            <span class="contact-card-icon" aria-hidden="true">◈</span>
-                            <div class="contact-card-body">
-                                <strong>Business Enquiries</strong>
-                                <span>partners@retroposhak.in</span>
-                                <em>Collabs, wholesale, press</em>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
-                        </a>
-
-                        <a href="https://wa.me/919999999999" class="contact-card whatsapp-card" target="_blank" rel="noopener">
-                            <span class="contact-card-icon" aria-hidden="true">☎</span>
-                            <div class="contact-card-body">
-                                <strong>WhatsApp Support</strong>
-                                <span>Mon–Sat · 10am–7pm IST</span>
-                                <em>Quickest for order tracking</em>
-                            </div>
-                            <span class="contact-card-arrow" aria-hidden="true">↗</span>
-                        </a>
-                    </div>
-
-                    <div class="contact-studio">
-                        <span class="contact-studio-eyebrow">Visit us</span>
-                        <h3>Studio &amp; Pickup Point</h3>
-                        <p>Retro Poshak Studio<br>Mumbai, Maharashtra<br>India</p>
-                        <p class="contact-studio-note">By appointment only · Drop us a line first.</p>
-                    </div>
-                </aside>
-
-            </div>
-        </section>
-
-        <!-- ===== FAQ TEASER ===== -->
-        <section class="faq-teaser" aria-labelledby="faqTitle">
-            <div class="container">
-                <header class="faq-teaser-head">
-                    <span class="eyebrow center">Quick Answers</span>
-                    <h2 class="section-title center" id="faqTitle">Before You Write.</h2>
-                    <p class="section-sub center">A few things people ask us most.</p>
-                </header>
-
-                <div class="faq-grid">
-                    <article class="faq-card">
-                        <span class="faq-num" aria-hidden="true">01</span>
-                        <h3>How long does shipping take?</h3>
-                        <p>2–3 days to dispatch, then 3–7 days across India. Tracking by email.</p>
-                    </article>
-                    <article class="faq-card">
-                        <span class="faq-num" aria-hidden="true">02</span>
-                        <h3>Can I exchange for a different size?</h3>
-                        <p>Yes — free within 7 days, unworn with tags. Just email us your order #.</p>
-                    </article>
-                    <article class="faq-card">
-                        <span class="faq-num" aria-hidden="true">03</span>
-                        <h3>Do you do custom / bulk orders?</h3>
-                        <p>We do! Minimum 20 pieces. Write to partners@retroposhak.in with details.</p>
-                    </article>
-                    <article class="faq-card">
-                        <span class="faq-num" aria-hidden="true">04</span>
-                        <h3>Are the prints long-lasting?</h3>
-                        <p>Yes — high-quality DTF prints designed to survive 50+ washes with care.</p>
-                    </article>
+                <!-- Success message -->
+                <div class="form-success" id="formSuccess">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Message sent! We'll be in touch soon.</span>
                 </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <div class="footer-logo-wrap">
-                    <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak" class="footer-logo-img"
-                        onerror="this.onerror=null; this.replaceWith(Object.assign(document.createElement('h3'), { className: 'footer-logo', textContent: 'RETRO POSHAK' }));" />
-                </div>
-                <p class="footer-tagline">Pehno Yaaden.</p>
-                <p class="footer-hindi">Old memories. New fits.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Shop</h4>
-                <ul>
-                    <li><a href="shop.html">All Products</a></li>
-                    <li><a href="shop.html?filter=new">New Arrivals</a></li>
-                    <li><a href="shop.html?filter=bestseller">Bestsellers</a></li>
-                    <li><a href="shop.html">Collections</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Help</h4>
-                <ul>
-                    <li><a href="contact.html">Contact Us</a></li>
-                    <li><a href="#">FAQs</a></li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Returns &amp; Exchanges</a></li>
-                    <li><a href="#">Size Guide</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="about.html">Our Story</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms &amp; Conditions</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Follow</h4>
-                <ul>
-                    <li><a href="https://www.instagram.com/retro_poshak" target="_blank" rel="noopener">Instagram</a></li>
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Pinterest</a></li>
-                    <li><a href="#">YouTube</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-newsletter container">
-            <p>Get the next memory in your inbox.</p>
-            <form class="newsletter-form" id="newsletterForm">
-                <input type="email" placeholder="Enter your email" required aria-label="Email for newsletter" />
-                <button type="submit" class="btn btn-primary">Subscribe</button>
             </form>
         </div>
-        <div class="footer-bottom container">
-            <p>&copy; <span data-year>2025</span> Retro Poshak. Founded by Urvashi Naik. All memories reserved.</p>
-            <a href="#" class="whatsapp">💬 WhatsApp Support</a>
+
+        <!-- RIGHT COLUMN: Image -->
+        <div class="contact-hero-image">
+            <img
+                src="assets/images/contactus-hero.jpeg"
+                alt="Retro Indian telephone booth"
+                loading="eager"
+            >
+
+            <!-- Cursive note overlay -->
+            <div class="contact-note">
+                Same streets.<br>
+                Different generations.<br>
+                <em>Same feelings.</em>
+            </div>
         </div>
-    </footer>
+    </section>
 
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <!-- ============================================ -->
+    <!-- BOTTOM STRIP                                  -->
+    <!-- ============================================ -->
+    <section class="contact-strip">
+        <div class="strip-item">
+            <div class="strip-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+            </div>
+            <div class="strip-text">
+                <h4>Quick Response</h4>
+                <p>We reply within 24 hours.</p>
+            </div>
+        </div>
 
-    <a href="#" class="wa-float" aria-label="Chat on WhatsApp">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path
-                d="M20.5 3.5A11 11 0 0 0 3.6 17L2 22l5.1-1.6A11 11 0 1 0 20.5 3.5zm-8.5 18a9 9 0 0 1-4.6-1.3l-.3-.2-3 .9.9-2.9-.2-.3A9 9 0 1 1 12 21.5zm5.2-6.7c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.4.2-.6.1a7.4 7.4 0 0 1-3.7-3.3c-.1-.2-.1-.4.1-.6l.6-.7c.1-.2.1-.4 0-.6l-.9-2c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 10.4 10.4 0 0 0 4 3.5 4.6 4.6 0 0 0 2.8.5c.9-.1 1.7-.6 2.1-1.4.2-.4.3-.9.2-1.3 0-.2-.2-.3-.4-.4z" />
-        </svg>
-    </a>
+        <div class="strip-item">
+            <div class="strip-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m7.5 4.27 9 5.15"></path>
+                    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
+                    <path d="m3.3 7 8.7 5 8.7-5"></path>
+                    <path d="M12 22V12"></path>
+                </svg>
+            </div>
+            <div class="strip-text">
+                <h4>Order Support</h4>
+                <p>Help with orders, returns and exchanges.</p>
+            </div>
+        </div>
+
+        <div class="strip-item">
+            <div class="strip-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18h6"></path>
+                    <path d="M10 22h4"></path>
+                    <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+                </svg>
+            </div>
+            <div class="strip-text">
+                <h4>Suggestions</h4>
+                <p>Share your ideas with us.</p>
+            </div>
+        </div>
+
+        <div class="strip-item">
+            <div class="strip-icon strip-icon-heart">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+            </div>
+            <div class="strip-text">
+                <h4>Just Say Hi</h4>
+                <p>We love hearing your stories.</p>
+            </div>
+        </div>
+
+        <!-- Cursive note bottom-right -->
+        <div class="strip-note">
+            Same streets.<br>
+            Different generations.<br>
+            Same feelings.
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+        </div>
+
+        <!-- India postal stamp -->
+        <div class="strip-postal-stamp">
+            <div class="stamp-inner">
+                <span class="stamp-top">INDIA</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" class="stamp-icon">
+                    <path d="M12 3 L14 7 L18 7 L15 10 L16.5 14 L12 12 L7.5 14 L9 10 L6 7 L10 7 Z"/>
+                    <path d="M9 14 L9 20 L12 18 L15 20 L15 14"/>
+                </svg>
+                <span class="stamp-bottom">INDIA</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
-    <script src="js/theme.js"></script>
-    <script src="js/products.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/cart.js"></script>
     <script src="js/main.js"></script>
-
-    <!-- Contact form interactions -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('contactForm');
-            const msg = document.getElementById('contactMsg');
-            const msgField = document.getElementById('fieldMessage');
-            const msgCount = document.getElementById('msgCount');
-            const submitBtn = document.getElementById('contactSubmit');
-            if (!form) return;
+        (async function initPage() {
+            try {
+                const [navRes, footRes] = await Promise.all([
+                    fetch('components/navbar.html'),
+                    fetch('components/footer.html')
+                ]);
 
-            /* Character counter */
-            msgField?.addEventListener('input', () => {
-                if (msgCount) msgCount.textContent = msgField.value.length;
-            });
+                document.getElementById('navbar-placeholder').innerHTML = await navRes.text();
+                document.getElementById('footer-placeholder').innerHTML = await footRes.text();
 
-            /* Validation helper */
-            const setFieldError = (field, hasError) => {
-                const wrap = field.closest('.field');
-                if (!wrap) return;
-                wrap.classList.toggle('has-error', hasError);
-                field.setAttribute('aria-invalid', hasError ? 'true' : 'false');
-            };
+                if (typeof initMobileMenu === 'function') initMobileMenu();
+                if (typeof initSearch === 'function') initSearch();
 
-            /* Clear error on input */
-            form.querySelectorAll('input, select, textarea').forEach(el => {
-                el.addEventListener('input', () => setFieldError(el, false));
-                el.addEventListener('change', () => setFieldError(el, false));
-            });
+                // Contact form
+                const form = document.getElementById('contactForm');
+                const successMsg = document.getElementById('formSuccess');
 
-            /* Submit */
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                msg.textContent = '';
+                if (form) {
+                    form.addEventListener('submit', (e) => {
+                        e.preventDefault();
 
-                let valid = true;
-                ['fieldName', 'fieldEmail', 'fieldSubject', 'fieldMessage'].forEach(id => {
-                    const el = document.getElementById(id);
-                    if (!el) return;
-                    const empty = !el.value.trim();
-                    const badEmail = id === 'fieldEmail' &&
-                        el.value.trim() && !/^\S+@\S+\.\S+$/.test(el.value.trim());
-                    if (empty || badEmail) {
-                        setFieldError(el, true);
-                        valid = false;
-                    }
-                });
+                        const name = document.getElementById('name').value.trim();
+                        const email = document.getElementById('email').value.trim();
+                        const subject = document.getElementById('subject').value;
+                        const message = document.getElementById('message').value.trim();
 
-                if (!valid) {
-                    msg.textContent = 'Please fill in the highlighted fields.';
-                    msg.className = 'form-msg error';
-                    return;
+                        if (!name || !email || !subject || !message) {
+                            alert('Please fill in all required fields.');
+                            return;
+                        }
+
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(email)) {
+                            alert('Please enter a valid email address.');
+                            return;
+                        }
+
+                        const submitBtn = form.querySelector('.contact-submit');
+                        submitBtn.disabled = true;
+                        submitBtn.querySelector('span').textContent = 'Sending...';
+
+                        setTimeout(() => {
+                            successMsg.classList.add('show');
+                            form.reset();
+                            submitBtn.disabled = false;
+                            submitBtn.querySelector('span').textContent = 'Send Message';
+
+                            setTimeout(() => {
+                                successMsg.classList.remove('show');
+                            }, 5000);
+                        }, 800);
+                    });
                 }
-
-                /* Simulate send */
-                submitBtn.disabled = true;
-                submitBtn.classList.add('is-sending');
-                const label = submitBtn.querySelector('.contact-submit-label');
-                if (label) label.textContent = 'Sending…';
-
-                setTimeout(() => {
-                    submitBtn.classList.remove('is-sending');
-                    submitBtn.classList.add('is-sent');
-                    if (label) label.textContent = 'Sent ✓';
-                    msg.textContent = 'Thank you — your message is on its way. We\'ll reply within 24 hours.';
-                    msg.className = 'form-msg success';
-
-                    setTimeout(() => {
-                        form.reset();
-                        if (msgCount) msgCount.textContent = '0';
-                        submitBtn.disabled = false;
-                        submitBtn.classList.remove('is-sent');
-                        if (label) label.textContent = 'Send Message';
-                    }, 2600);
-                }, 1200);
-            });
-        });
+            } catch (err) {
+                console.error('Failed to load navbar/footer:', err);
+            }
+        })();
     </script>
 </body>
-
 </html>
