@@ -1,17 +1,31 @@
 /* ============================================
-   ABOUT SECTION — PIXEL-PERFECT MATCH
+   ABOUT SECTION — Editorial Story v2
    ============================================ */
 
 .about-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 60px;
+    gap: 80px;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 100px 60px;
+    padding: 130px 60px;
     background-color: #f5f0e8;
     position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Soft warm background glow — matches products/collections */
+.about-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 15% 20%, rgba(201, 169, 110, 0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 80%, rgba(179, 58, 58, 0.05) 0%, transparent 55%);
 }
 
 /* ============================================
@@ -26,98 +40,174 @@
     z-index: 2;
 }
 
+/* Eyebrow — pill-style with gold rule */
 .about-eyebrow {
-    display: inline-block;
-    font-size: 0.75rem;
-    letter-spacing: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
     color: #b33a3a;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 24px;
-    font-family: var(--font-body);
+    line-height: 1;
+}
+
+.about-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1.5px;
+    background: linear-gradient(90deg, #b33a3a, rgba(179, 58, 58, 0.15));
+    border-radius: 1px;
+    flex-shrink: 0;
 }
 
 .about-heading {
-    font-family: var(--font-serif);
+    font-family: var(--font-serif, 'Playfair Display', serif);
     font-size: 4rem;
     font-weight: 400;
     line-height: 1.05;
     color: #1a1a1a;
     margin: 0 0 28px 0;
     letter-spacing: -1.2px;
+    position: relative;
+    display: inline-block;
 }
 
+/* Skewed warm underline accent — matches the rest of the site */
+.about-heading em,
+.about-heading::after {
+    font-style: italic;
+}
+.about-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: -8px;
+    right: -12px;
+    height: 14px;
+    background: linear-gradient(90deg,
+        rgba(179, 58, 58, 0.14) 0%,
+        rgba(201, 169, 110, 0.28) 100%);
+    z-index: -1;
+    border-radius: 2px;
+    transform: skewX(-6deg);
+}
+
+/* Italic pull-quote description */
 .about-description {
-    font-size: 1rem;
-    color: #5a5a5a;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: #5a544d;
     line-height: 1.75;
     margin: 0 0 40px 0;
     max-width: 480px;
     font-weight: 400;
+    padding-left: 20px;
+    border-left: 2px solid rgba(184, 145, 74, 0.55);
 }
 
-/* READ OUR STORY button */
+/* READ OUR STORY button — enhanced editorial CTA */
 .about-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 14px;
     background-color: #1a1a1a;
     color: #f5f0e8;
     padding: 20px 40px;
-    font-size: 0.75rem;
-    letter-spacing: 2.5px;
+    font-size: 0.72rem;
+    letter-spacing: 2.8px;
     text-transform: uppercase;
     font-weight: 700;
     border-radius: 0;
     align-self: flex-start;
     position: relative;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    font-family: var(--font-body);
+    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: 'Inter', sans-serif;
     text-decoration: none;
-    min-width: 220px;
+    min-width: 230px;
+    box-shadow: 0 8px 24px rgba(26, 20, 15, 0.12);
 }
 
+/* Gold hairline border */
+.about-cta::after {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgba(201, 169, 110, 0);
+    transition: border-color 0.5s ease;
+    pointer-events: none;
+}
+
+.about-cta:hover::after {
+    border-color: rgba(201, 169, 110, 0.55);
+}
+
+/* Diagonal shine sweep */
 .about-cta::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
-    width: 100%;
+    width: 60%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-    transition: left 0.6s ease;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.28) 50%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-cta:hover::before {
-    left: 100%;
+    left: 140%;
 }
 
 .about-cta:hover {
     background-color: #b33a3a;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(179, 58, 58, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px rgba(179, 58, 58, 0.32);
 }
 
 .about-cta svg {
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     flex-shrink: 0;
 }
 
 .about-cta:hover svg {
-    transform: translateX(5px);
+    transform: translateX(6px);
 }
 
 /* ============================================
-   RIGHT COLUMN: FRAMED IMAGE
+   RIGHT COLUMN: FRAMED IMAGE — Editorial photo print
    ============================================ */
 .about-image-frame {
     position: relative;
     width: 100%;
-    padding: 24px;
+    padding: 26px;
     background-color: transparent;
     z-index: 1;
+}
+
+/* Paper backing — layered behind the frame */
+.about-image-frame::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    background: #fdfbf7;
+    box-shadow:
+        0 8px 24px rgba(26, 20, 15, 0.10),
+        0 24px 60px -20px rgba(26, 20, 15, 0.22),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.18);
+    z-index: 0;
+    border-radius: 2px;
 }
 
 /* Inner framed image container */
@@ -126,9 +216,15 @@
     width: 100%;
     aspect-ratio: 3 / 2;
     background-color: #f5f0e8;
-    border: 1.5px solid rgba(26, 26, 26, 0.15);
+    border: 1px solid rgba(26, 26, 26, 0.12);
     overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    z-index: 2;
+    box-shadow: inset 0 0 0 6px #fdfbf7;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-image-frame:hover .about-image-wrap {
+    transform: translateY(-4px);
 }
 
 .about-image-wrap img {
@@ -142,58 +238,59 @@
 }
 
 .about-image-wrap:hover img {
-    filter: grayscale(80%) contrast(1.1) brightness(1);
-    transform: scale(1.03);
+    filter: grayscale(75%) contrast(1.1) brightness(1.02);
+    transform: scale(1.04);
 }
 
-/* Soft vignette */
+/* Soft warm vignette */
 .about-image-wrap::after {
     content: '';
     position: absolute;
     inset: 0;
     background: radial-gradient(
         ellipse at center,
-        transparent 50%,
-        rgba(0, 0, 0, 0.12) 100%
+        transparent 55%,
+        rgba(26, 20, 15, 0.18) 100%
     );
     pointer-events: none;
     z-index: 2;
 }
 
 /* ============================================
-   POSTAL STAMP — TOP-LEFT OVERLAP
+   POSTAL STAMP — TOP-LEFT
    ============================================ */
 .about-postal-stamp {
     position: absolute;
-    top: -10px;
-    left: -10px;
-    width: 140px;
-    height: 140px;
+    top: -12px;
+    left: -12px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    background: rgba(245, 240, 232, 0.95);
+    background: radial-gradient(circle at 40% 30%, #fdfbf7 0%, #f5f0e8 100%);
     border: 1px solid rgba(179, 58, 58, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 5;
-    transform: rotate(-8deg);
+    transform: rotate(-10deg);
     pointer-events: none;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
-    animation: stampSway 6s ease-in-out infinite;
+    box-shadow:
+        0 8px 24px rgba(26, 20, 15, 0.14),
+        inset 0 0 0 1px rgba(179, 58, 58, 0.15);
+    animation: stampSway 7s ease-in-out infinite;
 }
 
 @keyframes stampSway {
-    0%, 100% { transform: rotate(-8deg); }
-    50%      { transform: rotate(-4deg); }
+    0%, 100% { transform: rotate(-10deg); }
+    50%      { transform: rotate(-6deg); }
 }
 
-/* Inner dashed ring */
 .about-postal-stamp::before {
     content: '';
     position: absolute;
     inset: 8px;
     border-radius: 50%;
-    border: 1px dashed rgba(179, 58, 58, 0.5);
+    border: 1px dashed rgba(179, 58, 58, 0.55);
 }
 
 .postal-inner {
@@ -203,9 +300,9 @@
     justify-content: center;
     text-align: center;
     line-height: 1.15;
-    font-family: var(--font-body);
+    font-family: 'Inter', sans-serif;
     color: #b33a3a;
-    gap: 4px;
+    gap: 5px;
     padding: 8px;
 }
 
@@ -214,18 +311,20 @@
     letter-spacing: 2.5px;
     text-transform: uppercase;
     font-weight: 700;
-    border-top: 1px solid rgba(179, 58, 58, 0.5);
-    border-bottom: 1px solid rgba(179, 58, 58, 0.5);
+    border-top: 1px solid rgba(179, 58, 58, 0.55);
+    border-bottom: 1px solid rgba(179, 58, 58, 0.55);
     padding: 4px 0;
     width: 100%;
 }
 
 .postal-line.accent {
     font-weight: 800;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     letter-spacing: 3px;
     border: none;
     padding: 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
 }
 
 .postal-line.small {
@@ -238,13 +337,13 @@
 }
 
 /* ============================================
-   WAVE LINES — BOTTOM-RIGHT OVERLAP
+   WAVE LINES — BOTTOM-RIGHT
    ============================================ */
 .about-waves {
     position: absolute;
-    bottom: 30px;
-    right: -20px;
-    z-index: 5;
+    bottom: 34px;
+    right: -24px;
+    z-index: 6;
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -254,7 +353,7 @@
 .about-waves span {
     display: block;
     height: 2px;
-    background: rgba(179, 58, 58, 0.7);
+    background: linear-gradient(90deg, rgba(179, 58, 58, 0.85), rgba(179, 58, 58, 0.4));
     border-radius: 2px;
     margin-left: auto;
 }
@@ -265,79 +364,95 @@
 .about-waves span:nth-child(4) { width: 45px; }
 
 /* ============================================
-   GOOD FRIENDS STAMP — TOP-RIGHT
+   GOOD FRIENDS STAMP — TOP-RIGHT PAPER NOTE
    ============================================ */
 .about-stamp {
     position: absolute;
-    top: 30px;
-    right: -30px;
-    background: #fdfbf7;
-    padding: 30px 34px;
+    top: 34px;
+    right: -34px;
+    background: linear-gradient(180deg, #fdfbf7 0%, #f8f3e8 100%);
+    padding: 32px 36px;
     font-family: 'Dancing Script', 'Playfair Display', cursive;
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 500;
-    line-height: 1.2;
+    line-height: 1.15;
     color: #1a1a1a;
     transform: rotate(8deg);
     box-shadow:
-        8px 8px 28px rgba(0, 0, 0, 0.28),
-        inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+        8px 10px 30px rgba(26, 20, 15, 0.28),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.25),
+        inset 0 0 40px rgba(184, 145, 74, 0.08);
     border-radius: 2px;
     z-index: 6;
     text-align: center;
-    min-width: 160px;
-    animation: stampFloat 6s ease-in-out infinite;
+    min-width: 170px;
+    animation: stampFloat 7s ease-in-out infinite;
 }
 
 @keyframes stampFloat {
     0%, 100% { transform: rotate(8deg) translateY(0); }
-    50%      { transform: rotate(5deg) translateY(-6px); }
+    50%      { transform: rotate(5deg) translateY(-8px); }
 }
 
-/* Paper texture */
+/* Paper grain */
 .about-stamp::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.06"/></svg>');
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.07"/></svg>');
     pointer-events: none;
     border-radius: 2px;
+    opacity: 0.9;
 }
 
 /* Torn top edge */
 .about-stamp::after {
     content: '';
     position: absolute;
-    top: -5px;
-    left: 10%;
-    width: 80%;
-    height: 8px;
+    top: -6px;
+    left: 8%;
+    width: 84%;
+    height: 10px;
     background: #fdfbf7;
     border-radius: 50%;
-    filter: blur(1.5px);
-    opacity: 0.65;
+    filter: blur(2px);
+    opacity: 0.75;
+}
+
+/* Tape piece */
+.about-stamp .about-stamp-tape {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 60px;
+    height: 20px;
+    background: rgba(201, 169, 110, 0.35);
+    border-left: 1px dashed rgba(184, 145, 74, 0.5);
+    border-right: 1px dashed rgba(184, 145, 74, 0.5);
+    box-shadow: 0 2px 6px rgba(26, 20, 15, 0.08);
 }
 
 /* ============================================
    RESPONSIVE — ULTRAWIDE (1800px+)
    ============================================ */
 @media (min-width: 1800px) {
-    .about-section { max-width: 1600px; padding: 120px 60px; gap: 80px; }
+    .about-section { max-width: 1600px; padding: 150px 60px; gap: 100px; }
     .about-heading { font-size: 4.8rem; }
-    .about-description { font-size: 1.1rem; max-width: 540px; }
-    .about-cta { padding: 22px 46px; font-size: 0.8rem; }
-    .about-postal-stamp { width: 160px; height: 160px; top: -20px; left: -20px; }
+    .about-description { font-size: 1.15rem; max-width: 540px; }
+    .about-cta { padding: 22px 46px; font-size: 0.78rem; }
+    .about-postal-stamp { width: 170px; height: 170px; top: -22px; left: -22px; }
     .postal-line { font-size: 0.7rem; }
-    .postal-line.accent { font-size: 0.8rem; }
+    .postal-line.accent { font-size: 0.82rem; }
     .postal-line.small { font-size: 0.48rem; }
-    .about-stamp { font-size: 1.9rem; padding: 34px 38px; min-width: 180px; top: 40px; right: -40px; }
+    .about-stamp { font-size: 2rem; padding: 36px 42px; min-width: 200px; top: 44px; right: -44px; }
 }
 
 /* ============================================
    RESPONSIVE — LARGE DESKTOP (1400–1799px)
    ============================================ */
 @media (min-width: 1400px) and (max-width: 1799px) {
-    .about-section { padding: 100px 50px; gap: 60px; }
+    .about-section { padding: 110px 50px; gap: 70px; }
     .about-heading { font-size: 4.2rem; }
 }
 
@@ -345,30 +460,30 @@
    RESPONSIVE — SMALL DESKTOP (1200–1399px)
    ============================================ */
 @media (max-width: 1399px) {
-    .about-section { padding: 90px 50px; gap: 50px; }
+    .about-section { padding: 100px 50px; gap: 60px; }
     .about-heading { font-size: 3.6rem; }
-    .about-description { font-size: 0.95rem; }
-    .about-postal-stamp { width: 120px; height: 120px; }
-    .postal-line { font-size: 0.54rem; }
-    .postal-line.accent { font-size: 0.6rem; }
+    .about-description { font-size: 1rem; }
+    .about-postal-stamp { width: 130px; height: 130px; }
+    .postal-line { font-size: 0.55rem; }
+    .postal-line.accent { font-size: 0.62rem; }
     .postal-line.small { font-size: 0.38rem; }
-    .about-stamp { font-size: 1.4rem; padding: 26px 30px; min-width: 140px; top: 24px; right: -24px; }
+    .about-stamp { font-size: 1.5rem; padding: 28px 32px; min-width: 150px; top: 28px; right: -28px; }
 }
 
 /* ============================================
    RESPONSIVE — TABLET LANDSCAPE (1024–1199px)
    ============================================ */
 @media (max-width: 1199px) {
-    .about-section { padding: 80px 40px; gap: 40px; }
+    .about-section { padding: 90px 40px; gap: 50px; }
     .about-heading { font-size: 3rem; }
-    .about-description { font-size: 0.92rem; max-width: 400px; margin-bottom: 32px; }
-    .about-cta { padding: 17px 32px; font-size: 0.7rem; min-width: 190px; }
-    .about-postal-stamp { width: 100px; height: 100px; top: -6px; left: -6px; }
-    .postal-line { font-size: 0.46rem; letter-spacing: 2px; }
-    .postal-line.accent { font-size: 0.52rem; letter-spacing: 2.5px; }
+    .about-description { font-size: 0.95rem; max-width: 400px; margin-bottom: 32px; }
+    .about-cta { padding: 18px 34px; font-size: 0.7rem; min-width: 200px; }
+    .about-postal-stamp { width: 110px; height: 110px; top: -8px; left: -8px; }
+    .postal-line { font-size: 0.48rem; letter-spacing: 2px; }
+    .postal-line.accent { font-size: 0.54rem; letter-spacing: 2.5px; }
     .postal-line.small { font-size: 0.34rem; }
-    .about-stamp { font-size: 1.2rem; padding: 22px 26px; min-width: 120px; top: 20px; right: -20px; }
-    .about-waves { bottom: 24px; right: -16px; }
+    .about-stamp { font-size: 1.25rem; padding: 22px 26px; min-width: 125px; top: 20px; right: -22px; }
+    .about-waves { bottom: 24px; right: -18px; }
     .about-waves span:nth-child(1) { width: 70px; }
     .about-waves span:nth-child(2) { width: 45px; }
     .about-waves span:nth-child(3) { width: 58px; }
@@ -379,19 +494,20 @@
    RESPONSIVE — TABLET PORTRAIT (768–1023px)
    ============================================ */
 @media (max-width: 1023px) {
-    .about-section { padding: 70px 30px; gap: 30px; }
-    .about-heading { font-size: 2.4rem; margin-bottom: 20px; }
-    .about-eyebrow { font-size: 0.68rem; letter-spacing: 3px; margin-bottom: 16px; }
-    .about-description { font-size: 0.85rem; line-height: 1.7; margin-bottom: 26px; }
-    .about-cta { padding: 15px 26px; font-size: 0.65rem; min-width: 170px; }
+    .about-section { padding: 80px 30px; gap: 40px; }
+    .about-heading { font-size: 2.5rem; margin-bottom: 22px; }
+    .about-eyebrow { font-size: 0.65rem; letter-spacing: 3px; margin-bottom: 18px; }
+    .about-description { font-size: 0.9rem; line-height: 1.7; margin-bottom: 28px; }
+    .about-cta { padding: 16px 28px; font-size: 0.66rem; min-width: 180px; }
     .about-cta svg { width: 14px; height: 14px; }
-    .about-image-frame { padding: 16px; }
-    .about-postal-stamp { width: 85px; height: 85px; top: -5px; left: -5px; }
-    .postal-line { font-size: 0.4rem; letter-spacing: 1.8px; }
-    .postal-line.accent { font-size: 0.44rem; letter-spacing: 2.2px; }
-    .postal-line.small { font-size: 0.28rem; }
-    .about-stamp { font-size: 1rem; padding: 18px 22px; min-width: 100px; top: 16px; right: -16px; }
-    .about-waves { bottom: 20px; right: -12px; }
+    .about-image-frame { padding: 18px; }
+    .about-image-frame::before { inset: 6px; }
+    .about-postal-stamp { width: 95px; height: 95px; top: -6px; left: -6px; }
+    .postal-line { font-size: 0.42rem; letter-spacing: 1.8px; }
+    .postal-line.accent { font-size: 0.46rem; letter-spacing: 2.2px; }
+    .postal-line.small { font-size: 0.3rem; }
+    .about-stamp { font-size: 1.05rem; padding: 18px 22px; min-width: 105px; top: 18px; right: -18px; }
+    .about-waves { bottom: 22px; right: -14px; }
     .about-waves span:nth-child(1) { width: 55px; }
     .about-waves span:nth-child(2) { width: 38px; }
     .about-waves span:nth-child(3) { width: 45px; }
@@ -404,8 +520,8 @@
 @media (max-width: 767px) {
     .about-section {
         grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 60px 24px 70px;
+        gap: 60px;
+        padding: 70px 24px 80px;
     }
 
     .about-content {
@@ -413,40 +529,45 @@
         align-items: center;
     }
 
-    .about-heading {
-        font-size: 2.2rem;
-        text-align: center;
+    .about-eyebrow {
+        justify-content: center;
     }
 
+    .about-heading {
+        font-size: 2.4rem;
+        text-align: center;
+    }
+    .about-heading::after { left: -6px; right: -8px; height: 10px; }
+
     .about-description {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
+        padding-left: 16px;
+        padding-right: 16px;
     }
 
     .about-cta {
         align-self: center;
     }
 
-    .about-image-frame {
-        padding: 12px;
-    }
+    .about-image-frame { padding: 14px; }
 
-    .about-postal-stamp { width: 80px; height: 80px; top: -8px; left: -8px; }
+    .about-postal-stamp { width: 88px; height: 88px; top: -8px; left: -8px; }
     .postal-line { font-size: 0.38rem; }
     .postal-line.accent { font-size: 0.42rem; }
-    .postal-line.small { font-size: 0.26rem; }
+    .postal-line.small { font-size: 0.28rem; }
 
     .about-stamp {
-        font-size: 0.95rem;
-        padding: 16px 20px;
-        min-width: 95px;
-        top: 12px;
-        right: -14px;
+        font-size: 1rem;
+        padding: 18px 22px;
+        min-width: 100px;
+        top: 14px;
+        right: -16px;
     }
 
-    .about-waves { bottom: 16px; right: -10px; }
+    .about-waves { bottom: 18px; right: -12px; }
     .about-waves span:nth-child(1) { width: 45px; }
     .about-waves span:nth-child(2) { width: 32px; }
     .about-waves span:nth-child(3) { width: 40px; }
@@ -457,17 +578,17 @@
    RESPONSIVE — STANDARD PHONE (480–599px)
    ============================================ */
 @media (max-width: 599px) {
-    .about-section { padding: 50px 20px 60px; gap: 32px; }
-    .about-heading { font-size: 1.9rem; }
-    .about-description { font-size: 0.85rem; }
-    .about-cta { padding: 14px 24px; font-size: 0.65rem; min-width: 160px; }
+    .about-section { padding: 60px 20px 70px; gap: 50px; }
+    .about-heading { font-size: 2rem; }
+    .about-description { font-size: 0.88rem; }
+    .about-cta { padding: 14px 24px; font-size: 0.65rem; min-width: 170px; }
 
-    .about-postal-stamp { width: 70px; height: 70px; top: -6px; left: -6px; }
+    .about-postal-stamp { width: 75px; height: 75px; top: -6px; left: -6px; }
     .postal-line { font-size: 0.34rem; letter-spacing: 1.5px; }
     .postal-line.accent { font-size: 0.38rem; letter-spacing: 1.8px; }
-    .postal-line.small { font-size: 0.22rem; }
+    .postal-line.small { font-size: 0.24rem; }
 
-    .about-stamp { font-size: 0.88rem; padding: 14px 16px; min-width: 88px; top: 10px; right: -12px; }
+    .about-stamp { font-size: 0.9rem; padding: 14px 18px; min-width: 90px; top: 12px; right: -14px; }
 
     .about-waves span:nth-child(1) { width: 38px; }
     .about-waves span:nth-child(2) { width: 26px; }
@@ -479,20 +600,20 @@
    RESPONSIVE — SMALL PHONE (360–479px)
    ============================================ */
 @media (max-width: 479px) {
-    .about-section { padding: 40px 16px 50px; gap: 28px; }
+    .about-section { padding: 50px 16px 60px; gap: 40px; }
     .about-eyebrow { font-size: 0.6rem; letter-spacing: 2.5px; }
-    .about-heading { font-size: 1.6rem; margin-bottom: 16px; }
-    .about-description { font-size: 0.78rem; margin-bottom: 22px; }
-    .about-cta { padding: 13px 20px; font-size: 0.6rem; min-width: 150px; }
+    .about-heading { font-size: 1.7rem; margin-bottom: 18px; }
+    .about-description { font-size: 0.82rem; margin-bottom: 24px; }
+    .about-cta { padding: 13px 22px; font-size: 0.6rem; min-width: 160px; }
 
-    .about-postal-stamp { width: 62px; height: 62px; top: -5px; left: -5px; }
+    .about-postal-stamp { width: 65px; height: 65px; top: -5px; left: -5px; }
     .postal-line { font-size: 0.3rem; letter-spacing: 1.2px; border-width: 0.5px; }
     .postal-line.accent { font-size: 0.34rem; letter-spacing: 1.5px; }
-    .postal-line.small { font-size: 0.2rem; letter-spacing: 0.8px; }
+    .postal-line.small { font-size: 0.22rem; letter-spacing: 0.8px; }
 
-    .about-stamp { font-size: 0.78rem; padding: 12px 14px; min-width: 78px; top: 8px; right: -10px; }
+    .about-stamp { font-size: 0.8rem; padding: 12px 14px; min-width: 78px; top: 10px; right: -12px; }
 
-    .about-waves { bottom: 12px; right: -8px; }
+    .about-waves { bottom: 14px; right: -10px; }
     .about-waves span { height: 1.5px; }
     .about-waves span:nth-child(1) { width: 30px; }
     .about-waves span:nth-child(2) { width: 22px; }
@@ -504,14 +625,14 @@
    RESPONSIVE — TINY PHONE (up to 359px)
    ============================================ */
 @media (max-width: 359px) {
-    .about-heading { font-size: 1.4rem; }
-    .about-description { font-size: 0.72rem; }
-    .about-cta { padding: 12px 18px; font-size: 0.58rem; min-width: 140px; }
+    .about-heading { font-size: 1.5rem; }
+    .about-description { font-size: 0.76rem; }
+    .about-cta { padding: 12px 18px; font-size: 0.58rem; min-width: 150px; }
 
-    .about-postal-stamp { width: 55px; height: 55px; }
+    .about-postal-stamp { width: 58px; height: 58px; }
     .postal-line.small { display: none; }
 
-    .about-stamp { font-size: 0.7rem; padding: 10px 12px; min-width: 70px; }
+    .about-stamp { font-size: 0.72rem; padding: 10px 12px; min-width: 72px; }
 
     .about-waves { display: none; }
 }
@@ -523,15 +644,15 @@
     .about-section {
         grid-template-columns: 1fr 1fr;
         gap: 24px;
-        padding: 30px 20px;
+        padding: 40px 20px;
     }
 
-    .about-heading { font-size: 1.8rem; margin-bottom: 14px; }
-    .about-description { font-size: 0.78rem; margin-bottom: 18px; }
-    .about-cta { padding: 11px 20px; font-size: 0.6rem; min-width: 150px; }
+    .about-heading { font-size: 1.9rem; margin-bottom: 14px; }
+    .about-description { font-size: 0.8rem; margin-bottom: 18px; }
+    .about-cta { padding: 11px 20px; font-size: 0.6rem; min-width: 160px; }
 
-    .about-postal-stamp { width: 70px; height: 70px; top: -4px; left: -4px; }
-    .about-stamp { font-size: 0.85rem; padding: 12px 14px; min-width: 85px; top: 12px; right: -12px; }
+    .about-postal-stamp { width: 75px; height: 75px; top: -4px; left: -4px; }
+    .about-stamp { font-size: 0.9rem; padding: 12px 14px; min-width: 88px; top: 12px; right: -12px; }
     .about-waves { display: none; }
 }
 
@@ -542,10 +663,14 @@
     .about-cta:hover {
         transform: none;
         background-color: #1a1a1a;
-        box-shadow: none;
+        box-shadow: 0 8px 24px rgba(26, 20, 15, 0.12);
     }
+    .about-cta:hover::before { left: -100%; }
+    .about-cta:hover::after { border-color: transparent; }
+    .about-cta:hover svg { transform: none; }
 
-    .about-image-wrap:hover img {
+    .about-image-wrap:hover img,
+    .about-image-frame:hover .about-image-wrap {
         transform: none;
         filter: grayscale(100%) contrast(1.08) brightness(0.95);
     }
@@ -562,6 +687,8 @@
 @media (prefers-reduced-motion: reduce) {
     .about-cta,
     .about-cta svg,
+    .about-cta::before,
+    .about-image-wrap,
     .about-image-wrap img,
     .about-stamp,
     .about-postal-stamp {
@@ -579,6 +706,6 @@
         border-width: 0.5px;
     }
     .about-image-wrap {
-        border-width: 1px;
+        border-width: 0.75px;
     }
 }

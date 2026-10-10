@@ -12,22 +12,13 @@
     --font-body: 'Inter', sans-serif;
     --font-serif: 'Playfair Display', serif;
 
-    /* Responsive fluid container */
     --container-pad: clamp(16px, 4vw, 60px);
     --section-pad-y: clamp(40px, 6vw, 90px);
 }
 
-/* ============================================
-   RESET
-   ============================================ */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
-    /* Prevents iOS text-size bump on orientation change */
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
 }
@@ -38,7 +29,6 @@ body {
     color: var(--text-dark);
     line-height: 1.6;
     overflow-x: hidden;
-    /* Prevent layout shift from scrollbar appearing */
     scrollbar-gutter: stable;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
@@ -51,9 +41,7 @@ a {
     transition: opacity 0.3s ease, color 0.3s ease;
 }
 
-ul {
-    list-style: none;
-}
+ul { list-style: none; }
 
 img {
     max-width: 100%;
@@ -64,6 +52,8 @@ img {
 button {
     font-family: inherit;
     cursor: pointer;
+    border: none;
+    background: transparent;
 }
 
 /* ============================================
@@ -83,39 +73,30 @@ button {
     box-sizing: border-box;
 }
 
-/* Placeholders should always be full width */
 [id$="-placeholder"] {
     width: 100%;
     display: block;
 }
 
 /* ============================================
-   TYPOGRAPHY — Fluid scaling
+   TYPOGRAPHY
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
     line-height: 1.15;
     font-weight: 500;
 }
 
-/* Hero heading — scales 2rem to 6rem */
-h1 {
-    font-size: clamp(2rem, 8vw, 6rem);
-}
+h1 { font-size: clamp(2rem, 8vw, 6rem); }
 
-/* Section headings */
 h2 {
     font-size: clamp(1.5rem, 4vw, 2.5rem);
     font-family: var(--font-serif);
     font-weight: 400;
 }
 
-h3 {
-    font-size: clamp(1rem, 2.5vw, 1.5rem);
-}
+h3 { font-size: clamp(1rem, 2.5vw, 1.5rem); }
 
-p {
-    font-size: clamp(0.85rem, 1.5vw, 1rem);
-}
+p { font-size: clamp(0.85rem, 1.5vw, 1rem); }
 
 /* ============================================
    BUTTONS
@@ -163,20 +144,10 @@ p {
 }
 
 /* ============================================
-   SECTION HEADER
+   SECTION HEADER (generic)
    ============================================ */
 .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
     margin-bottom: clamp(24px, 4vw, 40px);
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
-.section-header h2 {
-    font-size: clamp(1.6rem, 4vw, 2.5rem);
-    font-weight: 400;
 }
 
 .subtitle {
@@ -205,120 +176,48 @@ p {
 }
 
 /* ============================================
-   RESPONSIVE — Fluid breakpoints
+   RESPONSIVE
    ============================================ */
-
-/* Ultrawide (1800px+) — cap content width */
 @media (min-width: 1800px) {
-    .container,
-    .products-section,
-    .collections-section,
-    .about-section,
-    .lookbook-section,
-    .reviews-section {
+    .container, .products-section, .collections-section, .about-section,
+    .lookbook-section, .reviews-section {
         max-width: 1600px;
     }
-
     body { font-size: 17px; }
 }
 
-/* Large desktop (1400–1799) */
-@media (min-width: 1400px) and (max-width: 1799px) {
-    body { font-size: 16px; }
-}
+@media (min-width: 1400px) and (max-width: 1799px) { body { font-size: 16px; } }
+@media (min-width: 1200px) and (max-width: 1399px) { body { font-size: 16px; } }
 
-/* Desktop (1200–1399) */
-@media (min-width: 1200px) and (max-width: 1399px) {
-    body { font-size: 16px; }
-}
-
-/* Small desktop / large tablet (1024–1199) */
 @media (min-width: 1024px) and (max-width: 1199px) {
-    :root {
-        --container-pad: clamp(24px, 3vw, 40px);
-    }
+    :root { --container-pad: clamp(24px, 3vw, 40px); }
 }
 
-/* Tablet landscape (900–1023) */
 @media (min-width: 900px) and (max-width: 1023px) {
-    :root {
-        --container-pad: 32px;
-        --section-pad-y: 60px;
-    }
+    :root { --container-pad: 32px; --section-pad-y: 60px; }
 }
 
-/* Tablet portrait (768–899) */
 @media (min-width: 768px) and (max-width: 899px) {
-    :root {
-        --container-pad: 28px;
-        --section-pad-y: 50px;
-    }
-
+    :root { --container-pad: 28px; --section-pad-y: 50px; }
     body { font-size: 15px; }
-
-    .section-header {
-        gap: 12px;
-    }
 }
 
-/* Large phone (600–767) */
 @media (min-width: 600px) and (max-width: 767px) {
-    :root {
-        --container-pad: 24px;
-        --section-pad-y: 45px;
-    }
-
+    :root { --container-pad: 24px; --section-pad-y: 45px; }
     body { font-size: 15px; }
-
-    .section-header {
-        gap: 12px;
-        align-items: flex-start;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-        padding: 12px 22px;
-    }
+    .btn-primary, .btn-secondary { padding: 12px 22px; }
 }
 
-/* Standard phone (480–599) */
 @media (min-width: 480px) and (max-width: 599px) {
-    :root {
-        --container-pad: 20px;
-        --section-pad-y: 40px;
-    }
-
+    :root { --container-pad: 20px; --section-pad-y: 40px; }
     body { font-size: 14px; }
-
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
-    .view-all {
-        align-self: flex-start;
-    }
+    .view-all { align-self: flex-start; }
 }
 
-/* Small phone (360–479) */
 @media (min-width: 360px) and (max-width: 479px) {
-    :root {
-        --container-pad: 16px;
-        --section-pad-y: 36px;
-    }
-
+    :root { --container-pad: 16px; --section-pad-y: 36px; }
     body { font-size: 14px; line-height: 1.55; }
-
-    .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        margin-bottom: 24px;
-    }
-
-    .btn-primary,
-    .btn-secondary {
+    .btn-primary, .btn-secondary {
         padding: 11px 20px;
         font-size: 0.72rem;
         width: 100%;
@@ -326,79 +225,29 @@ p {
     }
 }
 
-/* Tiny phone (up to 359) */
 @media (max-width: 359px) {
-    :root {
-        --container-pad: 14px;
-        --section-pad-y: 32px;
-    }
-
+    :root { --container-pad: 14px; --section-pad-y: 32px; }
     body { font-size: 13px; line-height: 1.5; }
-
     h1 { font-size: 1.8rem; }
     h2 { font-size: 1.3rem; }
-
-    .btn-primary,
-    .btn-secondary {
-        padding: 10px 16px;
-        font-size: 0.68rem;
-        letter-spacing: 0.8px;
-    }
+    .btn-primary, .btn-secondary { padding: 10px 16px; font-size: 0.68rem; letter-spacing: 0.8px; }
 }
 
-/* ============================================
-   TOUCH DEVICE OPTIMIZATIONS
-   ============================================ */
 @media (hover: none) and (pointer: coarse) {
-    /* Remove hover transforms on touch devices */
-    .btn-primary:hover,
-    .btn-secondary:hover {
-        transform: none;
-    }
-
-    /* Bigger tap targets */
-    a, button {
-        min-height: 40px;
-    }
+    .btn-primary:hover, .btn-secondary:hover { transform: none; }
+    a, button { min-height: 40px; }
 }
 
-/* ============================================
-   LANDSCAPE PHONE (short viewport height)
-   ============================================ */
 @media (max-height: 500px) and (orientation: landscape) {
-    :root {
-        --section-pad-y: 24px;
-    }
-
-    .section-header {
-        margin-bottom: 16px;
-    }
+    :root { --section-pad-y: 24px; }
+    .section-header { margin-bottom: 16px; }
 }
 
-/* ============================================
-   REDUCED MOTION
-   ============================================ */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
         scroll-behavior: auto !important;
     }
-}
-
-/* ============================================
-   DARK MODE (optional, respects OS setting)
-   ============================================ */
-@media (prefers-color-scheme: dark) {
-    /* Leave as-is for now — your brand is cream/light.
-       Uncomment below if you want a dark variant later. */
-    /*
-    :root {
-        --bg-cream: #1a1a1a;
-        --text-dark: #f5f0e8;
-    }
-    */
 }

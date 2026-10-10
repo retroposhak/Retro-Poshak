@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (id) {
         renderProductDetail(id);
     } else {
-        // Read initial filters from URL
         shopState.search = params.get('search') || '';
         shopState.category = params.get('category') || 'all';
         shopState.sort = params.get('sort') || 'featured';
@@ -60,6 +59,7 @@ function renderProductDetail(id) {
 
     const product = products.find(p => p.id === id) || products[0];
     const images = product.images || [product.image];
+    const isWishlisted = isInWishlist(product.id);
     document.title = `${product.name} - Retro Poshak`;
 
     app.innerHTML = `
@@ -73,6 +73,11 @@ function renderProductDetail(id) {
                     <div class="product-gallery">
                         <div class="gallery-main">
                             <img id="main-product-img" src="${images[0]}" alt="${product.name}">
+                            <button class="detail-wishlist-btn ${isWishlisted ? 'active' : ''}" data-id="${product.id}" aria-label="Add to wishlist">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="${isWishlisted ? '#b33a3a' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                            </button>
                         </div>
                         <div class="gallery-thumbs">
                             ${images.map((img, i) => `
@@ -97,7 +102,10 @@ function renderProductDetail(id) {
                             <span class="detail-label">Colour</span>
                             <div class="detail-color-list">
                                 ${product.colors.map((c, i) => `
-                                    <button class="detail-color ${i === 0 ? 'active' : ''}" style="background: ${product.colorHex[c]}" title="${c}"></button>
+                                    <button class="detail-color ${i === 0 ? 'active' : ''}"
+                                            style="background: ${product.colorHex[c]}"
+                                            data-color="${c}"
+                                            title="${c}"></button>
                                 `).join('')}
                             </div>
                         </div>
@@ -106,12 +114,12 @@ function renderProductDetail(id) {
                             <span class="detail-label">Size</span>
                             <div class="detail-size-list">
                                 ${['S', 'M', 'L', 'XL', 'XXL'].map((s, i) => `
-                                    <button class="detail-size ${i === 1 ? 'active' : ''}">${s}</button>
+                                    <button class="detail-size ${i === 1 ? 'active' : ''}" data-size="${s}">${s}</button>
                                 `).join('')}
                             </div>
                         </div>
 
-                        <button class="detail-cta">ADD TO BAG</button>
+                        <button class="detail-cta" data-product-id="${product.id}">ADD TO BAG</button>
                         <div class="detail-meta">
                             <p>✦ 240 GSM Heavyweight Cotton</p>
                             <p>✦ Free shipping on orders above ₹1499</p>
@@ -123,9 +131,37 @@ function renderProductDetail(id) {
         </div>
     `;
     attachProductDetailListeners();
+    attachDetailWishlistListener(product.id);
+    updateWishlistBadge();
+    if (typeof updateCartBadge === 'function') updateCartBadge();
+}
+
+function attachDetailWishlistListener(productId) {
+    const btn = document.querySelector('.detail-wishlist-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const isAdded = toggleWishlist(productId);
+        const svg = btn.querySelector('svg');
+
+        if (isAdded) {
+            btn.classList.add('active', 'pop');
+            if (svg) svg.setAttribute('fill', '#b33a3a');
+            setTimeout(() => btn.classList.remove('pop'), 500);
+        } else {
+            btn.classList.remove('active');
+            if (svg) svg.setAttribute('fill', 'none');
+        }
+
+        updateWishlistBadge();
+    });
 }
 
 function attachProductDetailListeners() {
+    // Gallery thumb switching
     const mainImg = document.getElementById('main-product-img');
     document.querySelectorAll('.gallery-thumb').forEach(t => t.addEventListener('click', () => {
         document.querySelectorAll('.gallery-thumb').forEach(x => x.classList.remove('active'));
@@ -133,20 +169,57 @@ function attachProductDetailListeners() {
         mainImg.style.opacity = '0';
         setTimeout(() => { mainImg.src = t.dataset.img; mainImg.style.opacity = '1'; }, 180);
     }));
+
+    // Size selection
     document.querySelectorAll('.detail-size').forEach(b => b.addEventListener('click', () => {
         document.querySelectorAll('.detail-size').forEach(x => x.classList.remove('active'));
         b.classList.add('active');
     }));
+
+    // Color selection
     document.querySelectorAll('.detail-color').forEach(b => b.addEventListener('click', () => {
         document.querySelectorAll('.detail-color').forEach(x => x.classList.remove('active'));
         b.classList.add('active');
     }));
+
+    // ============================================
+    // ✅ ADD TO BAG — functional
+    // ============================================
     const cta = document.querySelector('.detail-cta');
-    if (cta) cta.addEventListener('click', () => {
-        cta.textContent = '✓ ADDED TO BAG';
-        cta.style.background = '#2c7a4a';
-        setTimeout(() => { cta.textContent = 'ADD TO BAG'; cta.style.background = ''; }, 1800);
-    });
+    if (cta) {
+        cta.addEventListener('click', () => {
+            const productId = parseInt(cta.dataset.productId);
+            if (!productId) return;
+
+            // Read selected size
+            const sizeBtn = document.querySelector('.detail-size.active');
+            const size = sizeBtn?.dataset.size || sizeBtn?.textContent?.trim() || 'M';
+
+            // Read selected color
+            const colorBtn = document.querySelector('.detail-color.active');
+            const color = colorBtn?.dataset.color || colorBtn?.title || null;
+
+            // Add to cart via data.js
+            if (typeof addToCart === 'function') {
+                addToCart(productId, 1, size, color);
+            }
+
+            // Visual feedback
+            const originalText = cta.textContent;
+            cta.textContent = '✓ ADDED TO BAG';
+            cta.style.background = '#2c7a4a';
+            cta.disabled = true;
+
+            setTimeout(() => {
+                cta.textContent = originalText;
+                cta.style.background = '';
+                cta.disabled = false;
+            }, 1800);
+
+            // Update navbar cart badge (also runs inside addToCart, but safe)
+            if (typeof updateCartBadge === 'function') updateCartBadge();
+        });
+    }
 }
 
 // ============================================
@@ -156,15 +229,12 @@ function renderShopGrid() {
     const app = document.getElementById('shop-app');
     if (!app) return;
 
-    // Title updates based on search
     document.title = shopState.search
         ? `Search: "${shopState.search}" - Retro Poshak`
         : 'Shop - Retro Poshak';
 
-    // Max price init
     if (shopState.maxPrice === 2000) shopState.maxPrice = PRICE_MAX;
 
-    // Search banner text
     const searchBanner = shopState.search ? `
         <div class="shop-search-banner">
             <span>Showing results for</span>
@@ -181,7 +251,6 @@ function renderShopGrid() {
             <div class="shop-hero-bg" style="background-image: url('assets/images/shop-hero.jpeg');"></div>
             <div class="shop-hero-overlay"></div>
             <div class="shop-hero-content">
-                <span class="shop-hero-eyebrow">EXPLORE OUR COLLECTION</span>
                 <h1 class="shop-hero-title">Shop</h1>
                 <p class="shop-hero-subtitle">Nostalgia you can wear.</p>
             </div>
@@ -277,29 +346,24 @@ function renderShopGrid() {
 }
 
 // ============================================
-// SYNC STATE → UI (called after render)
+// SYNC STATE → UI
 // ============================================
 function syncStateToUI() {
-    // Sort select
     const sortSelect = document.getElementById('sortSelect');
     if (sortSelect) sortSelect.value = shopState.sort;
 
-    // Active category tab
     document.querySelectorAll('.shop-cat').forEach(t => {
         t.classList.toggle('active', t.dataset.cat === shopState.category);
     });
 
-    // Sidebar category checkboxes
     document.querySelectorAll('.filter-checkbox input[data-cat]').forEach(i => {
         i.checked = i.dataset.cat === shopState.category;
     });
 
-    // Colors
     document.querySelectorAll('.filter-color').forEach(btn => {
         btn.classList.toggle('active', shopState.colors.includes(btn.dataset.color));
     });
 
-    // Sizes
     document.querySelectorAll('.filter-size').forEach(btn => {
         btn.classList.toggle('active', shopState.sizes.includes(btn.dataset.size));
     });
@@ -426,7 +490,7 @@ function resetFilters() {
 }
 
 // ============================================
-// URL SYNC — keeps filters shareable
+// URL SYNC
 // ============================================
 function updateURL() {
     const url = new URL(window.location);
@@ -448,7 +512,6 @@ function updateURL() {
 function applyFiltersAndRender() {
     let filtered = [...products];
 
-    // Search filter
     if (shopState.search) {
         const q = shopState.search.toLowerCase().trim();
         filtered = filtered.filter(p =>
@@ -460,7 +523,6 @@ function applyFiltersAndRender() {
         );
     }
 
-    // Category filter
     if (shopState.category !== 'all') {
         const map = {
             'childhood': [1, 4],
@@ -472,38 +534,32 @@ function applyFiltersAndRender() {
         filtered = filtered.filter(p => allowed.includes(p.id));
     }
 
-    // Color filter
     if (shopState.colors.length > 0) {
         filtered = filtered.filter(p =>
             (p.colors || []).some(c => shopState.colors.includes(c))
         );
     }
 
-    // Size filter
     if (shopState.sizes.length > 0) {
         filtered = filtered.filter(p => {
-            if (!p.sizes) return true; // assume universal if no sizes
+            if (!p.sizes) return true;
             return p.sizes.some(s => shopState.sizes.includes(s));
         });
     }
 
-    // Price filter
     filtered = filtered.filter(p => p.price <= shopState.maxPrice);
 
-    // Sort
     switch (shopState.sort) {
         case 'price-low': filtered.sort((a, b) => a.price - b.price); break;
         case 'price-high': filtered.sort((a, b) => b.price - a.price); break;
         case 'name': filtered.sort((a, b) => a.name.localeCompare(b.name)); break;
     }
 
-    // Update count
     const countEl = document.getElementById('shopCount');
     if (countEl) {
         countEl.textContent = `${filtered.length} ${filtered.length === 1 ? 'Product' : 'Products'}`;
     }
 
-    // Empty state
     const emptyEl = document.getElementById('shopEmpty');
     const gridEl = document.getElementById('shop-product-grid');
 
@@ -523,14 +579,16 @@ function renderShopProductCards(list = products) {
     const grid = document.getElementById('shop-product-grid');
     if (!grid) return;
 
-    grid.innerHTML = list.map(product => `
+    grid.innerHTML = list.map(product => {
+        const isWishlisted = isInWishlist(product.id);
+        return `
         <div class="product-card" data-id="${product.id}" data-images='${JSON.stringify(product.images)}'>
             <div class="product-image-wrap">
                 <a href="shop.html?id=${product.id}" class="product-image-link">
                     <img src="${product.images[0]}" alt="${product.name}" class="product-img" loading="lazy">
                 </a>
-                <button class="wishlist-btn" aria-label="Add to wishlist">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                <button class="wishlist-btn ${isWishlisted ? 'active' : ''}" data-id="${product.id}" aria-label="Add to wishlist">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${isWishlisted ? '#b33a3a' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                 </button>
             </div>
             <div class="product-info">
@@ -549,10 +607,12 @@ function renderShopProductCards(list = products) {
                 </div>
             </div>
         </div>
-    `).join('');
+        `;
+    }).join('');
 
     attachHoverCycling();
     attachWishlistToggle();
+    updateWishlistBadge();
 }
 
 function attachHoverCycling() {
@@ -578,6 +638,29 @@ function attachHoverCycling() {
 
 function attachWishlistToggle() {
     document.querySelectorAll('.wishlist-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); btn.classList.toggle('active'); });
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+
+        newBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const productId = newBtn.dataset.id;
+            if (!productId) return;
+
+            const isAdded = toggleWishlist(productId);
+            const svg = newBtn.querySelector('svg');
+
+            if (isAdded) {
+                newBtn.classList.add('active', 'pop');
+                if (svg) svg.setAttribute('fill', '#b33a3a');
+                setTimeout(() => newBtn.classList.remove('pop'), 500);
+            } else {
+                newBtn.classList.remove('active');
+                if (svg) svg.setAttribute('fill', 'none');
+            }
+
+            updateWishlistBadge();
+        });
     });
 }

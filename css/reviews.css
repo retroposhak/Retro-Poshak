@@ -1,13 +1,29 @@
 /* ============================================
-   REVIEWS + COMMUNITY SECTION
+   REVIEWS + COMMUNITY — Editorial Letters v2
+   Premium testimonials spread
    ============================================ */
 
 .reviews-section {
-    padding: 70px 60px;
+    position: relative;
+    padding: 130px 60px 60px;
     max-width: 1500px;
     margin: 0 auto;
     background-color: #f5f0e8;
-    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Warm layered glow — consistent with the rest of the site */
+.reviews-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 15% 20%, rgba(201, 169, 110, 0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 85%, rgba(179, 58, 58, 0.05) 0%, transparent 55%);
 }
 
 /* ============================================
@@ -16,166 +32,341 @@
 .reviews-top {
     display: grid;
     grid-template-columns: 1fr 3.5fr;
-    gap: 40px;
+    gap: 60px;
     align-items: flex-start;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
+    position: relative;
+    z-index: 1;
 }
 
-/* ---- Rating summary (left) ---- */
+/* ============================================
+   LEFT: Rating Summary — "Certified" Seal
+   ============================================ */
 .rating-summary {
-    padding-top: 12px;
+    position: relative;
+    padding: 36px 32px 32px;
+    background: linear-gradient(180deg, #fdfbf7 0%, #f8f3e8 100%);
+    border-radius: 4px;
+    box-shadow:
+        0 2px 8px rgba(26, 20, 15, 0.05),
+        0 20px 40px -20px rgba(26, 20, 15, 0.15),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.25);
+    /* subtle tilt for editorial feel */
+    transform: rotate(-1deg);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s ease;
 }
 
+.rating-summary:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow:
+        0 6px 16px rgba(26, 20, 15, 0.06),
+        0 30px 50px -20px rgba(26, 20, 15, 0.22),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.45);
+}
+
+/* Corner gold bracket marks */
+.rating-summary::before,
+.rating-summary::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid #b8914a;
+    opacity: 0.5;
+}
+
+.rating-summary::before {
+    top: 14px;
+    left: 14px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.rating-summary::after {
+    bottom: 14px;
+    right: 14px;
+    border-left: none;
+    border-top: none;
+}
+
+/* "Certified" eyebrow */
 .rating-summary h3 {
-    font-family: var(--font-body);
-    font-size: 0.72rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 2.5px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    color: #1a1a1a;
-    margin: 0 0 16px 0;
+    color: #b33a3a;
+    margin: 0 0 20px 0;
     line-height: 1.4;
+    position: relative;
+    padding-left: 42px;
+    text-align: left;
 }
 
+.rating-summary h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 28px;
+    height: 1.5px;
+    background: linear-gradient(90deg, #b33a3a, rgba(179, 58, 58, 0.2));
+    transform: translateY(-50%);
+    border-radius: 1px;
+}
+
+/* Giant display score */
 .rating-score {
     display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 10px;
+    justify-content: flex-start;
 }
 
 .rating-score .stars {
-    font-size: 1.05rem;
+    font-size: 1rem;
     color: #d4a44a;
     letter-spacing: 2px;
     line-height: 1;
+    display: inline-block;
 }
 
 .rating-score .score {
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    font-size: 3.4rem;
+    font-weight: 400;
+    font-style: italic;
     color: #1a1a1a;
-    letter-spacing: 0.5px;
+    letter-spacing: -1.5px;
+    line-height: 0.9;
+    position: relative;
+}
+
+/* Small gold underline under the big score */
+.rating-score .score::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -8px;
+    bottom: -6px;
+    height: 4px;
+    background: linear-gradient(90deg,
+        rgba(201, 169, 110, 0.7) 0%,
+        rgba(179, 58, 58, 0.35) 100%);
+    border-radius: 2px;
+    transform: skewX(-6deg);
 }
 
 .rating-summary p {
-    font-family: var(--font-body);
-    font-size: 0.78rem;
-    color: #7a7a7a;
-    margin: 0;
-    letter-spacing: 0.3px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.92rem;
+    font-style: italic;
+    color: #5a544d;
+    margin: 18px 0 0 0;
+    letter-spacing: 0.2px;
+    line-height: 1.5;
+    padding-left: 16px;
+    border-left: 2px solid rgba(184, 145, 74, 0.55);
+    text-align: left;
 }
 
-/* ---- Reviews grid (right) ---- */
+/* ============================================
+   RIGHT: Review Cards — Paper Notes
+   ============================================ */
 .reviews-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
 }
 
 .review-card {
     position: relative;
-    background: transparent;
-    padding: 0 12px 0 0;
-    border-radius: 0;
-    box-shadow: none;
+    padding: 34px 26px 26px;
+    background: linear-gradient(180deg, #ffffff 0%, #faf5eb 100%);
+    border-radius: 6px;
+    box-shadow:
+        0 2px 8px rgba(26, 20, 15, 0.05),
+        0 14px 30px -14px rgba(26, 20, 15, 0.12),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.14);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Slight alternating tilt for magazine feel */
+.review-card:nth-child(1) { transform: rotate(-0.8deg); }
+.review-card:nth-child(2) { transform: rotate(0.5deg) translateY(-4px); }
+.review-card:nth-child(3) { transform: rotate(-0.4deg); }
+
+.review-card:hover {
+    transform: rotate(0deg) translateY(-8px);
+    box-shadow:
+        0 6px 16px rgba(26, 20, 15, 0.06),
+        0 42px 60px -22px rgba(26, 20, 15, 0.22),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.45);
+}
+
+/* Gold paper tape at the top */
+.review-card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 60px;
+    height: 22px;
+    background: rgba(201, 169, 110, 0.42);
+    border-left: 1px dashed rgba(184, 145, 74, 0.55);
+    border-right: 1px dashed rgba(184, 145, 74, 0.55);
+    box-shadow: 0 2px 6px rgba(26, 20, 15, 0.08);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* Star row */
 .review-card .review-stars {
     font-size: 0.85rem;
     color: #d4a44a;
-    letter-spacing: 1.5px;
-    margin-bottom: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
     line-height: 1;
+    display: block;
 }
 
+/* Oversized editorial quote mark */
 .quote-mark {
     position: absolute;
-    top: 0;
-    right: 12px;
-    font-family: var(--font-serif);
-    font-size: 2.4rem;
+    top: 24px;
+    right: 22px;
+    font-family: 'Playfair Display', serif;
+    font-size: 3.6rem;
     font-weight: 700;
-    color: #1a1a1a;
+    font-style: italic;
+    color: rgba(179, 58, 58, 0.18);
     line-height: 0.7;
-    opacity: 0.8;
+    pointer-events: none;
+    user-select: none;
 }
 
 .review-card p {
-    font-family: var(--font-body);
-    font-size: 0.82rem;
-    color: #4a4a4a;
-    line-height: 1.6;
-    margin: 0 0 16px 0;
-    font-style: normal;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: #3d3d3d;
+    line-height: 1.65;
+    margin: 0 0 22px 0;
+    position: relative;
+    z-index: 1;
 }
 
+/* Reviewer signature line */
 .reviewer {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-family: var(--font-body);
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
     font-size: 0.72rem;
     font-weight: 600;
     color: #1a1a1a;
-    letter-spacing: 0.3px;
-    text-transform: none;
+    letter-spacing: 0.5px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(26, 20, 15, 0.08);
+    position: relative;
+    z-index: 1;
 }
 
-/* Avatar dot before reviewer name */
+/* Monogram avatar — initials, gold ring */
 .reviewer::before {
-    content: '';
-    width: 22px;
-    height: 22px;
+    content: '★';
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #e8dcc8, #c9a96e);
-    display: inline-block;
+    background: linear-gradient(135deg, #f5e9cf, #c9a96e);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    color: #7a5a20;
+    font-size: 0.7rem;
+    box-shadow:
+        0 0 0 2px #f5f0e8,
+        0 0 0 3px rgba(184, 145, 74, 0.4);
 }
 
 /* ============================================
-   BOTTOM PART: Community Carousel
+   DIVIDER — Gold hairline with diamond mark
    ============================================ */
 .community-section {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    gap: 40px;
+    gap: 50px;
     align-items: center;
-    padding-top: 40px;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding-top: 60px;
+    border-top: 1px solid rgba(184, 145, 74, 0.25);
+    position: relative;
+    z-index: 1;
 }
 
+.community-section::before {
+    content: '◆';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #f5f0e8;
+    padding: 0 14px;
+    color: #b8914a;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+/* ============================================
+   COMMUNITY HEADING
+   ============================================ */
 .community-heading {
     padding-right: 20px;
 }
 
+/* Hand-script accent + display serif combo */
 .community-eyebrow {
     display: block;
-    font-family: var(--font-body);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #1a1a1a;
-    margin-bottom: 8px;
-    line-height: 1.4;
+    font-family: 'Dancing Script', 'Playfair Display', cursive;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #b33a3a;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    position: relative;
+    padding-left: 0;
+    text-transform: none;
 }
 
+/* Optional handwriting flourish below */
 .community-heading p {
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    color: #7a7a7a;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    color: #5a544d;
     margin: 0;
     letter-spacing: 0.3px;
+    padding-left: 20px;
+    border-left: 2px solid rgba(184, 145, 74, 0.55);
+    line-height: 1.6;
 }
 
 .community-heading p strong {
     color: #1a1a1a;
-    font-weight: 600;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    letter-spacing: 0.3px;
 }
 
-/* ---- Carousel ---- */
+/* ============================================
+   COMMUNITY CAROUSEL — Taped Polaroids
+   ============================================ */
 .community-carousel-wrap {
     position: relative;
     overflow: hidden;
@@ -183,32 +374,64 @@
 
 .community-carousel {
     display: flex;
-    gap: 12px;
+    gap: 18px;
     overflow-x: auto;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-bottom: 4px;
+    padding: 16px 8px 12px;
 }
 
 .community-carousel::-webkit-scrollbar {
     display: none;
 }
 
+/* Polaroid frame */
 .community-item {
     flex: 0 0 auto;
-    width: 140px;
-    height: 140px;
-    border-radius: 4px;
-    overflow: hidden;
-    background-color: #ece3d1;
+    width: 150px;
+    height: 170px;
+    background: #fdfbf7;
+    padding: 8px 8px 26px;
+    border-radius: 2px;
     cursor: pointer;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    box-shadow:
+        0 4px 12px rgba(26, 20, 15, 0.10),
+        0 14px 28px -14px rgba(26, 20, 15, 0.20);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.5s ease;
+    /* alternating polaroid tilt */
+    transform: rotate(-1.5deg);
+}
+
+.community-item:nth-child(even) {
+    transform: rotate(1.5deg);
 }
 
 .community-item:hover {
-    transform: scale(1.04);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    transform: rotate(0deg) translateY(-8px) scale(1.04);
+    box-shadow:
+        0 8px 20px rgba(26, 20, 15, 0.14),
+        0 22px 44px -18px rgba(26, 20, 15, 0.28);
+    z-index: 3;
+}
+
+/* Gold tape on top of each polaroid */
+.community-item::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 42px;
+    height: 14px;
+    background: rgba(201, 169, 110, 0.5);
+    border-left: 1px dashed rgba(184, 145, 74, 0.6);
+    border-right: 1px dashed rgba(184, 145, 74, 0.6);
+    box-shadow: 0 2px 4px rgba(26, 20, 15, 0.08);
+    z-index: 3;
+    pointer-events: none;
 }
 
 .community-item img {
@@ -217,88 +440,106 @@
     object-fit: cover;
     object-position: center top;
     display: block;
-    filter: saturate(0.95);
+    border-radius: 1px;
+    filter: saturate(0.96);
     transition: filter 0.4s ease;
 }
 
 .community-item:hover img {
-    filter: saturate(1.05);
+    filter: saturate(1.06);
 }
 
-/* ---- Next arrow (Unicode) ---- */
+/* ============================================
+   NEXT ARROW
+   ============================================ */
 .community-arrow {
     position: absolute;
     top: 50%;
-    right: 8px;
+    right: 10px;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: #f5f0e8;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #fdfbf7;
+    border: 1.5px solid rgba(26, 26, 26, 0.28);
     color: #1a1a1a;
-    font-family: var(--font-body);
+    font-family: 'Playfair Display', serif;
     font-size: 1.6rem;
     line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 5;
+    z-index: 6;
     padding: 0 0 4px 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(26, 20, 15, 0.1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .community-arrow:hover {
-    background: #1a1a1a;
-    color: #f5f0e8;
-    transform: translateY(-50%) scale(1.08);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background: #b33a3a;
+    color: #ffffff;
+    border-color: #b33a3a;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 10px 24px rgba(179, 58, 58, 0.35);
 }
 
-/* Fade gradient on right edge (behind arrow) */
+/* Soft fade on right edge (behind arrow) */
 .community-carousel-wrap::after {
     content: '';
     position: absolute;
     top: 0;
     right: 0;
-    width: 80px;
+    width: 100px;
     height: 100%;
-    background: linear-gradient(to right, transparent, #f5f0e8 80%);
+    background: linear-gradient(to right, transparent, #f5f0e8 90%);
     pointer-events: none;
-    z-index: 4;
+    z-index: 5;
 }
 
 /* ============================================
-   RESPONSIVE — ULTRAWIDE (1800px+)
+   RESPONSIVE
    ============================================ */
+
+/* Ultrawide */
 @media (min-width: 1800px) {
-    .reviews-section { max-width: 1600px; padding: 90px 80px; }
-    .community-item { width: 160px; height: 160px; }
-    .reviews-grid { gap: 30px; }
+    .reviews-section { max-width: 1600px; padding: 150px 80px; }
+    .reviews-top { gap: 70px; margin-bottom: 90px; }
+    .reviews-grid { gap: 28px; }
+    .rating-score .score { font-size: 4rem; }
+    .community-item { width: 170px; height: 190px; }
+    .community-carousel { gap: 22px; }
 }
 
-/* ============================================
-   RESPONSIVE — DESKTOP (1200–1399px)
-   ============================================ */
+/* Large desktop */
+@media (min-width: 1400px) and (max-width: 1799px) {
+    .reviews-section { padding: 140px 60px; }
+}
+
+/* Small desktop */
 @media (max-width: 1399px) {
-    .reviews-section { padding: 60px 40px; }
-    .reviews-top { gap: 32px; }
-    .community-item { width: 130px; height: 130px; }
+    .reviews-section { padding: 120px 50px; }
+    .reviews-top { gap: 40px; }
+    .community-item { width: 140px; height: 160px; }
 }
 
-/* ============================================
-   RESPONSIVE — SMALL DESKTOP / TABLET (1024–1199px)
-   ============================================ */
+/* Tablet landscape */
 @media (max-width: 1199px) {
+    .reviews-section { padding: 110px 40px; }
     .reviews-top {
         grid-template-columns: 1fr;
-        gap: 32px;
-        margin-bottom: 50px;
+        gap: 40px;
+        margin-bottom: 60px;
     }
-    .rating-summary { text-align: center; }
+    .rating-summary {
+        max-width: 420px;
+        margin: 0 auto;
+        transform: rotate(0deg);
+    }
+    .rating-summary h3 { text-align: center; padding-left: 0; }
+    .rating-summary h3::before { display: none; }
     .rating-score { justify-content: center; }
+    .rating-summary p { text-align: center; padding-left: 0; border-left: none; }
 
     .reviews-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -307,77 +548,79 @@
 
     .community-section {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 32px;
         align-items: flex-start;
     }
-    .community-heading { padding-right: 0; }
+    .community-heading { padding-right: 0; text-align: center; }
+    .community-heading p {
+        padding-left: 0;
+        border-left: none;
+        display: inline-block;
+    }
 }
 
-/* ============================================
-   RESPONSIVE — TABLET PORTRAIT (768–1023px)
-   ============================================ */
+/* Tablet portrait */
 @media (max-width: 1023px) {
-    .reviews-section { padding: 50px 30px; }
+    .reviews-section { padding: 100px 30px; }
     .reviews-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 22px;
     }
-    .community-item { width: 120px; height: 120px; }
-    .community-arrow { width: 36px; height: 36px; font-size: 1.4rem; }
+    .review-card:nth-child(3) {
+        grid-column: span 2;
+        transform: rotate(0deg);
+    }
+    .community-item { width: 130px; height: 150px; }
+    .community-arrow { width: 40px; height: 40px; font-size: 1.4rem; }
 }
 
-/* ============================================
-   RESPONSIVE — LARGE PHONE (600–767px)
-   ============================================ */
+/* Large phone */
 @media (max-width: 767px) {
-    .reviews-section { padding: 40px 20px; }
+    .reviews-section { padding: 90px 20px; }
 
-    .rating-summary h3 { font-size: 0.68rem; letter-spacing: 2px; }
-    .rating-score .stars { font-size: 0.95rem; }
-    .rating-score .score { font-size: 0.88rem; }
+    .rating-summary { padding: 30px 24px 26px; }
+    .rating-summary h3 { font-size: 0.62rem; letter-spacing: 2.5px; }
+    .rating-score .score { font-size: 3rem; }
+    .rating-score .stars { font-size: 0.9rem; }
 
     .reviews-grid {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 22px;
     }
-
-    .review-card {
-        padding: 0 10px 0 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        padding-bottom: 20px;
+    .review-card:nth-child(3) {
+        grid-column: span 1;
     }
-    .review-card:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
+    .review-card { padding: 30px 22px 22px; }
+    .review-card:nth-child(1),
+    .review-card:nth-child(2),
+    .review-card:nth-child(3) {
+        transform: rotate(0deg);
     }
+    .review-card:hover { transform: translateY(-6px); }
+    .quote-mark { font-size: 3rem; top: 20px; right: 18px; }
+    .review-card p { font-size: 0.9rem; }
 
-    .quote-mark { font-size: 2rem; right: 10px; }
-    .review-card p { font-size: 0.8rem; }
-
-    .community-item { width: 110px; height: 110px; }
-    .community-arrow { width: 32px; height: 32px; font-size: 1.3rem; right: 4px; }
-    .community-carousel-wrap::after { width: 50px; }
+    .community-item { width: 120px; height: 140px; }
+    .community-arrow { width: 36px; height: 36px; font-size: 1.3rem; right: 6px; }
+    .community-carousel-wrap::after { width: 60px; }
+    .community-eyebrow { font-size: 1.3rem; }
 }
 
-/* ============================================
-   RESPONSIVE — SMALL PHONE (480–599px)
-   ============================================ */
+/* Standard phone */
 @media (max-width: 599px) {
-    .reviews-section { padding: 34px 16px; }
-    .community-eyebrow { font-size: 0.65rem; letter-spacing: 1.5px; }
-    .community-heading p { font-size: 0.72rem; }
-    .community-item { width: 100px; height: 100px; }
-    .community-carousel { gap: 10px; }
-    .community-arrow { width: 30px; height: 30px; font-size: 1.2rem; }
+    .reviews-section { padding: 80px 16px; }
+    .community-eyebrow { font-size: 1.15rem; }
+    .community-heading p { font-size: 0.75rem; }
+    .community-item { width: 110px; height: 130px; }
+    .community-carousel { gap: 14px; }
+    .community-arrow { width: 32px; height: 32px; font-size: 1.2rem; }
 }
 
-/* ============================================
-   RESPONSIVE — TINY PHONE (up to 359px)
-   ============================================ */
+/* Tiny phone */
 @media (max-width: 359px) {
-    .reviews-section { padding: 28px 12px; }
-    .rating-summary h3 { font-size: 0.62rem; }
-    .community-item { width: 90px; height: 90px; }
+    .reviews-section { padding: 70px 12px; }
+    .rating-score .score { font-size: 2.6rem; }
+    .community-item { width: 100px; height: 120px; }
     .community-arrow { display: none; }
     .community-carousel-wrap::after { display: none; }
 }
@@ -386,13 +629,37 @@
    TOUCH DEVICES
    ============================================ */
 @media (hover: none) and (pointer: coarse) {
-    .community-item:hover { transform: none; box-shadow: none; }
-    .community-item:hover img { filter: saturate(0.95); }
+    .rating-summary { transform: rotate(0deg); }
+
+    .review-card:nth-child(1),
+    .review-card:nth-child(2),
+    .review-card:nth-child(3) {
+        transform: rotate(0deg);
+    }
+    .review-card:hover { transform: none; box-shadow:
+        0 2px 8px rgba(26, 20, 15, 0.05),
+        0 14px 30px -14px rgba(26, 20, 15, 0.12),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.14);
+    }
+
+    .community-item,
+    .community-item:nth-child(even) {
+        transform: rotate(0deg);
+    }
+    .community-item:hover {
+        transform: none;
+        box-shadow:
+            0 4px 12px rgba(26, 20, 15, 0.10),
+            0 14px 28px -14px rgba(26, 20, 15, 0.20);
+    }
+    .community-item:hover img { filter: saturate(0.96); }
+
     .community-arrow:hover {
-        background: #f5f0e8;
+        background: #fdfbf7;
         color: #1a1a1a;
+        border-color: rgba(26, 26, 26, 0.28);
         transform: translateY(-50%) scale(1);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 14px rgba(26, 20, 15, 0.1);
     }
 }
 
@@ -400,13 +667,30 @@
    REDUCED MOTION
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
+    .rating-summary,
+    .review-card,
+    .review-card::before,
     .community-item,
     .community-item img,
     .community-arrow {
         transition: none !important;
         animation: none !important;
     }
-    .community-carousel {
-        scroll-behavior: auto;
+    .community-carousel { scroll-behavior: auto; }
+}
+
+/* ============================================
+   HIGH DPI
+   ============================================ */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .rating-summary { box-shadow:
+        0 2px 8px rgba(26, 20, 15, 0.05),
+        0 20px 40px -20px rgba(26, 20, 15, 0.15),
+        inset 0 0 0 0.5px rgba(184, 145, 74, 0.25);
+    }
+    .review-card { box-shadow:
+        0 2px 8px rgba(26, 20, 15, 0.05),
+        0 14px 30px -14px rgba(26, 20, 15, 0.12),
+        inset 0 0 0 0.5px rgba(184, 145, 74, 0.14);
     }
 }

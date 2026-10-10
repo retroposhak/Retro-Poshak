@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Retro Poshak</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/auth.css">
+     <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 (icons) -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <main class="auth-page">
+        <div class="auth-grain"></div>
+
+        <div class="auth-container">
+            <!-- ═══════ LEFT: Cinematic Visual ═══════ -->
+            <div class="auth-visual">
+                <!-- Floating photos -->
+                <div class="auth-visual-photos">
+                    <div class="auth-photo auth-photo-1">
+                        <img src="assets/images/shopbystory/dostonkibaithak.jpeg" alt="" aria-hidden="true">
+                    </div>
+                    <div class="auth-photo auth-photo-2">
+                        <img src="assets/images/shopbystory/wohlambicalls.jpeg" alt="" aria-hidden="true">
+                    </div>
+                    <div class="auth-photo auth-photo-3">
+                        <img src="assets/images/shopbystory/ekchaihazaarkisse.jpeg" alt="" aria-hidden="true">
+                    </div>
+                </div>
+
+                <div class="auth-visual-content">
+                    <span class="auth-eyebrow">WELCOME BACK</span>
+                    <h2>Wear your<br><em>yaaden.</em></h2>
+                    <p>Sign in to track orders, save favourites, and relive the memories.</p>
+                </div>
+
+                <div class="auth-visual-foot">
+                    <span class="auth-visual-foot-line"></span>
+                    <span>Est. 2026 · Made in India</span>
+                </div>
+            </div>
+
+            <!-- ═══════ RIGHT: Form ═══════ -->
+            <div class="auth-form-wrap">
+                <div class="auth-form-inner">
+                    <h1 class="auth-title">Login</h1>
+                    <p class="auth-sub">Enter your details to continue.</p>
+
+                    <form id="loginForm" class="auth-form" novalidate>
+                        <div class="auth-field">
+                            <input type="email" id="loginEmail" placeholder=" " required autocomplete="email">
+                            <label for="loginEmail">Email</label>
+                        </div>
+                        <div class="auth-field">
+                            <input type="password" id="loginPassword" placeholder=" " required minlength="4" autocomplete="current-password">
+                            <label for="loginPassword">Password</label>
+                        </div>
+
+                        <div class="auth-error" id="loginError"></div>
+
+                        <button type="submit" class="auth-submit">
+                            <span>LOGIN</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </button>
+                    </form>
+
+                    <div class="auth-divider">
+                        <span>New here?</span>
+                    </div>
+
+                    <p class="auth-alt">Don't have an account? <a href="signup.html">Create one</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        (async function () {
+            await initNavbarAndFooter();
+            initLoginForm();
+        })();
+    </script>
+</body>
+</html>

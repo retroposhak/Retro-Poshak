@@ -1,0 +1,687 @@
+/* ============================================
+   WISHLIST PAGE — Premium Editorial v3
+   Fixed layout — no collisions
+   ============================================ */
+
+.wishlist-page {
+    position: relative;
+    padding: 70px 60px 120px;
+    background: #f5f0e8;
+    min-height: 70vh;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Soft warm glow — matches the rest of the site */
+.wishlist-page::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 15% 15%, rgba(201, 169, 110, 0.09) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 90%, rgba(179, 58, 58, 0.05) 0%, transparent 55%);
+}
+
+/* Giant faint watermark behind the page */
+.wishlist-page::after {
+    content: 'yaadein';
+    position: absolute;
+    bottom: -10%;
+    left: 3%;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(10rem, 22vw, 24rem);
+    color: #3b2a20;
+    opacity: 0.028;
+    letter-spacing: -8px;
+    line-height: 0.85;
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+    z-index: 0;
+}
+
+.wishlist-container {
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+/* ============================================
+   HEADER — Editorial Masthead
+   Now uses natural stacking: back link row → title row
+   ============================================ */
+.wishlist-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 60px;
+    padding-bottom: 34px;
+    border-bottom: 1px solid rgba(26, 20, 15, 0.08);
+}
+
+/* Gold accent rule below the header */
+.wishlist-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 90px;
+    height: 2px;
+    background: linear-gradient(90deg, #b33a3a, #c9a96e);
+    border-radius: 2px;
+}
+
+/* Top row: back link */
+.wishlist-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Back link — natural flow (no more absolute) */
+.wishlist-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #8a8479;
+    text-decoration: none;
+    padding: 6px 0;
+    position: relative;
+    transition: color 0.35s ease, gap 0.35s ease;
+    align-self: flex-start;
+}
+
+.wishlist-back::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform-origin: left;
+    transform: scaleX(0.4);
+    opacity: 0.35;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.wishlist-back:hover {
+    color: #b33a3a;
+    gap: 14px;
+}
+
+.wishlist-back:hover::after {
+    transform: scaleX(1);
+    opacity: 1;
+}
+
+.wishlist-back svg {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wishlist-back:hover svg {
+    transform: translateX(-4px);
+}
+
+/* Bottom row: title block + clear all button */
+.wishlist-header-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+/* Title block */
+.wishlist-title-block {
+    flex: 1;
+    min-width: 0;
+    max-width: 700px;
+}
+
+/* Eyebrow — gold rule + red uppercase */
+.wishlist-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 3.5px;
+    text-transform: uppercase;
+    color: #b33a3a;
+    font-weight: 700;
+    margin-bottom: 18px;
+    line-height: 1;
+}
+
+.wishlist-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1.5px;
+    background: linear-gradient(90deg, #b33a3a, rgba(179, 58, 58, 0.15));
+    border-radius: 1px;
+    flex-shrink: 0;
+}
+
+/* Big serif title with skewed warm underline */
+.wishlist-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 400;
+    font-style: italic;
+    color: #1a1a1a;
+    line-height: 1.05;
+    margin: 0 0 16px 0;
+    letter-spacing: -1.2px;
+    position: relative;
+    display: inline-block;
+}
+
+.wishlist-title::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: -6px;
+    right: -10px;
+    height: 12px;
+    background: linear-gradient(90deg,
+        rgba(179, 58, 58, 0.14) 0%,
+        rgba(201, 169, 110, 0.28) 100%);
+    z-index: -1;
+    border-radius: 2px;
+    transform: skewX(-6deg);
+}
+
+/* Italic pull-quote subtitle */
+.wishlist-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    color: #5a544d;
+    margin: 0;
+    padding-left: 18px;
+    border-left: 2px solid rgba(184, 145, 74, 0.55);
+    line-height: 1.6;
+    max-width: 480px;
+}
+
+/* Clear All button */
+.wishlist-clear-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: #b33a3a;
+    border: 1px solid rgba(179, 58, 58, 0.35);
+    padding: 12px 22px;
+    border-radius: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    align-self: flex-end;
+}
+
+.wishlist-clear-all::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wishlist-clear-all:hover::before {
+    left: 140%;
+}
+
+.wishlist-clear-all::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(201, 169, 110, 0);
+    transition: border-color 0.5s ease;
+    pointer-events: none;
+}
+
+.wishlist-clear-all:hover::after {
+    border-color: rgba(201, 169, 110, 0.7);
+}
+
+.wishlist-clear-all:hover {
+    background: #b33a3a;
+    color: #f5f0e8;
+    border-color: #b33a3a;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(179, 58, 58, 0.28);
+}
+
+/* ============================================
+   WISHLIST GRID
+   ============================================ */
+.wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px;
+}
+
+/* ============================================
+   EMPTY STATE — Editorial Card
+   ============================================ */
+.wishlist-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 110px 24px;
+    gap: 22px;
+    position: relative;
+    animation: emptyFadeIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes emptyFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Decorative gold rule above the icon */
+.wishlist-empty::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, #b8914a, transparent);
+}
+
+/* Heart icon badge */
+.wishlist-empty-icon {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #fdfbf7 0%, #f5efe1 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b33a3a;
+    position: relative;
+    box-shadow:
+        0 8px 24px rgba(26, 20, 15, 0.06),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.35),
+        inset 0 0 0 6px #f5f0e8;
+    animation: floatHeart 3.5s ease-in-out infinite;
+}
+
+.wishlist-empty-icon::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 1px dashed rgba(179, 58, 58, 0.35);
+    pointer-events: none;
+}
+
+.wishlist-empty-icon svg {
+    position: relative;
+    z-index: 1;
+    animation: heartBeatWishlist 2.4s ease-in-out infinite;
+}
+
+@keyframes floatHeart {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+
+@keyframes heartBeatWishlist {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+}
+
+/* Empty state heading */
+.wishlist-empty h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 8px 0 0 0;
+    letter-spacing: -0.6px;
+    position: relative;
+    display: inline-block;
+}
+
+.wishlist-empty h2::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: -4px;
+    right: -6px;
+    height: 8px;
+    background: linear-gradient(90deg,
+        rgba(179, 58, 58, 0.14) 0%,
+        rgba(201, 169, 110, 0.28) 100%);
+    z-index: -1;
+    border-radius: 2px;
+    transform: skewX(-6deg);
+}
+
+/* Empty state description */
+.wishlist-empty p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #5a544d;
+    max-width: 420px;
+    line-height: 1.7;
+    margin: 0;
+    padding-left: 18px;
+    border-left: 2px solid rgba(184, 145, 74, 0.55);
+    text-align: left;
+}
+
+/* CTA button */
+.wishlist-empty-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #1a1a1a;
+    color: #f5f0e8;
+    padding: 16px 32px;
+    border: 1px solid #1a1a1a;
+    border-radius: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    margin-top: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.wishlist-empty-cta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.28) 50%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wishlist-empty-cta:hover::before {
+    left: 140%;
+}
+
+.wishlist-empty-cta::after {
+    content: '';
+    position: absolute;
+    inset: 5px;
+    border: 1px solid rgba(201, 169, 110, 0);
+    transition: border-color 0.5s ease;
+    pointer-events: none;
+}
+
+.wishlist-empty-cta:hover::after {
+    border-color: rgba(201, 169, 110, 0.7);
+}
+
+.wishlist-empty-cta:hover {
+    background: #b33a3a;
+    border-color: #b33a3a;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(179, 58, 58, 0.3);
+}
+
+.wishlist-empty-cta svg {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.wishlist-empty-cta:hover svg {
+    transform: translateX(6px);
+}
+
+/* ============================================
+   RESPONSIVE — ULTRAWIDE (1800px+)
+   ============================================ */
+@media (min-width: 1800px) {
+    .wishlist-page { padding: 90px 80px 150px; }
+    .wishlist-grid { gap: 40px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+    .wishlist-title { font-size: 4.2rem; }
+    .wishlist-subtitle { font-size: 1.05rem; }
+}
+
+/* ============================================
+   RESPONSIVE — LARGE DESKTOP (1400–1799px)
+   ============================================ */
+@media (min-width: 1400px) and (max-width: 1799px) {
+    .wishlist-page { padding: 80px 60px 120px; }
+    .wishlist-title { font-size: 3.6rem; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL DESKTOP / LARGE TABLET (1024–1199px)
+   ============================================ */
+@media (max-width: 1199px) {
+    .wishlist-page { padding: 60px 40px 100px; }
+    .wishlist-grid { gap: 26px; }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET LANDSCAPE (900–1023px)
+   ============================================ */
+@media (max-width: 1023px) {
+    .wishlist-page { padding: 50px 28px 90px; }
+
+    .wishlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 24px;
+    }
+
+    .wishlist-header { gap: 26px; margin-bottom: 50px; }
+
+    .wishlist-empty { padding: 80px 20px; }
+    .wishlist-empty-icon { width: 110px; height: 110px; }
+    .wishlist-empty h2 { font-size: 1.75rem; }
+    .wishlist-empty p { font-size: 0.92rem; }
+}
+
+/* ============================================
+   RESPONSIVE — TABLET PORTRAIT (768–899px)
+   ============================================ */
+@media (max-width: 899px) {
+    .wishlist-page { padding: 44px 24px 80px; }
+    .wishlist-header { padding-bottom: 28px; margin-bottom: 44px; gap: 22px; }
+    .wishlist-title { font-size: 2.8rem; }
+    .wishlist-subtitle { font-size: 0.92rem; }
+}
+
+/* ============================================
+   RESPONSIVE — LARGE PHONE (600–767px)
+   ============================================ */
+@media (max-width: 767px) {
+    .wishlist-page { padding: 36px 20px 70px; }
+
+    .wishlist-header {
+        gap: 22px;
+        margin-bottom: 36px;
+        padding-bottom: 24px;
+    }
+
+    .wishlist-header-main {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .wishlist-title { font-size: 2.2rem; }
+    .wishlist-subtitle { font-size: 0.85rem; padding-left: 14px; }
+
+    .wishlist-clear-all {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+        align-self: stretch;
+    }
+
+    .wishlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 16px;
+    }
+
+    .wishlist-empty { padding: 60px 16px; gap: 18px; }
+    .wishlist-empty-icon { width: 100px; height: 100px; }
+    .wishlist-empty-icon svg { width: 48px; height: 48px; }
+    .wishlist-empty h2 { font-size: 1.55rem; }
+    .wishlist-empty p { font-size: 0.85rem; padding-left: 14px; }
+    .wishlist-empty-cta { padding: 14px 24px; font-size: 0.65rem; }
+}
+
+/* ============================================
+   RESPONSIVE — STANDARD PHONE (480–599px)
+   ============================================ */
+@media (max-width: 599px) {
+    .wishlist-page { padding: 30px 16px 60px; }
+    .wishlist-title { font-size: 1.95rem; }
+    .wishlist-empty { padding: 50px 14px; }
+    .wishlist-empty-icon { width: 90px; height: 90px; }
+    .wishlist-empty-icon svg { width: 42px; height: 42px; }
+    .wishlist-empty h2 { font-size: 1.4rem; }
+    .wishlist-empty p { font-size: 0.8rem; }
+}
+
+/* ============================================
+   RESPONSIVE — SMALL PHONE (360–479px)
+   ============================================ */
+@media (max-width: 479px) {
+    .wishlist-page { padding: 26px 14px 55px; }
+    .wishlist-title { font-size: 1.75rem; }
+    .wishlist-subtitle { font-size: 0.78rem; padding-left: 12px; }
+
+    .wishlist-grid { grid-template-columns: 1fr; gap: 22px; }
+
+    .wishlist-empty { padding: 44px 12px; gap: 16px; }
+    .wishlist-empty-icon { width: 80px; height: 80px; }
+    .wishlist-empty-icon svg { width: 36px; height: 36px; }
+    .wishlist-empty h2 { font-size: 1.25rem; }
+    .wishlist-empty p { font-size: 0.75rem; padding-left: 12px; }
+    .wishlist-empty-cta { padding: 13px 22px; font-size: 0.62rem; }
+}
+
+/* ============================================
+   RESPONSIVE — TINY PHONE (up to 359px)
+   ============================================ */
+@media (max-width: 359px) {
+    .wishlist-page { padding: 22px 12px 50px; }
+    .wishlist-title { font-size: 1.55rem; }
+    .wishlist-empty-icon { width: 70px; height: 70px; }
+    .wishlist-empty-icon svg { width: 32px; height: 32px; }
+    .wishlist-empty h2 { font-size: 1.15rem; }
+    .wishlist-empty p { font-size: 0.72rem; }
+}
+
+/* ============================================
+   LANDSCAPE PHONE
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .wishlist-page { padding: 24px 20px 50px; }
+    .wishlist-header { margin-bottom: 30px; gap: 18px; }
+    .wishlist-title { font-size: 2rem; }
+    .wishlist-empty { padding: 40px 20px; }
+}
+
+/* ============================================
+   TOUCH DEVICES
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+    .wishlist-clear-all:hover {
+        background: transparent;
+        color: #b33a3a;
+        border-color: rgba(179, 58, 58, 0.35);
+        transform: none;
+        box-shadow: none;
+    }
+    .wishlist-clear-all:hover::before { left: -100%; }
+    .wishlist-clear-all:hover::after { border-color: transparent; }
+
+    .wishlist-empty-cta:hover {
+        background: #1a1a1a;
+        color: #f5f0e8;
+        border-color: #1a1a1a;
+        transform: none;
+        box-shadow: none;
+    }
+    .wishlist-empty-cta:hover::before { left: -100%; }
+    .wishlist-empty-cta:hover::after { border-color: transparent; }
+    .wishlist-empty-cta:hover svg { transform: none; }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    .wishlist-clear-all,
+    .wishlist-clear-all::before,
+    .wishlist-clear-all::after,
+    .wishlist-empty-cta,
+    .wishlist-empty-cta::before,
+    .wishlist-empty-cta::after,
+    .wishlist-empty-cta svg,
+    .wishlist-empty-icon,
+    .wishlist-empty-icon svg,
+    .wishlist-empty {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ============================================
+   HIGH DPI
+   ============================================ */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .wishlist-empty-icon {
+        box-shadow:
+            0 8px 24px rgba(26, 20, 15, 0.06),
+            inset 0 0 0 0.5px rgba(184, 145, 74, 0.35),
+            inset 0 0 0 6px #f5f0e8;
+    }
+}

@@ -1,114 +1,222 @@
 /* ============================================
-   LOOKBOOK — MATCHING REFERENCE EXACTLY
+   LOOKBOOK — Premium Editorial Grid v2
    ============================================ */
 
 .lookbook-section {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 2.4fr;
-    gap: 50px;
+    gap: 60px;
     align-items: center;
-    padding: 60px 60px;
+    padding: 120px 60px 130px;
     max-width: 1500px;
     margin: 0 auto;
     background-color: #f5f0e8;
-    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Soft warm background glow — matches other sections */
+.lookbook-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 20% 30%, rgba(201, 169, 110, 0.09) 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 90%, rgba(179, 58, 58, 0.05) 0%, transparent 55%);
 }
 
 /* ============================================
-   LEFT COLUMN: Header + Navigation
+   LEFT COLUMN
    ============================================ */
 .lookbook-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0;
     padding-right: 20px;
+    position: relative;
+    z-index: 1;
 }
 
+/* Eyebrow — matches Collections/About style */
 .lookbook-eyebrow {
-    display: inline-block;
-    font-size: 0.7rem;
-    letter-spacing: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 3.5px;
     text-transform: uppercase;
     color: #b33a3a;
-    font-weight: 600;
-    margin-bottom: 16px;
-    font-family: var(--font-body);
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1;
+}
+
+.lookbook-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1.5px;
+    background: linear-gradient(90deg, #b33a3a, rgba(179, 58, 58, 0.15));
+    border-radius: 1px;
+    flex-shrink: 0;
 }
 
 .lookbook-heading {
-    font-family: var(--font-serif);
-    font-size: 2.4rem;
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: 2.6rem;
     font-weight: 400;
-    line-height: 1.15;
+    line-height: 1.1;
     color: #1a1a1a;
-    margin: 0 0 32px 0;
-    letter-spacing: -0.8px;
-    max-width: 280px;
+    margin: 0 0 22px 0;
+    letter-spacing: -0.9px;
+    max-width: 320px;
+    position: relative;
+    display: inline-block;
 }
 
-/* Navigation arrows — smaller, muted, closer to heading */
+/* Skewed warm underline accent */
+.lookbook-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: -6px;
+    right: -10px;
+    height: 12px;
+    background: linear-gradient(90deg,
+        rgba(179, 58, 58, 0.14) 0%,
+        rgba(201, 169, 110, 0.28) 100%);
+    z-index: -1;
+    border-radius: 2px;
+    transform: skewX(-6deg);
+}
+
+/* Italic pull-quote sub */
+.lookbook-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #5a544d;
+    margin: 0 0 36px 0;
+    padding-left: 18px;
+    border-left: 2px solid rgba(184, 145, 74, 0.55);
+    line-height: 1.6;
+    max-width: 320px;
+}
+
+/* Navigation arrows */
 .lookbook-nav {
     display: flex;
-    gap: 8px;
+    gap: 12px;
 }
 
 .lookbook-arrow {
-    width: 34px;
-    height: 34px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: transparent;
-    border: 1px solid rgba(26, 26, 26, 0.35);
-    color: rgba(26, 26, 26, 0.7);
+    border: 1.5px solid rgba(26, 26, 26, 0.35);
+    color: #1a1a1a;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 0;
+    position: relative;
+    overflow: hidden;
 }
 
-.lookbook-arrow svg {
-    width: 14px;
-    height: 14px;
-    stroke-width: 1.8;
+.lookbook-arrow i {
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lookbook-arrow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #b33a3a;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lookbook-arrow:hover {
-    background: #1a1a1a;
-    color: #f5f0e8;
-    border-color: #1a1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    border-color: transparent;
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(179, 58, 58, 0.32);
 }
 
-.lookbook-arrow:active {
-    transform: translateY(0);
+.lookbook-arrow:hover::before {
+    opacity: 1;
+    transform: scale(1);
 }
+
+.lookbook-arrow:hover i { transform: scale(1.12); }
+
+.lookbook-arrow:active { transform: translateY(0) scale(0.95); }
 
 /* ============================================
-   RIGHT COLUMN: Image Grid
+   RIGHT COLUMN — Image Grid
    ============================================ */
 .lookbook-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
+    gap: 22px;
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
+/* ============================================
+   CARD — Floating paper panel
+   ============================================ */
 .lookbook-item {
     position: relative;
     aspect-ratio: 3 / 4;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 12px;
     background-color: #ece3d1;
     cursor: pointer;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow:
+        0 2px 8px rgba(26, 20, 15, 0.05),
+        0 14px 30px -14px rgba(26, 20, 15, 0.14),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.14);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
 }
 
 .lookbook-item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    box-shadow:
+        0 6px 16px rgba(26, 20, 15, 0.06),
+        0 42px 60px -22px rgba(26, 20, 15, 0.24),
+        inset 0 0 0 1px rgba(184, 145, 74, 0.45);
+}
+
+/* Gold hairline that appears on hover */
+.lookbook-item::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border-radius: 8px;
+    border: 1px solid rgba(184, 145, 74, 0);
+    transition: border-color 0.5s ease;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.lookbook-item:hover::before {
+    border-color: rgba(184, 145, 74, 0.5);
 }
 
 .lookbook-item img {
@@ -117,25 +225,25 @@
     object-fit: cover;
     object-position: center top;
     display: block;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1),
                 filter 0.5s ease;
-    filter: saturate(0.95);
+    filter: saturate(0.96);
 }
 
 .lookbook-item:hover img {
-    transform: scale(1.04);
-    filter: saturate(1.05);
+    transform: scale(1.08);
+    filter: saturate(1.1);
 }
 
-/* Subtle gradient on hover */
+/* Warm gradient on hover */
 .lookbook-item::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 65%, rgba(0, 0, 0, 0.12) 100%);
+    background: linear-gradient(to bottom, transparent 55%, rgba(26, 20, 15, 0.32) 100%);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s ease;
     z-index: 2;
 }
 
@@ -143,178 +251,172 @@
     opacity: 1;
 }
 
+/* Shine sweep on hover */
+.lookbook-shine {
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.28) 50%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+    z-index: 3;
+    transition: left 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lookbook-item:hover .lookbook-shine {
+    left: 125%;
+}
+
 /* ============================================
-   WISHLIST HEART — thinner, lighter
+   WISHLIST HEART
    ============================================ */
 .lookbook-wishlist {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.04);
     display: flex;
     align-items: center;
     justify-content: center;
     color: #1a1a1a;
     cursor: pointer;
-    z-index: 3;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    z-index: 5;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
     padding: 0;
+    font-size: 1rem;
 }
 
-.lookbook-wishlist svg {
-    width: 14px;
-    height: 14px;
-    stroke-width: 1.6;
+.lookbook-wishlist i {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lookbook-wishlist:hover {
     transform: scale(1.12);
     background: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 22px rgba(179, 58, 58, 0.25);
+    color: #b33a3a;
 }
 
-.lookbook-wishlist:active {
-    transform: scale(0.94);
-}
+.lookbook-wishlist:hover i { transform: scale(1.15); }
+
+.lookbook-wishlist:active { transform: scale(0.94); }
 
 .lookbook-wishlist.active {
     color: #b33a3a;
     background: #ffffff;
-    animation: heartPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: heartPopLB 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes heartPop {
+.lookbook-wishlist.active i {
+    animation: heartBeatLB 0.6s ease;
+}
+
+@keyframes heartPopLB {
     0%   { transform: scale(1); }
-    50%  { transform: scale(1.3); }
+    50%  { transform: scale(1.35); }
     100% { transform: scale(1); }
 }
 
-.lookbook-wishlist.active svg {
-    fill: #b33a3a;
+@keyframes heartBeatLB {
+    0%, 100% { transform: scale(1); }
+    25%      { transform: scale(1.25); }
+    50%      { transform: scale(0.95); }
 }
 
 /* ============================================
-   RESPONSIVE — ULTRAWIDE (1800px+)
+   RESPONSIVE
    ============================================ */
 @media (min-width: 1800px) {
-    .lookbook-section {
-        max-width: 1600px;
-        padding: 80px 80px;
-        gap: 60px;
-    }
+    .lookbook-section { max-width: 1600px; padding: 140px 80px 150px; gap: 80px; }
+    .lookbook-heading { font-size: 3rem; max-width: 360px; }
+    .lookbook-sub { font-size: 1.05rem; max-width: 360px; }
+    .lookbook-arrow { width: 48px; height: 48px; }
+    .lookbook-arrow i { font-size: 0.9rem; }
+    .lookbook-wishlist { width: 40px; height: 40px; top: 14px; right: 14px; font-size: 1.05rem; }
+}
+
+@media (min-width: 1400px) and (max-width: 1799px) {
+    .lookbook-section { padding: 130px 60px 140px; }
     .lookbook-heading { font-size: 2.8rem; }
-    .lookbook-arrow { width: 38px; height: 38px; }
-    .lookbook-wishlist { width: 34px; height: 34px; top: 12px; right: 12px; }
-    .lookbook-wishlist svg { width: 15px; height: 15px; }
 }
 
-/* ============================================
-   RESPONSIVE — DESKTOP (1200–1399px)
-   ============================================ */
 @media (max-width: 1399px) {
-    .lookbook-section { padding: 50px 40px; gap: 40px; }
-    .lookbook-heading { font-size: 2.2rem; }
+    .lookbook-section { padding: 110px 50px 120px; gap: 50px; }
+    .lookbook-heading { font-size: 2.4rem; }
 }
 
-/* ============================================
-   RESPONSIVE — SMALL DESKTOP / TABLET (1024–1199px)
-   ============================================ */
 @media (max-width: 1199px) {
-    .lookbook-section {
-        grid-template-columns: 1fr;
-        gap: 36px;
-        padding: 50px 40px;
-    }
-    .lookbook-header {
-        text-align: left;
-        padding-right: 0;
-    }
-    .lookbook-heading {
-        font-size: 2.1rem;
-        margin-bottom: 24px;
-        max-width: 100%;
-    }
-    .lookbook-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-    }
+    .lookbook-section { grid-template-columns: 1fr; gap: 48px; padding: 100px 40px 110px; }
+    .lookbook-header { text-align: left; padding-right: 0; }
+    .lookbook-heading { font-size: 2.3rem; margin-bottom: 24px; max-width: 100%; }
+    .lookbook-sub { max-width: 100%; margin-bottom: 30px; }
+    .lookbook-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; }
 }
 
-/* ============================================
-   RESPONSIVE — TABLET PORTRAIT (768–1023px)
-   ============================================ */
 @media (max-width: 1023px) {
-    .lookbook-section { padding: 40px 30px; }
-    .lookbook-heading { font-size: 1.9rem; }
-    .lookbook-grid { gap: 14px; }
-    .lookbook-wishlist { width: 28px; height: 28px; top: 8px; right: 8px; }
-    .lookbook-wishlist svg { width: 13px; height: 13px; }
+    .lookbook-section { padding: 90px 30px 100px; }
+    .lookbook-heading { font-size: 2.05rem; }
+    .lookbook-grid { gap: 16px; }
+    .lookbook-wishlist { width: 34px; height: 34px; top: 10px; right: 10px; font-size: 0.9rem; }
 }
 
-/* ============================================
-   RESPONSIVE — LARGE PHONE (600–767px)
-   ============================================ */
 @media (max-width: 767px) {
-    .lookbook-section { padding: 36px 20px; gap: 28px; }
-    .lookbook-eyebrow { font-size: 0.65rem; letter-spacing: 3px; margin-bottom: 12px; }
-    .lookbook-heading { font-size: 1.6rem; margin-bottom: 20px; }
-    .lookbook-arrow { width: 32px; height: 32px; }
-
-    .lookbook-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-    }
-    .lookbook-wishlist { width: 26px; height: 26px; top: 8px; right: 8px; }
-    .lookbook-wishlist svg { width: 12px; height: 12px; }
+    .lookbook-section { padding: 80px 20px 90px; gap: 36px; }
+    .lookbook-eyebrow { font-size: 0.65rem; letter-spacing: 3px; margin-bottom: 16px; }
+    .lookbook-heading { font-size: 1.9rem; margin-bottom: 20px; }
+    .lookbook-sub { font-size: 0.92rem; margin-bottom: 26px; padding-left: 14px; }
+    .lookbook-arrow { width: 40px; height: 40px; }
+    .lookbook-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .lookbook-wishlist { width: 32px; height: 32px; top: 10px; right: 10px; font-size: 0.85rem; }
 }
 
-/* ============================================
-   RESPONSIVE — SMALL PHONE (480–599px)
-   ============================================ */
 @media (max-width: 599px) {
-    .lookbook-section { padding: 30px 16px; gap: 24px; }
-    .lookbook-heading { font-size: 1.4rem; }
-    .lookbook-nav { gap: 8px; }
-    .lookbook-arrow { width: 30px; height: 30px; }
-    .lookbook-arrow svg { width: 12px; height: 12px; }
-    .lookbook-grid { gap: 10px; }
+    .lookbook-section { padding: 70px 16px 80px; gap: 30px; }
+    .lookbook-heading { font-size: 1.7rem; }
+    .lookbook-arrow { width: 36px; height: 36px; }
+    .lookbook-arrow i { font-size: 0.78rem; }
+    .lookbook-grid { gap: 12px; }
 }
 
-/* ============================================
-   RESPONSIVE — TINY PHONE (up to 359px)
-   ============================================ */
 @media (max-width: 359px) {
-    .lookbook-heading { font-size: 1.25rem; }
-    .lookbook-grid { grid-template-columns: 1fr; gap: 14px; }
-    .lookbook-wishlist { width: 28px; height: 28px; }
+    .lookbook-heading { font-size: 1.5rem; }
+    .lookbook-grid { grid-template-columns: 1fr; gap: 18px; }
+    .lookbook-wishlist { width: 34px; height: 34px; }
 }
 
 /* ============================================
    TOUCH DEVICES
    ============================================ */
 @media (hover: none) and (pointer: coarse) {
-    .lookbook-item:hover {
-        transform: none;
-        box-shadow: none;
-    }
-    .lookbook-item:hover img {
-        transform: none;
-        filter: saturate(0.95);
-    }
+    .lookbook-item:hover { transform: none; box-shadow: 0 2px 8px rgba(26, 20, 15, 0.05); }
+    .lookbook-item:hover img { transform: none; filter: saturate(0.96); }
+    .lookbook-item:hover::after { opacity: 0; }
+    .lookbook-item:hover::before { border-color: transparent; }
+    .lookbook-item:hover .lookbook-shine { left: -75%; }
+
     .lookbook-arrow:hover {
         background: transparent;
-        color: rgba(26, 26, 26, 0.7);
+        color: #1a1a1a;
         border-color: rgba(26, 26, 26, 0.35);
         transform: none;
         box-shadow: none;
     }
+    .lookbook-arrow:hover::before { opacity: 0; }
+    .lookbook-arrow:hover i { transform: none; }
 }
 
 /* ============================================
@@ -323,9 +425,32 @@
 @media (prefers-reduced-motion: reduce) {
     .lookbook-item,
     .lookbook-item img,
+    .lookbook-item::before,
+    .lookbook-item::after,
+    .lookbook-shine,
     .lookbook-arrow,
+    .lookbook-arrow i,
+    .lookbook-arrow::before,
     .lookbook-wishlist {
         transition: none !important;
         animation: none !important;
+    }
+}
+
+/* ============================================
+   HIGH DPI
+   ============================================ */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .lookbook-item {
+        box-shadow:
+            0 2px 8px rgba(26, 20, 15, 0.05),
+            0 14px 30px -14px rgba(26, 20, 15, 0.14),
+            inset 0 0 0 0.5px rgba(184, 145, 74, 0.14);
+    }
+    .lookbook-item:hover {
+        box-shadow:
+            0 6px 16px rgba(26, 20, 15, 0.06),
+            0 42px 60px -22px rgba(26, 20, 15, 0.24),
+            inset 0 0 0 0.5px rgba(184, 145, 74, 0.45);
     }
 }
