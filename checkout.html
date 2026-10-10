@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Retro Poshak</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/checkout.css">
+     <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 (icons) -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer">
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+
+    <main id="checkout-app">
+        <section class="checkout-page">
+            <div class="checkout-container">
+                <div class="checkout-header">
+                    <h1 class="checkout-title">Checkout</h1>
+                    <p class="checkout-sub">Complete your details to place the order.</p>
+                </div>
+
+                <div class="checkout-layout">
+                    <form class="checkout-form" id="checkoutForm">
+                        <h2 class="checkout-section-title">Shipping Address</h2>
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label>Full Name *</label>
+                                <input type="text" id="coName" required>
+                            </div>
+                            <div class="form-field">
+                                <label>Phone *</label>
+                                <input type="tel" id="coPhone" required>
+                            </div>
+                            <div class="form-field form-full">
+                                <label>Email *</label>
+                                <input type="email" id="coEmail" required>
+                            </div>
+                            <div class="form-field form-full">
+                                <label>Address *</label>
+                                <input type="text" id="coAddress" placeholder="House no, Street, Area" required>
+                            </div>
+                            <div class="form-field">
+                                <label>City *</label>
+                                <input type="text" id="coCity" required>
+                            </div>
+                            <div class="form-field">
+                                <label>State *</label>
+                                <input type="text" id="coState" required>
+                            </div>
+                            <div class="form-field">
+                                <label>Pincode *</label>
+                                <input type="text" id="coPincode" pattern="[0-9]{6}" required>
+                            </div>
+                        </div>
+
+                        <h2 class="checkout-section-title">Payment Method</h2>
+                        <div class="payment-options">
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="COD" checked>
+                                <div class="payment-content">
+                                    <span class="payment-name">Cash on Delivery</span>
+                                    <span class="payment-desc">Pay when you receive the order</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="Prepaid">
+                                <div class="payment-content">
+                                    <span class="payment-name">Prepaid (UPI / Card)</span>
+                                    <span class="payment-desc">Get 5% off on prepaid orders</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="checkout-submit" id="placeOrderBtn">
+                            PLACE ORDER
+                        </button>
+                    </form>
+
+                    <aside class="checkout-summary">
+                        <h2 class="summary-title">Order Summary</h2>
+                        <div class="checkout-summary-items" id="checkoutSummaryItems"></div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row"><span>Subtotal</span><span id="coSubtotal">₹0</span></div>
+                        <div class="summary-row"><span>Shipping</span><span id="coShipping">₹0</span></div>
+                        <div class="summary-row"><span>Discount</span><span id="coDiscount">-₹0</span></div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row summary-total"><span>Total</span><span id="coTotal">₹0</span></div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/checkout.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        (async function () {
+            await initNavbarAndFooter();
+            initCheckout();
+        })();
+    </script>
+</body>
+</html>

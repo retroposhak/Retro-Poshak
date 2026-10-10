@@ -1,36 +1,59 @@
 <section class="products-section">
-    <div class="products-accent">
-        <span class="accent-dot"></span>
-        <span class="accent-line"></span>
-        <span class="accent-dot"></span>
+
+    <!-- ═══════ EDITORIAL BACKGROUND LAYERS ═══════ -->
+    <div class="products-bg" aria-hidden="true">
+        <!-- Warm radial glows -->
+        <div class="products-bg-glow products-bg-glow-1"></div>
+        <div class="products-bg-glow products-bg-glow-2"></div>
+
+        <!-- Giant watermark word -->
+        <div class="products-bg-word">Memories</div>
+
+        <!-- Horizontal baselines for editorial feel -->
+        <div class="products-bg-lines"></div>
+
+        <!-- Corner flourishes -->
+        <div class="products-bg-corner products-bg-corner-tl"></div>
+        <div class="products-bg-corner products-bg-corner-tr"></div>
+        <div class="products-bg-corner products-bg-corner-bl"></div>
+        <div class="products-bg-corner products-bg-corner-br"></div>
+
+        <!-- Film grain -->
+        <div class="products-bg-grain"></div>
     </div>
 
+    <!-- Editorial chapter ribbon -->
+    <div class="chapter-ribbon" aria-hidden="true">
+        <span class="chapter-num">01</span>
+        <span class="chapter-sep"></span>
+        <span class="chapter-label">THE FIRST CHAPTER</span>
+        <span class="chapter-sep"></span>
+        <span class="chapter-meta">4 Stories · 2026</span>
+    </div>
+
+    <!-- Editorial header -->
     <div class="section-header">
         <div class="header-left">
-            <span class="subtitle">
-                <span class="subtitle-line"></span>
-                THE FIRST CHAPTER
-            </span>
             <h2>
                 Four stories.<br>
                 <em>Countless memories.</em>
             </h2>
+            <p class="header-description">
+                Every design is a memory. A moment. A feeling from the days that made us.
+            </p>
         </div>
-
-        <p class="header-description">
-            Every design is a memory. A moment. A feeling from the days that made us.
-        </p>
 
         <a href="shop.html" class="view-all">
             <span>VIEW ALL</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
+            <span class="view-all-arrow">
+                <i class="fa-solid fa-arrow-right"></i>
+            </span>
         </a>
     </div>
 
+    <!-- Product grid -->
     <div class="product-grid" id="product-grid">
         <!-- Products injected by JS -->
     </div>
+
 </section>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wishlist - Retro Poshak</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/products.css">
+    <link rel="stylesheet" href="css/wishlist.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <main id="wishlist-app">
+        <section class="wishlist-page">
+            <div class="wishlist-container">
+
+                <!-- Header -->
+                <div class="wishlist-header">
+                    <a href="index.html" class="wishlist-back">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" y1="12" x2="5" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                        <span>Continue Shopping</span>
+                    </a>
+
+                    <div class="wishlist-title-block">
+                        <h1 class="wishlist-title">My Wishlist</h1>
+                        <p class="wishlist-subtitle" id="wishlistSubtitle">Your favourite stories, all in one place.</p>
+                    </div>
+
+                    <button class="wishlist-clear-all" id="clearWishlistBtn" style="display:none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2">
+                            </path>
+                        </svg>
+                        <span>Clear All</span>
+                    </button>
+                </div>
+
+                <!-- Wishlist Grid -->
+                <div class="wishlist-grid" id="wishlistGrid"></div>
+
+                <!-- Empty State -->
+                <div class="wishlist-empty" id="wishlistEmpty" style="display:none;">
+                    <div class="wishlist-empty-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2>Your wishlist is empty</h2>
+                    <p>Save your favourite stories and come back to them anytime.</p>
+                    <a href="shop.html" class="wishlist-empty-cta">
+                        <span>EXPLORE THE COLLECTION</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/navbar.js"></script>
+    <script>
+        // ============================================
+        // WISHLIST PAGE LOGIC
+        // ============================================
+        function renderWishlistPage() {
+            const grid = document.getElementById('wishlistGrid');
+            const empty = document.getElementById('wishlistEmpty');
+            const subtitle = document.getElementById('wishlistSubtitle');
+            const clearBtn = document.getElementById('clearWishlistBtn');
+            if (!grid) return;
+
+            const wishlistedProducts = products.filter(p => isInWishlist(p.id));
+
+            if (subtitle) {
+                subtitle.textContent = wishlistedProducts.length === 0
+                    ? "Your favourite stories, all in one place."
+                    : `${wishlistedProducts.length} ${wishlistedProducts.length === 1 ? 'story' : 'stories'} saved for later.`;
+            }
+
+            if (clearBtn) {
+                clearBtn.style.display = wishlistedProducts.length > 0 ? 'inline-flex' : 'none';
+            }
+
+            if (wishlistedProducts.length === 0) {
+                grid.innerHTML = '';
+                grid.style.display = 'none';
+                empty.style.display = 'flex';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            empty.style.display = 'none';
+
+            grid.innerHTML = wishlistedProducts.map(product => `
+                <div class="product-card" data-id="${product.id}" data-images='${JSON.stringify(product.images)}'>
+                    <div class="product-image-wrap">
+                        <a href="shop.html?id=${product.id}" class="product-image-link">
+                            <img src="${product.images[0]}" alt="${product.name}" class="product-img" loading="lazy">
+                        </a>
+                        <button class="wishlist-btn active" aria-label="Remove from wishlist" data-id="${product.id}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#b33a3a" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="story-text">${product.subtitle}</p>
+
+                        <div class="product-bottom">
+                            <div class="product-price-row">
+                                <div class="product-price">
+                                    <span class="current-price">₹${product.price.toLocaleString()}</span>
+                                </div>
+                                <div class="color-dots">
+                                    ${product.colors.map(color =>
+                                        `<span class="color-dot" style="background: ${product.colorHex[color]}" title="${color}"></span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+
+                            <a href="shop.html?id=${product.id}" class="product-arrow" aria-label="View product">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (typeof attachHoverCycling === 'function') attachHoverCycling();
+            attachWishlistPageHandlers();
+        }
+
+        function attachWishlistPageHandlers() {
+            document.querySelectorAll('.wishlist-btn').forEach(btn => {
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+
+                newBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const productId = newBtn.dataset.id;
+                    if (!productId) return;
+
+                    toggleWishlist(productId);
+                    updateWishlistBadge();
+
+                    const card = newBtn.closest('.product-card');
+                    if (card) {
+                        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => renderWishlistPage(), 300);
+                    } else {
+                        renderWishlistPage();
+                    }
+                });
+            });
+        }
+
+        document.getElementById('clearWishlistBtn')?.addEventListener('click', () => {
+            if (!confirm('Remove all items from your wishlist?')) return;
+            wishlist = [];
+            saveWishlist();
+            updateWishlistBadge();
+            renderWishlistPage();
+        });
+
+        // ============================================
+        // PAGE INIT — uses ONLY the shared initializer.
+        // No duplicate fetch, no double-init.
+        // ============================================
+        (async function initPage() {
+            try {
+                await initNavbarAndFooter();
+                renderWishlistPage();
+
+                window.addEventListener('storage', (e) => {
+                    if (e.key === 'retroPoshakWishlist') {
+                        wishlist = JSON.parse(e.newValue || '[]');
+                        updateWishlistBadge();
+                        renderWishlistPage();
+                    }
+                });
+            } catch (err) {
+                console.error('Failed to init page:', err);
+            }
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,56 +1,136 @@
 <section class="hero">
-    <!-- Ambient Background Glow -->
-    <div class="hero-ambient-glow"></div>
+    <!-- ═══════ CINEMATIC BACKGROUND LAYERS ═══════ -->
+    <div class="hero-bg" aria-hidden="true">
+        <!-- Big watermark typography -->
+        <div class="hero-bg-word hero-bg-word-1">Pehno</div>
+        <div class="hero-bg-word hero-bg-word-2">Yaaden</div>
 
-    <!-- LEFT COLUMN: Content -->
-    <div class="hero-content-wrapper">
-        <div class="hero-content">
-            <!-- <span class="hero-eyebrow">Est. 2026 · India</span> -->
-            <h1>PEHNO<br><span class="accent">YAADEN.</span></h1>
-            <p class="hero-subtitle">Old memories. New fits.</p>
-            <a href="shop.html" class="btn-primary">
-                <span>SHOP THE COLLECTION</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
+        <!-- Editorial grid lines -->
+        <div class="hero-bg-grid"></div>
+
+        <!-- Marquee text bottom -->
+        <div class="hero-bg-marquee">
+            <div class="hero-bg-marquee-track">
+                <span>PEHNO YAADEN</span><span>·</span>
+                <span>EST. 2026</span><span>·</span>
+                <span>MADE IN INDIA</span><span>·</span>
+                <span>PEHNO YAADEN</span><span>·</span>
+                <span>EST. 2026</span><span>·</span>
+                <span>MADE IN INDIA</span><span>·</span>
+            </div>
         </div>
 
-        <!-- Slide Indicators -->
-        <div class="hero-indicators">
-            <button class="indicator active" data-slide="0" aria-label="Slide 1"></button>
-            <button class="indicator" data-slide="1" aria-label="Slide 2"></button>
-            <button class="indicator" data-slide="2" aria-label="Slide 3"></button>
-            <button class="indicator" data-slide="3" aria-label="Slide 4"></button>
+        <!-- Radial glows -->
+        <div class="hero-glow glow-gold"></div>
+        <div class="hero-glow glow-red"></div>
+
+        <!-- Grain -->
+        <div class="hero-grain"></div>
+
+        <!-- Corner crosshairs -->
+        <div class="hero-crosshair hero-crosshair-tl"></div>
+        <div class="hero-crosshair hero-crosshair-tr"></div>
+        <div class="hero-crosshair hero-crosshair-bl"></div>
+        <div class="hero-crosshair hero-crosshair-br"></div>
+    </div>
+
+    <!-- ═══════ LEFT — Editorial Content ═══════ -->
+    <div class="hero-left">
+        <div class="hero-content">
+
+            <span class="hero-eyebrow">
+                <span class="eyebrow-dot"></span>
+                <span>Est. 2026 · Made in India</span>
+            </span>
+
+            <h1 class="hero-title">
+                <span class="hero-title-line hero-title-small">Pehno</span>
+                <span class="hero-title-line hero-title-big">
+                    Yaaden<span class="hero-title-dot">.</span>
+                </span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Old memories. <em>New fits.</em>
+            </p>
+
+            <div class="hero-ctas">
+                <a href="shop.html" class="hero-cta hero-cta-primary">
+                    <span>Shop the Collection</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="our-story.html" class="hero-cta hero-cta-ghost">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Our Story</span>
+                </a>
+            </div>
+
+            <ul class="hero-trust-row">
+                <li><i class="fa-solid fa-truck-fast"></i> Free Shipping</li>
+                <li><i class="fa-solid fa-star"></i> 4.8 / 5</li>
+                <li><i class="fa-solid fa-rotate-left"></i> 7-Day Returns</li>
+            </ul>
+        </div>
+
+        <div class="hero-indicators" role="tablist" aria-label="Featured products">
+            <button class="indicator active" data-slide="0" aria-label="Chai ki Tapri">
+                <span class="indicator-fill"></span>
+            </button>
+            <button class="indicator" data-slide="1" aria-label="Barf Ka Gola">
+                <span class="indicator-fill"></span>
+            </button>
+            <button class="indicator" data-slide="2" aria-label="Cycle ka Safar">
+                <span class="indicator-fill"></span>
+            </button>
+            <button class="indicator" data-slide="3" aria-label="Khelo Cards">
+                <span class="indicator-fill"></span>
+            </button>
         </div>
     </div>
 
-    <!-- RIGHT COLUMN: Image Carousel -->
-    <div class="hero-image-wrapper">
-        <div class="hero-carousel">
-            <!-- Slide 1 -->
-            <div class="hero-slide active">
-                <div class="hero-slide-bg" style="background-image: url('assets/images/products/Chai ki Tapri/ChaiKiTapri_Hero1.jpeg');"></div>
-                <img src="assets/images/products/Chai ki Tapri/ChaiKiTapri_Hero1.jpeg" alt="Chai ki Tapri">
-            </div>
-            <!-- Slide 2 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('assets/images/products/Barf Ka Gola/BarfKaGola_Hero1.jpeg');"></div>
-                <img src="assets/images/products/Barf Ka Gola/BarfKaGola_Hero1.jpeg" alt="Barf Ka Gola">
-            </div>
-            <!-- Slide 3 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('assets/images/products/Cycle ka Safar/CycleKaSafar_Hero1.jpeg');"></div>
-                <img src="assets/images/products/Cycle ka Safar/CycleKaSafar_Hero1.jpeg" alt="Cycle ka Safar">
-            </div>
-            <!-- Slide 4 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg" style="background-image: url('assets/images/products/Khelo Cards/KheloCards_Hero1.jpeg');"></div>
-                <img src="assets/images/products/Khelo Cards/KheloCards_Hero1.jpeg" alt="Khelo Cards">
-            </div>
-        </div>
+    <!-- ═══════ RIGHT — Editorial Poster ═══════ -->
+    <div class="hero-right">
+        <div class="hero-poster">
 
-        <!-- Progress Bar -->
-        <div class="hero-progress">
-            <div class="hero-progress-bar"></div>
+            <div class="hero-frame" aria-hidden="true"></div>
+
+            <div class="hero-top-strip">
+                <span class="hero-top-num" id="heroSlideNum">01 — 04</span>
+                <span class="hero-top-label">The First Drop</span>
+            </div>
+
+            <!-- Carousel — full image with contain + blurred fill -->
+            <div class="hero-carousel">
+                <div class="hero-slide active">
+                    <div class="hero-slide-bg" style="background-image: url('assets/images/products/Chai ki Tapri/ChaiKiTapri_Hero1.jpeg');"></div>
+                    <img src="assets/images/products/Chai ki Tapri/ChaiKiTapri_Hero1.jpeg" alt="Chai ki Tapri">
+                </div>
+                <div class="hero-slide">
+                    <div class="hero-slide-bg" style="background-image: url('assets/images/products/Barf Ka Gola/BarfKaGola_Hero1.jpeg');"></div>
+                    <img src="assets/images/products/Barf Ka Gola/BarfKaGola_Hero1.jpeg" alt="Barf Ka Gola">
+                </div>
+                <div class="hero-slide">
+                    <div class="hero-slide-bg" style="background-image: url('assets/images/products/Cycle ka Safar/CycleKaSafar_Hero1.jpeg');"></div>
+                    <img src="assets/images/products/Cycle ka Safar/CycleKaSafar_Hero1.jpeg" alt="Cycle ka Safar">
+                </div>
+                <div class="hero-slide">
+                    <div class="hero-slide-bg" style="background-image: url('assets/images/products/Khelo Cards/KheloCards_Hero1.jpeg');"></div>
+                    <img src="assets/images/products/Khelo Cards/KheloCards_Hero1.jpeg" alt="Khelo Cards">
+                </div>
+            </div>
+
+            <div class="hero-info">
+                <div class="hero-info-text">
+                    <span class="hero-info-eyebrow">Now Wearing</span>
+                    <span class="hero-info-name" id="heroSlideLabel">Chai ki Tapri</span>
+                </div>
+                <a href="shop.html" class="hero-info-cta" aria-label="View product">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <div class="hero-info-progress">
+                    <div class="hero-progress-bar" id="heroProgressBar"></div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

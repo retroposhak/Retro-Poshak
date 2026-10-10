@@ -4,7 +4,6 @@
 <div class="announcement-bar">
     <div class="announcement-ticker">
         <div class="ticker-track">
-            <!-- Set 1 -->
             <span class="ticker-item">FREE SHIPPING ON ORDERS ABOVE ₹1499</span>
             <span class="ticker-dot">•</span>
             <span class="ticker-item">GET 5% OFF ON PREPAID ORDERS</span>
@@ -13,7 +12,6 @@
             <span class="ticker-dot">•</span>
             <span class="ticker-item">NEW DROPS EVERY FRIDAY</span>
             <span class="ticker-dot">•</span>
-            <!-- Set 2 (duplicate for seamless loop) -->
             <span class="ticker-item">FREE SHIPPING ON ORDERS ABOVE ₹1499</span>
             <span class="ticker-dot">•</span>
             <span class="ticker-item">GET 5% OFF ON PREPAID ORDERS</span>
@@ -25,29 +23,64 @@
         </div>
     </div>
     <div class="announcement-right">
-        <a href="#" class="announce-link">Track Order</a>
-        <a href="#" class="announce-link">Help</a>
+        <a href="/pages/track-order.html" class="announce-link">
+            <i class="fa-solid fa-truck-fast announce-icon" aria-hidden="true"></i>
+            Track Order
+        </a>
+        <span class="announce-sep" aria-hidden="true"></span>
+        <a href="contact.html" class="announce-link">
+            <i class="fa-solid fa-headset announce-icon" aria-hidden="true"></i>
+            Help
+        </a>
     </div>
 </div>
 
 <!-- ============================================ -->
 <!-- Main Navbar                                 -->
 <!-- ============================================ -->
-<nav class="navbar">
+<nav class="navbar" id="mainNavbar">
     <div class="nav-container">
 
         <!-- Logo -->
         <div class="logo">
-            <a href="index.html" class="logo-link">
+            <a href="index.html" class="logo-link" aria-label="Retro Poshak home">
+                <span class="logo-glow" aria-hidden="true"></span>
                 <img src="assets/images/Retro_Poshak_Logo.png" alt="Retro Poshak" class="logo-img">
             </a>
         </div>
 
         <!-- Desktop Navigation Links -->
         <ul class="nav-links">
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="our-story.html">Our Story</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li>
+                <a href="index.html" class="nav-link" data-page="home">
+                    <span class="nav-link-text">Home</span>
+                    <span class="nav-link-bg" aria-hidden="true"></span>
+                </a>
+            </li>
+            <li>
+                <a href="shop.html" class="nav-link" data-page="shop">
+                    <span class="nav-link-text">Shop</span>
+                    <span class="nav-link-bg" aria-hidden="true"></span>
+                </a>
+            </li>
+            <li>
+                <a href="our-story.html" class="nav-link" data-page="our-story">
+                    <span class="nav-link-text">Our Story</span>
+                    <span class="nav-link-bg" aria-hidden="true"></span>
+                </a>
+            </li>
+            <li>
+                <a href="blog.html" class="nav-link" data-page="blog">
+                    <span class="nav-link-text">Blog</span>
+                    <span class="nav-link-bg" aria-hidden="true"></span>
+                </a>
+            </li>
+            <li>
+                <a href="contact.html" class="nav-link" data-page="contact">
+                    <span class="nav-link-text">Contact</span>
+                    <span class="nav-link-bg" aria-hidden="true"></span>
+                </a>
+            </li>
         </ul>
 
         <!-- Search & Icons -->
@@ -55,31 +88,51 @@
 
             <!-- Search (desktop) -->
             <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" placeholder="Search for stories..." class="nav-search-input">
-                <button class="search-submit" aria-label="Search">→</button>
+                <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+                <input type="text" placeholder="Search for stories..." class="nav-search-input" aria-label="Search">
+                <button class="search-submit" aria-label="Search">
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </button>
             </div>
 
-            <!-- Icons: only Wishlist + Cart -->
+            <!-- Icons -->
             <div class="nav-icons">
-                <!-- Wishlist (using text heart) -->
-                <a href="#" class="icon-link" aria-label="Wishlist">
-                    <span class="icon-char">♡</span>
+
+                <!-- Profile Dropdown -->
+                <div class="profile-wrapper" id="profileWrapper">
+                    <a href="javascript:void(0)" class="icon-link profile-icon" aria-label="Account" id="profileToggle">
+                        <span class="icon-halo" aria-hidden="true"></span>
+                        <i class="fa-regular fa-user icon-svg" aria-hidden="true"></i>
+                        <span class="icon-tooltip">Account</span>
+                    </a>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <!-- Injected by JS based on auth state -->
+                    </div>
+                </div>
+
+                <!-- Wishlist -->
+                <a href="wishlist.html" class="icon-link wishlist-icon" aria-label="Wishlist">
+                    <span class="icon-halo" aria-hidden="true"></span>
+                    <i class="fa-regular fa-heart icon-svg" aria-hidden="true"></i>
+                    <span class="wishlist-count">0</span>
                     <span class="icon-tooltip">Wishlist</span>
                 </a>
-                <!-- Cart (using text cart) -->
-                <a href="#" class="icon-link cart-icon" aria-label="Cart">
-                    <span class="icon-char">🛒</span>
+
+                <!-- Cart -->
+                <a href="cart.html" class="icon-link cart-icon" aria-label="Cart">
+                    <span class="icon-halo" aria-hidden="true"></span>
+                    <i class="fa-solid fa-bag-shopping icon-svg" aria-hidden="true"></i>
                     <span class="cart-count">0</span>
                     <span class="icon-tooltip">Cart</span>
                 </a>
             </div>
 
-            <!-- Mobile Hamburger — TEXT BASED, ALWAYS VISIBLE -->
+            <!-- Mobile Hamburger -->
             <button class="mobile-toggle" aria-label="Toggle menu">
-                <span class="hamburger-char">≡</span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
             </button>
-
         </div>
     </div>
 </nav>
@@ -91,27 +144,80 @@
 <nav class="mobile-menu">
     <div class="mobile-menu-header">
         <span class="mobile-menu-title">Menu</span>
-        <button class="mobile-menu-close" aria-label="Close menu">✕</button>
+        <button class="mobile-menu-close" aria-label="Close menu">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
     </div>
 
-    <!-- Mobile Search -->
     <div class="mobile-search">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Search for stories..." class="mobile-search-input">
-        <button class="mobile-search-submit" aria-label="Search">→</button>
+        <i class="fa-solid fa-magnifying-glass search-icon" aria-hidden="true"></i>
+        <input type="text" placeholder="Search for stories..." class="mobile-search-input" aria-label="Search">
+        <button class="mobile-search-submit" aria-label="Search">
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </button>
     </div>
 
-    <!-- Nav Links -->
-    <ul>
-        <li><a href="shop.html">Shop</a></li>
-        <li><a href="our-story.html">Our Story</a></li>
-        <li><a href="contact.html">Contact</a></li>
+    <ul class="mobile-nav-list">
+        <li class="mobile-nav-item">
+            <a href="index.html" class="mobile-nav-link" data-page="home">
+                <span><i class="fa-solid fa-house mobile-nav-icon"></i> Home</span>
+                <i class="fa-solid fa-arrow-right mobile-arrow"></i>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="shop.html" class="mobile-nav-link" data-page="shop">
+                <span><i class="fa-solid fa-store mobile-nav-icon"></i> Shop</span>
+                <i class="fa-solid fa-arrow-right mobile-arrow"></i>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="our-story.html" class="mobile-nav-link" data-page="our-story">
+                <span><i class="fa-solid fa-book-open mobile-nav-icon"></i> Our Story</span>
+                <i class="fa-solid fa-arrow-right mobile-arrow"></i>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="blog.html" class="mobile-nav-link" data-page="blog">
+                <span><i class="fa-solid fa-feather-pointed mobile-nav-icon"></i> Blog</span>
+                <i class="fa-solid fa-arrow-right mobile-arrow"></i>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="contact.html" class="mobile-nav-link" data-page="contact">
+                <span><i class="fa-solid fa-envelope mobile-nav-icon"></i> Contact</span>
+                <i class="fa-solid fa-arrow-right mobile-arrow"></i>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="wishlist.html" class="mobile-nav-link" data-page="wishlist">
+                <span><i class="fa-regular fa-heart mobile-nav-icon"></i> Wishlist</span>
+                <span class="mobile-wishlist-count"></span>
+            </a>
+        </li>
+        <li class="mobile-nav-item">
+            <a href="cart.html" class="mobile-nav-link" data-page="cart">
+                <span><i class="fa-solid fa-bag-shopping mobile-nav-icon"></i> Cart</span>
+                <i class="fa-solid fa-arrow-right mobile-arrow"></i>
+            </a>
+        </li>
+        <li class="mobile-auth-slot"><!-- Injected by JS --></li>
     </ul>
 
-    <!-- Footer info -->
     <div class="mobile-menu-footer">
-        <p>📞 +91 92207 22844</p>
-        <p>✉️ retroposhak2026@gmail.com</p>
-        <p><a href="#">Track Order</a> · <a href="#">Help</a></p>
+        <div class="mobile-footer-row">
+            <i class="fa-solid fa-phone mobile-footer-icon"></i>
+            <a href="tel:+919220722844">+91 92207 22844</a>
+        </div>
+        <div class="mobile-footer-row">
+            <i class="fa-solid fa-envelope mobile-footer-icon"></i>
+            <a href="mailto:retroposhak2026@gmail.com">retroposhak2026@gmail.com</a>
+        </div>
+        <div class="mobile-footer-row">
+            <i class="fa-brands fa-instagram mobile-footer-icon"></i>
+            <a href="https://instagram.com/retro_poshak" target="_blank" rel="noopener">@retro_poshak</a>
+        </div>
+        <p class="mobile-footer-links">
+            <a href="#">Track Order</a> · <a href="#">Help</a>
+        </p>
     </div>
 </nav>
