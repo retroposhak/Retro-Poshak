@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Retro Poshak scarf icon</title>
+  <desc id="desc">A stylized teal retro scarf with champagne highlights, designed for a transparent background.</desc>
+  <defs>
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#39C6D6"/>
+      <stop offset="0.48" stop-color="#087D98"/>
+      <stop offset="1" stop-color="#06475D"/>
+    </linearGradient>
+    <linearGradient id="light" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF1C8"/>
+      <stop offset="1" stop-color="#D7A85B"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#102A30" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+    <!-- wrapped upper band -->
+    <path d="M31 91 C38 49 76 27 119 28 C163 28 201 50 209 89 C204 108 184 120 163 119 C143 117 129 102 119 94 C106 105 91 118 71 119 C51 120 35 109 31 91Z" fill="url(#teal)"/>
+    <path d="M43 81 C58 51 86 41 118 41 C149 41 180 53 196 82 C177 71 153 65 120 65 C88 65 61 71 43 81Z" fill="none" stroke="url(#light)" stroke-width="6"/>
+    <path d="M39 94 C56 109 79 108 99 93 M142 94 C162 109 185 108 201 93" fill="none" stroke="#5ED4DF" stroke-width="4"/>
+    <!-- knot -->
+    <path d="M104 91 C112 80 129 80 138 91 L143 111 C134 124 112 124 103 111Z" fill="url(#teal)"/>
+    <path d="M112 91 L116 112 M126 89 L130 112" fill="none" stroke="#69D5DD" stroke-width="3"/>
+    <!-- left tail -->
+    <path d="M108 112 C94 129 88 150 94 172 C98 187 108 199 121 210 C125 184 132 158 130 136 C129 124 120 115 108 112Z" fill="url(#teal)"/>
+    <path d="M105 130 C101 151 108 172 118 188" fill="none" stroke="url(#light)" stroke-width="5"/>
+    <!-- right tail -->
+    <path d="M136 111 C153 122 174 140 183 164 C190 184 188 204 177 222 C162 203 149 184 142 163 C136 145 133 127 136 111Z" fill="url(#teal)"/>
+    <path d="M145 131 C158 153 170 177 177 200" fill="none" stroke="url(#light)" stroke-width="5"/>
+  </g>
+</svg>

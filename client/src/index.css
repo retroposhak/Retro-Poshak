@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,500&family=Dancing+Script:wght@400;500;700&family=Oswald:wght@500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    background-image:
+      radial-gradient(circle at 30% 20%, #fbf8f3 0%, #f5f0e8 55%, #ece3d1 100%);
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    @apply bg-red text-cream;
+  }
+
+  h1, h2, h3, h4 {
+    @apply text-ink;
+  }
+
+  a {
+    @apply text-inherit no-underline;
+  }
+
+  /* Fix: font-inherit is not a Tailwind class — use plain CSS */
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+  }
+
+  img {
+    @apply max-w-full block;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-pill
+           px-6 py-3 text-xs font-cond font-medium uppercase tracking-wide2
+           transition-all duration-300;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-cream shadow-soft hover:bg-red hover:-translate-y-0.5;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-ink border border-ink/20 hover:border-red hover:text-red;
+  }
+  .btn-red {
+    @apply btn bg-red text-cream hover:bg-red-dark hover:-translate-y-0.5;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-chip border border-ink/15
+           px-3 py-1 text-[11px] font-cond uppercase tracking-wide2;
+  }
+
+  .input {
+    @apply w-full rounded-soft border border-ink/15 bg-cream-50
+           px-4 py-3 text-sm text-ink placeholder:text-ink-mute
+           focus:outline-none focus:border-red focus:ring-2 focus:ring-red/20
+           transition;
+  }
+
+  .card {
+    @apply rounded-card bg-cream-50 shadow-soft border border-ink/5;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-cond uppercase tracking-wide3 text-ink-mute;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-[1240px] px-5 sm:px-8;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
