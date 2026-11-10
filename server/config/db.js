@@ -1,26 +1,45 @@
 import mongoose from 'mongoose';
 import { env } from './env.js';
 
+// Cache the connection globally so it persists across serverless invocations
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
 export async function connectDB() {
-  mongoose.set('strictQuery', true);
+  if (cached.conn) {
+    return cached.conn;
+  }
 
-  mongoose.connection.on('connected', () => {
-    console.log('[db] MongoDB connected');
-  });
-  mongoose.connection.on('error', (err) => {
-    console.error('[db] MongoDB error:', err.message);
-  });
-  mongoose.connection.on('disconnected', () => {
-    console.warn('[db] MongoDB disconnected');
-  });
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false, // Fail immediately if not connected instead of buffering
+      serverSelectionTimeoutMS: 5000, // Try for 5s, then fail (instead of default 30s)
+      socketTimeoutMS: 45000,
+      maxPoolSize: 10, // Keep pool small per function instance
+    };
 
-  await mongoose.connect(env.mongoUri, {
-    autoIndex: !env.isProd, // build indexes automatically in dev
-  });
+    cached.promise = mongoose.connect(env.mongoUri, opts).then((mongoose) => {
+      console.log('[db] MongoDB connected');
+      return mongoose;
+    });
+  }
 
-  return mongoose.connection;
+  try {
+    cached.conn = await cached.promise;
+  } catch (e) {
+    cached.promise = null;
+    throw e;
+  }
+
+  return cached.conn;
 }
 
 export async function disconnectDB() {
-  await mongoose.disconnect();
+  // Only disconnect locally; on Vercel, let the connection persist
+  if (process.env.NODE_ENV !== 'production') {
+    await mongoose.disconnect();
+  }
 }
