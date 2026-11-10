@@ -31,10 +31,10 @@ export function createApp() {
   // Allow requests from localhost and your Vercel frontend
   const allowedOrigins = [
     'http://localhost:5173',
-    'https://retro-poshak.vercel.app',
-    // Add your custom GoDaddy domain here once configured (e.g., 'https://yourdomain.com')
+    'https://retroposhak.com',
+    'https://www.retroposhak.com',
+    'https://retro-poshak.vercel.app'
   ];
-
   app.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" } // Allow images/assets to load cross-origin
   }));
