@@ -3,6 +3,9 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 // ── Auto-refresh on 401 ─────────────────────────
@@ -22,12 +25,12 @@ api.interceptors.response.use(
   async (error) => {
     const original = error.config;
     const status = error.response?.status;
+    
+    // Log the error for debugging
+    console.error(`API Error [${status}] on ${original.url}:`, error.response?.data);
 
-    // Don't retry the refresh endpoint itself
     const isRefreshRequest = original.url.includes('/auth/refresh');
-    // Don't loop if login/register fails
     const isAuthRequest = original.url.includes('/auth/login') || original.url.includes('/auth/register');
-    // Don't loop if the initial profile check fails (user is just a guest)
     const isMeRequest = original.url.includes('/auth/me');
 
     if (status === 401 && original && !original._retry && !isRefreshRequest && !isAuthRequest && !isMeRequest) {
