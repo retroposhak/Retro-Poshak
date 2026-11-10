@@ -22,15 +22,15 @@ export function verifyRefreshToken(token) {
 }
 
 /**
- * Sets both auth cookies. In prod `secure: true` requires HTTPS.
- * `sameSite: 'lax'` allows the cookie to travel on top-level navigations
- * (needed for redirect-based OAuth flows later) but blocks cross-site POSTs.
+ * Sets both auth cookies. 
+ * In production (Vercel cross-domain), we MUST use sameSite: 'none' and secure: true.
+ * In development (localhost), we use sameSite: 'lax' and secure: false.
  */
 export function setAuthCookies(res, accessToken, refreshToken) {
   const base = {
     httpOnly: true,
-    secure: env.cookie.secure,
-    sameSite: 'lax',
+    secure: env.isProd, // true in production, false locally
+    sameSite: env.isProd ? 'none' : 'lax', // 'none' allows cross-domain cookies
     path: '/',
   };
 
@@ -48,8 +48,8 @@ export function setAuthCookies(res, accessToken, refreshToken) {
 export function clearAuthCookies(res) {
   const base = {
     httpOnly: true,
-    secure: env.cookie.secure,
-    sameSite: 'lax',
+    secure: env.isProd,
+    sameSite: env.isProd ? 'none' : 'lax',
     path: '/',
   };
   res.clearCookie('accessToken', base);

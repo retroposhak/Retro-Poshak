@@ -1,5 +1,8 @@
 import dotenv from 'dotenv';
-dotenv.config();
+// Only load .env locally. Vercel injects env vars automatically.
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config();
+}
 
 function required(name) {
   const v = process.env[name];
@@ -15,8 +18,9 @@ function optional(name, fallback = '') {
 
 export const env = {
   nodeEnv: optional('NODE_ENV', 'development'),
+  // Use Vercel's check for production to ensure security
   isProd: optional('NODE_ENV', 'development') === 'production',
-  port: Number(optional('PORT', '5000')),
+  port: Number(optional('PORT', '5000')), // Vercel ignores this, but good for local
   clientOrigin: optional('CLIENT_ORIGIN', 'http://localhost:5173'),
 
   mongoUri: required('MONGODB_URI'),
@@ -29,7 +33,8 @@ export const env = {
   },
   cookie: {
     domain: optional('COOKIE_DOMAIN', 'localhost'),
-    secure: optional('COOKIE_SECURE', 'false') === 'true',
+    // Ensure secure is true in production automatically
+    secure: optional('COOKIE_SECURE', 'false') === 'true' || optional('NODE_ENV') === 'production',
   },
 
   razorpay: {

@@ -28,12 +28,30 @@ export function createApp() {
 
   app.set("trust proxy", 1);
   app.use(helmet());
+  
+  // CORS configuration to allow multiple origins
+  const allowedOrigins = [
+    env.clientOrigin,
+    'http://localhost:5173',
+    'https://retro-poshak.vercel.app',
+    // Add any preview deployment URLs here if needed
+  ].filter(Boolean);
+
   app.use(
     cors({
-      origin: env.clientOrigin,
+      origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+          const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+          return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+      },
       credentials: true, // allow cookies
     })
   );
+  
   app.use(express.json({ limit: "2mb" }));
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
@@ -61,11 +79,11 @@ export function createApp() {
   app.use("/api/admin", adminRoutes);
 
   app.use('/api/posts', postRoutes);
-app.use('/api/policies', policyRoutes);
-app.use('/api/newsletter', newsletterRoutes);
-app.use('/api/contact', contactRoutes);
-// Nested under products:
-app.use('/api/products/:productId/reviews', reviewRoutes);
+  app.use('/api/policies', policyRoutes);
+  app.use('/api/newsletter', newsletterRoutes);
+  app.use('/api/contact', contactRoutes);
+  // Nested under products:
+  app.use('/api/products/:productId/reviews', reviewRoutes);
 
   // ── Dev root info ────────────────────────────
   if (!env.isProd) {
