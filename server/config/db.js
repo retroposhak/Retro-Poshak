@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import { env } from './env.js';
 
-// Cache the connection globally so it persists across serverless invocations
 let cached = global.mongoose;
 
 if (!cached) {
@@ -9,21 +8,19 @@ if (!cached) {
 }
 
 export async function connectDB() {
-  if (cached.conn) {
-    return cached.conn;
-  }
+  if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
     const opts = {
-      bufferCommands: false, // Fail immediately if not connected instead of buffering
-      serverSelectionTimeoutMS: 5000, // Try for 5s, then fail (instead of default 30s)
+      bufferCommands: false,
+      serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-      maxPoolSize: 10, // Keep pool small per function instance
+      maxPoolSize: 10,
     };
 
-    cached.promise = mongoose.connect(env.mongoUri, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(env.mongoUri, opts).then((m) => {
       console.log('[db] MongoDB connected');
-      return mongoose;
+      return m;
     });
   }
 
@@ -38,7 +35,6 @@ export async function connectDB() {
 }
 
 export async function disconnectDB() {
-  // Only disconnect locally; on Vercel, let the connection persist
   if (process.env.NODE_ENV !== 'production') {
     await mongoose.disconnect();
   }
